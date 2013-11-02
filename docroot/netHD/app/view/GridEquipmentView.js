@@ -27,7 +27,7 @@ Ext.define('New.view.GridEquipmentView', {
 		  },{
 			  flex : 1,
 			  header : 'Equipment Type',
-			  dataIndex : 'ItemType',
+			  dataIndex : 'itemtypes',
 	
 		  },{
 			  flex : 1,

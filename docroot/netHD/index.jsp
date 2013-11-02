@@ -1,16 +1,16 @@
-<%@taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet"%>
+<%@taglib uri="http://java.sun.com/portlet" prefix="portlet"%>
 <portlet:defineObjects/>
 <portlet:resourceURL var="ItemTypeStoreUrl" id="ItemTypeStoreUrl" escapeXml="false" />	
-<%-- <portlet:resourceURL var="SiteTypeStoreUrl" id="SiteTypeStoreUrl" escapeXml="false" />
+<portlet:resourceURL var="EquipmentStoreUrl" id="EquipmentStoreUrl" escapeXml="false" />
+<portlet:resourceURL var="SiteTypeStoreUrl" id="SiteTypeStoreUrl" escapeXml="false" />
 <portlet:resourceURL var="ProjectItemsStoreUrl" id="ProjectItemsStoreUrl" escapeXml="false" />
 <portlet:resourceURL var="EquipmentsBulkStoreUrl" id="EquipmentsBulkStoreUrl" escapeXml="false" />
 <portlet:resourceURL var="ProjectsStoreUrl" id="ProjectsStoreUrl" escapeXml="false" />
-<portlet:resourceURL var="EquipmentStoreUrl" id="EquipmentStoreUrl" escapeXml="false" />
 <portlet:resourceURL var="PackageStoreUrl" id="PackageStoreUrl" escapeXml="false" />	
 <portlet:resourceURL var="UserStoreUrl" id="UserStoreUrl" escapeXml="false" />			
 <portlet:resourceURL var="EquipmentsMapingStoreUrl" id="EquipmentsMapingStoreUrl" escapeXml="false" />	
 <portlet:resourceURL var="ExcelUrl" id="ExcelUrl" escapeXml="false" />		
-<portlet:resourceURL var="validate_url" id="validate_url" escapeXml="false" /> --%>	
+<portlet:resourceURL var="validate_url" id="validate_url" escapeXml="false" />
 
 <script>
 	/******************************** app ********************************/
@@ -22,18 +22,18 @@
  		
  	/******************************************* urls *******************************************************/
  	
-	 <%-- 	var validate_url	="<%= renderResponse.encodeURL(validate_url.toString())%>";
+	 	var validate_url	="<%= renderResponse.encodeURL(validate_url.toString())%>";
 		var ExcelUrl	="<%= renderResponse.encodeURL(ExcelUrl.toString())%>";
 		var EquipmentsMapingStoreUrl	="<%= renderResponse.encodeURL(EquipmentsMapingStoreUrl.toString())%>";
 		var ProjectItemsStoreUrl	="<%= renderResponse.encodeURL(ProjectItemsStoreUrl.toString())%>";
-		var EquipmentsBulkStoreUrl	="<%= renderResponse.encodeURL(EquipmentsBulkStoreUrl.toString())%>"; --%>
+		var EquipmentsBulkStoreUrl	="<%= renderResponse.encodeURL(EquipmentsBulkStoreUrl.toString())%>";
 		var ItemTypeStoreUrl		= "<%=renderResponse.encodeURL(ItemTypeStoreUrl.toString())%>";
-		<%-- var PackageStoreUrl			="<%= renderResponse.encodeURL(PackageStoreUrl.toString())%>";
-		var ProjectsStoreUrl	 	="<%= renderResponse.encodeURL(ProjectsStoreUrl.toString())%>";
 		var EquipmentStoreUrl		="<%= renderResponse.encodeURL(EquipmentStoreUrl.toString())%>";
+		var PackageStoreUrl			="<%= renderResponse.encodeURL(PackageStoreUrl.toString())%>";
+		var ProjectsStoreUrl	 	="<%= renderResponse.encodeURL(ProjectsStoreUrl.toString())%>";
 		var UserStoreUrl 			="<%= renderResponse.encodeURL(UserStoreUrl.toString())%>";	
 		var SiteTypeStoreUrl 			="<%= renderResponse.encodeURL(SiteTypeStoreUrl.toString())%>";	
-		 --%>
+
 	/********************************* paths**********************************/
 	
 		var ext_path = "/test-portlet/netHD/ext-4.0/src";
@@ -46,8 +46,15 @@
 <script src="/test-portlet/netHD/Addflow/addflow-min.js"></script>
 <script src="/test-portlet/netHD/Addflow/network.js"></script>
 
+<link type="text/css" rel="stylesheet" href="/test-portlet/netHD/dr/bin/demo.css" />
+	<SCRIPT src='/test-portlet/netHD/dr/bin/wz_jsgraphics.js'></SCRIPT>
+	<SCRIPT src='/test-portlet/netHD/dr/bin/mootools.js'></SCRIPT>
+	<SCRIPT src='/test-portlet/netHD/dr/bin/moocanvas.js'></SCRIPT>
+	<SCRIPT src='/test-portlet/netHD/dr/bin/draw2d.js'></SCRIPT>
+	<SCRIPT src='/test-portlet/netHD/dr/bin/NetObject.js'></SCRIPT>
+
 	<!--  ********************************* Body **********************************  -->
-<body>
+<body style="margin:0px;padding:0px;">
 	<div style="background-color: white;" >
 	<!--  ********************************* Menu Bar **********************************  -->
 		<div align="left">

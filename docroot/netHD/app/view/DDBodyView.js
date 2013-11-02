@@ -1,4 +1,4 @@
-Ext.define('New.view.Body' , {
+Ext.define('New.view.DDBodyView' , {
 	extend :'Ext.panel.Panel',
 	alias  : 'widget.DDBody',
     title: 'Main Display',
@@ -14,7 +14,7 @@ Ext.define('New.view.Body' , {
 		text : 'Body',
 		iconCls : 'Icon',
 		textAlign : 'left',
-		//xtype : 'EquipmentBulkDD',
+		xtype : 'EquipmentBulkDD',
 		//equipment bulk Form
 		
     },{
@@ -24,7 +24,7 @@ Ext.define('New.view.Body' , {
     	text : 'Save',
     	iconCls : 'Icon',
 		textAlign : 'left',
-		//xtype : 'EquipmentsBulkGrid',
+		xtype : 'EquipmentsBulkGrid',
 		//equipment bulk Grid
 		tbar : [{
 			//top bar buttons

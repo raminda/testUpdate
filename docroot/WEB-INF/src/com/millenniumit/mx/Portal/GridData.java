@@ -100,7 +100,8 @@ public class GridData {
 			for(int i=0;i<lst.size();i++){
 				Equipments obj=lst.get(i);
 				try{
-					jsonOb2+="{ ItemName: '" + obj.getItemName()+"',Summary:'"+obj.getSummary()+"',Price: '"+obj.getPrice()+"',Full_Descrip:'"+obj.getITIC_Descrip()+"',ITIC_Descrip:'"+obj.getITIC_Descrip()+"',Tec_Descrip:'"+obj.getTec_Descrip()+"',EOLDate:'"+obj.getEOLDate()+"',date_logged:'"+obj.getCalendar_modified()+"',date_modified:'"+obj.getCalendar_logged()+"',date_created:'"+obj.getCalendar_created()+"',ID:'"+obj.getID()+"',ItemType:'"+obj.getItemType().getTypeName()+"'}";
+					jsonOb2+="{ ItemName: '" + obj.getItemName()+"',Summary:'"+obj.getSummary()+"',Price: '"+obj.getPrice()+"',ITIC_Descrip:'"+obj.getITIC_Descrip()+"',Tec_Descrip:'"+obj.getTec_Descrip()+"',EOLDate:'"+obj.getEOLDate()+"',date_modified:'"+obj.getCalendar_modified()+"',date_logged:'"+obj.getCalendar_logged()+"',date_created:'"+obj.getCalendar_created()+"',ID:'"+obj.getID()+"',itemtypes:'"+obj.getItemType().getTypeName()+"'}";
+					//System.out.println(obj.getItemName()+" gdfg "+ obj.getItemType().getTypeName());
 				}catch (Exception e) {
 					logger.info("Error : " + e.getMessage());
 					jsonOb2+="'}";
@@ -253,7 +254,7 @@ public class GridData {
 					else{
 						AccsessLevel="Equipment";
 					}
-					jsonOb2+="{ TypeName: '" +lst.get(i).getTypeName() +"',AccsessLevel: '" +AccsessLevel+"',ID :'"+lst.get(i).getID()+"',date_logged:'"+lst.get(i).getCalendar_logged()+"',date_modified:'"+lst.get(i).getCalendar_modified()+"',date_created:'"+lst.get(i).getCalendar_created()+"'}";
+					jsonOb2+="{TypeName: '" +lst.get(i).getTypeName() +"',AccsessLevel: '" +AccsessLevel+"',ID :'"+lst.get(i).getID()+"',date_logged:'"+lst.get(i).getCalendar_logged()+"',date_modified:'"+lst.get(i).getCalendar_modified()+"',date_created:'"+lst.get(i).getCalendar_created()+"'}";
 				}catch (Exception e) {
 					logger.info("Error : " + e.getMessage());
 					jsonOb2+="'}";

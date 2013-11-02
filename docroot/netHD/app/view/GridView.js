@@ -18,20 +18,20 @@ Ext.define('New.view.GridView', {
 				text : 'Add Type',
 				id : 'ItemTypeGrid',
 				name : 'ItemTypeGrid',
-				title : 'Add Type',
+				title : 'Configure Equipment Types',
 				xtype : 'ItemTypeGrid',
 			},{
 				flex : 1,
 				id : 'EquipmentGrid',
 				name : 'EquipmentGrid',
 				title : 'My Equipment Grid View',
-				//xtype : 'EquipmentGrid',
+				xtype : 'EquipmentGrid',
 			},{
 				flex : 1,
 				id : 'PackageGrid',
 				name : 'PackageGrid',
 				title : 'My Package Grid view',
-				//xtype : 'PackageGrid'
+				xtype : 'PackageGrid'
 			},{
 				flex : 1,
 				id : 'ProjectGrid',

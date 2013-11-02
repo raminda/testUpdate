@@ -2,7 +2,22 @@
  * @author DECAN
  */
 var flow;
-
+function crt(){ 
+	var workflow = new draw2d.Workflow("paintarea"); 
+		my2("Start");
+		var startObj = new draw2d.NetObject();
+		workflow.addFigure(startObj, 200,300);
+		my2("End");
+		var startObj2 = new draw2d.NetObject();
+		workflow.addFigure(startObj2, 400,300);
+		
+		var node1= new draw2d.Oval();
+		node1.setDimension(100,40);
+		node1.setBackgroundColor(new draw2d.Color(255,0,0));
+		workflow.addFigure(node1,130,180);
+		workflow.addFigure(node1,130,480);
+		//alert("d");
+}
         function createDiagram() {
             var canvas;
 
@@ -186,4 +201,5 @@ var flow;
 
         function delete2() {
             flow.deleteSel();
-        }     
+        } 
+        
