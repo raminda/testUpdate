@@ -24,6 +24,6 @@ function my2(st) {
 			this.outputPort.setWorkflow(_ac0);
 			this.outputPort.setBackgroundColor(new draw2d.Color(245,115,115));
 			this.addPort(this.outputPort,this.width,this.height/2);
-			}
-		};
+		}
+	};
 }

@@ -46,12 +46,12 @@
 <script src="/test-portlet/netHD/Addflow/addflow-min.js"></script>
 <script src="/test-portlet/netHD/Addflow/network.js"></script>
 
-<link type="text/css" rel="stylesheet" href="/test-portlet/netHD/dr/bin/demo.css" />
-	<SCRIPT src='/test-portlet/netHD/dr/bin/wz_jsgraphics.js'></SCRIPT>
-	<SCRIPT src='/test-portlet/netHD/dr/bin/mootools.js'></SCRIPT>
-	<SCRIPT src='/test-portlet/netHD/dr/bin/moocanvas.js'></SCRIPT>
-	<SCRIPT src='/test-portlet/netHD/dr/bin/draw2d.js'></SCRIPT>
-	<SCRIPT src='/test-portlet/netHD/dr/bin/NetObject.js'></SCRIPT>
+<link type="text/css" rel="stylesheet" href="/test-portlet/netHD/dr/demo.css" />
+	<SCRIPT src='/test-portlet/netHD/dr/wz_jsgraphics.js'></SCRIPT>
+	<SCRIPT src='/test-portlet/netHD/dr/mootools.js'></SCRIPT>
+	<SCRIPT src='/test-portlet/netHD/dr/moocanvas.js'></SCRIPT>
+	<SCRIPT src='/test-portlet/netHD/dr/draw2d.js'></SCRIPT>
+	<SCRIPT src='/test-portlet/netHD/dr/NetObject.js'></SCRIPT>
 
 	<!--  ********************************* Body **********************************  -->
 <body style="margin:0px;padding:0px;">
