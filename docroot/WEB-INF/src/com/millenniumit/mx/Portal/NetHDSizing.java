@@ -105,6 +105,7 @@ public class NetHDSizing extends MVCPortlet {
 			System.out.println("This section is for Navigate "+ ItemName+" for Grid");
 			gridData.gridLoad(request,  response, ItemName);
 		}
+		
 		else{
 			
 		}

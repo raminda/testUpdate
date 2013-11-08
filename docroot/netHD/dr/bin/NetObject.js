@@ -16,5 +16,12 @@ function my2(st) {
 			this.outputPort.setBackgroundColor(new draw2d.Color(245,115,115));
 			this.addPort(this.outputPort,this.width,this.height/2);
 		}
+		if(_ac0!==null&&this.inputPort===null){
+			this.inputPort=new draw2d.InputPort();
+			this.inputPort.setMaxFanOut(5);
+			this.inputPort.setWorkflow(_ac0);
+			this.inputPort.setBackgroundColor(new draw2d.Color(245,115,115));
+			this.addPort(this.inputPort,0,this.height/2);
+		}
 	};
 }
