@@ -15,6 +15,7 @@ Ext.define('New.view.SMenuHomeView', {
 			text : 'Projects',
 			width : 200,
 			handler : function() {
+				crt2();
 			}
 		}]		         
 	} ],

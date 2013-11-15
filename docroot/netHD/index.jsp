@@ -38,21 +38,39 @@
 	
 		var ext_path = "/test-portlet/netHD/ext-4.0/src";
   		var app_path = "/test-portlet/netHD/app";
-  		
 </script>
 
 	<!--  ********************************* Js s********************************** -->
+	
 
-<script src="/test-portlet/netHD/Addflow/addflow-min.js"></script>
-<script src="/test-portlet/netHD/Addflow/network.js"></script>
+	<link type="text/css" rel="stylesheet" href="/test-portlet/netHD/draw2d/demo.css" />
+	<script src='/test-portlet/netHD/draw2d/wz_jsgraphics.js'></script>
+	<script src='/test-portlet/netHD/draw2d/mootools.js'></script>
+	<script src='/test-portlet/netHD/draw2d/moocanvas.js'></script>
+	<script src='/test-portlet/netHD/draw2d/draw2d.js'></script>
+	<script src='/test-portlet/netHD/draw2d/NetObject.js'></script>
+	
+		<script src='/test-portlet/netHD/draw2d/ContextmenuConnection.js'></script>
+		<script src='/test-portlet/netHD/draw2d/DiagramFigure.js'></script>
+		<script src='/test-portlet/netHD/draw2d/JSONSerializer.js'></script>
+		<script src='/test-portlet/netHD/draw2d/MyInputPort.js'></script>
+		<script src='/test-portlet/netHD/draw2d/MyOutputPort.js'></script>
+		<script src='/test-portlet/netHD/draw2d/ResizeImage.js'></script>
+		<script src='/test-portlet/netHD/Addflow/network.js'></script>
+		
+		<script >
+		JSON=new(function(){
+			var _1={}.hasOwnProperty?true:false;
+			var _2=function(n){
+				return n<10?"0"+n:n;};
+			var m={"\b":"\\b","\t":"\\t","\n":"\\n","\f":"\\f","\r":"\\r","\"":"\\\"","\\":"\\\\"};
+			var _5=function(s){
+				if(/["\\\x00-\x1f]/.test(s)){return"\""+s.replace(/([\x00-\x1f\\"])/g,function(a,b){var c=m[b];if(c){return c;}c=b.charCodeAt();return"\\u00"+Math.floor(c/16).toString(16)+(c%16).toString(16);})+"\"";}return"\""+s+"\"";};var _a=function(o){var a=["["],b,i,l=o.length,v;for(i=0;i<l;i+=1){v=o[i];switch(typeof v){case"undefined":case"function":case"unknown":break;default:if(b){a.push(",");}
+				a.push(v===null?"null":JSON.encode(v));b=true;}}a.push("]");return a.join("");};var _11=function(o){return"\""+o.getFullYear()+"-"+_2(o.getMonth()+1)+"-"+_2(o.getDate())+"T"+_2(o.getHours())+":"+_2(o.getMinutes())+":"+_2(o.getSeconds())+"\"";};
+				this.encode=function(o){if(typeof o=="undefined"||o===null){return"null";}else{if(o instanceof Array){return _a(o);}else{if(o instanceof Date){return _11(o);}else{if(typeof o=="string"){return _5(o);}else{if(typeof o=="number"){return isFinite(o)?String(o):"null";}else{if(typeof o=="boolean"){return String(o);}else{var a=["{"],b,i,v;for(i in o){if(!_1||o.hasOwnProperty(i)){v=o[i];switch(typeof v)
+				{case"undefined":case"function":case"unknown":break;default:if(b){a.push(",");}a.push(this.encode(i),":",v===null?"null":this.encode(v));b=true;}}}a.push("}");return a.join("");}}}}}}};this.decode=function(_18){return eval("("+_18+")");};})();encode=JSON.encode;decode=JSON.decode;
 
-<link type="text/css" rel="stylesheet" href="/test-portlet/netHD/dr/bin/demo.css" />
-	<SCRIPT src='/test-portlet/netHD/dr/bin/wz_jsgraphics.js'></SCRIPT>
-	<SCRIPT src='/test-portlet/netHD/dr/bin/mootools.js'></SCRIPT>
-	<SCRIPT src='/test-portlet/netHD/dr/bin/moocanvas.js'></SCRIPT>
-	<SCRIPT src='/test-portlet/netHD/dr/bin/draw2d.js'></SCRIPT>
-	<SCRIPT src='/test-portlet/netHD/dr/bin/NetObject.js'></SCRIPT>
-
+		</script>
 	<!--  ********************************* Body **********************************  -->
 <body style="margin:0px;padding:0px;">
 	<div style="background-color: white;" >
@@ -60,24 +78,7 @@
 		<div align="left">
 			<div id="<portlet:namespace/>-ext-div" align="left"></div>
 		</div><br>
-		</div>
-</body>
-		<%-- <div>
-	<!--  ********************************* Slide Bar **********************************  -->
-			<div id="SlideBar" style="float: left; width: 23% ;height:410px;">
-				<div id="<portlet:namespace/>-Slide-ext-div" align="center" style="float: left; width: 100%"></div>
-			</div>
-	<!--  ********************************* Main Body **********************************  -->
-			<div id="MainBody"  style="float: left;height:410px;width: 75% ;">
-			
-				<div id="<portlet:namespace/>-Body-ext-div" align="center" style="float: left;width: 100%"></div>
-			</div>
-	<!--  ********************************* Canvas Body **********************************  -->
-			<div id="Canvas" align=center style="border-style: solid; height:410px; overflow:auto; float: right; display: none;">
-				<canvas id="canvas" width="90%" height="700px">THIS BROWSER NETHDSIZING PLESE USE CHORME OR FIREFOX</canvas>
-			</div>
-		</div> 
 	</div>
-</body>--%>
+</body>
 	
 	
