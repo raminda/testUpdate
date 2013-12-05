@@ -1,6 +1,6 @@
 Ext.define( 'New.store.PackageStoreGrid', {
 	extend :'Ext.data.Store',
-	model : 'New.model.PackageModel',
+	model : 'New.model.PackagesModel',
 	autoLoad : true,
 	autoSync : false,
 	proxy : {

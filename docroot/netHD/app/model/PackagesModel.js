@@ -22,13 +22,13 @@ Ext.define('New.model.PackagesModel', {
 		name : 'Tec_Descrip',
 		type : 'string'
 	},{
-		name : 'date_created',
+		name : 'Calendar_created',
 		type : 'string'
 	},{
-		name : 'date_modified',
+		name : 'Calendar_modified',
 		type : 'string'
 	},{
-		name : 'date_logged',
+		name : 'Calendar_logged',
 		type : 'string'
 	}]
 });

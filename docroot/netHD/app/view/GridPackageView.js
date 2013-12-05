@@ -24,11 +24,11 @@ Ext.define('New.view.GridPackageView', {
 			header : 'Package Name',
 			dataIndex : 'PackageName',
 	
-		}, /*{
+		}, {
 			header : 'Price',
-			dataIndex : 'Price',
+			dataIndex : 'BasePrice',
 	
-		},*/{
+		},{
 			flex : 1,
 			header : 'Summery',
 			dataIndex : 'Summery',
@@ -36,14 +36,14 @@ Ext.define('New.view.GridPackageView', {
 		},{
 			flex : 1,
 			header : 'Full Description',
-			dataIndex : 'Full_Descrip',
+			dataIndex : 'Comment',
 	
-		},{
+		},/*{
 			flex : 1,
 			header : 'Technical Description',
 			dataIndex : 'Tec_Descrip',
 			
-		},{
+		},*/{
 			flex : 1,
 			header : 'End Of Life date',
 			dataIndex : 'EOLDate',
@@ -51,12 +51,12 @@ Ext.define('New.view.GridPackageView', {
 		},{
 			flex : 1,
 			header : 'date created',
-			dataIndex : 'date_created',
+			dataIndex : 'Calendar_created',
 	
 		},{
 			flex : 1,
 			header : 'date modified',
-			dataIndex : 'date_modified',
+			dataIndex : 'Calendar_modified',
 	
 		}],
 		tbar : [{
