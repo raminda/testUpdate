@@ -23,8 +23,6 @@ import com.millenniumit.mx.data.nethdsizing.domain.Equipments;
 import com.millenniumit.mx.data.nethdsizing.domain.ItemTypes;
 import com.millenniumit.mx.data.nethdsizing.domain.Packages;
 import com.millenniumit.mx.data.nethdsizing.domain.Project;
-import com.millenniumit.mx.data.nethdsizing.domain.ProjectItems;
-import com.millenniumit.mx.data.nethdsizing.domain.VersionMap;
 import com.millenniumit.mx.data.nethdsizing.service.EquipmentMapingService;
 import com.millenniumit.mx.data.nethdsizing.service.EquipmentsBulkService;
 import com.millenniumit.mx.data.nethdsizing.service.EquipmentsService;
@@ -32,7 +30,6 @@ import com.millenniumit.mx.data.nethdsizing.service.ItemTypesService;
 import com.millenniumit.mx.data.nethdsizing.service.PackagesService;
 import com.millenniumit.mx.data.nethdsizing.service.ProjectItemsService;
 import com.millenniumit.mx.data.nethdsizing.service.ProjectsService;
-import com.millenniumit.mx.data.nethdsizing.service.VersionMapService;
 
 public class SaveData {
 	
@@ -46,11 +43,11 @@ public class SaveData {
 	private ItemTypesService itemTypeService;
 	private PackagesService packageService;
 	private ProjectsService projectService;
+	@SuppressWarnings("unused")
 	private ProjectItemsService projectItemsService;
 	private EquipmentMapingService equipmentMapingService;
-	private VersionMapService versionMapService;
 	
-	/*public SaveData(AcUserService acUserService,EquipmentsService equipmentService,EquipmentMapingService equipmentMapingService,EquipmentsBulkService equipmentsBulkService,ItemTypeService itemTypeService,PackagesService packageService,ProjectsService projectService,ProjectItemsService projectItemsService){
+	public SaveData(EquipmentsService equipmentService,EquipmentMapingService equipmentMapingService,EquipmentsBulkService equipmentsBulkService,ItemTypesService itemTypeService,PackagesService packageService,ProjectsService projectService,ProjectItemsService projectItemsService){
 		
 		
 		this.equipmentService =equipmentService; 
@@ -60,8 +57,7 @@ public class SaveData {
 		this.projectService =projectService;
 		this.projectItemsService = projectItemsService;
 		this.equipmentMapingService=equipmentMapingService;
-		this.acUserService=acUserService;
-	}*/
+	}
 	
 	public SaveData(EquipmentsService equipmentService,EquipmentMapingService equipmentMapingService,ItemTypesService itemTypeService){		
 			
@@ -115,11 +111,11 @@ public class SaveData {
 				try {
 					//*************************************************
 					System.out.println(jsonobj);
-					System.out.println((jsonobj.get("EOLDate")));
+					//System.out.println((jsonobj.get("EOLDate")));
 					
 					//*****Saving To Object******
 					NewEquipment.setItemName(jsonobj.getString("ItemName"));
-					//NewEquipment.setItemType(itemTypeService.getItemType(jsonobj.getString("ItemType")));
+					NewEquipment.setItemType(itemTypeService.get(jsonobj.getString("itemtypes")));
 					NewEquipment.setSummary(jsonobj.getString("Summary"));
 					NewEquipment.setITIC_Descrip(jsonobj.getString("Full_Descrip"));
 					NewEquipment.setTec_Descrip(jsonobj.getString("Tec_Descrip"));
@@ -127,10 +123,13 @@ public class SaveData {
 					NewEquipment.setPrice(Integer.parseInt(jsonobj.getString("Price"),10));
 					
 					//String dateFormat  = "yyyy-MM-dd";
-					Calendar date =null;
+					//Calendar date =null;
+					Calendar cal = Calendar.getInstance();
+				    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				    cal.setTime((Date)sdf.parse(jsonobj.getString("EOLDate")));// all done
 							/**********************************/
 					try{
-						NewEquipment.setEOLDate(date);
+						NewEquipment.setEOLDate(cal);
 					}
 					catch (Exception e) {
 						 logger.info("Error : " + e.getMessage());
@@ -186,7 +185,7 @@ public class SaveData {
 				
 				EquipmentMaping equipmentMaping=new EquipmentMaping();
 				//*************************************************
-				logger.info("hi : " + key+" " + CID+" ");
+				logger.info("hi : 1" + key+"1 " + CID+" ");
 				equipmentMaping.setParentID(equipmentService.getEquipments(key));
 				equipmentMaping.setChildID(equipmentService.getEquipments(CID));
 				//logger.info("hi : " + equipmentMaping.getChildID().getItemName() +"   "+equipmentMaping.getParentID().getItemName());
@@ -275,7 +274,7 @@ public class SaveData {
 				try {
 					ID =equipmentsBulkService.save( equipmentsBulk);
 					List<EquipmentBulk> equipmentmaping=equipmentsBulkService.getPackageBulk(packages);
-					int prices=  0;
+					//int prices=  0;
 					for(int i=0;i<equipmentmaping.size();i++){
 						//prices+=equipmentmaping.get(i).getPrice();
 						
@@ -377,7 +376,7 @@ public class SaveData {
 					try {
 						ID =equipmentsBulkService.save( equipmentsBulk);
 						List<EquipmentBulk> equipmentmaping=equipmentsBulkService.getPackageBulk(packages);
-						Long prices=  (long) 0;
+						//Long prices=  (long) 0;
 						for(int i=0;i<equipmentmaping.size();i++){
 							//prices+=equipmentmaping.get(i).getPrice();
 							
@@ -390,7 +389,7 @@ public class SaveData {
 					}
 				}
 				else{
-					Equipments equipments=equipmentService.getEquipments(jsonobj.getString("ItemID"));
+					//Equipments equipments=equipmentService.getEquipments(jsonobj.getString("ItemID"));
 					EquipmentBulk equipmentsBulk=equipmentsBulkService.EquipmentsBulkget(packageService.getPackagess(Integer.parseInt(jsonobj.getString("PackageID"))), equipmentService.getEquipments(jsonobj.getString("ItemID")));
 					equipmentsBulk.setQuantity(equipmentsBulk.getQuantity()+(Integer.parseInt(jsonobj.getString("Quantity"),10)));
 					//equipmentsBulk.setPrice(equipments.getPrice()*equipmentsBulk.getQuantity());
@@ -406,7 +405,7 @@ public class SaveData {
 		//********ProjectItems**********
 		else if (ServiceType.equals("ProjectItems")) {
 			
-			ProjectItems projectItems=new ProjectItems();
+			//ProjectItems projectItems=new ProjectItems();
 			//ProjectItems obj=projectItemsService.get(projectService.getProjects(jsonobj.getString("ProjectID")), jsonobj.getString("OptionID"), jsonobj.getString("VersionID"), (jsonobj.getString("SiteID")),packageService.getPackagess(Integer.parseInt(jsonobj.getString("PackageID")))) ;
 			/*if(obj== null){
 				logger.info("saving not Duplicate ");

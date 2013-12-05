@@ -23,7 +23,6 @@ Ext.define('New.view.BodyView', {
 		name : 'EquipmentBulkDD',
 		iconCls : 'Icon',
 		textAlign : 'left',
-		//xtype : 'BulkDD',
 	},{
 		flex : 1,
 		text : 'Home',
@@ -44,7 +43,6 @@ Ext.define('New.view.BodyView', {
 		id : 'ReportView',
 		name : 'ReportView',
 		textAlign : 'left',
-		//xtype:'Report'
 	}],
 	initComponent : function() {
 		this.callParent(arguments);
@@ -53,7 +51,6 @@ Ext.define('New.view.BodyView', {
 		Ext.getCmp('imageView').setVisible(true);
 		Ext.getCmp('GridView').setVisible(false);
 		Ext.getCmp('CanversView').setVisible(false);
-		//Ext.getCmp('DDBodyView').setVisible(false);
 		Ext.getCmp('ReportView').setVisible(false);
 			
 	}

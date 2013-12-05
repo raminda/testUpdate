@@ -10,23 +10,26 @@ Ext.define('New.model.EquipmentModel', {
 		name : 'itemtypes',
 		type : 'string'
 	}, {
-		name : 'Comments',
+		name : 'Summary',
 		type : 'string'
 	}, {
 		name : 'ITIC_Descrip',
 		type : 'string'
 	}, {
-		name : 'Summary',
-		type : 'string'
-	}, {
 		name : 'Tec_Descrip',
 		type : 'string'
 	}, {
-		name : 'EOLDate',
+		name : 'Comments',
 		type : 'string'
+	}, {
+		name : 'Full_Descrip',
+		type: 'string'
 	}, {
 		name : 'Price',
 		type : 'number'
+	}, {
+		name : 'EOLDate',
+		type : 'string'
 	}, {
 		name : 'date_created',
 		type : 'string'

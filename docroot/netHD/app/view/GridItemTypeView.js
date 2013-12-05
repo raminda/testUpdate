@@ -1,7 +1,7 @@
 Ext.define('New.view.GridItemTypeView', {
 	extend : 'Ext.form.Panel',
 	alias : 'widget.ItemTypeGrid',
-	title : 'Item Type Grid',
+	title : 'Item Types',
 	height :750,
 	frame : true,
 	border : false,
@@ -87,6 +87,7 @@ Ext.define('New.view.GridItemTypeView', {
 								store.proxy.extraParams.purpose = 'Grid';
 								store.load();
 								
+								//Ext.Msg.alert('Error', 'Plese Fill all the feied brfor saving !');
 								win.close();//Ext.Msg.alert('Sucsess', 'Sucsess !');
 					         }
 					 		else{
@@ -118,12 +119,13 @@ Ext.define('New.view.GridItemTypeView', {
 					store.remove(val);
 					if (store.getCount() > 0) {
 					sm.select(0);
-					}
+				}
 				
 					store.proxy.extraParams.purpose = 'delete';
 					store.proxy.extraParams.value = val[0].get('ID');
 					store.load();
 					
+					Ext.Msg.alert('Error', 'ok');
 					
 					var grid = Ext.getCmp('GridItemTypeView');
 					var store=grid.getStore('ItemTypeStoreGrid');

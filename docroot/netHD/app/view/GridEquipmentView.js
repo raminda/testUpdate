@@ -103,7 +103,7 @@ Ext.define('New.view.GridEquipmentView', {
 								//var ndate=new Date();
 								var Support=support.toString();
 								if(Support=="This is a base Item"){
-									Support='base';
+									Support='Base';
 								}
 								 var form = Ext.getCmp('AddEquiment').getForm();
 						         if(form.isValid()){
@@ -115,9 +115,12 @@ Ext.define('New.view.GridEquipmentView', {
 	
 										
 									var store = Ext.getStore('EquipmentStore');
+									//store.Re
 									store.proxy.extraParams.purpose = 'New';
 									store.proxy.extraParams.ID=Support;
-									var JsonObject= {ItemName:Name,ItemType:ItemType,Summary: Summary,Full_Descrip:FullDescription,ITIC_Descrip:ITICDescription,Tec_Descrip:TecDescription,Price:Price,EOLDate:EOL};
+									var JsonObject= {ID:0,ItemName:Name,itemtypes:ItemType,Summary: Summary,ITIC_Descrip:ITICDescription,Tec_Descrip:TecDescription,Full_Descrip:FullDescription,Price:Price,EOLDate:EOL};
+									//alert(JsonObject.toString());
+									//Ext.Msg.alert('Error', ItemType);
 									var row= Ext.create('New.model.EquipmentModel', JsonObject);
 									store.insert(0, row);
 									
@@ -136,7 +139,7 @@ Ext.define('New.view.GridEquipmentView', {
 									var store = grid.getStore('EquipmentStoreGrid');
 									store.proxy.extraParams.purpose='Grid';
 									store.load();
-										
+									win.close();
 									//	Ext.Msg.alert('Message', edate);
 								}
 						         else{
@@ -183,7 +186,7 @@ Ext.define('New.view.GridEquipmentView', {
 							}
 						
 							store.proxy.extraParams.purpose = 'delete';
-							store.proxy.extraParams.value = val[0].get('ID');
+							store.proxy.extraParams.value = val[0].get('ItemName');
 							store.load();
 							
 							
@@ -242,7 +245,7 @@ Ext.define('New.view.GridEquipmentView', {
 								var Support=support.toString();
 								
 								if(Support=="This is a base Item"){
-									Support='base';
+									Support='Base';
 								}
 								 var form = Ext.getCmp('UpdateEquiment').getForm();
 								
@@ -256,7 +259,8 @@ Ext.define('New.view.GridEquipmentView', {
 									 var store = Ext.getStore('EquipmentStore');
 									 store.proxy.extraParams.purpose = 'Update';
 									 store.proxy.extraParams.ID=Support;
-									 var JsonObject= {ID:ID,ItemName:Name,ItemType:ItemType,Summary: Summary,Full_Descrip:FullDescription,ITIC_Descrip:ITICDescription,Tec_Descrip:TecDescription,Price:Price,EOLDate:EOL};
+									 store.proxy.extraParams.value=Ext.getCmp('txtEqUpEquipmentCName').getValue();
+									 var JsonObject= {ID:ID,ItemName:Name,itemtypes:ItemType,Summary: Summary,Comments:FullDescription,ITIC_Descrip:ITICDescription,Tec_Descrip:TecDescription,Price:Price,EOLDate:EOL};
 									 var row= Ext.create('New.model.EquipmentModel', JsonObject);
 									 store.insert(0, row);
 									 

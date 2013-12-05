@@ -17,10 +17,24 @@ Ext.define('New.view.SMenuHomeView', {
 			handler : function() {
 				crt2();
 			}
+		},{
+			xtype : 'textfield',
+			fieldLabel : 'Eqipment Type',
+			id : 'txtEqipmentType',
+			name : 'txtEqipmentType',
+			
+		},{
+			xtype : 'textfield',
+			fieldLabel : 'Eqipment Name',
+			id : 'txtEqipmentName',
+			name : 'txtEqipmentName',
+			
 		}]		         
-	} ],
+	} ], 
 
 	initComponent : function() {
 		this.callParent(arguments);
+		Ext.getCmp('txtEqipmentType').setVisible(false);
+		Ext.getCmp('txtEqipmentName').setVisible(false);
 	}
 });

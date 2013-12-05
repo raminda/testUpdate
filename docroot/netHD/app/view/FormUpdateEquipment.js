@@ -31,6 +31,14 @@ Ext.define('New.view.FormUpdateEquipment', {
 			allowBlank : false,
 			msgTarget: 'side',
 			width : 400
+		},{
+			xtype : 'textfield',
+			fieldLabel : 'Equiment Name',
+			id : 'txtEqUpEquipmentCName',
+			name : 'txtEqUpEquipmentCName',
+			allowBlank : false,
+			msgTarget: 'side',
+			width : 400
 		}, {
 			xtype : 'combobox',
 			fieldLabel : 'Item Type',
@@ -172,6 +180,7 @@ Ext.define('New.view.FormUpdateEquipment', {
 		var EOLDate =[ day, mnth,  date.getFullYear()].join("-");
 		
 		Ext.getCmp('txtEqUpEquipmentName').setValue(ItemName);
+		Ext.getCmp('txtEqUpEquipmentCName').setValue(ItemName);
 		Ext.getCmp('txtEqUpPrice').setValue(Price);
 		Ext.getCmp('txtEqUpSummery').setValue(Summary);
 		Ext.getCmp('txtEqUpFullDescription').setValue(Full_Descrip);
@@ -180,6 +189,8 @@ Ext.define('New.view.FormUpdateEquipment', {
 		Ext.getCmp('txtEqUpEOD').setValue(EOLDate);
 		Ext.getCmp('cmbEqUpItemType').setValue(ItemType);
 		Ext.getCmp('cmbEqUpID').setValue(ID);
+		
 		Ext.getCmp('cmbEqUpID').setVisible(false);
+		Ext.getCmp('txtEqUpEquipmentCName').setVisible(false);
 	}
 });

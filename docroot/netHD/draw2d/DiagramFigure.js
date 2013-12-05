@@ -117,7 +117,7 @@ Node.prototype.addAnnotation = function(aForWhat, aText, aAnnX, aAnnY) {
   ann.doEdit=function(){
         var obj = this.html;
         var aThat = this;
-	Element.hide(obj);
+	//Element.hide(obj);
         workflow.setCurrentSelection(null);
 
 	
@@ -125,7 +125,7 @@ Node.prototype.addAnnotation = function(aForWhat, aText, aAnnX, aAnnY) {
 	var textarea = '<div id="'+obj.id+'_editor" style="position: absolute; z-index:99999; left:'+this.getX()+'; top:' + this.getY() +'"><input type="text" id="'+obj.id+'_edit" name="'+obj.id+'" value="'+obj.innerHTML+'"></input>';
 	var button	 = '<div><input id="'+obj.id+'_save" type="button" value="SAVE" /> OR <input id="'+obj.id+'_cancel" type="button" value="CANCEL" /></div></div>';
 	
-	new Insertion.After(obj, textarea+button);
+	new Insertion.After(obj, button+textarea);
 	$(obj.id+'_edit').focus();
 	$(obj.id+'_edit').select();
 		
@@ -134,6 +134,7 @@ Node.prototype.addAnnotation = function(aForWhat, aText, aAnnX, aAnnY) {
         Event.observe(obj.id+'_edit', 'keydown', function(event) { var key = event.which || event.keyCode;if(key==13) { aThat.setText($F(obj.id+'_edit'));Element.remove(obj.id+'_editor'); Element.show(obj);}}, false);
   }
   ann.onDoubleClick=function(){
+	  alert("Ann d Click");
     this.doEdit();
   }
 
@@ -151,7 +152,9 @@ DiagramFigure=function(){
 DiagramFigure.prototype=new ImageFigure;
 DiagramFigure.prototype.type="DiagramFigure";
 DiagramFigure.prototype.setPic = function(aPic) {
-  this.pic = aPic;
+	
+	aPic="/test-portlet/netHD/draw2d/icons/"+aPic;	
+	this.pic = aPic;
   this.setImage(aPic);
 }
 /*
@@ -214,39 +217,43 @@ DiagramFigure.prototype.onSelectionChanged=function(newSel){
         newSel.forWhat.bgFlash();
       }
     }
-  } catch (err) {
+  } catch (err){
     // if properties do not exist, do nothing
   }
 }
 
 DiagramFigure.prototype.onDoubleClick=function(){
-  if(!this.annotation) {
-    this.addAnnotation(this, "Description for the figure", 1, this.height + 5);
-    this.annotation.doEdit();
-    this.bgFlash();
-  } else {
-    this.annotation.bgFlash();
+	Ext.getCmp('txtEqipmentType').setVisible(true);
+	Ext.getCmp('txtEqipmentName').setVisible(true);
+	if(!this.annotation) {
+		this.addAnnotation(this, "Description for the figure", 1, this.height + 5);
+		this.annotation.doEdit();
+		this.bgFlash();
+	}
+	else {
+		this.annotation.bgFlash();
   }
+  
 }
 
 DiagramFigure.prototype.setWorkflow=function(_3a5c){
-ImageFigure.prototype.setWorkflow.call(this,_3a5c);
-if(_3a5c!=null&&this.inputPort==null){
-this.inputPort=new MyInputPort();
-this.inputPort.setWorkflow(_3a5c);
-this.addPort(this.inputPort,0,this.height/2);
-this.inputPort2=new MyInputPort();
-this.inputPort2.setWorkflow(_3a5c);
-this.addPort(this.inputPort2,this.width/2,0);
-this.inputPort3=new MyInputPort();
-this.inputPort3.setWorkflow(_3a5c);
-this.addPort(this.inputPort3,this.width,this.height/2);
-this.inputPort4=new MyInputPort();
-this.inputPort4.setWorkflow(_3a5c);
-this.addPort(this.inputPort4,this.width/2,this.height);
-this.workflow.addSelectionListener(this);
-//workflow.addFigure(this.annotation,this.getX(),this.getY());
-};
+	ImageFigure.prototype.setWorkflow.call(this,_3a5c);
+	if(_3a5c!=null&&this.inputPort==null){
+		this.inputPort=new MyInputPort();
+		this.inputPort.setWorkflow(_3a5c);
+		this.addPort(this.inputPort,0,this.height/2);
+		this.inputPort2=new MyInputPort();
+		this.inputPort2.setWorkflow(_3a5c);
+		this.addPort(this.inputPort2,this.width/2,0);
+		this.inputPort3=new MyInputPort();
+		this.inputPort3.setWorkflow(_3a5c);
+		this.addPort(this.inputPort3,this.width,this.height/2);
+		this.inputPort4=new MyInputPort();
+		this.inputPort4.setWorkflow(_3a5c);
+		this.addPort(this.inputPort4,this.width/2,this.height);
+		this.workflow.addSelectionListener(this);
+		//workflow.addFigure(this.annotation,this.getX(),this.getY());
+	};
 };
 
 DiagramFigure.prototype.getContextMenu=function(){

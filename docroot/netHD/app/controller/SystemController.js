@@ -5,8 +5,8 @@ Ext.define('New.controller.SystemController', {
 	extend : 'Ext.app.Controller',
 
 	views 	: ['BodyView','CanversView','imageView','FormAddEquipmentView','FormAddItemTypeView','FormAddPackageView','FormUpdateEquipment','FormUpdateItemType','FormUpdatePackage','GridView','GridEquipmentView','GridItemTypeView','GridPackageView','MenuDivView','MenuBarView','SlideMenuView','SMenuHomeView'],
-	stores 	: ['EquipmentsBulkStoreGrid','EquipmentStoreComp','EquipmentStoreGrid','ItemTypeStoreGrid','PackageStoreGrid'],
-	models 	: ['EquipmentModel','ItemTypeModel'],
+	stores 	: ['EquipmentStore','EquipmentStoreComp', 'EquipmentStoreGrid','ItemTypeStore','ItemTypeStoreGrid','PackageStore','PackageStoreGrid'],
+	models 	: ['EquipmentModel','ItemTypeModel','PackagesModel'],
 
 	init : function() {
 		this.control({

@@ -80,8 +80,6 @@ public class JsonCreator {
 	}
 	
 	private String linebracker(String jsonOb2){
-		//String a="|";
-		//String b="\n";
 		//jsonOb2=jsonOb2.replaceAll(a, b);
 		return jsonOb2;
 	}

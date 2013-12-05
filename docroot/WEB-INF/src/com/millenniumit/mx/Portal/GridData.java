@@ -100,11 +100,12 @@ public class GridData {
 			for(int i=0;i<lst.size();i++){
 				Equipments obj=lst.get(i);
 				try{
-					jsonOb2+="{ ItemName: '" + obj.getItemName()+"',Summary:'"+obj.getSummary()+"',Price: '"+obj.getPrice()+"',ITIC_Descrip:'"+obj.getITIC_Descrip()+"',Tec_Descrip:'"+obj.getTec_Descrip()+"',EOLDate:'"+obj.getEOLDate()+"',date_modified:'"+obj.getCalendar_modified()+"',date_logged:'"+obj.getCalendar_logged()+"',date_created:'"+obj.getCalendar_created()+"',ID:'"+obj.getID()+"',itemtypes:'"+obj.getItemType().getTypeName()+"'}";
+					jsonOb2+="{ ItemName: '" + obj.getItemName()+"',Summary:'"+obj.getSummary()+"',Price: '"+obj.getPrice()+"',ITIC_Descrip:'"+obj.getITIC_Descrip()+"',Tec_Descrip:'"+obj.getTec_Descrip()+"',EOLDate:'',itemtypes:'"+obj.getItemType().getTypeName()+"'}";
 					//System.out.println(obj.getItemName()+" gdfg "+ obj.getItemType().getTypeName());
 				}catch (Exception e) {
 					logger.info("Error : " + e.getMessage());
 					jsonOb2+="'}";
+					
 					bool=false;
 				}
 				if(i<lst.size()-1 && bool){
@@ -115,6 +116,7 @@ public class GridData {
 			
 			jsonOb2+="]";
 			jsonOb2=linebracker(jsonOb2);
+			System.out.println(jsonOb2);
 			out.println(jsonOb2);
 		}
 		//******equipmentBulk********

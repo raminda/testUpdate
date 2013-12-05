@@ -1,5 +1,7 @@
 package com.millenniumit.mx.Portal;
 
+import java.util.List;
+
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
@@ -51,8 +53,9 @@ public class DeleteData {
 		this.acUserService=acUserService;
 	}*/
 	
-	public DeleteData(EquipmentsService equipmentService){		
-			
+	public DeleteData(EquipmentsService equipmentService,EquipmentMapingService equipmentMapingService){		
+		
+		this.equipmentMapingService=equipmentMapingService;	
 		this.equipmentService =equipmentService; 
 	}
 	public DeleteData(EquipmentsBulkService equipmentsBulkService){		
@@ -83,20 +86,42 @@ public class DeleteData {
 	
 	public void DeleteDB(ResourceRequest request, ResourceResponse response,String ServiceType){
 		
-		
+		System.out.println("value is "+request.getParameter("value"));
 		//*****equipment*******
 		 if (ServiceType.equals("Equipment")) {
 			
 			Equipments newEquipments=new Equipments();
-			newEquipments=equipmentService.getEquipments(Integer.parseInt(request.getParameter("value")));
+			newEquipments=equipmentService.getEquipments(request.getParameter("value"));
+			System.out.println("value is "+newEquipments.getItemName());
+			List <EquipmentMaping> list=equipmentMapingService.getEquipmentMapings(newEquipments, 1);
+			try{
+				System.out.println("ize() : "+list.size());
+				for(int i=0;i<list.size();i++){
+					equipmentMapingService.delete(list.get(i));
+				}
+			}
+			catch (Exception e) {
+				System.out.println("Error in delete in "+ServiceType+" "+e.getMessage());
+			}
+			try{
+				
 			equipmentService.delete(newEquipments);
+			}
+			catch (Exception e) {
+				System.out.println("Error in delete in "+ServiceType+" "+e.getMessage());
+			}
 		}
 		//******equipmentBulk********
 		else if (ServiceType.equals("EquipmentsBulk")) {
 			
 			EquipmentBulk newEquipmentBulk=new EquipmentBulk();
 			newEquipmentBulk=equipmentsBulkService.getEquipmentsBulks(Integer.parseInt(request.getParameter("value")));
-			equipmentsBulkService.delete(newEquipmentBulk);
+			try{
+				equipmentsBulkService.delete(newEquipmentBulk);
+			}
+			catch (Exception e) {
+				System.out.println("Error in delete in "+ServiceType+" "+e.getMessage());
+			}
 		}
 		//*****equipment Map*******
 		else if (ServiceType.equals("EquipmentMap")) {	
@@ -104,7 +129,12 @@ public class DeleteData {
 			
 			EquipmentMaping equipmentMaping=new EquipmentMaping();
 			equipmentMaping =equipmentMapingService.getEquipmentMapings(Integer.parseInt(request.getParameter("value")));
+			try{
 			equipmentMapingService.delete(equipmentMaping);
+			}
+			catch (Exception e) {
+				System.out.println("Error in delete in "+ServiceType+" "+e.getMessage());
+			}
 			
 		}
 		//************************Package**************
@@ -112,50 +142,73 @@ public class DeleteData {
 			
 			Packages newPackage=new Packages();
 			newPackage = packageService.getPackagess(Integer.parseInt(request.getParameter("value")));
+			try{
 			packageService.delete(newPackage);
-			
+			}
+			catch (Exception e) {
+				System.out.println("Error in delete in "+ServiceType+" "+e.getMessage());
+			}
 		}
 		//********ProjectItems**********
 		else if (ServiceType.equals("ProjectItems")) {
 			
 			ProjectItems newProjectItems=new ProjectItems();
 			newProjectItems=projectItemsService.getProjectItemss(Integer.parseInt(request.getParameter("value")));
+			try{
 			projectItemsService.delete(newProjectItems);
-			
+			}
+			catch (Exception e) {
+				System.out.println("Error in delete in "+ServiceType+" "+e.getMessage());
+			}
 		}
 		//*********Project*********
 		else if (ServiceType.equals("Projects")) {
 			
 			Project newprojects=new Project();
 			newprojects=projectService.getProjects(Integer.parseInt(request.getParameter("value")));
+			try{
 			projectService.delete(newprojects);	
-			
+			}
+			catch (Exception e) {
+				System.out.println("Error in delete in "+ServiceType+" "+e.getMessage());
+			}
 		}
 		//**********ItemType***********
 		else if (ServiceType.equals("ItemType")) {
-			
+			System.out.println(Integer.parseInt(request.getParameter("value")));
 			ItemTypes newItemType=new ItemTypes();
 			newItemType=itemTypeService.getItemTypess(Integer.parseInt(request.getParameter("value")));
+			try{
 			itemTypeService.delete(newItemType);
-			
+			}
+			catch (Exception e) {
+				System.out.println("Error in delete in "+ServiceType+" "+e.getMessage());
+			}
 		}
 		else if (ServiceType.equals("Company")) {
 					
 			Company company=new Company();
 			company=companyService.get(Integer.parseInt(request.getParameter("value")));
-					companyService.delete(company);
-					
-				}
+			try{
+			companyService.delete(company);
+			}
+			catch (Exception e) {
+				System.out.println("Error in delete in "+ServiceType+" "+e.getMessage());
+			}	
+		}
 		else if (ServiceType.equals("VersionMap")) {
 			
 			VersionMap versionMap=new VersionMap();
 			versionMap=versionMapService.get(Integer.parseInt(request.getParameter("value")));
+			try{
 			versionMapService.delete(versionMap);
-			
+			}
+			catch (Exception e) {
+				System.out.println("Error in delete in "+ServiceType+" "+e.getMessage());
+			}
 		}
 		//**********Nothing***********
 		else {
-			
 			System.out.println("This section is for Nothing for Delete");
 		}
 	}
