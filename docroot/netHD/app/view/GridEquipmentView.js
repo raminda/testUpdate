@@ -36,18 +36,13 @@ Ext.define('New.view.GridEquipmentView', {
 	
 		  },{
 			  flex : 1,
-			  header : 'Full Description',
-			  dataIndex : 'Full_Descrip',
-	
-		  },{
-			  flex : 1,
 			  header : 'ITIC Description',
 			  dataIndex : 'ITIC_Descrip',
 	
 			}, {
 				flex : 1,
-			header : 'Tec Description',
-			dataIndex : 'Tec_Descrip',
+			header : 'Comments ',
+			dataIndex : 'Comments',
 	
 			}, {
 				flex : 1,
@@ -59,16 +54,16 @@ Ext.define('New.view.GridEquipmentView', {
 				header : 'Equipment Price',
 				dataIndex : 'Price',
 	
-			},/* {
+			}/*, {
 			header : 'Date created',
 			dataIndex : 'date_created',
 	
-			}, */{
+			}, {
 				flex : 1,
 				header : 'Date modified',
 				dataIndex : 'date_modified',
 	
-			}],
+			}*/],
          tbar : [ {
 				text : 'Add New Equipment',
 				iconCls : 'add',
@@ -95,7 +90,7 @@ Ext.define('New.view.GridEquipmentView', {
 								var Price = Ext.getCmp('txtEqPrice').getValue();
 								var Summary=Ext.getCmp('txtEqSummery').getValue();
 								var support=Ext.getCmp('cmbEqSupport').getValue();
-								var FullDescription = Ext.getCmp('txtEqFullDescription').getValue();
+								var Comments = Ext.getCmp('txtEqFullDescription').getValue();
 								var ITICDescription = Ext.getCmp('txtEqITICDescription').getValue();
 								var TecDescription = Ext.getCmp('txtEqTecDescription').getValue();
 								var edate= Ext.getCmp('txtEqEOD').getValue();						
@@ -115,12 +110,9 @@ Ext.define('New.view.GridEquipmentView', {
 	
 										
 									var store = Ext.getStore('EquipmentStore');
-									//store.Re
 									store.proxy.extraParams.purpose = 'New';
 									store.proxy.extraParams.ID=Support;
-									var JsonObject= {ID:0,ItemName:Name,itemtypes:ItemType,Summary: Summary,ITIC_Descrip:ITICDescription,Tec_Descrip:TecDescription,Full_Descrip:FullDescription,Price:Price,EOLDate:EOL};
-									//alert(JsonObject.toString());
-									//Ext.Msg.alert('Error', ItemType);
+									var JsonObject= {ID:0,ItemName:Name,itemtypes:ItemType,Summary: Summary,ITIC_Descrip:ITICDescription,Tec_Descrip:TecDescription,Comments:Comments,Price:Price,EOLDate:EOL};
 									var row= Ext.create('New.model.EquipmentModel', JsonObject);
 									store.insert(0, row);
 									
@@ -235,7 +227,7 @@ Ext.define('New.view.GridEquipmentView', {
 								var Price = Ext.getCmp('txtEqUpPrice').getValue();
 								var Summary=Ext.getCmp('txtEqUpSummery').getValue();
 								var support=Ext.getCmp('cmbEqUpSupport').getValue();
-								var FullDescription = Ext.getCmp('txtEqUpFullDescription').getValue();
+								var Comments = Ext.getCmp('txtEqUpComments').getValue();
 								var ITICDescription = Ext.getCmp('txtEqUpITICDescription').getValue();
 								var TecDescription = Ext.getCmp('txtEqUpTecDescription').getValue();
 								var edate= Ext.getCmp('txtEqUpEOD').getValue();	
@@ -260,7 +252,7 @@ Ext.define('New.view.GridEquipmentView', {
 									 store.proxy.extraParams.purpose = 'Update';
 									 store.proxy.extraParams.ID=Support;
 									 store.proxy.extraParams.value=Ext.getCmp('txtEqUpEquipmentCName').getValue();
-									 var JsonObject= {ID:ID,ItemName:Name,itemtypes:ItemType,Summary: Summary,Comments:FullDescription,ITIC_Descrip:ITICDescription,Tec_Descrip:TecDescription,Price:Price,EOLDate:EOL};
+									 var JsonObject= {ID:ID,ItemName:Name,itemtypes:ItemType,Summary: Summary,Comments:Comments,ITIC_Descrip:ITICDescription,Tec_Descrip:TecDescription,Price:Price,EOLDate:EOL};
 									 var row= Ext.create('New.model.EquipmentModel', JsonObject);
 									 store.insert(0, row);
 									 

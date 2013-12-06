@@ -35,7 +35,7 @@ Ext.define('New.view.GridPackageView', {
 	
 		},{
 			flex : 1,
-			header : 'Full Description',
+			header : 'Comments',
 			dataIndex : 'Comment',
 	
 		},/*{
@@ -83,9 +83,9 @@ Ext.define('New.view.GridPackageView', {
 							
 							var Name = Ext.getCmp('txtPackageName').getValue();
 							var Summary=Ext.getCmp('txtPkgSummery').getValue();
-							var FullDescription = Ext.getCmp('txtPkgFullDescription').getValue();
-							var ITICDescription = Ext.getCmp('txtpkgITICDescription').getValue();
-							var TecDescription = Ext.getCmp('txtpkgTecDescription').getValue();
+							var Comment = Ext.getCmp('txtPkgComment').getValue();
+							var BasePrice = Ext.getCmp('txtpkgBasePrice').getValue();
+							//var TecDescription = Ext.getCmp('txtpkgTecDescription').getValue();
 							var edate= Ext.getCmp('txtPkgEOD').getValue();
 							
 							var Itemname = Ext.getCmp('cmbItemss').getValue();
@@ -107,16 +107,16 @@ Ext.define('New.view.GridPackageView', {
 									store = Ext.getStore('PackageStore');
 									store.proxy.extraParams.purpose = 'New';
 									store.proxy.extraParams.ID="[{PackageID:'"+Name+"',ItemID:'"+Itemname+"',Quantity:'1'}]";
-									JsonObject= {PackageName:Name,Summery: Summary,Full_Descrip:FullDescription,ITIC_Descrip:ITICDescription,Tec_Descrip:TecDescription,Price:0,EOLDate:EOLdate};
-									row= Ext.create('New.model.PackageModel', JsonObject);
+									JsonObject= {PackageName:Name,Summery:Summary,Comment:Comment,BasePrice:BasePrice,EOLDate:EOLdate};
+									row= Ext.create('New.model.PackagesModel', JsonObject);
 									store.insert(0, row);
 																
 									
 									Ext.getCmp('txtPackageName').reset();
 									Ext.getCmp('txtPkgSummery').reset();
-									Ext.getCmp('txtPkgFullDescription').reset();
-									Ext.getCmp('txtpkgITICDescription').reset();
-									Ext.getCmp('txtpkgTecDescription').reset();
+									Ext.getCmp('txtPkgComment').reset();
+									Ext.getCmp('txtpkgBasePrice').reset();
+									//Ext.getCmp('txtpkgTecDescription').reset();
 									Ext.getCmp('txtPkgEOD').reset();
 									
 									var grid = Ext.getCmp('gridPackageView');
@@ -202,9 +202,9 @@ Ext.define('New.view.GridPackageView', {
 							var Name = Ext.getCmp('txtUpPackageName').getValue();
 							//var Price = Ext.getCmp('txtUpPkgPrice').getValue();
 							var Summery=Ext.getCmp('txtUpPkgSummery').getValue();
-							var FullDescription = Ext.getCmp('txtUpPkgFullDescription').getValue();
-							var ITICDescription = Ext.getCmp('txtUppkgITICDescription').getValue();
-							var TecDescription = Ext.getCmp('txtUppkgTecDescription').getValue();
+							var Comment = Ext.getCmp('txtUpPkgComment').getValue();
+							var BasePrice = Ext.getCmp('txtUppkgBasePrice').getValue();
+							//var TecDescription = Ext.getCmp('txtUppkgTecDescription').getValue();
 							var edate= Ext.getCmp('txtUpPkgEOD').getValue();
 							
 							var ndate=new Date();
@@ -226,8 +226,8 @@ Ext.define('New.view.GridPackageView', {
 							         if(form.isValid()){
 										store = Ext.getStore('PackageStore');
 										store.proxy.extraParams.purpose = 'Update';
-										JsonObject= {ID:ID,PackageName:Name,Summery: Summery,Full_Descrip:FullDescription,ITIC_Descrip:ITICDescription,Tec_Descrip:TecDescription,EOLDate:EOLdate};
-										row= Ext.create('New.model.PackageModel', JsonObject);
+										JsonObject= {ID:ID,PackageName:Name,Summery: Summery,Comment:Comment,BasePrice:BasePrice,EOLDate:EOLdate};
+										row= Ext.create('New.model.PackagesModel', JsonObject);
 										store.insert(0, row);
 										
 										

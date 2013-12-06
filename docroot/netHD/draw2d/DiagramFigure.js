@@ -125,7 +125,8 @@ Node.prototype.addAnnotation = function(aForWhat, aText, aAnnX, aAnnY) {
 	var textarea = '<div id="'+obj.id+'_editor" style="position: absolute; z-index:99999; left:'+this.getX()+'; top:' + this.getY() +'"><input type="text" id="'+obj.id+'_edit" name="'+obj.id+'" value="'+obj.innerHTML+'"></input>';
 	var button	 = '<div><input id="'+obj.id+'_save" type="button" value="SAVE" /> OR <input id="'+obj.id+'_cancel" type="button" value="CANCEL" /></div></div>';
 	
-	new Insertion.After(obj, button+textarea);
+	new Insertion.After(obj,textarea+button);
+	//new Insertion.After(textarea,);
 	$(obj.id+'_edit').focus();
 	$(obj.id+'_edit').select();
 		
@@ -134,7 +135,7 @@ Node.prototype.addAnnotation = function(aForWhat, aText, aAnnX, aAnnY) {
         Event.observe(obj.id+'_edit', 'keydown', function(event) { var key = event.which || event.keyCode;if(key==13) { aThat.setText($F(obj.id+'_edit'));Element.remove(obj.id+'_editor'); Element.show(obj);}}, false);
   }
   ann.onDoubleClick=function(){
-	  alert("Ann d Click");
+	//  alert("Ann d Click");
     this.doEdit();
   }
 

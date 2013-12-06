@@ -57,6 +57,7 @@
 		<script src='/test-portlet/netHD/draw2d/MyOutputPort.js'></script>
 		<script src='/test-portlet/netHD/draw2d/ResizeImage.js'></script>
 		<script src='/test-portlet/netHD/Addflow/network.js'></script>
+		<script src='/test-portlet/netHD/draw2d/adapter/prototype/prototype.js'></script>
 		
 		<script >
 		/* function for decording Object to JSON String */

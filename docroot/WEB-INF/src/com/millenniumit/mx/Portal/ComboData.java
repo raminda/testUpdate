@@ -108,6 +108,7 @@ public class ComboData {
 				if(value==1){
 					value=1;
 					List<Equipments> lst = equipmentService.getBase(0);
+					//System.out.println(lst.get(0).getItemName());
 						for(int i=0;i<lst.size();i++){
 							//Equipments obj=lst.get(i);
 							try{
@@ -124,8 +125,7 @@ public class ComboData {
 						}
 						
 						jsonOb2+="]";
-				}	
-				//gfdf
+				}
 				else{
 					value=3;
 					jsonOb2+="{ItemName: 'This is a base Item'}]";

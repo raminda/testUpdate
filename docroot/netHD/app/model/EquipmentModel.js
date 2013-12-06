@@ -21,23 +21,20 @@ Ext.define('New.model.EquipmentModel', {
 	}, {
 		name : 'Comments',
 		type : 'string'
-	}, {
-		name : 'Full_Descrip',
-		type: 'string'
-	}, {
+	},{
 		name : 'Price',
 		type : 'number'
 	}, {
 		name : 'EOLDate',
 		type : 'string'
 	}, {
-		name : 'date_created',
+		name : 'Calendar_created',
 		type : 'string'
 	}, {
-		name : 'date_modified',
+		name : 'Calendar_logged',
 		type : 'string'
 	},{
-		name : 'date_logged',
+		name : 'Calendar_modified',
 		type : 'string'
 	}]
 });

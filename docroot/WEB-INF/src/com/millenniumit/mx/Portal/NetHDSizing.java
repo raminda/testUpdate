@@ -115,7 +115,7 @@ public class NetHDSizing extends MVCPortlet {
 			comboData=new ComboData(packageService);
 			saveData=new SaveData(packageService, equipmentsBulkService, equipmentService);
 			updateData=new UpdateData(packageService);
-			deleteData=new DeleteData(packageService);
+			deleteData=new DeleteData(packageService,equipmentsBulkService);
 		}
 		else{
 			

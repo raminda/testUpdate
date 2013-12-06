@@ -120,8 +120,8 @@ Ext.define('New.view.FormUpdateEquipment', {
 			emptyText : 'txtSummery Here'
 		},{
 			xtype : 'textarea',
-			id : 'txtEqUpFullDescription',
-			fieldLabel : 'Full Description',
+			id : 'txtEqUpComments',
+			fieldLabel : 'Comments',
 			width : 400,
 			height : 60,
 			emptyText : 'Description Here'
@@ -132,13 +132,6 @@ Ext.define('New.view.FormUpdateEquipment', {
 			width : 400,
 			height : 60,
 			emptyText : 'ITIC Description Here'
-		},{
-			xtype : 'textarea',
-			id : 'txtEqUpTecDescription',
-			fieldLabel : 'Technical Description',
-			width : 400,
-			height : 60,
-			emptyText : 'Technical Description Here'
 		},{
 			xtype : 'datefield',
 			id : 'txtEqUpEOD',
@@ -167,9 +160,8 @@ Ext.define('New.view.FormUpdateEquipment', {
 		var ItemName = val[0].get('ItemName');
 		var ID = val[0].get('ID');
 		var Summary = val[0].get('Summary');
-		var Full_Descrip = val[0].get('Full_Descrip');
+		var Comments = val[0].get('Comments');
 		var ITIC_Descrip = val[0].get('ITIC_Descrip');
-		var Tec_Descrip = val[0].get('Tec_Descrip');
 		var EOLDates = val[0].get('EOLDate');
 		var Price = val[0].get('Price');
 		var ItemType = val[0].get('ItemType');
@@ -183,9 +175,8 @@ Ext.define('New.view.FormUpdateEquipment', {
 		Ext.getCmp('txtEqUpEquipmentCName').setValue(ItemName);
 		Ext.getCmp('txtEqUpPrice').setValue(Price);
 		Ext.getCmp('txtEqUpSummery').setValue(Summary);
-		Ext.getCmp('txtEqUpFullDescription').setValue(Full_Descrip);
+		Ext.getCmp('txtEqUpComments').setValue(Comments);
 		Ext.getCmp('txtEqUpITICDescription').setValue(ITIC_Descrip);
-		Ext.getCmp('txtEqUpTecDescription').setValue(Tec_Descrip);
 		Ext.getCmp('txtEqUpEOD').setValue(EOLDate);
 		Ext.getCmp('cmbEqUpItemType').setValue(ItemType);
 		Ext.getCmp('cmbEqUpID').setValue(ID);

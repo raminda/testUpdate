@@ -100,7 +100,7 @@ public class GridData {
 			for(int i=0;i<lst.size();i++){
 				Equipments obj=lst.get(i);
 				try{
-					jsonOb2+="{ ItemName: '" + obj.getItemName()+"',Summary:'"+obj.getSummary()+"',Price: '"+obj.getPrice()+"',ITIC_Descrip:'"+obj.getITIC_Descrip()+"',Tec_Descrip:'"+obj.getTec_Descrip()+"',EOLDate:'',itemtypes:'"+obj.getItemType().getTypeName()+"'}";
+					jsonOb2+="{ ItemName: '" + obj.getItemName()+"',Summary:'"+obj.getSummary()+"',Price: '"+obj.getPrice()+"',ITIC_Descrip:'"+obj.getITIC_Descrip()+"',Comments:'"+obj.getTec_Descrip()+"',EOLDate:'"+obj.getEOLDate()+"',itemtypes:'"+obj.getItemType().getTypeName()+"'}";
 					//System.out.println(obj.getItemName()+" gdfg "+ obj.getItemType().getTypeName());
 				}catch (Exception e) {
 					logger.info("Error : " + e.getMessage());

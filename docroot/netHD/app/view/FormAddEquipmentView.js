@@ -133,6 +133,8 @@ Ext.define('New.view.FormAddEquipmentView', {
 			width : 400,
 			height : 60,
 			selectOnTab : true,
+			allowBlank : false,
+			msgTarget: 'side',
 			minValue:new Date(),
 			format:"d/M/Y"
 		

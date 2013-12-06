@@ -3,7 +3,6 @@ package com.millenniumit.mx.Portal;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -31,19 +30,19 @@ import com.millenniumit.mx.data.nethdsizing.service.PackagesService;
 import com.millenniumit.mx.data.nethdsizing.service.ProjectItemsService;
 import com.millenniumit.mx.data.nethdsizing.service.ProjectsService;
 
+@SuppressWarnings("unused")
 public class SaveData {
 	
 	private String dateFormat  = "yyyy-MM-dd";
 	private Logger logger = Logger.getLogger(SaveData.class);
 	private JsonCreator jsonCreator=new JsonCreator();
-	//Services Objects in Service class 
 	
+	//Services Objects in Service class 
 	private EquipmentsService equipmentService;
 	private EquipmentsBulkService equipmentsBulkService;
 	private ItemTypesService itemTypeService;
 	private PackagesService packageService;
 	private ProjectsService projectService;
-	@SuppressWarnings("unused")
 	private ProjectItemsService projectItemsService;
 	private EquipmentMapingService equipmentMapingService;
 	
@@ -101,7 +100,7 @@ public class SaveData {
 	public void NewData(ResourceRequest request, ResourceResponse response,String ServiceType) throws NumberFormatException, JSONException, ParseException{
 		JSONObject jsonobj=jsonCreator.JsonCreat(request, response,ServiceType);
 		int ID = 0 ;
-		//Long ID2 = null ;
+		System.out.println(jsonobj);
 		
 		//*****Equipment*******
 		if (ServiceType.equals("Equipment")) {
@@ -109,35 +108,25 @@ public class SaveData {
 			if(equipmentService.getEquipments(jsonobj.getString("ItemName"))==null){
 				Equipments NewEquipment=new Equipments();
 				try {
-					//*************************************************
-					System.out.println(jsonobj);
-					//System.out.println((jsonobj.get("EOLDate")));
-					
 					//*****Saving To Object******
 					NewEquipment.setItemName(jsonobj.getString("ItemName"));
 					NewEquipment.setItemType(itemTypeService.get(jsonobj.getString("itemtypes")));
 					NewEquipment.setSummary(jsonobj.getString("Summary"));
-					NewEquipment.setITIC_Descrip(jsonobj.getString("Full_Descrip"));
-					NewEquipment.setTec_Descrip(jsonobj.getString("Tec_Descrip"));
+					NewEquipment.setTec_Descrip(jsonobj.getString("Comments"));
+					//NewEquipment.setTec_Descrip(jsonobj.getString("Tec_Descrip"));
 					NewEquipment.setITIC_Descrip(jsonobj.getString("ITIC_Descrip"));
 					NewEquipment.setPrice(Integer.parseInt(jsonobj.getString("Price"),10));
-					
-					//String dateFormat  = "yyyy-MM-dd";
-					//Calendar date =null;
-					Calendar cal = Calendar.getInstance();
-				    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-				    cal.setTime((Date)sdf.parse(jsonobj.getString("EOLDate")));// all done
-							/**********************************/
+					Date date = new SimpleDateFormat(dateFormat).parse(jsonobj.getString("EOLDate"));
 					try{
-						NewEquipment.setEOLDate(cal);
+						NewEquipment.setEOLDate(date);
 					}
 					catch (Exception e) {
 						 logger.info("Error : " + e.getMessage());
 					}
 							/**********************************/
 				} 
-				
 				catch (JSONException e) {logger.info("Error : " + e.getMessage());}
+				
 				//save data
 				try {
 					ID = equipmentService.save(NewEquipment);
@@ -146,23 +135,21 @@ public class SaveData {
 					logger.info("Error : " + e.getMessage());
 					ID= 0;
 				}
-				
 			}
 			else{
 				logger.info("Error : " + "Duplicate data entry (Same Equipment name in database )");
 			}
-			/**
-			 *
-			 * */
+			
+			/* Saving Equipment Mappings    */
+			
 			Integer CID=1;
 			try {
-				
 				CID=equipmentService.getEquipments(jsonobj.getString("ItemName")).getID();
 				
 			} catch (Exception e) {
+				CID=0;
 				logger.info("Error : " + e.getMessage());
 			}
-			
 			String Items = null;
 			//
 			try {
@@ -188,7 +175,6 @@ public class SaveData {
 				logger.info("hi : 1" + key+"1 " + CID+" ");
 				equipmentMaping.setParentID(equipmentService.getEquipments(key));
 				equipmentMaping.setChildID(equipmentService.getEquipments(CID));
-				//logger.info("hi : " + equipmentMaping.getChildID().getItemName() +"   "+equipmentMaping.getParentID().getItemName());
 				//save data
 				try {
 					ID=equipmentMapingService.save(equipmentMaping);	
@@ -199,9 +185,6 @@ public class SaveData {
 				
 				//
 			}
-			/**
-			 * */
-			//request.getRemoteUser() ;
 		}
 		
 		//*****equipment Map*******
@@ -241,7 +224,6 @@ public class SaveData {
 				logger.info("hi : " + key+" " + CID+" ");
 				equipmentMaping.setParentID(equipmentService.getEquipments(key));
 				equipmentMaping.setChildID(equipmentService.getEquipments(CID));
-				//logger.info("hi : " + equipmentMaping.getChildID().getItemName() +"   "+equipmentMaping.getParentID().getItemName());
 				//save data
 				try {
 					ID=equipmentMapingService.save(equipmentMaping);	
@@ -249,8 +231,6 @@ public class SaveData {
 					logger.info("Error : " + e.getMessage());
 					ID=  0;
 				}
-				
-				//
 			}
 		}
 		
@@ -299,18 +279,14 @@ public class SaveData {
 		else if (ServiceType.equals("Package")) {
 			
 			String Bulk=request.getParameter("ID");
-			
 			if(packageService.getPackages(jsonobj.getString("PackageName"))==null){
 				Packages NewPackage=new Packages();
 				try {
 					//*****Saving To Object******
 					NewPackage.setPackageName(jsonobj.getString("PackageName"));
 					NewPackage.setSummary(jsonobj.getString("Summery"));
-					//NewPackage.setFullDescription(jsonobj.getString("Full_Descrip"));
-					//NewPackage.setTecDescription(jsonobj.getString("Tec_Descrip"));
-					//NewPackage.setITICDescription(jsonobj.getString("ITIC_Descrip"));
-					//NewPackage.setPrice(Integer.parseInt(jsonobj.getString("Price"),10));
-					//logger.info("Error : " + NewPackage.getDateCreated());
+					NewPackage.setBasePrice(Long.parseLong(jsonobj.getString("BasePrice")));
+					NewPackage.setComment(jsonobj.getString("Comment"));
 				} 
 				catch (JSONException e) {
 					logger.info("Error : " + e.getMessage());

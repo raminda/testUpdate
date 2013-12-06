@@ -6,7 +6,7 @@ Ext.define('New.model.PackagesModel', {
 	}, {
 		name : 'PackageName',
 		type : 'string'
-	}, {
+	},{
 		name : 'BasePrice',
 		type : 'number'
 	},{
@@ -17,9 +17,6 @@ Ext.define('New.model.PackagesModel', {
 		type : 'string'
 	},{
 		name : 'Comment',
-		type : 'string'
-	},{
-		name : 'Tec_Descrip',
 		type : 'string'
 	},{
 		name : 'Calendar_created',

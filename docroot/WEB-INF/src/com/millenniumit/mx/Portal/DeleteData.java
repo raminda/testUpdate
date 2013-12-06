@@ -66,9 +66,10 @@ public class DeleteData {
 		
 		this.itemTypeService = itemTypeService;	
 	}
-	public DeleteData(PackagesService packageService){
+	public DeleteData(PackagesService packageService,EquipmentsBulkService equipmentsBulkService){
 	
 		this.packageService =packageService ;
+		this.equipmentsBulkService=equipmentsBulkService;
 	}
 	public DeleteData(ProjectsService projectService){
 		
@@ -142,6 +143,17 @@ public class DeleteData {
 			
 			Packages newPackage=new Packages();
 			newPackage = packageService.getPackagess(Integer.parseInt(request.getParameter("value")));
+			System.out.println(newPackage.getPackageName());
+			List <EquipmentBulk> list=equipmentsBulkService.getPackageBulk(newPackage);
+			try{
+				System.out.println("ize() : "+list.size());
+				for(int i=0;i<list.size();i++){
+					equipmentsBulkService.delete(list.get(i));
+				}
+			}
+			catch (Exception e) {
+				System.out.println("Error in delete in "+ServiceType+" "+e.getMessage());
+			}
 			try{
 			packageService.delete(newPackage);
 			}

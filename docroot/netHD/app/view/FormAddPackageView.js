@@ -56,21 +56,25 @@ Ext.define('New.view.FormAddPackageView', {
 				emptyText : 'txtSummery Here'
 			},{
 				xtype : 'textarea',
-				id : 'txtPkgFullDescription',
-				name : 'txtPkgFullDescription',
-				fieldLabel : 'Full Description',
+				id : 'txtPkgComment',
+				name : 'txtPkgComment',
+				fieldLabel : 'Comments',
 				width : 400,
 				height : 60,
-				emptyText : 'Description Here'
-			}, {
-				xtype : 'textarea',
-				id : 'txtpkgITICDescription',
-				name : 'txtpkgITICDescription',
-				fieldLabel : 'ITIC Description',
-				width : 400,
-				height : 60,
-				emptyText : 'ITIC Description Here'
+				emptyText : 'Comment Here'
 			},{
+				xtype : 'numberfield',
+				id : 'txtpkgBasePrice',
+				name : 'txtpkgBasePrice',
+				fieldLabel : 'Base Price',
+				width : 400,
+				msgTarget: 'side',
+				height : 60,
+				allowNegative: false,
+				allowDecimals: false,
+				minValue: 0,
+				emptyText : '$'
+			},/*{
 				xtype : 'textarea',
 				id : 'txtpkgTecDescription',
 				name : 'txtpkgTecDescription',
@@ -78,7 +82,7 @@ Ext.define('New.view.FormAddPackageView', {
 				width : 400,
 				height : 60,
 				emptyText : 'Technical Description Here'
-			},{
+			},*/{
 				xtype : 'datefield',
 				id : 'txtPkgEOD',
 				name : 'txtPkgEOD',

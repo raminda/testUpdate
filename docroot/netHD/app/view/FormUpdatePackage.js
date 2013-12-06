@@ -43,28 +43,20 @@ Ext.define('New.view.FormUpdatePackage', {
 				emptyText : 'txtUpSummery Here'
 			},{
 				xtype : 'textarea',
-				id : 'txtUpPkgFullDescription',
-				name : 'txtUpPkgFullDescription',
-				fieldLabel : 'Full Description',
+				id : 'txtUpPkgComment',
+				name : 'txtUpPkgComment',
+				fieldLabel : 'Comment',
 				width : 400,
 				height : 60,
-				emptyText : 'Description Here'
+				emptyText : 'Comment'
 			}, {
 				xtype : 'textarea',
-				id : 'txtUppkgITICDescription',
-				name : 'txtUppkgITICDescription',
-				fieldLabel : 'ITIC Description',
+				id : 'txtUppkgBasePrice',
+				name : 'txtUppkgBasePrice',
+				fieldLabel : 'Base Price',
 				width : 400,
 				height : 60,
-				emptyText : 'ITIC Description Here'
-			},{
-				xtype : 'textarea',
-				id : 'txtUppkgTecDescription',
-				name : 'txtUppkgTecDescription',
-				fieldLabel : 'Technical Description',
-				width : 400,
-				height : 60,
-				emptyText : 'Technical Description Here'
+				emptyText : '$'
 			},{
 				xtype : 'datefield',
 				id : 'txtUpPkgEOD',
@@ -92,9 +84,8 @@ Ext.define('New.view.FormUpdatePackage', {
 		
 		var ItemName = val[0].get('PackageName');
 		var Summary = val[0].get('Summery');
-		var Full_Descrip = val[0].get('Full_Descrip');
-		var ITIC_Descrip = val[0].get('ITIC_Descrip');
-		var Tec_Descrip = val[0].get('Tec_Descrip');
+		var Comment = val[0].get('Comment');
+		var BasePrice = val[0].get('BasePrice');
 		var EOLDates = val[0].get('EOLDate');
 		var ID=val[0].get('ID');
 		
@@ -105,9 +96,8 @@ Ext.define('New.view.FormUpdatePackage', {
 		
 		Ext.getCmp('txtUpPackageName').setValue(ItemName);
 		Ext.getCmp('txtUpPkgSummery').setValue(Summary);
-		Ext.getCmp('txtUpPkgFullDescription').setValue(Full_Descrip);
-		Ext.getCmp('txtUppkgITICDescription').setValue(ITIC_Descrip);
-		Ext.getCmp('txtUppkgTecDescription').setValue(Tec_Descrip);
+		Ext.getCmp('txtUpPkgComment').setValue(Comment);
+		Ext.getCmp('txtUppkgBasePrice').setValue(BasePrice);
 		Ext.getCmp('txtUpPkgEOD').setValue(EOLDate);
 		Ext.getCmp('txtUpPackageID').setValue(ID);
 		Ext.getCmp('txtUpPackageID').setVisible(false);

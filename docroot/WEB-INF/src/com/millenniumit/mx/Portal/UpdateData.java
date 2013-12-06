@@ -108,15 +108,16 @@ public class UpdateData {
 				NewEquipment.setItemName(jsonobj.getString("ItemName"));
 				NewEquipment.setItemType(itemTypeService.get(jsonobj.getString("itemtypes")));
 				NewEquipment.setSummary(jsonobj.getString("Summary"));
-				NewEquipment.setTec_Descrip(jsonobj.getString("Tec_Descrip"));
+				NewEquipment.setTec_Descrip(jsonobj.getString("Comments"));
 				NewEquipment.setITIC_Descrip(jsonobj.getString("ITIC_Descrip"));
 				NewEquipment.setPrice(Integer.parseInt(jsonobj.getString("Price"),10));
 				NewEquipment.setCalendar_modified(calendar.getTime());
 				
-				Calendar cal = Calendar.getInstance();
+				/*Calendar cal = Calendar.getInstance();
 			    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			    cal.setTime((Date)sdf.parse(jsonobj.getString("EOLDate")));
-				NewEquipment.setEOLDate(cal);
+			    cal.setTime((Date)sdf.parse(jsonobj.getString("EOLDate")));*/
+				Date date = new SimpleDateFormat(dateFormat).parse(jsonobj.getString("EOLDate"));
+				NewEquipment.setEOLDate(date);
 				
 				equipmentService.update(NewEquipment);
 			}
@@ -147,12 +148,13 @@ public class UpdateData {
 				NewEquipment.setPrice(Integer.parseInt(jsonobj.getString("Price"),10));
 				NewEquipment.setCalendar_modified(calendar.getTime());
 				
-				Calendar cal = Calendar.getInstance();
+				/*Calendar cal = Calendar.getInstance();
 			    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			    cal.setTime((Date)sdf.parse(jsonobj.getString("EOLDate")));// all done
+			    cal.setTime((Date)sdf.parse(jsonobj.getString("EOLDate")));*/// all done
 				/**********************************/
+				Date date = new SimpleDateFormat(dateFormat).parse(jsonobj.getString("EOLDate"));
 				try{
-					NewEquipment.setEOLDate(cal);
+					NewEquipment.setEOLDate(date);
 				}
 				catch (Exception e) {
 					 logger.info("Error : " + e.getMessage());
