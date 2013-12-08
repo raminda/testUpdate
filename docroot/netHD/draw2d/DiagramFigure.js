@@ -122,17 +122,28 @@ Node.prototype.addAnnotation = function(aForWhat, aText, aAnnX, aAnnY) {
 
 	
 	//var textarea = '<div id="'+obj.id+'_editor" style="position: absolute; left:'+this.getX()+'; top:' + this.getY() +'"><textarea id="'+obj.id+'_edit" name="'+obj.id+'" rows="4" cols="60">'+obj.innerHTML+'</textarea>';
-	var textarea = '<div id="'+obj.id+'_editor" style="position: absolute; z-index:99999; left:'+this.getX()+'; top:' + this.getY() +'"><input type="text" id="'+obj.id+'_edit" name="'+obj.id+'" value="'+obj.innerHTML+'"></input>';
-	var button	 = '<div><input id="'+obj.id+'_save" type="button" value="SAVE" /> OR <input id="'+obj.id+'_cancel" type="button" value="CANCEL" /></div></div>';
+	var textarea = '<div id="'+obj.id+'_editor" style="position: absolute; z-index:99999; left:'+this.getX()+'; top:' + this.getY() +'"><input style="visibility:hidden" type="text" id="'+obj.id+'_edit" name="'+obj.id+'" value="'+obj.innerHTML+'"></input>';
+	var button	 = '<div><input style="visibility:hidden" id="'+obj.id+'_save" type="button" value="SAVE" /><input style="visibility:hidden" id="'+obj.id+'_cancel" type="button" value="CANCEL" /></div></div>';
 	
 	new Insertion.After(obj,textarea+button);
-	//new Insertion.After(textarea,);
 	$(obj.id+'_edit').focus();
 	$(obj.id+'_edit').select();
+
+	Ext.getCmp('txtEqipmentType').setValue(obj.id);
+	//Ext.getCmp('txtEqipmentName').setValue(true);
+	
+	Event.observe(obj.id+'_save', 'click', function(){
 		
-	Event.observe(obj.id+'_save', 'click', function(){aThat.setText($F(obj.id+'_edit'));Element.remove(obj.id+'_editor'); Element.show(obj);}, false);
-	Event.observe(obj.id+'_cancel', 'click', function(){Element.remove(obj.id+'_editor'); Element.show(obj);}, false);
-        Event.observe(obj.id+'_edit', 'keydown', function(event) { var key = event.which || event.keyCode;if(key==13) { aThat.setText($F(obj.id+'_edit'));Element.remove(obj.id+'_editor'); Element.show(obj);}}, false);
+		//Ext.getCmp('txtEqipmentType').setVisible(false);
+		//Ext.getCmp('txtEqipmentName').setVisible(false);
+		Ext.getCmp('txtType').setVisible(false);
+		Ext.getCmp('btnType').setVisible(false);
+		
+		aThat.setText($F(obj.id+'_edit'));Element.remove(obj.id+'_editor'); Element.show(obj);}, false);
+	Event.observe(obj.id+'_cancel', 'click', function(){
+		Element.remove(obj.id+'_editor'); Element.show(obj);}, false);
+    Event.observe(obj.id+'_edit', 'keydown', function(event) { 
+    	var key = event.which || event.keyCode;if(key==13) { aThat.setText($F(obj.id+'_edit'));Element.remove(obj.id+'_editor'); Element.show(obj);}}, false);
   }
   ann.onDoubleClick=function(){
 	//  alert("Ann d Click");
@@ -224,10 +235,16 @@ DiagramFigure.prototype.onSelectionChanged=function(newSel){
 }
 
 DiagramFigure.prototype.onDoubleClick=function(){
-	Ext.getCmp('txtEqipmentType').setVisible(true);
-	Ext.getCmp('txtEqipmentName').setVisible(true);
+	
+	//Ext.getCmp('txtEqipmentType').setVisible(true);
+	//Ext.getCmp('txtEqipmentName').setVisible(true);
+
+	
+	Ext.getCmp('txtEqipmentName').setValue(this.toJSON()['subtype']);
 	if(!this.annotation) {
 		this.addAnnotation(this, "Description for the figure", 1, this.height + 5);
+		Ext.getCmp('txtType').setVisible(true);
+		Ext.getCmp('btnType').setVisible(true);
 		this.annotation.doEdit();
 		this.bgFlash();
 	}

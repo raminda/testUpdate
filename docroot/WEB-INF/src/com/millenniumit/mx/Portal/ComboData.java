@@ -183,6 +183,9 @@ public class ComboData {
 						
 						jsonOb2+="]";
 				}
+				else if(Long.parseLong(request.getParameter("value"))==4){
+					 System.out.println(request.getParameter("ID"));
+				}
 			jsonOb2=linebracker(jsonOb2);
 						out.println(jsonOb2);
 			//gdfgdfgfd

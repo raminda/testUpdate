@@ -17,6 +17,43 @@ Ext.define('New.view.SMenuHomeView', {
 			handler : function() {
 				crt2();
 			}
+		},/*{
+			xtype : 'textfield',
+			
+			
+		}*/
+		{
+			xtype : 'combobox',
+			fieldLabel : 'Eqipment Name',
+			id : 'txtType',
+			name : 'txtType',
+			valueField : 'ItemName',
+			displayField:'ItemName',
+			selectOnTab : true,
+			allowBlank : false,
+			msgTarget: 'side',
+			width : 400,
+			editable:false,
+			store : 'EquipmentStoreComp',   
+	        listeners: {
+				focus:function( me, The, eOpts ){
+					var store = Ext.getStore('EquipmentStoreComp');
+					store.proxy.extraParams.purpose = 'Combo';
+					store.proxy.extraParams.value="4";
+					store.proxy.extraParams.ID=Ext.getCmp('txtEqipmentName').getValue();;
+	    			store.load();
+	            }
+	    	}
+		},{
+			xtype : 'button',
+			text : 'Eq',
+			width : 200,
+			id : 'btnType',
+			name : 'btnType',
+			handler : function() {
+				document.getElementById(Ext.getCmp('txtEqipmentType').getValue()+"_edit").value=Ext.getCmp('txtType').getValue();
+				document.getElementById(Ext.getCmp('txtEqipmentType').getValue()+"_save").click();
+			}
 		},{
 			xtype : 'textfield',
 			fieldLabel : 'Eqipment Type',
@@ -34,7 +71,10 @@ Ext.define('New.view.SMenuHomeView', {
 
 	initComponent : function() {
 		this.callParent(arguments);
+		
 		Ext.getCmp('txtEqipmentType').setVisible(false);
 		Ext.getCmp('txtEqipmentName').setVisible(false);
+		Ext.getCmp('txtType').setVisible(false);
+		Ext.getCmp('btnType').setVisible(false);
 	}
 });
