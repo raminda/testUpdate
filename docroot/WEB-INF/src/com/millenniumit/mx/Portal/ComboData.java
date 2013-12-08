@@ -185,6 +185,24 @@ public class ComboData {
 				}
 				else if(Long.parseLong(request.getParameter("value"))==4){
 					 System.out.println(request.getParameter("ID"));
+					 List <Equipments> list =equipmentService.getAll(ItemTypesService.get(request.getParameter("ID")));
+					 boolean bool=true;
+					 for(int i=0;i<list.size();i++){
+							//Equipments obj=lst.get(i);
+							Equipments obj=list.get(i);
+							try{
+								jsonOb2+="{ ItemName: '" + obj.getItemName()+"'}";
+								}catch (Exception e) {
+									logger.info("Error : " + e.getMessage());
+								jsonOb2+="'}";
+								bool=false;
+							}
+							if(i<list.size()-1 && bool){
+								jsonOb2+=",";
+							}
+						}
+						
+						jsonOb2+="]";
 				}
 			jsonOb2=linebracker(jsonOb2);
 						out.println(jsonOb2);
