@@ -1,6 +1,7 @@
 package com.millenniumit.mx.Portal;
 
 
+import com.liferay.portal.UserLockoutException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -116,6 +117,24 @@ public class NetHDSizing extends MVCPortlet {
 			saveData=new SaveData(packageService, equipmentsBulkService, equipmentService);
 			updateData=new UpdateData(packageService);
 			deleteData=new DeleteData(packageService,equipmentsBulkService);
+		}
+		else if (resourceID.equals("ProjectsStoreUrl")) {
+			ItemName="Projects";
+			System.out.println("This section is for Navigate "+ ItemName+" init");
+			gridData=new GridData(projectService);
+			comboData=new ComboData(projectService);
+			saveData=new SaveData(projectService,companyService);
+			updateData=new UpdateData(projectService,companyService);
+			deleteData=new DeleteData(projectService);
+		}
+		else if (resourceID.equals("CompanyStoreUrl")) {
+			ItemName="Company";
+			System.out.println("This section is for Navigate "+ ItemName+" init");
+			gridData=new GridData(companyService);
+			comboData=new ComboData(companyService);
+			saveData=new SaveData(companyService);
+			updateData=new UpdateData(companyService);
+			deleteData=new DeleteData(companyService);
 		}
 		else{
 			
@@ -333,14 +352,18 @@ public class NetHDSizing extends MVCPortlet {
 		gridData=null;
 	}
 	public void userfinder(ResourceRequest request, ResourceResponse response) throws PortalException, SystemException{
-		User currentUser = PortalUtil.getUser(request);
-		User user = (User) request.getAttribute(WebKeys.USER);
-		String userId = request.getRemoteUser();
-		logger.info("User C user n : " + currentUser.getRoles().get(0).getName());
-		logger.info("User C user s : " + currentUser.getRoles().get(1).getName());
-		logger.info("User C user t : " + currentUser.getRoles().get(2).getName());
-		logger.info("User C user sz : " + currentUser.getRoles().size());
-		//logger.info("User Web user : " + user.getRoles().get(0).getName());
-		//logger.info("User S user : " + userId);
+		try{
+			User currentUser = PortalUtil.getUser(request);
+			User user = (User) request.getAttribute(WebKeys.USER);
+			String userId = request.getRemoteUser();
+			logger.info("User C user n : " + currentUser.getRoles().get(0).getName());
+			logger.info("User C user s : " + currentUser.getRoles().get(1).getName());
+			logger.info("User C user t : " + currentUser.getRoles().get(2).getName());
+			logger.info("User C user sz : " + currentUser.getRoles().size());
+			
+		}
+		catch (Exception e) {
+			logger.info("Error : " + e.getMessage());
+		}
 	}
 }

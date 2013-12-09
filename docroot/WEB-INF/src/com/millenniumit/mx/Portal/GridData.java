@@ -10,6 +10,7 @@ import javax.portlet.ResourceResponse;
 import org.apache.log4j.Logger;
 
 import com.google.gson.Gson;
+import com.millenniumit.mx.data.nethdsizing.domain.Company;
 import com.millenniumit.mx.data.nethdsizing.domain.EquipmentBulk;
 import com.millenniumit.mx.data.nethdsizing.domain.EquipmentMaping;
 import com.millenniumit.mx.data.nethdsizing.domain.Equipments;
@@ -17,6 +18,7 @@ import com.millenniumit.mx.data.nethdsizing.domain.ItemTypes;
 import com.millenniumit.mx.data.nethdsizing.domain.Packages;
 import com.millenniumit.mx.data.nethdsizing.domain.Project;
 import com.millenniumit.mx.data.nethdsizing.domain.ProjectItems;
+import com.millenniumit.mx.data.nethdsizing.service.CompanyService;
 import com.millenniumit.mx.data.nethdsizing.service.EquipmentMapingService;
 import com.millenniumit.mx.data.nethdsizing.service.EquipmentsBulkService;
 import com.millenniumit.mx.data.nethdsizing.service.EquipmentsService;
@@ -39,8 +41,9 @@ public class GridData {
 	private ProjectsService projectService;
 	private ProjectItemsService projectItemsService;
 	private EquipmentMapingService equipmentMapingService;
+	private CompanyService companyService;
 	
-	public GridData(EquipmentsService equipmentService,EquipmentMapingService equipmentMapingService,EquipmentsBulkService equipmentsBulkService,ItemTypesService itemTypeService,PackagesService packageService,ProjectsService projectService,ProjectItemsService projectItemsService){
+	public GridData(CompanyService companyService, EquipmentsService equipmentService,EquipmentMapingService equipmentMapingService,EquipmentsBulkService equipmentsBulkService,ItemTypesService itemTypeService,PackagesService packageService,ProjectsService projectService,ProjectItemsService projectItemsService){
 		
 		
 		this.equipmentService =equipmentService; 
@@ -50,6 +53,7 @@ public class GridData {
 		this.projectService =projectService;
 		this.projectItemsService = projectItemsService;
 		this.equipmentMapingService=equipmentMapingService;
+		this.companyService=companyService;
 	
 	}
 	
@@ -80,6 +84,10 @@ public class GridData {
 	public GridData(EquipmentMapingService equipmentMapingService){
 		
 		this.equipmentMapingService=equipmentMapingService;
+	}
+	public GridData(CompanyService companyService){
+		
+		this.companyService=companyService;
 	}
 
 
@@ -210,13 +218,14 @@ public class GridData {
 			System.out.println("This section is for Parameter ProjectsService Grid");
 			
 			if(Long.parseLong(request.getParameter("value"))==1){
-				List<String> a= projectService.getAllNames();
+				List<Project> a= projectService.getProjects();
 				System.out.println(a.size());
 				String jsonOb2="[";
 				boolean bool=true;
 				for(int i=0;i<a.size();i++){
+					Project obj=a.get(i);
 					try{
-						jsonOb2+="{ Company: '" +a.get(i)+"'}";
+						jsonOb2+="{ Company: '" +obj.getCompany().getCompanyName()+"'}";
 					}catch (Exception e) {
 						logger.info("Error : " + e.getMessage());
 						jsonOb2+="'}";
@@ -232,13 +241,56 @@ public class GridData {
 				out.println(jsonOb2);
 			}
 			else{
-				List<Project> lst = projectService.getProjects();
-				out.println(gson.toJson(lst));	
+				List<Project> a= projectService.getProjects();
+				System.out.println(a.size());
+				String jsonOb2="[";
+				boolean bool=true;
+				for(int i=0;i<a.size();i++){
+					Project obj=a.get(i);
+					try{
+						jsonOb2+="{ Company: '" +obj.getCompany().getCompanyName()+"',TotalAmount :'"+obj.getAmount()+"',ProjectName :'"+obj.getProjectName()+"',Calendar_created :'"+obj.getCalendar_created()+"',Calendar_modified :'"+obj.getCalendar_modified()+"'}";
+					}catch (Exception e) {
+						logger.info("Error : " + e.getMessage());
+						jsonOb2+="'}";
+						bool=false;
+					}
+					if(i<a.size()-1 && bool){
+						jsonOb2+=",";
+					}
+				}
+				jsonOb2+="]";
+				System.out.println(jsonOb2);
+				jsonOb2=linebracker(jsonOb2);
+				out.println(jsonOb2);	
 			}
 			
 			
 		}
-		
+		else if (ServiceType.equals("Company")) {
+			
+			System.out.println("This section is for Parameter Company Grid");
+			List<Company> a= companyService.getAll();
+			System.out.println(a.size());
+			String jsonOb2="[";
+			boolean bool=true;
+			for(int i=0;i<a.size();i++){
+				Company obj=a.get(i);
+				try{
+					jsonOb2+="{ Company: '" +obj.getCompanyName()+"',Calendar_created :'"+obj.getCalendar_created()+"',Calendar_modified :'"+obj.getCalendar_modified()+"}";
+				}catch (Exception e) {
+					logger.info("Error : " + e.getMessage());
+					jsonOb2+="'}";
+					bool=false;
+				}
+				if(i<a.size()-1 && bool){
+					jsonOb2+=",";
+				}
+			}
+			jsonOb2+="]";
+			System.out.println(jsonOb2);
+			jsonOb2=linebracker(jsonOb2);
+			out.println(jsonOb2);
+		}
 		//**********ItemType***********
 		else if (ServiceType.equals("ItemType")) {
 			
@@ -272,7 +324,38 @@ public class GridData {
 			out.println(jsonOb2);
 			//out.println(gson.toJson(lst));	
 		}
-		
+		else if (ServiceType.equals("ItemType")) {
+			
+			System.out.println("This section is for Parameter ItemTypeService Grid");
+			List<ItemTypes> lst = itemTypeService.getItemTypes();
+			//Equipment  Base Items
+			String jsonOb2="[";
+			String AccsessLevel="";
+			boolean bool=true;
+			for(int i=0;i<lst.size();i++){
+				try{
+					if(lst.get(i).getAccsessLevel()==0){
+						AccsessLevel="Base Items";
+					}
+					else{
+						AccsessLevel="Equipment";
+					}
+					jsonOb2+="{TypeName: '" +lst.get(i).getTypeName() +"',AccsessLevel: '" +AccsessLevel+"',ID :'"+lst.get(i).getID()+"',date_logged:'"+lst.get(i).getCalendar_logged()+"',date_modified:'"+lst.get(i).getCalendar_modified()+"',date_created:'"+lst.get(i).getCalendar_created()+"'}";
+				}catch (Exception e) {
+					logger.info("Error : " + e.getMessage());
+					jsonOb2+="'}";
+					bool=false;
+				}
+				if(i<lst.size()-1 && bool){
+					jsonOb2+=",";
+				}
+			}
+			jsonOb2+="]";
+			System.out.println(jsonOb2);
+			jsonOb2=linebracker(jsonOb2);
+			out.println(jsonOb2);
+			//out.println(gson.toJson(lst));	
+		}
 		//**********Nothing***********
 		else {
 			
@@ -283,9 +366,9 @@ public class GridData {
 	
 	
 	private String linebracker(String jsonOb2){
-		jsonOb2=jsonOb2.replaceAll("\\n", "|");
+		/*jsonOb2=jsonOb2.replaceAll("\\n", "|");
 		jsonOb2=jsonOb2.replaceAll("\r", "");
-		jsonOb2=jsonOb2.replaceAll("\n", "|");
+		jsonOb2=jsonOb2.replaceAll("\n", "|");*/
 		return jsonOb2;
 	}
 	

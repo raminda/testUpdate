@@ -1,5 +1,6 @@
 <%@taglib uri="http://java.sun.com/portlet" prefix="portlet"%>
 <portlet:defineObjects/>
+<portlet:resourceURL var="CompanyStoreUrl" id="CompanyStoreUrl" escapeXml="false" />	
 <portlet:resourceURL var="ItemTypeStoreUrl" id="ItemTypeStoreUrl" escapeXml="false" />	
 <portlet:resourceURL var="EquipmentStoreUrl" id="EquipmentStoreUrl" escapeXml="false" />
 <portlet:resourceURL var="SiteTypeStoreUrl" id="SiteTypeStoreUrl" escapeXml="false" />
@@ -22,6 +23,7 @@
  		
  	/******************************************* urls *******************************************************/
  	
+	 	var CompanyStoreUrl	="<%= renderResponse.encodeURL(CompanyStoreUrl.toString())%>";
 	 	var validate_url	="<%= renderResponse.encodeURL(validate_url.toString())%>";
 		var ExcelUrl	="<%= renderResponse.encodeURL(ExcelUrl.toString())%>";
 		var EquipmentsMapingStoreUrl	="<%= renderResponse.encodeURL(EquipmentsMapingStoreUrl.toString())%>";

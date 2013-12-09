@@ -146,7 +146,8 @@ Node.prototype.addAnnotation = function(aForWhat, aText, aAnnX, aAnnY) {
     	var key = event.which || event.keyCode;if(key==13) { aThat.setText($F(obj.id+'_edit'));Element.remove(obj.id+'_editor'); Element.show(obj);}}, false);
   }
   ann.onDoubleClick=function(){
-	//  alert("Ann d Click");
+	Ext.getCmp('txtType').setVisible(true);
+	Ext.getCmp('btnType').setVisible(true);
     this.doEdit();
   }
 
@@ -242,7 +243,7 @@ DiagramFigure.prototype.onDoubleClick=function(){
 	
 	Ext.getCmp('txtEqipmentName').setValue(this.toJSON()['subtype']);
 	if(!this.annotation) {
-		this.addAnnotation(this, "Description for the figure", 1, this.height + 5);
+		this.addAnnotation(this, "", 1, this.height + 5);
 		Ext.getCmp('txtType').setVisible(true);
 		Ext.getCmp('btnType').setVisible(true);
 		this.annotation.doEdit();

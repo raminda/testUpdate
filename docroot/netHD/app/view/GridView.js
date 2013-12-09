@@ -34,10 +34,16 @@ Ext.define('New.view.GridView', {
 				xtype : 'PackageGrid'
 			},{
 				flex : 1,
+				id : 'CompanyGrid',
+				name : 'CompanyGrid',
+				title : 'My Company Grid view',
+				xtype : 'CompanyGrid'
+			},{
+				flex : 1,
 				id : 'ProjectGrid',
 				name : 'ProjectGrid',
 				title : 'Project Grid view',
-				//xtype : 'ProjectGrid',
+				xtype : 'ProjectGrid',
 		}],
 		
 		initComponent : function() {
@@ -47,6 +53,7 @@ Ext.define('New.view.GridView', {
 			Ext.getCmp('EquipmentGrid').setVisible(false);
 			Ext.getCmp('ProjectGrid').setVisible(false);
 			Ext.getCmp('PackageGrid').setVisible(false);
+			Ext.getCmp('CompanyGrid').setVisible(false);
 			
 		}
 });

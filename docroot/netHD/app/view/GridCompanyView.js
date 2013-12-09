@@ -1,6 +1,6 @@
-Ext.define('New.view.GridProjectView', {
+Ext.define('New.view.GridCompanyView', {
 	extend : 'Ext.form.Panel',
-	alias : 'widget.ProjectGrid',
+	alias : 'widget.CompanyGrid',
 	title : 'Project Grid View',
 	height :750,
 	frame : true,
@@ -11,9 +11,9 @@ Ext.define('New.view.GridProjectView', {
 			scroll : true,
 			border : false,
 			columnLines : true,
-			id : 'gridProjectView',
-			name : 'gridProjectView',
-			store : 'ProjectsStoreGrid',
+			id : 'gridCompanyView',
+			name : 'gridCompanyView',
+			store : 'CompanyStoreGrid',
 			overflowX : 'auto',
 			viewConfig: {
 	            forceFit: true

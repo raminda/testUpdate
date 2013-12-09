@@ -24,10 +24,11 @@ import com.millenniumit.mx.data.nethdsizing.service.PackagesService;
 import com.millenniumit.mx.data.nethdsizing.service.ProjectItemsService;
 import com.millenniumit.mx.data.nethdsizing.service.ProjectsService;
 import com.millenniumit.mx.data.nethdsizing.service.VersionMapService;
+import common.Logger;
 
 public class DeleteData {
 	
-	//private Logger logger = Logger.getLogger(IticSystemPortlet.class);
+	private Logger logger = Logger.getLogger(DeleteData.class);
 	//Services Objects in Service class 
 	
 	private EquipmentsService equipmentService;
@@ -40,7 +41,7 @@ public class DeleteData {
 	private CompanyService companyService;
 	private VersionMapService versionMapService;
 	
-	/*public DeleteData(AcUserService acUserService,EquipmentsService equipmentService,EquipmentMapingService equipmentMapingService,EquipmentsBulkService equipmentsBulkService,ItemTypeService itemTypeService,PackagesService packageService,ProjectsService projectService,ProjectItemsService projectItemsService){
+	public DeleteData(CompanyService companyService,EquipmentsService equipmentService,EquipmentMapingService equipmentMapingService,EquipmentsBulkService equipmentsBulkService,ItemTypesService itemTypeService,PackagesService packageService,ProjectsService projectService,ProjectItemsService projectItemsService){
 		
 		
 		this.equipmentService =equipmentService; 
@@ -50,8 +51,8 @@ public class DeleteData {
 		this.projectService =projectService;
 		this.projectItemsService = projectItemsService;
 		this.equipmentMapingService=equipmentMapingService;
-		this.acUserService=acUserService;
-	}*/
+		this.companyService=companyService;
+	}
 	
 	public DeleteData(EquipmentsService equipmentService,EquipmentMapingService equipmentMapingService){		
 		
@@ -61,6 +62,10 @@ public class DeleteData {
 	public DeleteData(EquipmentsBulkService equipmentsBulkService){		
 		
 		this.equipmentsBulkService=equipmentsBulkService;
+	}
+	public DeleteData(CompanyService companyService){		
+		
+		this.companyService=companyService;
 	}
 	public DeleteData(ItemTypesService itemTypeService){
 		

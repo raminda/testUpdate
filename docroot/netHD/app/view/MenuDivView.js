@@ -40,21 +40,7 @@ Ext.define('New.view.MenuDivView', {
 		flex : 1
 	}],
 	initComponent : function() {
-			this.callParent(arguments);		
-			//Ext.getCmp('Slide_View').setVisible(false);
-			//Ext.getCmp('Canvers_View').setVisible(false);
-		},
-/*listeners: {
-    click : function(){
-       // element: 'el', //bind to the underlying el property on the panel
-        //fn: function(){ console.log('click el'); }
-    	Ext.Msg.alert('Status', 'Changes saved successfully.');
-    },
-    dblclick:function(){
-        console.log('dblclick body');
-        alert('Status', 'Changes saved successfully.');
-    }
-},*/
+			this.callParent(arguments);}		
 	});
 
 Ext.onReady(function(){ 

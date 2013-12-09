@@ -45,7 +45,7 @@ public class UpdateData {
 	private EquipmentMapingService equipmentMapingService;
 	private CompanyService companyService;
 
-	public UpdateData(EquipmentsService equipmentService,EquipmentMapingService equipmentMapingService,EquipmentsBulkService equipmentsBulkService,ItemTypesService itemTypeService,PackagesService packageService,ProjectsService projectService,ProjectItemsService projectItemsService){
+	public UpdateData(CompanyService companyService,EquipmentsService equipmentService,EquipmentMapingService equipmentMapingService,EquipmentsBulkService equipmentsBulkService,ItemTypesService itemTypeService,PackagesService packageService,ProjectsService projectService,ProjectItemsService projectItemsService){
 		
 		
 		this.equipmentService =equipmentService; 
@@ -55,6 +55,7 @@ public class UpdateData {
 		this.projectService =projectService;
 		this.projectItemsService = projectItemsService;
 		this.equipmentMapingService=equipmentMapingService;
+		this.companyService=companyService;
 		
 	}
 	
@@ -68,6 +69,10 @@ public class UpdateData {
 		
 		this.equipmentsBulkService=equipmentsBulkService;
 		this.packageService =packageService ;
+	}
+	public UpdateData(CompanyService companyService){
+		
+		this.companyService=companyService;
 	}
 	public UpdateData(ItemTypesService itemTypeService){
 		

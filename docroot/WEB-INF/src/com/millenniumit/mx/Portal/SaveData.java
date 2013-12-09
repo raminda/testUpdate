@@ -22,6 +22,7 @@ import com.millenniumit.mx.data.nethdsizing.domain.Equipments;
 import com.millenniumit.mx.data.nethdsizing.domain.ItemTypes;
 import com.millenniumit.mx.data.nethdsizing.domain.Packages;
 import com.millenniumit.mx.data.nethdsizing.domain.Project;
+import com.millenniumit.mx.data.nethdsizing.service.CompanyService;
 import com.millenniumit.mx.data.nethdsizing.service.EquipmentMapingService;
 import com.millenniumit.mx.data.nethdsizing.service.EquipmentsBulkService;
 import com.millenniumit.mx.data.nethdsizing.service.EquipmentsService;
@@ -29,6 +30,7 @@ import com.millenniumit.mx.data.nethdsizing.service.ItemTypesService;
 import com.millenniumit.mx.data.nethdsizing.service.PackagesService;
 import com.millenniumit.mx.data.nethdsizing.service.ProjectItemsService;
 import com.millenniumit.mx.data.nethdsizing.service.ProjectsService;
+import com.millenniumit.mx.data.nethdsizing.service.impl.CompanyServiceImpl;
 
 @SuppressWarnings("unused")
 public class SaveData {
@@ -45,8 +47,9 @@ public class SaveData {
 	private ProjectsService projectService;
 	private ProjectItemsService projectItemsService;
 	private EquipmentMapingService equipmentMapingService;
+	private CompanyService companyService;
 	
-	public SaveData(EquipmentsService equipmentService,EquipmentMapingService equipmentMapingService,EquipmentsBulkService equipmentsBulkService,ItemTypesService itemTypeService,PackagesService packageService,ProjectsService projectService,ProjectItemsService projectItemsService){
+	public SaveData(CompanyService companyService,EquipmentsService equipmentService,EquipmentMapingService equipmentMapingService,EquipmentsBulkService equipmentsBulkService,ItemTypesService itemTypeService,PackagesService packageService,ProjectsService projectService,ProjectItemsService projectItemsService){
 		
 		
 		this.equipmentService =equipmentService; 
@@ -56,10 +59,15 @@ public class SaveData {
 		this.projectService =projectService;
 		this.projectItemsService = projectItemsService;
 		this.equipmentMapingService=equipmentMapingService;
+		this.companyService=companyService;
 	}
 	
+	public SaveData(CompanyService companyService){	
+		
+		this.companyService=companyService;
+	}
 	public SaveData(EquipmentsService equipmentService,EquipmentMapingService equipmentMapingService,ItemTypesService itemTypeService){		
-			
+		
 		this.equipmentService =equipmentService;
 		this.equipmentMapingService =equipmentMapingService;
 		this.itemTypeService = itemTypeService;	
@@ -80,8 +88,8 @@ public class SaveData {
 		this.equipmentsBulkService=equipmentsBulkService;
 		this.equipmentService=equipmentService;
 	}
-	public SaveData(ProjectsService projectService){
-		
+	public SaveData(ProjectsService projectService,CompanyService companyService){
+		this.companyService=companyService;
 		this.projectService =projectService;
 	}
 	public SaveData(ProjectItemsService projectItemsService, ProjectsService projectService , PackagesService  packageService){
@@ -437,7 +445,8 @@ public class SaveData {
 		else if (ServiceType.equals("Projects")) {
 			if(projectService.getProjects(jsonobj.getString("ProjectName")) == null){
 				Project projects =new Project();
-				//projects.setCompany(Company)(jsonobj.getString("Company"));
+				logger.info("saving Duplicate Update :"+jsonobj.getString("Company"));
+				projects.setCompany(companyService.get((jsonobj.getString("Company"))));
 				projects.setProjectName(jsonobj.getString("ProjectName"));
 				
 				try {

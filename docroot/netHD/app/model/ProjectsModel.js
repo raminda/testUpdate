@@ -7,19 +7,22 @@ Ext.define('New.model.ProjectsModel', {
 		name : 'Company',
 		type : 'string'
 	},{
-		name : 'TotalAmount',
-		type : 'number'
-	},{
 		name : 'ProjectName',
 		type : 'string'
 	},{
-		name : 'date_created',
+		name : 'TotalAmount',
+		type : 'number'
+	},{
+		name : 'SysReq',
 		type : 'string'
 	},{
-		name : 'date_modified',
+		name : 'Calendar_created',
 		type : 'string'
 	},{
-		name : 'date_logged',
+		name : 'Calendar_modified',
+		type : 'string'
+	},{
+		name : 'Calendar_logged',
 		type : 'string'
 	}
 

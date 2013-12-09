@@ -16,6 +16,7 @@ import com.millenniumit.mx.data.nethdsizing.domain.Equipments;
 import com.millenniumit.mx.data.nethdsizing.domain.EquipmentBulk;
 import com.millenniumit.mx.data.nethdsizing.domain.ProjectItems;
 import com.millenniumit.mx.data.nethdsizing.domain.Project;
+import com.millenniumit.mx.data.nethdsizing.service.CompanyService;
 import com.millenniumit.mx.data.nethdsizing.service.EquipmentMapingService;
 import com.millenniumit.mx.data.nethdsizing.service.EquipmentsBulkService;
 import com.millenniumit.mx.data.nethdsizing.service.EquipmentsService;
@@ -40,6 +41,7 @@ public class ComboData {
 	private ProjectsService projectService;
 	private ProjectItemsService projectItemsService;
 	private EquipmentMapingService equipmentMapingService;
+	private CompanyService companyService;
 	
 	public ComboData(EquipmentsService equipmentService,EquipmentMapingService equipmentMapingService,EquipmentsBulkService equipmentsBulkService,ItemTypesService ItemTypesService,PackagesService packageService,ProjectsService projectService,ProjectItemsService projectItemsService){
 		
@@ -52,6 +54,7 @@ public class ComboData {
 		this.projectService =projectService;
 		this.projectItemsService = projectItemsService;
 		this.equipmentMapingService=equipmentMapingService;
+		this.companyService=companyService;
 	}
 	
 	public ComboData(EquipmentsService equipmentService,EquipmentMapingService equipmentMapingService ,ItemTypesService ItemTypesService){		
@@ -85,6 +88,10 @@ public class ComboData {
 	public ComboData(EquipmentMapingService equipmentMapingService){
 		
 		this.equipmentMapingService=equipmentMapingService;
+	}
+	public ComboData(CompanyService companyService){
+		
+	this.companyService=companyService;
 	}
 
 

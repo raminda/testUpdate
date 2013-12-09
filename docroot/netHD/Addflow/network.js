@@ -4,6 +4,7 @@
 var workflow;
 function crt(){ 
 	workflow = new Workflow("paintarea"); 
+	//workflow.se
 	//workflow
 	/*my2("Start");
 	var startObj = new NetObject();

@@ -66,6 +66,16 @@ Ext.define('New.view.SMenuHomeView', {
 			id : 'txtEqipmentName',
 			name : 'txtEqipmentName',
 			
+		},{
+			xtype : 'image',
+			fieldLabel : 'Eqipment Name',
+			id : 'imageEqipmentName',
+			name : 'imageEqipmentName',
+			src: '/test-portlet/Img/4.png',
+			height : '100px',
+			weight : '100px',
+			draggable:true
+			
 		}]		         
 	} ], 
 

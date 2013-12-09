@@ -52,6 +52,17 @@ Ext.define('New.view.MenuBarView', {
 			},{
 				text: 'Projects',
 				handler : function() {
+					
+					var grid = Ext.getCmp('gridProjectView');
+					var store = grid.getStore('ProjectsStoreGrid');
+					store.proxy.extraParams.purpose='Grid';
+					store.load();
+
+					Ext.getCmp('ProjectGrid').setVisible(true);
+					Ext.getCmp('PackageGrid').setVisible(false);
+					Ext.getCmp('ItemTypeGrid').setVisible(false);
+					Ext.getCmp('EquipmentGrid').setVisible(false);
+					Ext.getCmp('CompanyGrid').setVisible(false);
 					Ext.getCmp('imageView').setVisible(false);
 					Ext.getCmp('GridView').setVisible(true);
 					Ext.getCmp('CanversView').setVisible(false);
@@ -62,6 +73,17 @@ Ext.define('New.view.MenuBarView', {
 			},{
 				text: 'Clients',
 				handler : function() {
+					
+					var grid = Ext.getCmp('gridCompanyView');
+					var store = grid.getStore('CompanyStoreGrid');
+					store.proxy.extraParams.purpose='Grid';
+					store.load();
+
+					Ext.getCmp('ProjectGrid').setVisible(false);
+					Ext.getCmp('PackageGrid').setVisible(false);
+					Ext.getCmp('ItemTypeGrid').setVisible(false);
+					Ext.getCmp('EquipmentGrid').setVisible(false);
+					Ext.getCmp('CompanyGrid').setVisible(true);
 					Ext.getCmp('imageView').setVisible(false);
 					Ext.getCmp('GridView').setVisible(true);
 					Ext.getCmp('CanversView').setVisible(false);
@@ -87,12 +109,13 @@ Ext.define('New.view.MenuBarView', {
 				var store = Ext.getStore('EquipmentStoreGrid');
 				store.proxy.extraParams.purpose='null';
 				store.load();
-				
+				Ext.getCmp('ProjectGrid').setVisible(false);
 				//Ext.getCmp('EquipmentBulkDD').setVisible(true);
 				
 				Ext.getCmp('imageView').setVisible(false);
 				Ext.getCmp('GridView').setVisible(true);
 				Ext.getCmp('CanversView').setVisible(false);
+				Ext.getCmp('ProjectGrid').setVisible(false);
 				//Ext.getCmp('DDBodyView').setVisible(false);
 				Ext.getCmp('ReportView').setVisible(false);	
     			}
@@ -107,7 +130,7 @@ Ext.define('New.view.MenuBarView', {
 				
 				Ext.getCmp('PackageGrid').setVisible(true);
 				Ext.getCmp('ItemTypeGrid').setVisible(false);
-				//Ext.getCmp('ProjectGrid').setVisible(false);
+				Ext.getCmp('ProjectGrid').setVisible(false);
 				Ext.getCmp('EquipmentGrid').setVisible(false);
 				//Ext.getCmp('EquipmentBulkDD').setVisible(false);
 				//Ext.getCmp('AddProjectDetails').setVisible(false);
@@ -125,7 +148,7 @@ Ext.define('New.view.MenuBarView', {
 				Ext.getCmp('EquipmentGrid').setVisible(true);
 				Ext.getCmp('ItemTypeGrid').setVisible(false);
 				Ext.getCmp('PackageGrid').setVisible(false);
-				
+				Ext.getCmp('ProjectGrid').setVisible(false);
 				var grid = Ext.getCmp('gridEquipmentView');
 				var store = grid.getStore('EquipmentStoreGrid');
 				store.proxy.extraParams.purpose='Grid';
@@ -145,7 +168,7 @@ Ext.define('New.view.MenuBarView', {
 				Ext.getCmp('ItemTypeGrid').setVisible(true);
 				Ext.getCmp('EquipmentGrid').setVisible(false);
 				Ext.getCmp('PackageGrid').setVisible(false);
-				
+				Ext.getCmp('ProjectGrid').setVisible(false);
 				var grid = Ext.getCmp('GridItemTypeView');
 				var store = grid.getStore('ItemTypeStoreGrid');
 				store.proxy.extraParams.purpose='Grid';
