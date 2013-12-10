@@ -148,9 +148,8 @@ public class UpdateData {
 				NewEquipment.setItemName(jsonobj.getString("ItemName"));
 				NewEquipment.setItemType(itemTypeService.get(jsonobj.getString("itemtypes")));
 				NewEquipment.setSummary(jsonobj.getString("Summary"));
-				NewEquipment.setITIC_Descrip(jsonobj.getString("Full_Descrip"));
-				NewEquipment.setTec_Descrip(jsonobj.getString("Tec_Descrip"));
 				NewEquipment.setITIC_Descrip(jsonobj.getString("ITIC_Descrip"));
+				NewEquipment.setTec_Descrip(jsonobj.getString("Comments"));
 				NewEquipment.setPrice(Integer.parseInt(jsonobj.getString("Price"),10));
 				NewEquipment.setCalendar_modified(calendar.getTime());
 				
@@ -204,8 +203,8 @@ public class UpdateData {
 					EquipmentMaping equipmentMaping=new EquipmentMaping();
 					//*************************************************
 					logger.info("hi : " + key+" " + CID+" ");
-					equipmentMaping.setParentID(equipmentService.getEquipments(key));
-					equipmentMaping.setChildID(equipmentService.getEquipments(CID));
+					equipmentMaping.setPEquipment(equipmentService.getEquipments(key));
+					equipmentMaping.setCEquipment(equipmentService.getEquipments(CID));
 					//logger.info("hi : " + equipmentMaping.getChildID().getItemName() +"   "+equipmentMaping.getParentID().getItemName());
 					//save data
 					try {
@@ -311,15 +310,16 @@ public class UpdateData {
 		else if (ServiceType.equals("ItemType")) {
 			
 			System.out.println("This section is for Parameter ItemTypeService Update");
-			ItemTypes itemType=itemTypeService.getItemTypess(Integer.parseInt(jsonobj.getString("ID")));
-			if(itemType!=null && (Integer.parseInt(jsonobj.getString("AccsessLevel"))==0||Integer.parseInt(jsonobj.getString("AccsessLevel"))==1) && jsonobj.getString("TypeName")!=null){
+			ItemTypes itemType=itemTypeService.get(request.getParameter("ID"));
+			//System.out.println("Error ; In valide data"+itemType.getTypeName());
+			if(itemType!=null && (Integer.parseInt(jsonobj.getString("AccsessLevel"))==1||Integer.parseInt(jsonobj.getString("AccsessLevel"))==0) && jsonobj.getString("TypeName")!=null){
 				itemType.setAccsessLevel(Integer.parseInt(jsonobj.getString("AccsessLevel")));
 				itemType.setCalendar_modified(calendar.getTime());
 				itemType.setTypeName(jsonobj.getString("TypeName"));
 				itemTypeService.update(itemType);
 			}
 			else{
-				System.out.println("Error ; In valide data");
+				System.out.println("Error ; In valide data"+itemType.getTypeName()+" d "+jsonobj.getString("AccsessLevel"));
 			}
 			
 		}

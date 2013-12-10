@@ -21,12 +21,12 @@ Ext.define('New.view.GridEquipmentsBulkView', {
 	
 		},*/{
 			flex : 1,
-			header : 'Item ID',
+			header : 'Equipment ',
 			dataIndex : 'ItemID',
 	
 		},{
 			flex : 1,
-			header : 'Package ID',
+			header : 'Package',
 			dataIndex : 'PackageID',
 	
 		},{
@@ -42,12 +42,12 @@ Ext.define('New.view.GridEquipmentsBulkView', {
 		},{
 			flex : 1,
 			header : 'date created',
-			dataIndex : 'date_created',
+			dataIndex : 'Calendar_created',
 	
 		},{
 			flex : 1,
 			header : 'date modified',
-			dataIndex : 'date_modified',
+			dataIndex : 'Calendar_modified',
 	
 		} ],
 		

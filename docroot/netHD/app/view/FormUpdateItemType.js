@@ -70,11 +70,15 @@ Ext.define('New.view.FormUpdateItemType', {
 
 		var name = val[0].get('TypeName');
 		var userlevel = val[0].get('AccsessLevel');
-		var ID=val[0].get('ID');
+		var ID;
+		if(userlevel=='Equipment')
+			ID=1;
+		else
+			ID=0;
 		
 		Ext.getCmp('txtUItemName').setValue(name);
-		Ext.getCmp('cmbUAsLvlLevel').setValue(userlevel);
-		Ext.getCmp('txtUItemID').setValue(ID);
+		Ext.getCmp('cmbUAsLvlLevel').setValue(ID);
+		Ext.getCmp('txtUItemID').setValue(name);
 		Ext.getCmp('txtUItemID').setVisible(false);
 	}
 });

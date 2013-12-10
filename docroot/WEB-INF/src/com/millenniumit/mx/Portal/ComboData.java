@@ -10,6 +10,7 @@ import javax.portlet.ResourceResponse;
 import org.apache.log4j.Logger;
 
 import com.google.gson.Gson;
+import com.millenniumit.mx.data.nethdsizing.domain.Company;
 import com.millenniumit.mx.data.nethdsizing.domain.EquipmentMaping;
 import com.millenniumit.mx.data.nethdsizing.domain.ItemTypes;
 import com.millenniumit.mx.data.nethdsizing.domain.Equipments;
@@ -43,7 +44,7 @@ public class ComboData {
 	private EquipmentMapingService equipmentMapingService;
 	private CompanyService companyService;
 	
-	public ComboData(EquipmentsService equipmentService,EquipmentMapingService equipmentMapingService,EquipmentsBulkService equipmentsBulkService,ItemTypesService ItemTypesService,PackagesService packageService,ProjectsService projectService,ProjectItemsService projectItemsService){
+	public ComboData(CompanyService companyService,EquipmentsService equipmentService,EquipmentMapingService equipmentMapingService,EquipmentsBulkService equipmentsBulkService,ItemTypesService ItemTypesService,PackagesService packageService,ProjectsService projectService,ProjectItemsService projectItemsService){
 		
 		
 		
@@ -76,8 +77,8 @@ public class ComboData {
 	
 		this.packageService =packageService ;
 	}
-	public ComboData(ProjectsService projectService){
-		
+	public ComboData(ProjectsService projectService,CompanyService companyService){
+		this.companyService =companyService; 
 		this.projectService =projectService;
 	}
 	public ComboData(ProjectItemsService projectItemsService,ProjectsService projectService){
@@ -96,7 +97,7 @@ public class ComboData {
 
 
 	
-	@SuppressWarnings({ "unchecked", "null" })
+	
 	public void Combo(ResourceRequest request, ResourceResponse response,String ServiceType) throws IOException{
 		PrintWriter out = response.getWriter();
 		//new Gson Object for getting String line to Json 
@@ -113,7 +114,6 @@ public class ComboData {
 				System.out.println(request.getParameter("ID")+" "+value);
 				 boolean bool=true;
 				if(value==1){
-					value=1;
 					List<Equipments> lst = equipmentService.getBase(0);
 					//System.out.println(lst.get(0).getItemName());
 						for(int i=0;i<lst.size();i++){
@@ -175,9 +175,9 @@ public class ComboData {
 						for(int i=0;i<list.size();i++){
 							//Equipments obj=lst.get(i);
 							EquipmentMaping objM=list.get(i);
-							Equipments obj=objM.getChildID();
+							Equipments obj=objM.getCEquipment();
 							try{
-								jsonOb2+="{ ItemName: '" + obj.getItemName()+"',Summary:'"+obj.getSummary()+"',Price: '"+obj.getPrice()+"',ITIC_Descrip:'"+obj.getITIC_Descrip()+"',Tec_Descrip:'"+obj.getTec_Descrip()+"',EOLDate:'"+obj.getEOLDate()+"',date_logged:'"+obj.getCalendar_modified()+"',date_modified:'"+obj.getCalendar_logged()+"',date_created:'"+obj.getCalendar_created()+"',ID:'"+obj.getID()+"',ItemType:'"+obj.getItemType().getTypeName()+"'}";
+								jsonOb2+="{ ItemName: '" + obj.getItemName()+"',Summary:'"+obj.getSummary()+"',Price: '"+obj.getPrice()+"',ITIC_Descrip:'"+obj.getITIC_Descrip()+"',Tec_Descrip:'"+obj.getTec_Descrip()+"',EOLDate:'"+obj.getEOLDate()+"',date_logged:'"+obj.getCalendar_modified()+"',date_modified:'"+obj.getCalendar_logged()+"',date_created:'"+obj.getCalendar_created()+"',ID:'"+obj.getID()+"',itemtypes:'"+obj.getItemType().getTypeName()+"'}";
 								}catch (Exception e) {
 									logger.info("Error : " + e.getMessage());
 								jsonOb2+="'}";
@@ -263,7 +263,7 @@ public class ComboData {
 					//Equipments obj=lst.get(i);
 					EquipmentBulk obj=lst.get(i);
 					try{
-						jsonOb2+="{ ItemID: '" + obj.getEquipmentsId().getItemName()+"',PackageID:'"+obj.getPackageID().getPackageName()+"',Quantity:'"+obj.getQuantity()+"',date_logged:'"+obj.getCalendar_modified()+"',date_modified:'"+obj.getCalendar_logged()+"',date_created:'"+obj.getCalendar_created()+"',ID:'"+obj.getId()+"'}";
+						jsonOb2+="{Price : '"+obj.getQuantity()*obj.getEquipmentsId().getPrice()+"',ItemID: '" + obj.getEquipmentsId().getItemName()+"',PackageID:'"+obj.getPackageID().getPackageName()+"',Quantity:'"+obj.getQuantity()+"',Calendar_logged:'"+obj.getCalendar_modified()+"',Calendar_modified:'"+obj.getCalendar_logged()+"',Calendar_created:'"+obj.getCalendar_created()+"',ID:'"+obj.getId()+"'}";
 						}catch (Exception e) {
 							logger.info("Error : " + e.getMessage());
 						jsonOb2+="'}";
@@ -448,8 +448,32 @@ public class ComboData {
 			//System.out.println(request.getParameter("value"));
 			
 			if(Long.parseLong(request.getParameter("value"))==1){
-				lst = (List<Project>) projectService.getProjects(request.getParameter("ID"));
-			}else{
+				//lst = projectService.getProjects(request.getParameter("ID"));
+			}
+			else if(Long.parseLong(request.getParameter("value"))==2){
+			List<Company> a= companyService.getAll();
+			System.out.println(a.size());
+			String jsonOb2="[";
+			boolean bool=true;
+			for(int i=0;i<a.size();i++){
+				Company obj=a.get(i);
+				try{
+					jsonOb2+="{ Company: '" +obj.getCompanyName()+"'}";
+				}catch (Exception e) {
+					logger.info("Error : " + e.getMessage());
+					jsonOb2+="'}";
+					bool=false;
+				}
+				if(i<a.size()-1 && bool){
+					jsonOb2+=",";
+				}
+			}
+			jsonOb2+="]";
+			System.out.println(jsonOb2);
+			jsonOb2=linebracker(jsonOb2);
+			out.println(jsonOb2);
+			}
+			else{
 				System.out.println(request.getParameter("value"));
 				lst = projectService.getProjects();
 			}
@@ -459,8 +483,8 @@ public class ComboData {
 		//**********ItemType***********
 		else if (ServiceType.equals("ItemType")) {
 			
-			System.out.println("This section is for Parameter ItemTypesService Combo");
-			List<ItemTypes> lst= (List<ItemTypes>) ItemTypesService.getItemTypess(Integer.parseInt(request.getParameter("ID")));
+			System.out.println("This section is for Parameter ItemTypesService Combo "+request.getParameter("ID"));
+			List<ItemTypes> lst= ItemTypesService.getItemTypesByAl(Integer.parseInt(request.getParameter("ID")));
 			out.println(gson.toJson(lst));
 		}
 		else if (ServiceType.equals("SiteType")) {
@@ -476,9 +500,6 @@ public class ComboData {
 	}
 	
 	private String linebracker(String jsonOb2){
-		jsonOb2=jsonOb2.replaceAll("\\n", "|");
-		jsonOb2=jsonOb2.replaceAll("\r", "");
-		jsonOb2=jsonOb2.replaceAll("\n", "|");
 		return jsonOb2;
 	}
 	

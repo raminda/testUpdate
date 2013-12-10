@@ -182,8 +182,8 @@ public class SaveData {
 				EquipmentMaping equipmentMaping=new EquipmentMaping();
 				//*************************************************
 				logger.info("hi : 1" + key+"1 " + CID+" ");
-				equipmentMaping.setParentID(equipmentService.getEquipments(key));
-				equipmentMaping.setChildID(equipmentService.getEquipments(CID));
+				equipmentMaping.setPEquipment(equipmentService.getEquipments(key));
+				equipmentMaping.setCEquipment(equipmentService.getEquipments(CID));
 				//save data
 				try {
 					ID=equipmentMapingService.save(equipmentMaping);	
@@ -231,8 +231,8 @@ public class SaveData {
 				EquipmentMaping equipmentMaping=new EquipmentMaping();
 				//*************************************************
 				logger.info("hi : " + key+" " + CID+" ");
-				equipmentMaping.setParentID(equipmentService.getEquipments(key));
-				equipmentMaping.setChildID(equipmentService.getEquipments(CID));
+				equipmentMaping.setPEquipment(equipmentService.getEquipments(key));
+				equipmentMaping.setCEquipment(equipmentService.getEquipments(CID));
 				//save data
 				try {
 					ID=equipmentMapingService.save(equipmentMaping);	

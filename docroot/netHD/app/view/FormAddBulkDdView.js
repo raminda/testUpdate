@@ -156,7 +156,7 @@ var formPanel = Ext.define('formPanel', {
 	    	},{
 			xtype : 'textfield',
 			fieldLabel : 'Item Type',
-			name       : 'ItemType',
+			name       : 'itemtypes',
 			id : 'txtBsItemType',
 			width : 350,
 	
@@ -211,9 +211,14 @@ var formPanel = Ext.define('formPanel', {
 			dataIndex : 'Price',
 	
 		  },{
-			  flex: 3,
-				header : ' Summary',
-				dataIndex : 'Summary',  
+		  	flex: 2,
+			header : ' item type',
+			dataIndex : 'itemtypes',
+		
+		  },{
+		  flex: 3,
+			header : ' Summary',
+			dataIndex : 'Summary',  
 		  }],
 	    enableDragDrop   : true,
 	    stripeRows       : true,
@@ -298,6 +303,12 @@ Ext.define('New.view.FormAddBulkDdView', {
 								Ext.getCmp('btnbulkClear').disable(true);
 			     	        	
 			  			}
+			  			Ext.getCmp('txtBsItemName').reset(true);
+			          	Ext.getCmp('txtBsItemType').reset(true);
+			          	Ext.getCmp('txtBsItemPrice').reset(true);
+			          	Ext.getCmp('txtBsItemQuntity').reset(true);
+			          	Ext.getCmp('cmbBsItem').reset(true);
+			          	Ext.getCmp('cmbBsItemType').reset(true);
 			  		}
 			  	},{
 			  		flex: 1,

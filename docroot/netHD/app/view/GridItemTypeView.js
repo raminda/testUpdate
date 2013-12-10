@@ -179,6 +179,7 @@ Ext.define('New.view.GridItemTypeView', {
 							         if(form.isValid()){
 									store = Ext.getStore('ItemTypeStore');
 									store.proxy.extraParams.purpose = 'Update';
+									store.proxy.extraParams.ID=Ext.getCmp('txtUItemID').getValue();
 									JsonObject= {ID:ID,TypeName:Name,AccsessLevel: Type};
 									row= Ext.create('New.model.ItemTypeModel', JsonObject);
 									store.insert(0, row);

@@ -118,11 +118,26 @@ public class NetHDSizing extends MVCPortlet {
 			updateData=new UpdateData(packageService);
 			deleteData=new DeleteData(packageService,equipmentsBulkService);
 		}
+		else if (resourceID.equals("EquipmentsBulkStoreUrl")) {
+			ItemName="EquipmentsBulk";
+			updateData=new UpdateData(equipmentsBulkService,packageService);
+			comboData=new ComboData(equipmentsBulkService,packageService);
+			gridData=new GridData(equipmentsBulkService);
+			saveData=new SaveData(equipmentsBulkService,packageService,equipmentService);
+			deleteData=new DeleteData(equipmentsBulkService);
+		}else if (resourceID.equals("EquipmentsBulkStoreUrl")) {
+			ItemName="EquipmentsBulk";
+			updateData=new UpdateData(equipmentsBulkService,packageService);
+			comboData=new ComboData(equipmentsBulkService,packageService);
+			gridData=new GridData(equipmentsBulkService);
+			saveData=new SaveData(equipmentsBulkService,packageService,equipmentService);
+			deleteData=new DeleteData(equipmentsBulkService);
+		}
 		else if (resourceID.equals("ProjectsStoreUrl")) {
 			ItemName="Projects";
 			System.out.println("This section is for Navigate "+ ItemName+" init");
 			gridData=new GridData(projectService);
-			comboData=new ComboData(projectService);
+			comboData=new ComboData(projectService,companyService);
 			saveData=new SaveData(projectService,companyService);
 			updateData=new UpdateData(projectService,companyService);
 			deleteData=new DeleteData(projectService);

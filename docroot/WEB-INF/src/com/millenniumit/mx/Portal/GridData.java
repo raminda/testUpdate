@@ -161,7 +161,7 @@ public class GridData {
 			for(int i=0;i<lst.size();i++){
 				EquipmentMaping obj=lst.get(i);
 				try{
-					jsonOb2+="{ ParentID : '" + obj.getParentID().getItemName()+"',ChildID:'"+obj.getChildID().getItemName()+"',date_logged:'"+obj.getCalendar_logged()+"',date_modified:'"+obj.getCalendar_modified()+"',date_created:'"+obj.getCalendar_created()+"', ID:'"+obj.getID()+"'}";
+					jsonOb2+="{ ParentID : '" + obj.getPEquipment().getItemName()+"',ChildID:'"+obj.getCEquipment().getItemName()+"',date_logged:'"+obj.getCalendar_logged()+"',date_modified:'"+obj.getCalendar_modified()+"',date_created:'"+obj.getCalendar_created()+"', ID:'"+obj.getID()+"'}";
 				}catch (Exception e) {
 					logger.info("Error : " + e.getMessage());
 					jsonOb2+="'}";
@@ -218,27 +218,7 @@ public class GridData {
 			System.out.println("This section is for Parameter ProjectsService Grid");
 			
 			if(Long.parseLong(request.getParameter("value"))==1){
-				List<Project> a= projectService.getProjects();
-				System.out.println(a.size());
-				String jsonOb2="[";
-				boolean bool=true;
-				for(int i=0;i<a.size();i++){
-					Project obj=a.get(i);
-					try{
-						jsonOb2+="{ Company: '" +obj.getCompany().getCompanyName()+"'}";
-					}catch (Exception e) {
-						logger.info("Error : " + e.getMessage());
-						jsonOb2+="'}";
-						bool=false;
-					}
-					if(i<a.size()-1 && bool){
-						jsonOb2+=",";
-					}
-				}
-				jsonOb2+="]";
-				System.out.println(jsonOb2);
-				jsonOb2=linebracker(jsonOb2);
-				out.println(jsonOb2);
+				
 			}
 			else{
 				List<Project> a= projectService.getProjects();

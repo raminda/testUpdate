@@ -34,8 +34,8 @@ Ext.define('New.view.FormAddProjectsView', {
             listeners: {
                 focus:function( me, The, eOpts ){
                 	var store = Ext.getStore('ProjectsStore');
-                	store.proxy.extraParams.purpose = 'Grid';
-                	store.proxy.extraParams.value = '1';
+                	store.proxy.extraParams.purpose = 'Combo';
+                	store.proxy.extraParams.value = '2';
                 	store.load();
                 },
                 change:function ( me, newValue, oldValue, eOpts ){

@@ -15,10 +15,7 @@ Ext.define('New.model.EquipmentModel', {
 	}, {
 		name : 'ITIC_Descrip',
 		type : 'string'
-	}, {
-		name : 'Tec_Descrip',
-		type : 'string'
-	}, {
+	},{
 		name : 'Comments',
 		type : 'string'
 	},{

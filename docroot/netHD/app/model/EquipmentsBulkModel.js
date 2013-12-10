@@ -4,7 +4,10 @@ Ext.define('New.model.EquipmentsBulkModel', {
 		name : 'ID',
 		type : 'number'
 	}, {
-		name : 'Equipment',
+		name : 'PackageID',
+		type : 'string'
+	},{
+		name : 'ItemID',
 		type : 'string'
 	}, {
 		name : 'Package',
@@ -16,13 +19,13 @@ Ext.define('New.model.EquipmentsBulkModel', {
 		name : 'Price',
 		type : 'number'
 	}, {
-		name : 'date_created',
+		name : 'Calendar_created',
 		type : 'string'
 	}, {
-		name : 'date_modified',
+		name : 'Calendar_modified',
 		type : 'string'
 	},{
-		name : 'date_logged',
+		name : 'Calendar_logged',
 		type : 'string'
 	}]
 });

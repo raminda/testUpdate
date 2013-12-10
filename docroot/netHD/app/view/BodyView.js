@@ -11,18 +11,19 @@ Ext.define('New.view.BodyView', {
 	height:'100%',
 	items :[{
 		flex : 1,
-		text : 'Home',
-		id : 'imageView',
-		name : 'imageView',
-		textAlign : 'left',
-		xtype:'image'
-	},{
-		flex : 1,
 		text : 'Add Equipment to EquipmentBulk',
 		id : 'EquipmentBulkDD',
 		name : 'EquipmentBulkDD',
 		iconCls : 'Icon',
 		textAlign : 'left',
+		xtype:'DDBody'
+	},{
+		flex : 1,
+		text : 'Home',
+		id : 'imageView',
+		name : 'imageView',
+		textAlign : 'left',
+		xtype:'image'
 	},{
 		flex : 1,
 		text : 'Home',
@@ -58,37 +59,37 @@ Ext.define('New.view.BodyView', {
 
 Ext.onReady(function(){
 	/****
-    * Setup Drop Targets
-    ***/
-	
-	/*var formPanelDropTargetEl =  Ext.getCmp('formPanel').body.dom;
-    Ext.create('Ext.dd.DropTarget', formPanelDropTargetEl, {
-        ddGroup: 'GridExample',
-        notifyEnter: function(ddSource, e, data) {
-        	
-            //Add some flare to invite drop.
-        	Ext.getCmp('formPanel').body.stopAnimation();
-        	Ext.getCmp('formPanel').body.highlight();
-        },
-        notifyDrop  : function(ddSource, e, data){
-        	
-            // Reference the record (single selection) for readability
-        	
-            var selectedRecord = ddSource.dragData.records[0];
+	    * Setup Drop Targets
+	    ***/
+		
+		var formPanelDropTargetEl =  Ext.getCmp('formPanel').body.dom;
+	    Ext.create('Ext.dd.DropTarget', formPanelDropTargetEl, {
+	        ddGroup: 'GridExample',
+	        notifyEnter: function(ddSource, e, data) {
+	        	
+	            //Add some flare to invite drop.
+	        	Ext.getCmp('formPanel').body.stopAnimation();
+	        	Ext.getCmp('formPanel').body.highlight();
+	        },
+	        notifyDrop  : function(ddSource, e, data){
+	        	
+	            // Reference the record (single selection) for readability
+	        	
+	            var selectedRecord = ddSource.dragData.records[0];
 
-            // Load the record into the form
-            Ext.getCmp('formPanel').getForm().loadRecord(selectedRecord);
+	            // Load the record into the form
+	            Ext.getCmp('formPanel').getForm().loadRecord(selectedRecord);
 
-            // Delete record from the source store.  not really required.
-            ddSource.view.store.remove(selectedRecord);
+	            // Delete record from the source store.  not really required.
+	            ddSource.view.store.remove(selectedRecord);
 
-            Ext.getCmp('btnbulkOK').enable(true);
-            Ext.getCmp('btnbulkClear').enable(true);
-            return true;
-        }
-    });*/
-   // Ext.getCmp('MBody').setVisible(true);
-    
-   // Ext.getCmp('EquipmentBulkDD').setVisible(false);
-    
+	            Ext.getCmp('btnbulkOK').enable(true);
+	            Ext.getCmp('btnbulkClear').enable(true);
+	            return true;
+	        }
+	    });
+	    Ext.getCmp('imageView').setVisible(true);
+	    
+	    Ext.getCmp('EquipmentBulkDD').setVisible(false);
+	    
 });
