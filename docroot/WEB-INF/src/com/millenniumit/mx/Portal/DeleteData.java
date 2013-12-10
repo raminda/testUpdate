@@ -205,7 +205,7 @@ public class DeleteData {
 		else if (ServiceType.equals("Company")) {
 					
 			Company company=new Company();
-			company=companyService.get(Integer.parseInt(request.getParameter("value")));
+			company=companyService.get(request.getParameter("value"));
 			try{
 			companyService.delete(company);
 			}

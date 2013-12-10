@@ -4,8 +4,8 @@
 Ext.define('New.controller.SystemController', {
 	extend : 'Ext.app.Controller',
 
-	views 	: ['BodyView','CanversView','imageView','FormAddEquipmentView','FormAddItemTypeView','FormAddPackageView','FormAddProjectsView','FormUpdateEquipment','FormUpdateItemType','FormUpdatePackage','GridView','GridCompanyView','GridEquipmentView','GridItemTypeView','GridPackageView','GridProjectView','MenuDivView','MenuBarView','SlideMenuView','SMenuHomeView'],
-	stores 	: ['CompanyStoreGrid','EquipmentStore','EquipmentStoreComp', 'EquipmentStoreGrid','ItemTypeStore','ItemTypeStoreGrid','PackageStore','PackageStoreGrid','ProjectsStore','ProjectsStoreGrid'],
+	views 	: ['BodyView','CanversView','imageView','FormAddCompanyView','FormAddEquipmentView','FormAddItemTypeView','FormAddPackageView','FormAddProjectsView','FormUpdateCompany','FormUpdateEquipment','FormUpdateItemType','FormUpdatePackage','GridView','GridCompanyView','GridEquipmentView','GridItemTypeView','GridPackageView','GridProjectView','MenuDivView','MenuBarView','SlideMenuView','SMenuHomeView'],
+	stores 	: ['CompanyStore','CompanyStoreGrid','EquipmentStore','EquipmentStoreComp', 'EquipmentStoreGrid','ItemTypeStore','ItemTypeStoreGrid','PackageStore','PackageStoreGrid','ProjectsStore','ProjectsStoreGrid'],
 	models 	: ['CompanyModel','EquipmentModel','ItemTypeModel','PackagesModel','ProjectsModel'],
 
 	init : function() {

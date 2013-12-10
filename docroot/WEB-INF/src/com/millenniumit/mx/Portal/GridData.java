@@ -276,7 +276,7 @@ public class GridData {
 			for(int i=0;i<a.size();i++){
 				Company obj=a.get(i);
 				try{
-					jsonOb2+="{ Company: '" +obj.getCompanyName()+"',Calendar_created :'"+obj.getCalendar_created()+"',Calendar_modified :'"+obj.getCalendar_modified()+"}";
+					jsonOb2+="{ Company: '" +obj.getCompanyName()+"',Calendar_created :'"+obj.getCalendar_created()+"',Calendar_modified :'"+obj.getCalendar_modified()+"'}";
 				}catch (Exception e) {
 					logger.info("Error : " + e.getMessage());
 					jsonOb2+="'}";

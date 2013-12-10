@@ -29,16 +29,6 @@ Ext.define('New.view.GridCompanyView', {
 		
 			},{
 				flex : 1,
-				header : 'Total Amount',
-				dataIndex : 'TotalAmount',
-		
-			},{
-				flex : 1,
-				header : 'Project Name',
-				dataIndex : 'ProjectName',
-				
-			},{
-				flex : 1,
 				header : 'date created',
 				dataIndex : 'Calendar_created',
 		
@@ -49,12 +39,12 @@ Ext.define('New.view.GridCompanyView', {
 	
 		}],
 		tbar : [{
-			text : 'Add New Projects',
-			iconCls : 'Add new Projects',
+			text : 'Add New Company',
+			iconCls : 'Add new Company',
 			handler : function() {
 				var win =null;
 				win= Ext.create('Ext.window.Window', {
-					title : 'Add New Projects',
+					title : 'Add New Company',
 					width : 450,
 					height : 250,
 					minWidth : 300,
@@ -62,29 +52,28 @@ Ext.define('New.view.GridCompanyView', {
 					layout : 'fit',
 					plain : true,
 					items : [{
-						xtype : 'AddProjects',
+						xtype : 'AddCompany',
 					}],
 					buttons : [{
 						xtype : 'button',
 						text : 'Save',
-						id : 'btnSaveproject',
-						name : 'btnSaveproject',
+						id : 'btnSaveCompany',
+						name : 'btnSaveCompany',
 						width : 150,
 						handler : function() {
 							
 							//saving Company data 
 							var CompanyName = Ext.getCmp('txtCompanyName').getValue();
-							var ProjectName = Ext.getCmp('txtProjectName').getValue();
 
 							var row=null;
 							var store=null;
 							
-							var form = Ext.getCmp('AddProjects').getForm();
+							var form = Ext.getCmp('AddCompany').getForm();
 							if(form.isValid()){
-								store = Ext.getStore('ProjectsStore');
+								store = Ext.getStore('CompanyStore');
 								store.proxy.extraParams.purpose = 'New';
-								JsonObject= {Company:CompanyName,ProjectName:ProjectName};
-								row= Ext.create('New.model.ProjectsModel', JsonObject);
+								JsonObject= {Company:CompanyName};
+								row= Ext.create('New.model.CompanyModel', JsonObject);
 								store.insert(0, row);
 									
 								win.close();
@@ -103,26 +92,26 @@ Ext.define('New.view.GridCompanyView', {
 				});
 				win.show();
 			}
-		}, {
-			text : 'Remove Project',
+		},{
+			text : 'Remove Company',
 			iconCls : 'Remove',
 			handler : function(){
 				
-				var grid = Ext.getCmp('gridProjectView');
+				var grid = Ext.getCmp('gridCompanyView');
 				var sm = grid.getSelectionModel();
 				var val = sm.getSelection();
-				var store = grid.getStore('ProjectsStoreGrid');
+				var store = grid.getStore('CompanyStoreGrid');
 				
 				if(val[0]!=null){
 					if (store.getCount() > 0) {
 						sm.select(0);
 					}
 					store.proxy.extraParams.purpose = 'delete';
-					store.proxy.extraParams.value = val[0].get('ID');
+					store.proxy.extraParams.value = val[0].get('Company');
 					store.load();
 					
-					var grid = Ext.getCmp('gridProjectView');
-					var store = grid.getStore('ProjectsStoreGrid');
+					var grid = Ext.getCmp('gridCompanyView');
+					var store = grid.getStore('CompanyStoreGrid');
 					store.proxy.extraParams.purpose='Grid';
 					store.load();
 					
@@ -139,14 +128,10 @@ Ext.define('New.view.GridCompanyView', {
 			iconCls : 'refresh',
 			handler : function(){
 				
-				var grid = Ext.getCmp('gridProjectView');
-				var store = grid.getStore('ProjectsStoreGrid');
+				var grid = Ext.getCmp('gridCompanyView');
+				var store = grid.getStore('CompanyStoreGrid');
 				store.proxy.extraParams.purpose='Grid';
 				store.load();
-				
-				//var store = Ext.getStore('my');
-				//store.proxy.extraParams.purpose='Grid';
-				//store.load();
 			}
 		}],
 		listeners : {
@@ -154,7 +139,7 @@ Ext.define('New.view.GridCompanyView', {
 				
 				var win=null;
 				win= Ext.create('Ext.window.Window', {
-					title : 'Update Equipment details',
+					title : 'Update Company details',
 					width : 450,
 					height : 250,
 					minWidth : 300,
@@ -162,33 +147,32 @@ Ext.define('New.view.GridCompanyView', {
 					layout : 'fit',
 					plain : true,
 					items : [ {
-						xtype : 'UpdateProjects',
+						xtype : 'UpdateCompany',
 					} ],
 
 					buttons : [{
 						xtype : 'button',
 						text : 'Update',
-						id : 'btnUpdateproject',
-						name : 'btnUpdateproject',
+						id : 'btnUpdateCompany',
+						name : 'btnUpdateCompany',
 						width : 150,
 						handler : function() {
 						
-							var CompanyName = Ext.getCmp('txtUpCompanyName').getValue();
-							var ProjectName = Ext.getCmp('txtUpProjectName').getValue();
-							var ID = Ext.getCmp('txtUpCompanyID').getValue();
+							var Company = Ext.getCmp('txtUpCompanyName').getValue();
 	
 							var row=null;
 							var store=null;
-							var form = Ext.getCmp('UpProjects').getForm();
+							var form = Ext.getCmp('UpCompany').getForm();
 							if(form.isValid()){
-								store = Ext.getStore('ProjectsStore');
+								store = Ext.getStore('CompanyStore');
 								store.proxy.extraParams.purpose = 'Update';
-								JsonObject= {ID:ID,Company:CompanyName,ProjectName:ProjectName};
-								row= Ext.create('New.model.ProjectsModel', JsonObject);
+								store.proxy.extraParams.ID=Ext.getCmp('txtTUpCompanyName').getValue();
+								JsonObject= {Company:Company};
+								row= Ext.create('New.model.CompanyModel', JsonObject);
 								store.insert(0, row);
 
-								var grid = Ext.getCmp('gridProjectView');
-								var store = grid.getStore('ProjectsStoreGrid');
+								var grid = Ext.getCmp('gridCompanyView');
+								var store = grid.getStore('CompanyStoreGrid');
 								store.proxy.extraParams.purpose='Grid';
 								store.load();
 								

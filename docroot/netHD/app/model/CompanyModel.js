@@ -4,16 +4,16 @@ Ext.define('New.model.CompanyModel', {
 		name : 'ID',
 		type : 'number'
 	},{
-		name : 'CompanyName',
-		type : 'number'
+		name : 'Company',
+		type : 'string'
 	},{
-		name : 'date_created',
-		type : 'date'
+		name : 'Calendar_created',
+		type : 'string'
 	},{
-		name : 'date_modified',
-		type : 'date'
+		name : 'Calendar_modified',
+		type : 'string'
 	},{
-		name : 'date_logged',
-		type : 'date'
+		name : 'Calendar_logged',
+		type : 'string'
 	}]
 });

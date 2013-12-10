@@ -16,6 +16,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
+import com.millenniumit.mx.data.nethdsizing.domain.Company;
 import com.millenniumit.mx.data.nethdsizing.domain.EquipmentBulk;
 import com.millenniumit.mx.data.nethdsizing.domain.EquipmentMaping;
 import com.millenniumit.mx.data.nethdsizing.domain.Equipments;
@@ -460,7 +461,23 @@ public class SaveData {
 				logger.info("Error : " + "Duplicate data entry (Same Project name in database )");
 			}
 		}
-		
+		else if (ServiceType.equals("Company")) {
+			if(companyService.get(jsonobj.getString("Company")) == null){
+				Company company =new Company();
+				logger.info("saving Duplicate Update :"+jsonobj.getString("Company"));
+				company.setCompanyName(jsonobj.getString("Company"));
+				
+				try {
+					ID =companyService.save(company);		
+				}catch (Exception e) {
+					logger.info("Error : " + e.getMessage());
+					ID=  0;
+				}
+			}
+			else{
+				logger.info("Error : " + "Duplicate data entry (Same Company name in database )");
+			}
+		}
 		//**********ItemType***********
 		else if (ServiceType.equals("ItemType")) {
 			ItemTypes NewitemType=new ItemTypes();
