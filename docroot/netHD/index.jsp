@@ -12,6 +12,7 @@
 <portlet:resourceURL var="EquipmentsMapingStoreUrl" id="EquipmentsMapingStoreUrl" escapeXml="false" />	
 <portlet:resourceURL var="ExcelUrl" id="ExcelUrl" escapeXml="false" />		
 <portlet:resourceURL var="validate_url" id="validate_url" escapeXml="false" />
+<portlet:resourceURL var="VersionMapStoreUrl" id="VersionMapStoreUrl" escapeXml="false" />
 
 <script>
 	/******************************** app ********************************/
@@ -22,7 +23,7 @@
  		var Slide_div		 	= "<portlet:namespace/>-Slide-ext-div"; */
  		
  	/******************************************* urls *******************************************************/
- 	
+ 	var VersionMapStoreUrl="<%= renderResponse.encodeURL(VersionMapStoreUrl.toString())%>";
 	 	var CompanyStoreUrl	="<%= renderResponse.encodeURL(CompanyStoreUrl.toString())%>";
 	 	var validate_url	="<%= renderResponse.encodeURL(validate_url.toString())%>";
 		var ExcelUrl	="<%= renderResponse.encodeURL(ExcelUrl.toString())%>";

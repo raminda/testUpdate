@@ -30,6 +30,7 @@ import com.millenniumit.mx.data.nethdsizing.service.ItemTypesService;
 import com.millenniumit.mx.data.nethdsizing.service.PackagesService;
 import com.millenniumit.mx.data.nethdsizing.service.ProjectItemsService;
 import com.millenniumit.mx.data.nethdsizing.service.ProjectsService;
+import com.millenniumit.mx.data.nethdsizing.service.VersionMapService;
 
 public class UpdateData {
 	private String dateFormat  = "yyyy-MM-dd";
@@ -45,8 +46,9 @@ public class UpdateData {
 	private ProjectItemsService projectItemsService;
 	private EquipmentMapingService equipmentMapingService;
 	private CompanyService companyService;
+	private VersionMapService versionMapService;
 
-	public UpdateData(CompanyService companyService,EquipmentsService equipmentService,EquipmentMapingService equipmentMapingService,EquipmentsBulkService equipmentsBulkService,ItemTypesService itemTypeService,PackagesService packageService,ProjectsService projectService,ProjectItemsService projectItemsService){
+	public UpdateData(VersionMapService versionMapService,CompanyService companyService,EquipmentsService equipmentService,EquipmentMapingService equipmentMapingService,EquipmentsBulkService equipmentsBulkService,ItemTypesService itemTypeService,PackagesService packageService,ProjectsService projectService,ProjectItemsService projectItemsService){
 		
 		
 		this.equipmentService =equipmentService; 
@@ -57,6 +59,7 @@ public class UpdateData {
 		this.projectItemsService = projectItemsService;
 		this.equipmentMapingService=equipmentMapingService;
 		this.companyService=companyService;
+		this.versionMapService=versionMapService;
 		
 	}
 	
@@ -70,6 +73,10 @@ public class UpdateData {
 		
 		this.equipmentsBulkService=equipmentsBulkService;
 		this.packageService =packageService ;
+	}
+	public UpdateData(VersionMapService versionMapService){
+		
+		this.versionMapService=versionMapService;
 	}
 	public UpdateData(CompanyService companyService){
 		

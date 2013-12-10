@@ -25,6 +25,7 @@ import com.millenniumit.mx.data.nethdsizing.service.ItemTypesService;
 import com.millenniumit.mx.data.nethdsizing.service.PackagesService;
 import com.millenniumit.mx.data.nethdsizing.service.ProjectItemsService;
 import com.millenniumit.mx.data.nethdsizing.service.ProjectsService;
+import com.millenniumit.mx.data.nethdsizing.service.VersionMapService;
 
 @SuppressWarnings("unused")
 public class ComboData {
@@ -43,8 +44,9 @@ public class ComboData {
 	private ProjectItemsService projectItemsService;
 	private EquipmentMapingService equipmentMapingService;
 	private CompanyService companyService;
+	private VersionMapService versionMapService;
 	
-	public ComboData(CompanyService companyService,EquipmentsService equipmentService,EquipmentMapingService equipmentMapingService,EquipmentsBulkService equipmentsBulkService,ItemTypesService ItemTypesService,PackagesService packageService,ProjectsService projectService,ProjectItemsService projectItemsService){
+	public ComboData(VersionMapService versionMapService,CompanyService companyService,EquipmentsService equipmentService,EquipmentMapingService equipmentMapingService,EquipmentsBulkService equipmentsBulkService,ItemTypesService ItemTypesService,PackagesService packageService,ProjectsService projectService,ProjectItemsService projectItemsService){
 		
 		
 		
@@ -56,6 +58,7 @@ public class ComboData {
 		this.projectItemsService = projectItemsService;
 		this.equipmentMapingService=equipmentMapingService;
 		this.companyService=companyService;
+		this.versionMapService=versionMapService;
 	}
 	
 	public ComboData(EquipmentsService equipmentService,EquipmentMapingService equipmentMapingService ,ItemTypesService ItemTypesService){		
@@ -68,6 +71,10 @@ public class ComboData {
 		
 		this.equipmentsBulkService=equipmentsBulkService;
 		this.packageService =packageService ;
+	}
+	public ComboData(VersionMapService versionMapService){
+		
+		this.versionMapService = versionMapService;	
 	}
 	public ComboData(ItemTypesService ItemTypesService){
 		

@@ -151,6 +151,15 @@ public class NetHDSizing extends MVCPortlet {
 			updateData=new UpdateData(companyService);
 			deleteData=new DeleteData(companyService);
 		}
+		else if (resourceID.equals("VersionMapStoreUrl")) {
+			ItemName="VersionMap";
+			System.out.println("This section is for Navigate "+ ItemName+" init");
+			gridData=new GridData(versionMapService);
+			comboData=new ComboData(versionMapService);
+			saveData=new SaveData(versionMapService);
+			updateData=new UpdateData(versionMapService);
+			deleteData=new DeleteData(versionMapService);
+		}
 		else{
 			
 		}

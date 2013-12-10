@@ -1,4 +1,4 @@
-Ext.define('New.model.SiteTypeModel', {
+Ext.define('New.model.VersionMapModel', {
 	extend : 'Ext.data.Model',
 	fields : [ {
 		name : 'ID',
@@ -13,15 +13,22 @@ Ext.define('New.model.SiteTypeModel', {
 		name : 'Project',
 		type : 'string'
 	},{
-		name : 'date_created',
-		type : 'date'
+		name : 'PackageName',
+		type : 'string'
 	},{
-		name : 'date_modified',
-		type : 'date'
+		name : 'EOLDate',
+		type : 'string'
 	},{
-		name : 'date_logged',
-		type : 'date'
-	}
-
-	]
+		name : 'Calendar_created',
+		type : 'string'
+	},{
+		name : 'Calendar_modified',
+		type : 'string'
+	},{
+		name : 'CompanyName',
+		type : 'string'
+	},{
+		name : 'Calendar_logged',
+		type : 'string'
+	}]
 });

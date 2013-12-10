@@ -31,6 +31,7 @@ import com.millenniumit.mx.data.nethdsizing.service.ItemTypesService;
 import com.millenniumit.mx.data.nethdsizing.service.PackagesService;
 import com.millenniumit.mx.data.nethdsizing.service.ProjectItemsService;
 import com.millenniumit.mx.data.nethdsizing.service.ProjectsService;
+import com.millenniumit.mx.data.nethdsizing.service.VersionMapService;
 import com.millenniumit.mx.data.nethdsizing.service.impl.CompanyServiceImpl;
 
 @SuppressWarnings("unused")
@@ -49,8 +50,9 @@ public class SaveData {
 	private ProjectItemsService projectItemsService;
 	private EquipmentMapingService equipmentMapingService;
 	private CompanyService companyService;
+	private VersionMapService versionMapService;
 	
-	public SaveData(CompanyService companyService,EquipmentsService equipmentService,EquipmentMapingService equipmentMapingService,EquipmentsBulkService equipmentsBulkService,ItemTypesService itemTypeService,PackagesService packageService,ProjectsService projectService,ProjectItemsService projectItemsService){
+	public SaveData(VersionMapService versionMapService,CompanyService companyService,EquipmentsService equipmentService,EquipmentMapingService equipmentMapingService,EquipmentsBulkService equipmentsBulkService,ItemTypesService itemTypeService,PackagesService packageService,ProjectsService projectService,ProjectItemsService projectItemsService){
 		
 		
 		this.equipmentService =equipmentService; 
@@ -61,8 +63,13 @@ public class SaveData {
 		this.projectItemsService = projectItemsService;
 		this.equipmentMapingService=equipmentMapingService;
 		this.companyService=companyService;
+		this.versionMapService=versionMapService;
 	}
 	
+	public SaveData(VersionMapService versionMapService){	
+		
+		this.versionMapService=versionMapService;
+	}
 	public SaveData(CompanyService companyService){	
 		
 		this.companyService=companyService;

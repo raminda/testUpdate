@@ -18,6 +18,7 @@ import com.millenniumit.mx.data.nethdsizing.domain.ItemTypes;
 import com.millenniumit.mx.data.nethdsizing.domain.Packages;
 import com.millenniumit.mx.data.nethdsizing.domain.Project;
 import com.millenniumit.mx.data.nethdsizing.domain.ProjectItems;
+import com.millenniumit.mx.data.nethdsizing.domain.VersionMap;
 import com.millenniumit.mx.data.nethdsizing.service.CompanyService;
 import com.millenniumit.mx.data.nethdsizing.service.EquipmentMapingService;
 import com.millenniumit.mx.data.nethdsizing.service.EquipmentsBulkService;
@@ -26,6 +27,7 @@ import com.millenniumit.mx.data.nethdsizing.service.ItemTypesService;
 import com.millenniumit.mx.data.nethdsizing.service.PackagesService;
 import com.millenniumit.mx.data.nethdsizing.service.ProjectItemsService;
 import com.millenniumit.mx.data.nethdsizing.service.ProjectsService;
+import com.millenniumit.mx.data.nethdsizing.service.VersionMapService;
 
 public class GridData {
 	//private String dateFormat  = "yyyy-MM-dd";
@@ -42,8 +44,9 @@ public class GridData {
 	private ProjectItemsService projectItemsService;
 	private EquipmentMapingService equipmentMapingService;
 	private CompanyService companyService;
+	private VersionMapService versionMapService;
 	
-	public GridData(CompanyService companyService, EquipmentsService equipmentService,EquipmentMapingService equipmentMapingService,EquipmentsBulkService equipmentsBulkService,ItemTypesService itemTypeService,PackagesService packageService,ProjectsService projectService,ProjectItemsService projectItemsService){
+	public GridData(VersionMapService versionMapService,CompanyService companyService, EquipmentsService equipmentService,EquipmentMapingService equipmentMapingService,EquipmentsBulkService equipmentsBulkService,ItemTypesService itemTypeService,PackagesService packageService,ProjectsService projectService,ProjectItemsService projectItemsService){
 		
 		
 		this.equipmentService =equipmentService; 
@@ -54,9 +57,13 @@ public class GridData {
 		this.projectItemsService = projectItemsService;
 		this.equipmentMapingService=equipmentMapingService;
 		this.companyService=companyService;
+		this.versionMapService=versionMapService;
 	
 	}
-	
+	public GridData(VersionMapService versionMapService){	
+		
+		this.versionMapService=versionMapService;
+	}
 	public GridData(EquipmentsService equipmentService){		
 			
 			this.equipmentService =equipmentService; 
@@ -151,6 +158,32 @@ public class GridData {
 			jsonOb2=linebracker(jsonOb2);
 			out.println(jsonOb2);	
 		}
+		//*****Version Map*******
+		else if (ServiceType.equals("VersionMap")) {	
+			
+			System.out.println("This section is for Parameter VersionMap Grid");
+			List<VersionMap> lst =versionMapService.getVersion_Maps();
+			boolean bool=true;
+			String jsonOb2="[";
+			for(int i=0;i<lst.size();i++){
+				VersionMap obj=lst.get(i);
+				try{
+					jsonOb2+="{ OptionID : '" + obj.getOptionID()+"',Version:'"+obj.getVersion()+"',Calendar_logged:'"+obj.getCalendar_logged()+"',Calendar_modified:'"+obj.getCalendar_modified()+"',Calendar_created:'"+obj.getCalendar_created()+"', ID:'"+obj.getID()+"',Project :'"+obj.getProjectID().getProjectName()+"',CompanyName: '"+obj.getProjectID().getCompany().getCompanyName()+"'}";
+				}catch (Exception e) {
+					logger.info("Error : " + e.getMessage());
+					jsonOb2+="'}";
+					bool=false;
+				}
+				if(i<lst.size()-1 && bool){
+					jsonOb2+=",";
+				}
+			}
+			
+			jsonOb2+="]";
+			jsonOb2=linebracker(jsonOb2);
+			out.println(jsonOb2);
+			
+		}
 		//*****equipment Map*******
 		else if (ServiceType.equals("EquipmentMap")) {	
 			
@@ -195,7 +228,7 @@ public class GridData {
 			for(int i=0;i<lst.size();i++){
 				ProjectItems obj=lst.get(i);
 				try{
-					jsonOb2+="{ ProjectID: '" + obj.getVersion().getProjectID()+"',PackageType:'"+obj.getPackageType()+"',VersionID: '"+obj.getVersion().getVersion()+"',SiteID:'"+obj.getSiteID()+"',PackageID:'"+obj.getPackageID().getPackageName()+"',Quantity:'"+obj.getQuantity()+"',Price:'"+obj.getPackageID().getBasePrice()+"',date_logged:'"+obj.getCalendar_logged()+"',date_modified:'"+obj.getCalendar_modified()+"',date_created:'"+obj.getCalendar_created()+"', ID:'"+obj.getId()+"'PackageType :'"+obj.getPackageType()+"}";
+					jsonOb2+="{ ProjectID: '" + obj.getVersion().getProjectID()+"',PackageType:'"+obj.getPackageType()+"',VersionID: '"+obj.getVersion().getVersion()+"',PackageID:'"+obj.getPackageID().getPackageName()+"',Quantity:'"+obj.getQuantity()+"',Price:'"+obj.getPackageID().getBasePrice()+"',date_logged:'"+obj.getCalendar_logged()+"',date_modified:'"+obj.getCalendar_modified()+"',date_created:'"+obj.getCalendar_created()+"', ID:'"+obj.getId()+"'PackageType :'"+obj.getPackageType()+"}";
 				}catch (Exception e) {
 					logger.info("Error : " + e.getMessage());
 					jsonOb2+="'}";

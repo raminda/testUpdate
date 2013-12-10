@@ -1,7 +1,7 @@
-Ext.define('New.view.GridProjectsItemsView', {
+Ext.define('New.view.GridVersionMapView', {
 	extend : 'Ext.form.Panel',
-	alias : 'widget.ProjectsItemsGrids',
-	title : 'Projects Items View',
+	alias : 'widget.VersionMapGrids',
+	title : 'Projects Deteils View',
 	height :400,
 	frame : false,
 	border : false,
@@ -15,84 +15,60 @@ Ext.define('New.view.GridProjectsItemsView', {
 		scroll : true,
 		border : false,
 		columnLines : true,
-		id : 'ProjectItemsResultGrid',
-		name : 'ProjectItemsResultGrid',
-		store : 'ProjectItemsStoreResult',
+		id : 'VersionMapResultGrid',
+		name : 'VersionMapResultGrid',
+		store : 'VersionMapStoreGrid',
 		overflowX : 'auto',
-		columns :[/* {
-			header : 'Project Items ID',
-			dataIndex : 'ID',	
-	
-		  }, */{
-			  flex : 1,
+		columns :[{
+			flex : 1,
 			id : 'ProjectItemsResultGridProjectID',
 			name : 'ProjectItemsResultGridProjectID',
 			header : 'Project ID',
-			dataIndex : 'ProjectID',
+			dataIndex : 'Project',
 	
-		  }, {
-			  flex : 1,
-			  id : 'ProjectItemsResultGridOptionID',
-				name : 'ProjectItemsResultGridOptionID',
+		  },{
+			flex : 1,
+			id : 'ProjectItemsResultGridOptionID',
+			name : 'ProjectItemsResultGridOptionID',
 			header : 'Option ID',
 			dataIndex : 'OptionID',
 	
-		  }, {
-			  id : 'ProjectItemsResultGridVersionID',
-				name : 'ProjectItemsResultGridVersionID',
-				flex : 1,
-				header : 'Version ID',
-			dataIndex : 'VersionID',	
-	
-		  }, {
-			  flex : 1,
-			  id : 'ProjectItemsResultGridSiteID',
-				name : 'ProjectItemsResultGridSiteID',
-			header : 'SiteID',
-			dataIndex : 'SiteID',
+		  },{
+			id : 'ProjectItemsResultGridVersionID',
+			name : 'ProjectItemsResultGridVersionID',
+			flex : 1,
+			header : 'Version ID',
+			dataIndex : 'Version',	
 	
 		  },{
-			  flex : 1,
-			  id : 'ProjectItemsResultGridPackageID',
-				name : 'ProjectItemsResultGridPackageID',
-			header : 'Package ID',
-			dataIndex : 'PackageID',
-	
-		  },{
-			  flex : 1,
-			  id : 'ProjectItemsResultGridQuantity',
-				name : 'ProjectItemsResultGridQuantity',
-			header : 'Quantity',
-			dataIndex : 'Quantity',
-	//
-		  },{
-			  flex : 1,
-			  id : 'ProjectItemsResultGridPcakageUsege',
-				name : 'ProjectItemsResultGridPcakageUsege',
-			header : 'Usage',
-			dataIndex : 'PcakageUsege',
+			id : 'ProjectItemsResultGridPackageName',
+			name : 'ProjectItemsResultGridPackageName',
+			flex : 1,
+			header : 'Package Name',
+			dataIndex : 'CompanyName',	
 		
 		  },{
-			  flex : 1,
-			  id : 'ProjectItemsResultGridPackageType',
-				name : 'ProjectItemsResultGridPackageType',
-			header : 'Package Type',
-			dataIndex : 'PackageType',				
-		  },{
-			  flex : 1,
-			  id : 'ProjectItemsResultGridPrice',
-				name : 'ProjectItemsResultGridPrice',
-			header : 'Price',
-			dataIndex : 'Price',
-	
-		  },{
-			  flex : 1,
-			  id : 'ProjectItemsResultGriddate_modified',
-				name : 'ProjectItemsResultGriddate_modified',
-			header : 'Date modified',
-			dataIndex : 'date_modified',
-	
-			}],
+			id : 'ProjectItemsResultGridEOLDate',
+			name : 'ProjectItemsResultGridEOLDate',
+			flex : 1,
+			header : 'EOL Date',
+			dataIndex : 'EOLDate',	
+		
+		},{
+			id : 'ProjectItemsResultGridCalendar_created',
+			name : 'ProjectItemsResultGridCalendar_created',
+			flex : 1,
+			header : 'created Date',
+			dataIndex : 'Calendar_created',	
+		
+		},{
+			id : 'ProjectItemsResultGridCalendar_modified',
+			name : 'ProjectItemsResultGridCalendar_modified',
+			flex : 1,
+			header : 'modified Date',
+			dataIndex : 'Calendar_modified',	
+		
+		}],  
 			
 			listeners : {
 				itemdblclick: function(me, record, item, index, e, eOpts ){
@@ -268,85 +244,15 @@ Ext.define('New.view.GridProjectsItemsView', {
         }
     },{
         xtype: 'button',
-        text : 'Copy Version',
+        text : 'Refresh',
         width : 100,
         flex: 1,
         handler : function() {
-			var win=null;
-			win= Ext.create('Ext.window.Window', {
-			title : 'Copy Version',
-			width : 500,
-			height : 350,
-			minWidth : 300,
-			minHeight : 200,
-			layout : 'fit',
-			plain : true,
-			items : [{    				
-				xtype : 'CopyVersion',
-				}],
-				buttons : [{
-					xtype : 'button',
-					text : 'Copy',
-					id : 'btnSaveproject',
-					name : 'btnSaveproject',
-					width : 150,
-					handler : function() {
-					
-						var  OOptionName  = Ext.getCmp('cmbCpOpPrjOption').getValue();
-						var OProjectName = Ext.getCmp('cmbCpOpPrjProject').getValue();
-						var OCompanyName= Ext.getCmp('cmbCpOpPrjCompany').getValue();
-						var OVersion =Ext.getCmp('cmbCpOpVersion').disable(true);
-						//var CompanyName = Ext.getCmp('cmbOrOpPrjCompany').getValue();
-						var ProjectName = Ext.getCmp('cmbOrOpPrjProject').getValue();
-						var OptionName = Ext.getCmp('cmbOrOpPrjOption').getValue();
-						var Version = Ext.getCmp('cmbOrOpVersion').getValue();
-   						
-						var row=null;
-						var store=null;
-						
-						var form = Ext.getCmp('CopyVersion').getForm();
-						if(form.isValid()){
-							store = Ext.getStore('ProjectItemsStore');
-							store.proxy.extraParams.purpose = 'Copy';
-							store.proxy.extraParams.value="{[CompanyName :'"+OCompanyName+"',ProjectName : '"+OProjectName+"',OptionName :'"+OOptionName+"',Version : '"+OVersion+"']}";
-							store.proxy.extraParams.ID='Version';
-							JsonObject= {ProjectID:ProjectName,OptionID :OptionName,VersionID:Version};
-							row= Ext.create('New.model.ProjectItemsModel', JsonObject);
-							store.insert(0, row);
-							
-							win.close();
-						}
-						else{
-							Ext.Msg.alert('Message', 'Plese Enter All fields Befor Save!');
-						}
-					}
-				},{
-					 flex: 1,
-					text : 'Reset',
-					width : 150,
-					handler : function() {
-						Ext.getCmp('cmbCpOpPrjCompany').reset();
-						Ext.getCmp('cmbCpOpPrjCompany').enable(true);
-						
-						Ext.getCmp('cmbCpOpPrjOption').reset();
-						Ext.getCmp('cmbCpOpPrjProject').reset();
-						Ext.getCmp('cmbOrOpPrjCompany').reset();
-						Ext.getCmp('cmbOrOpPrjProject').reset();
-   						Ext.getCmp('cmbOrOpPrjOption').reset();	
-   						Ext.getCmp('cmbOrOpVersion').reset();	
-   						Ext.getCmp('cmbCpOpVersion').reset();	
-						
-					}
-				},{
-					text : 'Close',
-					width : 150,
-					handler : function() {
-						win.close();
-					}
-				}],
-			});
-		win.show();
-        }
+        	var grid = Ext.getCmp('VersionMapResultGrid');
+			var store = grid.getStore('VersionMapStoreGrid');
+			store.proxy.extraParams.purpose='Grid';
+			store.load();
+		}
     },{
 		text : 'Remove Project Items',
 		iconCls : 'remove',

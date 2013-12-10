@@ -4,9 +4,9 @@
 Ext.define('New.controller.SystemController', {
 	extend : 'Ext.app.Controller',
 
-	views 	: ['BodyView','CanversView','DDBodyView','imageView','FormAddBulkDdView','FormAddCompanyView','FormAddEquipmentView','FormAddItemTypeView','FormAddPackageView','FormAddProjectsView','FormUpdateCompany','FormUpdateEquipment','FormUpdateItemType','FormUpdatePackage','GridView','GridCompanyView','GridEquipmentsBulkView','GridEquipmentView','GridItemTypeView','GridPackageView','GridProjectView','MenuDivView','MenuBarView','SlideMenuView','SMenuHomeView'],
-	stores 	: ['CompanyStore','CompanyStoreGrid','EquipmentsBulkStore','EquipmentsBulkStoreGrid','EquipmentStore','EquipmentStoreComp', 'EquipmentStoreGrid','GridStringStore','ItemTypeStore','ItemTypeStoreGrid','PackageStore','PackageStoreGrid','ProjectsStore','ProjectsStoreGrid'],
-	models 	: ['CompanyModel','EquipmentsBulkModel','EquipmentModel','GridStringModel','ItemTypeModel','PackagesModel','ProjectsModel'],
+	views 	: ['BodyView','CanversView','DDBodyView','imageView','FormAddBulkDdView','FormAddCompanyView','FormAddEquipmentView','FormAddItemTypeView','FormAddPackageView','FormAddProjectsView','FormUpdateCompany','FormUpdateEquipment','FormUpdateItemType','FormUpdatePackage','GridView','GridCompanyView','GridEquipmentsBulkView','GridEquipmentView','GridItemTypeView','GridPackageView','GridProjectView','GridVersionMapView','MenuDivView','MenuBarView','SlideMenuView','SMenuHomeView'],
+	stores 	: ['CompanyStore','CompanyStoreGrid','EquipmentsBulkStore','EquipmentsBulkStoreGrid','EquipmentStore','EquipmentStoreComp', 'EquipmentStoreGrid','GridStringStore','ItemTypeStore','ItemTypeStoreGrid','PackageStore','PackageStoreGrid','ProjectsStore','ProjectsStoreGrid','VersionMapStoreGrid'],
+	models 	: ['CompanyModel','EquipmentsBulkModel','EquipmentModel','GridStringModel','ItemTypeModel','PackagesModel','ProjectsModel','VersionMapModel'],
 
 	init : function() {
 		this.control({

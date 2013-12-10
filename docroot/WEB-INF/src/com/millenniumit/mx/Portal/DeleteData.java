@@ -41,7 +41,7 @@ public class DeleteData {
 	private CompanyService companyService;
 	private VersionMapService versionMapService;
 	
-	public DeleteData(CompanyService companyService,EquipmentsService equipmentService,EquipmentMapingService equipmentMapingService,EquipmentsBulkService equipmentsBulkService,ItemTypesService itemTypeService,PackagesService packageService,ProjectsService projectService,ProjectItemsService projectItemsService){
+	public DeleteData(VersionMapService versionMapService,CompanyService companyService,EquipmentsService equipmentService,EquipmentMapingService equipmentMapingService,EquipmentsBulkService equipmentsBulkService,ItemTypesService itemTypeService,PackagesService packageService,ProjectsService projectService,ProjectItemsService projectItemsService){
 		
 		
 		this.equipmentService =equipmentService; 
@@ -52,6 +52,7 @@ public class DeleteData {
 		this.projectItemsService = projectItemsService;
 		this.equipmentMapingService=equipmentMapingService;
 		this.companyService=companyService;
+		this.versionMapService=versionMapService;
 	}
 	
 	public DeleteData(EquipmentsService equipmentService,EquipmentMapingService equipmentMapingService){		
@@ -62,6 +63,10 @@ public class DeleteData {
 	public DeleteData(EquipmentsBulkService equipmentsBulkService){		
 		
 		this.equipmentsBulkService=equipmentsBulkService;
+	}
+	public DeleteData(VersionMapService versionMapService){		
+		
+		this.versionMapService=versionMapService;
 	}
 	public DeleteData(CompanyService companyService){		
 		
@@ -182,7 +187,7 @@ public class DeleteData {
 		else if (ServiceType.equals("Projects")) {
 			
 			Project newprojects=new Project();
-			newprojects=projectService.getProjects(Integer.parseInt(request.getParameter("value")));
+			newprojects=projectService.getProjects(request.getParameter("value"));
 			try{
 			projectService.delete(newprojects);	
 			}

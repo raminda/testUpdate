@@ -118,12 +118,13 @@ Ext.define('New.view.GridProjectView', {
 						sm.select(0);
 					}
 					store.proxy.extraParams.purpose = 'delete';
-					store.proxy.extraParams.value = val[0].get('ID');
+					store.proxy.extraParams.value = val[0].get('ProjectName');
 					store.load();
 					
 					var grid = Ext.getCmp('gridProjectView');
 					var store = grid.getStore('ProjectsStoreGrid');
 					store.proxy.extraParams.purpose='Grid';
+					store.proxy.extraParams.value=0;
 					store.load();
 					
 					
