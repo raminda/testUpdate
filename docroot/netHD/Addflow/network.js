@@ -3,41 +3,7 @@
  */
 var workflow;
 function crt(){ 
-	workflow = new Workflow("paintarea"); 
-	//workflow.se
-	//workflow
-	/*my2("Start");
-	var startObj = new NetObject();
-	workflow.addFigure(startObj, 200,300);
-	my2("End");
-	var startObj2 = new NetObject();
-	workflow.addFigure(startObj2, 400,300);*/
-	
-	aFig=new DiagramFigure();
-	aFig.setDimension(50, 50);
-    aFig.setPic("generic_gateway.png");
-    aFig.subtype = "generic_gateway";
-		
-    aFig3=new DiagramFigure();
-	aFig3.setDimension(60, 60);
-    aFig3.setPic("pc.png");
-    aFig3.subtype = "pc";
-    
-    aFig4=new DiagramFigure();
-	aFig4.setDimension(60, 60);
-    aFig4.setPic("pc.png");
-    aFig4.subtype = "pc";
-    
-	aFig2=new DiagramFigure();
-	aFig2.setDimension(50, 50);
-    aFig2.setPic("workstation.png");
-    aFig2.subtype = "workstation";
-   
-    workflow.addFigure(aFig,350,140);
-    workflow.addFigure(aFig2,450,140);
-    workflow.addFigure(aFig3,450,340); 
-    workflow.addFigure(aFig4,550,440);
-    
+	workflow = new Workflow("paintarea");  
     JSN(workflow);
 }
 
@@ -155,7 +121,7 @@ function addDragIconPic(aName, aWhere, aPic)
      var html = '';
      html = html + "<center>";
      html = html + "<h1>" + aName + "</h1>\n";
-     html = html + "<img src='/test-portlet/netHD/draw2d/icons/" + aPic + "' id='drag_" + aName + "' style='cursor:move'/>\n";
+     html = html + "<img src='/test-portlet/netHD/draw2d/icons/"+ aPic + "' id='drag_" + aName + "' style='cursor:move'/>\n";
      html = html + "<hr size=1 noshade>\n";
      html = html + "</center>";
 
@@ -167,7 +133,7 @@ function addDragIconPic(aName, aWhere, aPic)
 
 function addDragIcon2(aName, aWhere)
 {
-  var aPic = "/test-portlet/netHD/draw2d/icons/" + aName + ".png";
+  var aPic =aName + ".png";
   addDragIconPic(aName, aWhere, aPic);
 }
 

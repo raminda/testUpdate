@@ -105,6 +105,7 @@ public class ComboData {
 
 	
 	
+	@SuppressWarnings("null")
 	public void Combo(ResourceRequest request, ResourceResponse response,String ServiceType) throws IOException{
 		PrintWriter out = response.getWriter();
 		//new Gson Object for getting String line to Json 
@@ -424,7 +425,7 @@ public class ComboData {
 					for(int i=0;i<jsonOb1.size();i++){
 						ProjectItems obj=jsonOb1.get(i);
 						try{
-							jsonOb2+="{ ProjectID: '" + obj.getVersion().getProjectID().getProjectName()+"',OptionID:'"+obj.getVersion().getOptionID()+"',VersionID: '"+obj.getVersion().getVersion()+"',SiteID:'"+obj.getSiteID()+"',PackageID:'"+obj.getPackageID().getPackageName()+"',Quantity:'"+obj.getQuantity()+"',PackageType :'"+obj.getPackageType()+"',Price:'"+obj.getPackageID().getBasePrice()+"',date_logged:'"+obj.getCalendar_logged()+"',date_modified:'"+obj.getCalendar_modified()+"',date_created:'"+obj.getCalendar_created()+"', ID:'"+obj.getId()+"'}";
+							jsonOb2+="{ ProjectID: '" + obj.getVersion().getProjectID().getProjectName()+"',OptionID:'"+obj.getVersion().getOptionID()+"',VersionID: '"+obj.getVersion().getVersion()+"',PackageID:'"+obj.getPackageID().getPackageName()+"',Quantity:'"+obj.getQuantity()+"',PackageType :'"+obj.getPackageType()+"',Price:'"+obj.getPackageID().getBasePrice()+"',date_logged:'"+obj.getCalendar_logged()+"',date_modified:'"+obj.getCalendar_modified()+"',date_created:'"+obj.getCalendar_created()+"', ID:'"+obj.getId()+"'}";
 							}
 						catch (Exception e) {
 							logger.info("Error : " + e.getMessage());

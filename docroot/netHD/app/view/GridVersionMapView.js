@@ -20,6 +20,13 @@ Ext.define('New.view.GridVersionMapView', {
 		store : 'VersionMapStoreGrid',
 		overflowX : 'auto',
 		columns :[{
+			id : 'ProjectItemsResultGridCompanyName',
+			name : 'ProjectItemsResultGridCompanyName',
+			flex : 1,
+			header : 'Company Name',
+			dataIndex : 'CompanyName',	
+		
+		  },{
 			flex : 1,
 			id : 'ProjectItemsResultGridProjectID',
 			name : 'ProjectItemsResultGridProjectID',
@@ -41,20 +48,6 @@ Ext.define('New.view.GridVersionMapView', {
 			dataIndex : 'Version',	
 	
 		  },{
-			id : 'ProjectItemsResultGridPackageName',
-			name : 'ProjectItemsResultGridPackageName',
-			flex : 1,
-			header : 'Package Name',
-			dataIndex : 'CompanyName',	
-		
-		  },{
-			id : 'ProjectItemsResultGridEOLDate',
-			name : 'ProjectItemsResultGridEOLDate',
-			flex : 1,
-			header : 'EOL Date',
-			dataIndex : 'EOLDate',	
-		
-		},{
 			id : 'ProjectItemsResultGridCalendar_created',
 			name : 'ProjectItemsResultGridCalendar_created',
 			flex : 1,

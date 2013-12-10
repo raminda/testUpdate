@@ -28,6 +28,7 @@ import common.Logger;
 
 public class DeleteData {
 	
+	@SuppressWarnings("unused")
 	private Logger logger = Logger.getLogger(DeleteData.class);
 	//Services Objects in Service class 
 	

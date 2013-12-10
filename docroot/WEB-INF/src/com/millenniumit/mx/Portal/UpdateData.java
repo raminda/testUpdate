@@ -22,6 +22,7 @@ import com.millenniumit.mx.data.nethdsizing.domain.ItemTypes;
 import com.millenniumit.mx.data.nethdsizing.domain.Packages;
 import com.millenniumit.mx.data.nethdsizing.domain.Project;
 import com.millenniumit.mx.data.nethdsizing.domain.ProjectItems;
+import com.millenniumit.mx.data.nethdsizing.domain.VersionMap;
 import com.millenniumit.mx.data.nethdsizing.service.CompanyService;
 import com.millenniumit.mx.data.nethdsizing.service.EquipmentMapingService;
 import com.millenniumit.mx.data.nethdsizing.service.EquipmentsBulkService;
@@ -313,12 +314,22 @@ public class UpdateData {
 			projects.setCalendar_modified(calendar.getTime());
 			projectService.update(projects);
 		}
+		//********* versionMapService******
+		else if (ServiceType.equals("VersionMap")) {
+			
+			System.out.println("This section is for Parameter ProjectsService Update");
+			VersionMap versionMap =versionMapService.get(Integer.parseInt(jsonobj.getString("ID")));
+			versionMap.setSiteID((jsonobj.getString("siteID")));
+			versionMap.setOptionID(jsonobj.getString("optionID"));
+			versionMap.setCalendar_modified(calendar.getTime());
+			versionMap.setProjectID(projectService.getProjects(Integer.parseInt(jsonobj.getString("Projects"))));
+			versionMapService.update(versionMap);
+		}
 		//**********ItemType***********
 		else if (ServiceType.equals("ItemType")) {
 			
 			System.out.println("This section is for Parameter ItemTypeService Update");
 			ItemTypes itemType=itemTypeService.get(request.getParameter("ID"));
-			//System.out.println("Error ; In valide data"+itemType.getTypeName());
 			if(itemType!=null && (Integer.parseInt(jsonobj.getString("AccsessLevel"))==1||Integer.parseInt(jsonobj.getString("AccsessLevel"))==0) && jsonobj.getString("TypeName")!=null){
 				itemType.setAccsessLevel(Integer.parseInt(jsonobj.getString("AccsessLevel")));
 				itemType.setCalendar_modified(calendar.getTime());
