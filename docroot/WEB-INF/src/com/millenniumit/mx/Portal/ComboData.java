@@ -11,12 +11,12 @@ import org.apache.log4j.Logger;
 
 import com.google.gson.Gson;
 import com.millenniumit.mx.data.nethdsizing.domain.Company;
-import com.millenniumit.mx.data.nethdsizing.domain.EquipmentMaping;
-import com.millenniumit.mx.data.nethdsizing.domain.ItemTypes;
-import com.millenniumit.mx.data.nethdsizing.domain.Equipments;
 import com.millenniumit.mx.data.nethdsizing.domain.EquipmentBulk;
-import com.millenniumit.mx.data.nethdsizing.domain.ProjectItems;
+import com.millenniumit.mx.data.nethdsizing.domain.EquipmentMaping;
+import com.millenniumit.mx.data.nethdsizing.domain.Equipments;
+import com.millenniumit.mx.data.nethdsizing.domain.ItemTypes;
 import com.millenniumit.mx.data.nethdsizing.domain.Project;
+import com.millenniumit.mx.data.nethdsizing.domain.ProjectItems;
 import com.millenniumit.mx.data.nethdsizing.service.CompanyService;
 import com.millenniumit.mx.data.nethdsizing.service.EquipmentMapingService;
 import com.millenniumit.mx.data.nethdsizing.service.EquipmentsBulkService;
@@ -127,7 +127,7 @@ public class ComboData {
 						for(int i=0;i<lst.size();i++){
 							//Equipments obj=lst.get(i);
 							try{
-								jsonOb2+="{ItemName: '" + ((Equipments) lst.get(i)).getItemName()+"'}";
+								jsonOb2+="{ItemName: '" + lst.get(i).getItemName()+"'}";
 							}catch (Exception e) {
 								logger.info("Error : " + e.getMessage());
 								jsonOb2+="'}";
@@ -156,7 +156,7 @@ public class ComboData {
 						for(int i=0;i<lst.size();i++){
 							//Equipments obj=lst.get(i);
 							try{
-								jsonOb2+="{ItemName: '" + ((Equipments) lst.get(i)).getItemName()+"'}";
+								jsonOb2+="{ItemName: '" + lst.get(i).getItemName()+"'}";
 							}catch (Exception e) {
 								logger.info("Error : " + e.getMessage());
 								jsonOb2+="'}";

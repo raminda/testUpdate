@@ -3,9 +3,7 @@ Ext.define('New.view.imageView', {
 	alias  : 'widget.image',
 	border : false,
 	frame : true,
-	anchor: '100% 100%',
-	height :900,
-	flex:1,
+	height:900,
 	layout : {
 		align: 'stretch', 
 		type : 'fit',

@@ -21,7 +21,7 @@ Ext.define('New.view.MenuBarView', {
 			Ext.getCmp('imageView').setVisible(true);
 			Ext.getCmp('GridView').setVisible(false);
 			Ext.getCmp('CanversView').setVisible(false);
-			Ext.getCmp('DDBodyView').setVisible(false);
+			Ext.getCmp('EquipmentBulkDD').setVisible(false);
 			Ext.getCmp('ReportView').setVisible(false);
     	}
 		},{
@@ -42,7 +42,7 @@ Ext.define('New.view.MenuBarView', {
 					var store=grid.getStore('EquipmentsBulkStoreGrid');
 					store.proxy.extraParams.purpose = 'null';
 					store.load();
-					
+					Ext.getCmp('savepjt').setVisible(true);
 					Ext.getCmp('imageView').setVisible(false);
 					Ext.getCmp('GridView').setVisible(false);
 					Ext.getCmp('CanversView').setVisible(true);

@@ -1,52 +1,43 @@
 package com.millenniumit.mx.Portal;
 
-import java.awt.Color;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import javax.persistence.Table;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import javax.swing.text.StyledEditorKit.ItalicAction;
 
+import jxl.JXLException;
+import jxl.Workbook;
+import jxl.WorkbookSettings;
+import jxl.format.Colour;
+import jxl.format.UnderlineStyle;
+import jxl.read.biff.BiffException;
+import jxl.write.Formula;
+import jxl.write.Label;
+import jxl.write.Number;
+import jxl.write.NumberFormat;
+import jxl.write.WritableCellFormat;
+import jxl.write.WritableFont;
+import jxl.write.WritableFont.FontName;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
+import jxl.write.WriteException;
 
 import org.apache.log4j.Logger;
-
-
 
 import com.millenniumit.mx.data.nethdsizing.domain.EquipmentBulk;
 import com.millenniumit.mx.data.nethdsizing.domain.Packages;
 import com.millenniumit.mx.data.nethdsizing.domain.Project;
 import com.millenniumit.mx.data.nethdsizing.domain.ProjectItems;
-import com.millenniumit.mx.data.nethdsizing.service.CompanyService;
-import com.millenniumit.mx.data.nethdsizing.service.EquipmentMapingService;
 import com.millenniumit.mx.data.nethdsizing.service.EquipmentsBulkService;
 import com.millenniumit.mx.data.nethdsizing.service.EquipmentsService;
 import com.millenniumit.mx.data.nethdsizing.service.ItemTypesService;
 import com.millenniumit.mx.data.nethdsizing.service.PackagesService;
 import com.millenniumit.mx.data.nethdsizing.service.ProjectItemsService;
 import com.millenniumit.mx.data.nethdsizing.service.ProjectsService;
-import com.millenniumit.mx.data.nethdsizing.service.VersionMapService;
-
-
-import jxl.JXLException;
-import jxl.Workbook;
-import jxl.WorkbookSettings;
-import jxl.format.Colour;
-import jxl.format.Pattern;
-import jxl.format.RGB;
-import jxl.format.UnderlineStyle;
-import jxl.read.biff.BiffException;
-import jxl.write.Number;
-import jxl.write.*;
-import jxl.write.WritableFont.FontName;
-import jxl.write.biff.RowsExceededException;
 /**
  * @author Raminda
  *

@@ -32,17 +32,7 @@ AUI().ready(function() {
 						xtype : 'MenuDiv_View',
 						id 	: 	'MenuDiv_View',
 						name : 'MenuDiv_View',
-					}/*,{
-						renderTo : Slide_div,
-						xtype : 'Slide_View',
-						id 	: 	'Slide_View',
-						name : 'Slide_View',
-					},{
-						renderTo : Body_div,
-						xtype : 'Body_View',
-						id : 'Body_View',
-						name : 'Body_View',
-					}*/]
+					}]
 			});
 			
 		}

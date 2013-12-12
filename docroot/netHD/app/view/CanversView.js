@@ -7,23 +7,35 @@ Ext.define('New.view.CanversView', {
 	border : false,
 	frame : false,
 	anchor: '100% 100%',
-	height:800,
-	layout : {
-		align: 'stretch', 
-		type : 'hbox',
-		padding : 5
-	},
+	height:900,
+	overflowX : 'auto',
+	layout:'border',
 	items :[{
-    	flex : 1,
 		html: "<div id='icons_div'></div>",
 		xtype: 'panel',
 		border : true,
-        	
-		},{
-    	flex : 10,
-		html: "<div id='center1' class='x-layout-active-content'><div  id='paintarea' style='width:1000px;height:1000px;'></div></div>",
+		region: 'east',
+		title: "Elements",
+        initialSize: 200,
+        minSize: 175,
+        width : 200,
+        maxSize: 400,
+        border : true,
+		titlebar: true,
+        autoScroll:true,
+        fitToFrame:true,
+        collapsible: true,
+        animate: true,
+        split:true,
+	    
+	},{
+		region: 'center',
+		html: "<div id='center1' class='x-layout-active-content' style='width:1500px;height:1500px;' ><div  id='paintarea' style='width:1500px;height:1500px;'></div></div>",
 		xtype: 'panel',
-		border : true  	
+		border : true,
+		titlebar: true,
+        autoScroll:true,
+        fitToFrame:true
 	}],
 	
 	initComponent : function() {

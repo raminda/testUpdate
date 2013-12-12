@@ -11,12 +11,12 @@ Ext.define('New.model.ItemTypeModel', {
 		type : 'string'
 	},{
 		name : 'date_created',
-		type : 'date'
+		type : 'string'
 	},{
 		name : 'date_modified',
-		type : 'date'
+		type : 'string'
 	},{
 		name : 'date_logged',
-		type : 'date'
+		type : 'string'
 	}]
 });

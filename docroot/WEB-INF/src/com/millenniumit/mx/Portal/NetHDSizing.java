@@ -1,13 +1,6 @@
 package com.millenniumit.mx.Portal;
 
 
-import com.liferay.portal.UserLockoutException;
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.portal.model.User;
-import com.liferay.portal.util.PortalUtil;
-import com.liferay.util.bridges.mvc.MVCPortlet;
 import java.io.IOException;
 import java.text.ParseException;
 
@@ -16,10 +9,18 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
+
 import org.apache.log4j.Logger;
 import org.json.JSONException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.model.User;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.util.bridges.mvc.MVCPortlet;
 import com.millenniumit.mx.data.nethdsizing.service.CompanyService;
 import com.millenniumit.mx.data.nethdsizing.service.EquipmentMapingService;
 import com.millenniumit.mx.data.nethdsizing.service.EquipmentsBulkService;
@@ -292,10 +293,10 @@ public class NetHDSizing extends MVCPortlet {
 			try {
 				validateData.vaidate(request, response);
 			} catch (PortalException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			} catch (SystemException e) {
-				// TODO Auto-generated catch block
+				
 				e.printStackTrace();
 			}
 		}

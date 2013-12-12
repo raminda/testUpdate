@@ -53,16 +53,16 @@
 	<script src='/test-portlet/netHD/draw2d/draw2d.js'></script>
 	<script src='/test-portlet/netHD/draw2d/NetObject.js'></script>
 	
-		<script src='/test-portlet/netHD/draw2d/ContextmenuConnection.js'></script>
-		<script src='/test-portlet/netHD/draw2d/DiagramFigure.js'></script>
-		<script src='/test-portlet/netHD/draw2d/JSONSerializer.js'></script>
-		<script src='/test-portlet/netHD/draw2d/MyInputPort.js'></script>
-		<script src='/test-portlet/netHD/draw2d/MyOutputPort.js'></script>
-		<script src='/test-portlet/netHD/draw2d/ResizeImage.js'></script>
-		<script src='/test-portlet/netHD/Addflow/network.js'></script>
-		<script src='/test-portlet/netHD/draw2d/adapter/prototype/prototype.js'></script>
+	<script src='/test-portlet/netHD/draw2d/ContextmenuConnection.js'></script>
+	<script src='/test-portlet/netHD/draw2d/DiagramFigure.js'></script>
+	<script src='/test-portlet/netHD/draw2d/JSONSerializer.js'></script>
+	<script src='/test-portlet/netHD/draw2d/MyInputPort.js'></script>
+	<script src='/test-portlet/netHD/draw2d/MyOutputPort.js'></script>
+	<script src='/test-portlet/netHD/draw2d/ResizeImage.js'></script>
+	<script src='/test-portlet/netHD/draw2d/network.js'></script>
+	<script src='/test-portlet/netHD/draw2d/adapter/prototype/prototype.js'></script>
 		
-		<script >
+	<script >
 		/* function for decording Object to JSON String */
 		JSON=new(function(){
 			var _1={}.hasOwnProperty?true:false;

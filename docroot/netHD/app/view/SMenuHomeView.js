@@ -12,17 +12,13 @@ Ext.define('New.view.SMenuHomeView', {
 		bodyPadding : 15,
 		items : [{
 			xtype : 'button',
-			text : 'Projects',
+			text : 'Save Project to DB',
+			id: 'savepjt',
 			width : 200,
 			handler : function() {
 				crt2();
 			}
-		},/*{
-			xtype : 'textfield',
-			
-			
-		}*/
-		{
+		},{
 			xtype : 'combobox',
 			fieldLabel : 'Eqipment Name',
 			id : 'txtType',
@@ -32,7 +28,7 @@ Ext.define('New.view.SMenuHomeView', {
 			selectOnTab : true,
 			allowBlank : false,
 			msgTarget: 'side',
-			width : 400,
+			width : 200,
 			editable:false,
 			store : 'EquipmentStoreComp',   
 	        listeners: {
@@ -46,7 +42,7 @@ Ext.define('New.view.SMenuHomeView', {
 	    	}
 		},{
 			xtype : 'button',
-			text : 'Eq',
+			text : 'Save Equipment',
 			width : 200,
 			id : 'btnType',
 			name : 'btnType',
@@ -66,16 +62,6 @@ Ext.define('New.view.SMenuHomeView', {
 			id : 'txtEqipmentName',
 			name : 'txtEqipmentName',
 			
-		},{
-			xtype : 'image',
-			fieldLabel : 'Eqipment Name',
-			id : 'imageEqipmentName',
-			name : 'imageEqipmentName',
-			src: '/test-portlet/Img/4.png',
-			height : '100px',
-			weight : '100px',
-			draggable:true
-			
 		}]		         
 	} ], 
 
@@ -86,5 +72,6 @@ Ext.define('New.view.SMenuHomeView', {
 		Ext.getCmp('txtEqipmentName').setVisible(false);
 		Ext.getCmp('txtType').setVisible(false);
 		Ext.getCmp('btnType').setVisible(false);
+		Ext.getCmp('savepjt').setVisible(false);
 	}
 });

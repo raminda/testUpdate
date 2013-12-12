@@ -16,12 +16,8 @@ Ext.define('New.view.SlideMenuView', {
 		flex : 1,
 		textAlign : 'left',
 	}],
-	initComponent : function() {
-		
+	initComponent : function() {	
 		this.callParent(arguments);
 			
 	}
-});
-
-Ext.onReady(function(){	
 });

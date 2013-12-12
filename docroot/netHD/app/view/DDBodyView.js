@@ -5,22 +5,25 @@ Ext.define('New.view.DDBodyView' , {
     anchor: '100% 100%',
     border : false,
 	frame : false,
-    layout: {
-        align: 'stretch',  
-        padding: 0
-    },
+	height:900,
+	layout:'border',
+    defaults: {
+	    collapsible: true,
+	},
     items: [{
-    	anchor: '100% 70%',
+    	region: 'north',
 		text : 'Body',
 		iconCls : 'Icon',
+		height: 450,
+		minSize: 100,
+	    maxSize: 700,
+		margins: '5 0 0 0',
 		textAlign : 'left',
 		xtype : 'EquipmentBulkDD',
 		//equipment bulk Form
 		
     },{
-		xtype: 'splitter'
-    },{
-    	anchor: '100% 30%',
+    	region: 'center',
     	text : 'Save',
     	iconCls : 'Icon',
 		textAlign : 'left',

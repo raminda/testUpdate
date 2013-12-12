@@ -4,40 +4,48 @@ Ext.define('New.view.MenuDivView', {
 	border : false,
 	frame : true,
 	anchor: '100% 100%',
-	height:1000,
-	layout : {
-		align: 'stretch', 
-		type : 'hbox',
-		padding : 5
+	height:900,
+	layout:'border',
+	defaults: {
+	    collapsible: true,
+	    split: true,
+	    animate: true,
 	},
 	items:[{
-		anchor: '24% 100%',
-		type : 'hbox',
-		flex : 24,
-		xtype : 'Slide_View',
+		region: 'west',
+		xtype : 'Slide_View', 
+		width: 275,
+	    minSize: 100,
+	    maxSize: 250,
+		margins: '5 0 0 0',
 		id : 'Slide_View',
-		name : 'Slide_View'
-	},{
-		anchor: '1% 100%',
-		flex : 1,
-		type : 'hbox',
-    	xtype: 'splitter'
-    },{			
-    	anchor: '74% 100%',
-    	flex : 74,
+		name : 'Slide_View',
+		listeners: {
+	        collapse: function() {
+	        	var panel = Ext.getCmp('Body_View');
+	        	var panel2 = Ext.getCmp('CanversView');
+	            panel2.setWidth(panel.getWidth() -10);
+	        },
+	        expand: function() {
+	        	var panel = Ext.getCmp('Slide_View');
+	        	var panel2 = Ext.getCmp('CanversView');
+	            panel2.setWidth(panel2.getWidth()- panel.getWidth());
+	        }
+	    }
+	},{		
+		collapsible: false,
 		xtype : 'Body_View',
 		id : 'Body_View',
-		type : 'hbox',
+		region: 'center',
 		name : 'Body_View'
-	}],
-	
-	tbar :[{
-        collapsible: true,
-		anchor: '100% 50%',
+	},{
 		xtype : 'Menu_View',
 		id : 'Menu_View',
 		name : 'Menu_View',
-		flex : 1
+		height: 50,
+   		minSize: 25,
+   		maxSize: 100,
+		region: 'north',
 	}],
 	initComponent : function() {
 			this.callParent(arguments);}		
@@ -47,9 +55,17 @@ Ext.onReady(function(){
 	
 	Ext.getCmp('CanversView').setVisible(true);
 	
-	addLibraryIcon('a100baset_hub');
-	addLibraryIcon('asa');
-	addLibraryIcon('workstation');
+	addLibraryIcon('firewall');
+	addLibraryIcon('Array');
+	addLibraryIcon('Catalyst');
+	//addLibraryIcon('InfiniBand');
+	addLibraryIcon('PC');
+	addLibraryIcon('Server');
+	addLibraryIcon('firewall');
+	addLibraryIcon('Array');
+	addLibraryIcon('Switch');
+	addLibraryIcon('Tape Library');
+	addLibraryIcon('cloud');
 
 	var droptarget=new Ext.dd.DropTarget("center1",{ddGroup:'TreeDD'});
 	droptarget.notifyDrop=function(dd, e, data){

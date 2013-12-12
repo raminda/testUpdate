@@ -5,7 +5,6 @@ import java.util.List;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
-
 import com.millenniumit.mx.data.nethdsizing.domain.Company;
 import com.millenniumit.mx.data.nethdsizing.domain.EquipmentBulk;
 import com.millenniumit.mx.data.nethdsizing.domain.EquipmentMaping;

@@ -3,15 +3,16 @@ Ext.define('New.view.GridView', {
 		alias  : 'widget.GridView',
 		border : false,
 		frame : false,
-		height :800,
-		verticalScrollerType: 'paginggridscroller',viewConfig: {
-		 style : {
-	    	 overflow : 'auto',
-	    	 overflowX : 'hidden'
-	    	 },
-	    	 forceFit: false,
-	    	 trackOver: false,
-	 	},
+	    defaults: {
+		    collapsible: true,
+		    height: 800,
+			minSize: 100,
+		    maxSize: 900,
+		    viewConfig:{
+		 		forceFit:true,
+		 	},
+		},
+	 	layout: 'fit',
 		bodyPadding : 15,
 		items : [{
 				flex : 1,

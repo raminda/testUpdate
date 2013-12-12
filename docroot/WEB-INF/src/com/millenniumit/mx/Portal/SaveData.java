@@ -15,7 +15,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
 import com.millenniumit.mx.data.nethdsizing.domain.Company;
 import com.millenniumit.mx.data.nethdsizing.domain.EquipmentBulk;
 import com.millenniumit.mx.data.nethdsizing.domain.EquipmentMaping;
@@ -32,7 +31,6 @@ import com.millenniumit.mx.data.nethdsizing.service.PackagesService;
 import com.millenniumit.mx.data.nethdsizing.service.ProjectItemsService;
 import com.millenniumit.mx.data.nethdsizing.service.ProjectsService;
 import com.millenniumit.mx.data.nethdsizing.service.VersionMapService;
-import com.millenniumit.mx.data.nethdsizing.service.impl.CompanyServiceImpl;
 
 @SuppressWarnings("unused")
 public class SaveData {

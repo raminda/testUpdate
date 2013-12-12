@@ -1,10 +1,7 @@
 package com.millenniumit.mx.Portal;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.ParseException;
 import java.util.Calendar;
-import java.util.List;
 
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
@@ -13,9 +10,7 @@ import org.apache.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.google.gson.Gson;
 import com.millenniumit.mx.data.nethdsizing.domain.ProjectItems;
-import com.millenniumit.mx.data.nethdsizing.service.CompanyService;
 import com.millenniumit.mx.data.nethdsizing.service.EquipmentMapingService;
 import com.millenniumit.mx.data.nethdsizing.service.EquipmentsBulkService;
 import com.millenniumit.mx.data.nethdsizing.service.EquipmentsService;
@@ -23,7 +18,6 @@ import com.millenniumit.mx.data.nethdsizing.service.ItemTypesService;
 import com.millenniumit.mx.data.nethdsizing.service.PackagesService;
 import com.millenniumit.mx.data.nethdsizing.service.ProjectItemsService;
 import com.millenniumit.mx.data.nethdsizing.service.ProjectsService;
-import com.millenniumit.mx.data.nethdsizing.service.VersionMapService;
 
 @SuppressWarnings("unused")
 public class CopyData {

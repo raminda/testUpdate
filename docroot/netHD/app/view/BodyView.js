@@ -3,14 +3,20 @@ Ext.define('New.view.BodyView', {
 	alias : 'widget.Body_View',
 	border : false,
 	frame : true,
+	anchor: '100% 100%',
 	layout : {
-		align: 'center', 
+		align: 'stretch', 
 		type : 'fit',
 		padding : 5
 	},
-	height:'100%',
+	 defaults: {
+		 titlebar: true,
+		 autoScroll:true,
+		 fitToFrame:true
+	},
+	height:900,
 	items :[{
-		flex : 1,
+		region: 'center',
 		text : 'Add Equipment to EquipmentBulk',
 		id : 'EquipmentBulkDD',
 		name : 'EquipmentBulkDD',
@@ -18,28 +24,28 @@ Ext.define('New.view.BodyView', {
 		textAlign : 'left',
 		xtype:'DDBody'
 	},{
-		flex : 1,
+		region: 'center',
 		text : 'Home',
 		id : 'imageView',
 		name : 'imageView',
 		textAlign : 'left',
 		xtype:'image'
 	},{
-		flex : 1,
+		region: 'center',
 		text : 'Home',
 		id : 'GridView',
 		name : 'GridView',
 		textAlign : 'left',
 		xtype:'GridView'
 	},{
-		flex : 1,
+		region: 'center',
 		text : 'Home',
 		id : 'CanversView',
 		name : 'CanversView',
 		textAlign : 'left',
 		xtype:'Canvers_View'
 	},{
-		flex : 1,
+		region: 'center',
 		text : 'Home',
 		id : 'ReportView',
 		name : 'ReportView',
@@ -48,12 +54,10 @@ Ext.define('New.view.BodyView', {
 	initComponent : function() {
 		this.callParent(arguments);
 		Ext.getCmp('EquipmentBulkDD').setVisible(true);
-		
 		Ext.getCmp('imageView').setVisible(true);
 		Ext.getCmp('GridView').setVisible(false);
 		Ext.getCmp('CanversView').setVisible(false);
-		Ext.getCmp('ReportView').setVisible(false);
-			
+		Ext.getCmp('ReportView').setVisible(false);		
 	}
 });
 
