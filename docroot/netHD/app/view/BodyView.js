@@ -46,6 +46,13 @@ Ext.define('New.view.BodyView', {
 		xtype:'Canvers_View'
 	},{
 		region: 'center',
+		text : 'Project Details',
+		id : 'ProjectDetails',
+		name : 'ProjectDetails',
+		textAlign : 'left',
+		xtype:'ProjectDetails'
+	},{
+		region: 'center',
 		text : 'Home',
 		id : 'ReportView',
 		name : 'ReportView',
@@ -57,7 +64,7 @@ Ext.define('New.view.BodyView', {
 		Ext.getCmp('imageView').setVisible(true);
 		Ext.getCmp('GridView').setVisible(false);
 		Ext.getCmp('CanversView').setVisible(false);
-		Ext.getCmp('ReportView').setVisible(false);		
+		Ext.getCmp('ProjectDetails').setVisible(false);		
 	}
 });
 

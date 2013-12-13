@@ -1,6 +1,6 @@
 Ext.define( 'New.store.ProjectItemsStoreResult', {
 	extend :'Ext.data.Store',
-	model : 'New.model.ProjectItemsModel',
+	model : 'New.model.VersionMapModel',
 	autoLoad : true,
 	autoSync : true,
 	proxy : {

@@ -90,6 +90,7 @@ public class NetHDSizing extends MVCPortlet {
 		response.setContentType("application/json");
 		String resourceID = request.getResourceID();
 		String ItemName = null;
+		System.out.println("URL :"+resourceID);
 		
 		if (resourceID.equals("ItemTypeStoreUrl")) {
 			ItemName="ItemType";
@@ -156,10 +157,18 @@ public class NetHDSizing extends MVCPortlet {
 			ItemName="VersionMap";
 			System.out.println("This section is for Navigate "+ ItemName+" init");
 			gridData=new GridData(versionMapService);
-			comboData=new ComboData(versionMapService);
+			comboData=new ComboData(projectService,versionMapService);
 			saveData=new SaveData(versionMapService);
 			updateData=new UpdateData(versionMapService);
 			deleteData=new DeleteData(versionMapService);
+		}else if (resourceID.equals("ProjectItemsStoreUrl")) {
+			ItemName="ProjectItemsStore";
+			System.out.println("This section is for Navigate "+ ItemName+" init");
+			gridData=new GridData(versionMapService,projectItemsService,projectService,companyService);
+			comboData=new ComboData(versionMapService,projectItemsService,projectService,companyService);
+			saveData=new SaveData(versionMapService,projectItemsService,projectService,companyService);
+			updateData=new UpdateData(versionMapService,projectItemsService,projectService,companyService);
+			deleteData=new DeleteData(versionMapService,projectItemsService,projectService,companyService);
 		}
 		else{
 			

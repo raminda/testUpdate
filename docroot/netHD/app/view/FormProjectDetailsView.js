@@ -5,19 +5,17 @@ var PackageType = Ext.create('Ext.data.Store', {
         {"PackageType":"Network Accessories"},
         {"PackageType":"accessories"},
         {"PackageType":"Application "}
-
     ]
 });
-
 var Sitetype = Ext.create('Ext.data.Store', {
     fields: ['SiteID'],
     data : [
         {"SiteID":"Primary"},
         {"SiteID":"DR"},
         {"SiteID":"Test"}
-
     ]
 });
+
 
 Ext.define('New.view.FormProjectDetailsView', {
 	extend : 'Ext.form.Panel',
@@ -49,27 +47,32 @@ Ext.define('New.view.FormProjectDetailsView', {
 	    			allowBlank : false,
 	    			msgTarget: 'side',
 	    			editable:false,
-	    			store : 'ProjectsStore',
+	    			store : 'CompanyStore',
 	                width : 500,
 	                layout: {
 	                    type: 'absolute'
 	                },   
 	                listeners: {
-		            	change:function ( me, newValue, oldValue, eOpts ){                		
-		            		if(Ext.getCmp('cmbPrjCompany').getValue()!=null){
+		            	change:function ( me,newValue , oldValue, eOpts ){                		
+		            		if(newValue!=null){
 		            			//enable  Project Name filed clear 
 		            			Ext.getCmp('cmbPrjProject').enable(true);
 			    				Ext.getCmp('btnClearAll').enable(true);
-			    			
+			    				Ext.getCmp('gridProjectoutView').setVisible(true);
+			    				
+			    				var store = Ext.getStore('ProjectItemsStoreResult');
+			    				store.proxy.extraParams.purpose = 'Grid';
+			    				store.proxy.extraParams.value="1";	
+			    				store.proxy.extraParams.ID=Ext.getCmp('cmbPrjCompany').getValue();
+			    				store.load();
 		            		}
 		            		else{     
 	            			//disable  Project Name filed clear 
 		            			Ext.getCmp('cmbPrjProject').disable(true);
 		            		}
 		            		
-		            		
 		    				//grid Setting
-		    				
+		            		Ext.getCmp('ProjectItemsResultGridProjectID').setVisible(true);
         					Ext.getCmp('ProjectItemsResultGridOptionID').setVisible(true);
         					Ext.getCmp('ProjectItemsResultGridVersionID').setVisible(true);
 		    				Ext.getCmp('ProjectItemsResultGriddate_modified').setVisible(false);
@@ -79,13 +82,14 @@ Ext.define('New.view.FormProjectDetailsView', {
 		    				Ext.getCmp('ProjectItemsResultGridQuantity').setVisible(false);
 		    				Ext.getCmp('ProjectItemsResultGridPackageID').setVisible(false);
 		    				Ext.getCmp('ProjectItemsResultGridSiteID').setVisible(false);
-		    				
-		    				Ext.getCmp('ProjectItemsResultGridProjectID').setVisible(false);
+		    				Ext.getCmp('ProjectItemsResultGridEOLDate').setVisible(false);
 		    				Ext.getCmp('cmbPrjProject').reset();
+		   
 		            	},
+		            	
 		                focus:function( me, The, eOpts ){
 		                	// load Combo box
-		                	var store = Ext.getStore('ProjectsStore');
+		                	var store = Ext.getStore('CompanyStore');
 		                	store.proxy.extraParams.purpose = 'Grid';
 		                	store.proxy.extraParams.value = '1';
 		                	store.load();
@@ -112,12 +116,13 @@ Ext.define('New.view.FormProjectDetailsView', {
 	                		if(Ext.getCmp('cmbPrjProject').getValue()!=null){
 								Ext.getCmp('cmbPrjOption').enable(true);				
 								var store = Ext.getStore('ProjectItemsStoreResult');
-				        		store.proxy.extraParams.ID1=Ext.getCmp('cmbPrjProject').getValue();
-								store.proxy.extraParams.purpose = 'Combo';
-				        		store.proxy.extraParams.value = '8';
-								store.load();
+			    				store.proxy.extraParams.purpose = 'Grid';
+			    				store.proxy.extraParams.ID1=newValue;
+			    				store.proxy.extraParams.value="2";	
+			    				store.proxy.extraParams.ID=Ext.getCmp('cmbPrjCompany').getValue();
+			    				store.load();
 								Ext.getCmp('gridProjectoutView').setVisible(true);
-	   								
+								Ext.getCmp('ProjectItemsResultGridProjectID').setVisible(false);	
 	                		}
 	                		else{
 	                			Ext.getCmp('cmbPrjOption').disable(true);		
@@ -129,8 +134,7 @@ Ext.define('New.view.FormProjectDetailsView', {
 		                focus:function( me, The, eOpts ){
 		                	var store = Ext.getStore('ProjectsStore');
 		    				store.proxy.extraParams.purpose = 'Combo';
-		    				store.proxy.extraParams.value="1";
-		        				
+		    				store.proxy.extraParams.value="1";	
 		    				store.proxy.extraParams.ID=Ext.getCmp('cmbPrjCompany').getValue();
 		    				store.load();
 		                }
@@ -146,7 +150,7 @@ Ext.define('New.view.FormProjectDetailsView', {
 					displayField:'OptionID',
 					allowBlank : false,
 					msgTarget: 'side',
-					store : 'ProjectItemsStore1',
+					store : 'VersionMapStore',
 		            width : 500,
 		            typeAhead: true ,
 		            layout: {
@@ -156,13 +160,16 @@ Ext.define('New.view.FormProjectDetailsView', {
 	                	change:function ( me, newValue, oldValue, eOpts ){
 	                		if(Ext.getCmp('cmbPrjOption').getValue()!=null){
 								Ext.getCmp('cmbPrjVersion').enable(true);		
-	                			var store = Ext.getStore('ProjectItemsStoreResult');
-	        	        		store.proxy.extraParams.ID1=Ext.getCmp('cmbPrjProject').getValue();
-	        					store.proxy.extraParams.ID2=Ext.getCmp('cmbPrjOption').getValue();
-	        	        		store.proxy.extraParams.value = '7';	
-	        	        		store.proxy.extraParams.purpose = 'Combo';
-	        					store.load();
-	        					Ext.getCmp('gridProjectoutView').setVisible(true);	
+								var store = Ext.getStore('ProjectItemsStoreResult');
+			    				store.proxy.extraParams.purpose = 'Grid';
+			    				store.proxy.extraParams.ID=newValue;
+			    				store.proxy.extraParams.value="3";	
+			    				store.proxy.extraParams.ID1=Ext.getCmp('cmbPrjProject').getValue();
+			    				store.load();
+	        					Ext.getCmp('gridProjectoutView').setVisible(true);
+	        					Ext.getCmp('ProjectItemsResultGridSiteID').setVisible(true);
+	        					Ext.getCmp('ProjectItemsResultGridOptionID').setVisible(false);
+	        					
 	                		}
 	                		else{
 								Ext.getCmp('gridProjectoutView').setVisible(true);
@@ -173,9 +180,10 @@ Ext.define('New.view.FormProjectDetailsView', {
 	                	},
 	                	
 	                    focus:function( me, The, eOpts ){
-	                    	var store = Ext.getStore('ProjectItemsStore1');
+	                    	var store = Ext.getStore('VersionMapStore');
 							store.proxy.extraParams.purpose = 'Combo';
 							store.proxy.extraParams.value='1';
+							store.proxy.extraParams.ID=Ext.getCmp('cmbPrjCompany').getValue();
 							store.proxy.extraParams.ID1=Ext.getCmp('cmbPrjProject').getValue();
 							store.load();
 	                    }
@@ -186,12 +194,12 @@ Ext.define('New.view.FormProjectDetailsView', {
 		        	xtype : 'combobox',
 					id : 'cmbPrjVersion',
 					name : 'cmbPrjVersion',
-					valueField : 'VersionID',
-					displayField:'VersionID',
+					valueField : 'Version',
+					displayField:'Version',
 					selectOnTab : true,
 					allowBlank : false,
 					msgTarget: 'side',
-					store : 'ProjectItemsStore2',
+					store : 'VersionMapStore2',
 		            width : 500,
 		            typeAhead: true ,
 		            layout: {
@@ -215,12 +223,12 @@ Ext.define('New.view.FormProjectDetailsView', {
 	                		else{
 	                			Ext.getCmp('cmbPrjSite').enable(true);
 	                			var store = Ext.getStore('ProjectItemsStoreResult');
-	        	        		store.proxy.extraParams.ID1=Ext.getCmp('cmbPrjProject').getValue();
-	        					store.proxy.extraParams.ID2=Ext.getCmp('cmbPrjOption').getValue();
-	        					store.proxy.extraParams.ID3=Ext.getCmp('cmbPrjVersion').getValue();
-	    	        			store.proxy.extraParams.value = '6';
-	    	        			store.proxy.extraParams.purpose = 'Combo';
-	        					store.load();
+			    				store.proxy.extraParams.purpose = 'Grid';
+			    				store.proxy.extraParams.ID2=newValue;
+			    				store.proxy.extraParams.value="4";	
+			    				store.proxy.extraParams.ID1=Ext.getCmp('cmbPrjProject').getValue();
+			    				store.proxy.extraParams.ID=Ext.getCmp('cmbPrjOption').getValue();
+			    				store.load();
 	        					Ext.getCmp('GenerateAll').enable(false);
 	        					
 	        					Ext.getCmp('ProjectItemsResultGridOptionID').setVisible(false);
@@ -240,7 +248,7 @@ Ext.define('New.view.FormProjectDetailsView', {
 	                		Ext.getCmp('cmbPrjSite').reset();
 	                	},
 		                focus:function( me, The, eOpts ){
-		                	var store = Ext.getStore('ProjectItemsStore2');
+		                	var store = Ext.getStore('VersionMapStore2');
 	        				store.proxy.extraParams.purpose = 'Combo';
 	        				store.proxy.extraParams.value='2';
 	        				store.proxy.extraParams.ID1=Ext.getCmp('cmbPrjProject').getValue();
@@ -288,16 +296,14 @@ Ext.define('New.view.FormProjectDetailsView', {
 	                	change: function(){
 	            			if(Ext.getCmp('cmbPrjSite').getValue()!=null){
 								Ext.getCmp('cmbPrjPackage').enable(true);
-							
-								
 								var store = Ext.getStore('ProjectItemsStoreResult');
-				        		store.proxy.extraParams.ID1=Ext.getCmp('cmbPrjProject').getValue();
-								store.proxy.extraParams.ID2=Ext.getCmp('cmbPrjOption').getValue();
-								store.proxy.extraParams.ID3=Ext.getCmp('cmbPrjVersion').getValue();
-								store.proxy.extraParams.ID4=Ext.getCmp('cmbPrjSite').getValue();
-								store.proxy.extraParams.purpose = 'Combo';
-			        			store.proxy.extraParams.value = '5';		
-								store.load();
+			    				store.proxy.extraParams.purpose = 'Grid';
+			    				store.proxy.extraParams.ID2=Ext.getCmp('cmbPrjVersion').getValue();;
+			    				store.proxy.extraParams.value="5";	
+			    				store.proxy.extraParams.ID1=Ext.getCmp('cmbPrjProject').getValue();
+			    				store.proxy.extraParams.ID=Ext.getCmp('cmbPrjOption').getValue();
+			    				store.proxy.extraParams.ID3=Ext.getCmp('cmbPrjSite').getValue();
+			    				store.load();
 								
 								
 								Ext.getCmp('btnClearAll').enable(true);
@@ -444,7 +450,7 @@ Ext.define('New.view.FormProjectDetailsView', {
 	                    type: 'absolute'
 	                },
 	                handler : function() {
-	                	var form = Ext.getCmp('AddProjectDetails').getForm();
+	                	var form = Ext.getCmp('ProjectDetails').getForm();
 	                	form.isValid();
 	                	
 	                	var sts=false;
@@ -476,8 +482,8 @@ Ext.define('New.view.FormProjectDetailsView', {
 							var PcakageUsege=Ext.getCmp('txtPrjUseage').getValue();
 							var store = Ext.getStore('ProjectItemsStoreResult');
 							store.proxy.extraParams.purpose = 'New';
-							var JsonObject= {ProjectID:Project,OptionID:Option,VersionID: Version,SiteID:site,PackageID:Package,Quantity:Quntity,PcakageUsege:PcakageUsege,PackageType:PackageType};
-							var row= Ext.create('New.model.ProjectItemsModel', JsonObject);
+							var JsonObject= {Project:Project,OptionID:Option,Version: Version,SiteID:site,PackageName:Package,Quantity:Quntity,PcakageUsege:PcakageUsege,PackageType:PackageType};
+							var row= Ext.create('New.model.VersionMapModel', JsonObject);
 							store.insert(0, row);
 							sts=true;
 		            	
@@ -490,16 +496,13 @@ Ext.define('New.view.FormProjectDetailsView', {
 			                	
 			            	
 			                	var store = Ext.getStore('ProjectItemsStoreResult');
-			                	store.proxy.extraParams.ID1=Ext.getCmp('cmbPrjProject').getValue();
-			                	store.proxy.extraParams.ID2=Ext.getCmp('cmbPrjOption').getValue();
-			                	store.proxy.extraParams.ID3=Ext.getCmp('cmbPrjVersion').getValue();
-			                	store.proxy.extraParams.ID4=Ext.getCmp('cmbPrjSite').getValue();
-			                	store.proxy.extraParams.purpose = 'Combo';
-			        		
-							
-			                	store.proxy.extraParams.value = '5';	
-				        		//store.proxy.extraParams.purpose = 'Grid';	
-								store.load();
+			    				store.proxy.extraParams.purpose = 'Grid';
+			    				store.proxy.extraParams.ID2=Ext.getCmp('cmbPrjVersion').getValue();;
+			    				store.proxy.extraParams.value="5";	
+			    				store.proxy.extraParams.ID1=Ext.getCmp('cmbPrjProject').getValue();
+			    				store.proxy.extraParams.ID=Ext.getCmp('cmbPrjOption').getValue();
+			    				store.proxy.extraParams.ID3=Ext.getCmp('cmbPrjSite').getValue();
+			    				store.load();
 								Ext.getCmp('gridProjectoutView').setVisible(true);
 		            		}
 		            	}

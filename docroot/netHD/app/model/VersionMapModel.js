@@ -4,16 +4,31 @@ Ext.define('New.model.VersionMapModel', {
 		name : 'ID',
 		type : 'number'
 	},{
-		name : 'OptionID',
-		type : 'string'
-	},{
-		name : 'Version',
+		name : 'CompanyName',
 		type : 'string'
 	},{
 		name : 'Project',
 		type : 'string'
 	},{
+		name : 'Version',
+		type : 'string'
+	},{
+		name : 'OptionID',
+		type : 'string'
+	},{
+		name : 'SiteID',
+		type : 'string'
+	},{
 		name : 'PackageName',
+		type : 'string'
+	},{
+		name : 'PackageType',
+		type : 'string'
+	},{
+		name : 'Quantity',
+		type : 'string'
+	},{
+		name : 'Price',
 		type : 'string'
 	},{
 		name : 'EOLDate',
@@ -23,9 +38,6 @@ Ext.define('New.model.VersionMapModel', {
 		type : 'string'
 	},{
 		name : 'Calendar_modified',
-		type : 'string'
-	},{
-		name : 'CompanyName',
 		type : 'string'
 	},{
 		name : 'Calendar_logged',

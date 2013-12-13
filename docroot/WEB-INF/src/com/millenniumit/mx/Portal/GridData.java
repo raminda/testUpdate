@@ -60,6 +60,12 @@ public class GridData {
 		this.versionMapService=versionMapService;
 	
 	}
+	public GridData(VersionMapService versionMapService,ProjectItemsService projectItemsService,ProjectsService projectService,CompanyService companyService){	
+		this.companyService=companyService;
+		this.projectItemsService = projectItemsService;
+		this.projectService =projectService;
+		this.versionMapService = versionMapService;	
+	}
 	public GridData(VersionMapService versionMapService){	
 		
 		this.versionMapService=versionMapService;
@@ -337,47 +343,147 @@ public class GridData {
 			out.println(jsonOb2);
 			//out.println(gson.toJson(lst));	
 		}
-		else if (ServiceType.equals("ItemType")) {
+		else if (ServiceType.equals("ProjectItemsStore")){
 			
-			System.out.println("This section is for Parameter ItemTypeService Grid");
-			List<ItemTypes> lst = itemTypeService.getItemTypes();
-			//Equipment  Base Items
-			String jsonOb2="[";
-			String AccsessLevel="";
-			boolean bool=true;
-			for(int i=0;i<lst.size();i++){
-				try{
-					if(lst.get(i).getAccsessLevel()==0){
-						AccsessLevel="Base Items";
+			System.out.println("This section is for Parameter ProjectsService Combo2");
+			
+			if(Long.parseLong(request.getParameter("value"))==1){
+				List<Project> a= projectService.getCompany(companyService.get((request.getParameter("ID"))));
+				System.out.println(a.size());
+				String jsonOb2="[";
+				boolean bool=true;
+				for(int i=0;i<a.size();i++){
+					Project obj=a.get(i);
+					List<VersionMap> b =versionMapService.getAll(obj);
+					System.out.println(b.size());
+					for(int j=0;j<b.size();j++){
+						VersionMap obj2=b.get(j);
+						try{
+							jsonOb2+="{ ID :' ',CompanyName: ' ',Project: '" +obj.getProjectName()+"',Version : '"+obj2.getVersion()+"' ,OptionID : '"+obj2.getOptionID()+"' ,SiteID : ' ' ,PackageName : ' ',PackageType : ' ',Quantity : ' ' ,Price : ' ' ,EOLDate : ' ' ,Calendar_created : ' ' ,Calendar_modified :' ' ,Calendar_logged : ' ' }";
+						}catch (Exception e) {
+							logger.info("Error : " + e.getMessage());
+							jsonOb2+="'}";
+							bool=false;
+						}
+						if((i<a.size()-1 || j<b.size()-1) && bool ){
+							jsonOb2+=",";
+						}
 					}
-					else{
-						AccsessLevel="Equipment";
-					}
-					jsonOb2+="{TypeName: '" +lst.get(i).getTypeName() +"',AccsessLevel: '" +AccsessLevel+"',ID :'"+lst.get(i).getID()+"',date_logged:'"+lst.get(i).getCalendar_logged()+"',date_modified:'"+lst.get(i).getCalendar_modified()+"',date_created:'"+lst.get(i).getCalendar_created()+"'}";
-				}catch (Exception e) {
-					logger.info("Error : " + e.getMessage());
-					jsonOb2+="'}";
-					bool=false;
+					
 				}
-				if(i<lst.size()-1 && bool){
-					jsonOb2+=",";
-				}
+				jsonOb2+="]";
+				System.out.println(jsonOb2);
+				jsonOb2=linebracker(jsonOb2);
+				out.println(jsonOb2);
 			}
-			jsonOb2+="]";
-			System.out.println(jsonOb2);
-			jsonOb2=linebracker(jsonOb2);
-			out.println(jsonOb2);
-			//out.println(gson.toJson(lst));	
+			else if(Long.parseLong(request.getParameter("value"))==2){
+				String jsonOb2="[";
+				boolean bool=true;
+					List<VersionMap> b =versionMapService.getAll(projectService.getProjects(request.getParameter("ID1")));
+					System.out.println(b.size());
+					for(int j=0;j<b.size();j++){
+						VersionMap obj=b.get(j);
+						try{
+							jsonOb2+="{ ID :' ',CompanyName: ' ',Project: '" +obj.getProjectID().getProjectName()+"',Version : '"+obj.getVersion()+"' ,OptionID : '"+obj.getOptionID()+"' ,SiteID : ' ' ,PackageName : ' ',PackageType : ' ',Quantity : ' ' ,Price : ' ' ,EOLDate : ' ' ,Calendar_created : ' ' ,Calendar_modified :' ' ,Calendar_logged : ' ' }";
+						}catch (Exception e) {
+							logger.info("Error : " + e.getMessage());
+							jsonOb2+="'}";
+							bool=false;
+						}
+						if(( j<b.size()-1) && bool ){
+							jsonOb2+=",";
+						}
+					
+				}
+				jsonOb2+="]";
+				System.out.println(jsonOb2);
+				jsonOb2=linebracker(jsonOb2);
+				out.println(jsonOb2);
+			}
+			else if(Long.parseLong(request.getParameter("value"))==3){
+				String jsonOb2="[";
+				boolean bool=true;
+					List<String> b =versionMapService.getVersion_Maps(projectService.getProjects(request.getParameter("ID1")),request.getParameter("ID"));
+					System.out.println(b.size());
+					for(int j=0;j<b.size();j++){
+						String obj=b.get(j);
+						try{
+							jsonOb2+="{ ID :' ',CompanyName: ' ',Project: '" +request.getParameter("ID1")+"',Version : '"+obj+"' ,OptionID : '"+request.getParameter("ID")+"' ,SiteID : '' ,PackageName : ' ',PackageType : ' ',Quantity : ' ' ,Price : ' ' ,EOLDate : ' ' ,Calendar_created : ' ' ,Calendar_modified :' ' ,Calendar_logged : ' ' }";
+						}catch (Exception e) {
+							logger.info("Error : " + e.getMessage());
+							jsonOb2+="'}";
+							bool=false;
+						}
+						if(( j<b.size()-1) && bool ){
+							jsonOb2+=",";
+						}
+					
+				}
+				jsonOb2+="]";
+				System.out.println(jsonOb2);
+				jsonOb2=linebracker(jsonOb2);
+				out.println(jsonOb2);
+			}
+			else if(Long.parseLong(request.getParameter("value"))==4){
+				String jsonOb2="[";
+				boolean bool=true;
+					List<VersionMap> b = versionMapService.getAll(projectService.getProjects(request.getParameter("ID1")),request.getParameter("ID"),request.getParameter("ID2"));
+					System.out.println(" V sise "+ b.size());
+					for(int j=0;j<b.size();j++){
+						VersionMap obj=b.get(j);
+						List<ProjectItems> a= projectItemsService.getAll(obj);
+						System.out.println("P size "+ a.size());
+						for(int i=0;i<a.size();i++){
+							ProjectItems obj2=a.get(i);
+							try{
+								jsonOb2+="{ ID :' ',CompanyName: ' ',Project: '',Version : '' ,OptionID : '' ,SiteID : '" + obj.getSiteID()+ "' ,PackageName : '"+obj2.getPackageID().getPackageName()+" ',PackageType : '"+obj2.getPackageType()+"',Quantity : '"+obj2.getQuantity()+" ' ,Price : '"+(obj2.getPackageID().getBasePrice())+" ' ,EOLDate : '' ,Calendar_created : '"+obj2.getCalendar_created()+" ' ,Calendar_modified :' ' ,Calendar_logged : ' ' }";
+							}catch (Exception e) {
+								logger.info("Error : " + e.getMessage());
+								jsonOb2+="'}";
+								bool=false;
+							}
+							if(( j<b.size()-1 || i<a.size()-1) && bool ){
+								jsonOb2+=",";
+							}
+						}
+				}
+				jsonOb2+="]";
+				System.out.println(jsonOb2);
+				jsonOb2=linebracker(jsonOb2);
+				out.println(jsonOb2);
+			}
+			else if(Long.parseLong(request.getParameter("value"))==5){
+				String jsonOb2="[";
+				boolean bool=true;
+				VersionMap obj =versionMapService.getAll(projectService.getProjects(request.getParameter("ID1")),request.getParameter("ID"),request.getParameter("ID2"),request.getParameter("ID3"));
+				List<ProjectItems> a= projectItemsService.getAll(obj);
+				System.out.println(a.size());
+				for(int i=0;i<a.size();i++){
+					ProjectItems obj2=a.get(i);
+					try{
+						jsonOb2+="{ ID :' ',CompanyName: ' ',Project: '',Version : '' ,OptionID : '' ,SiteID : '" + obj.getSiteID()+ "' ,PackageName : '"+obj2.getPackageID().getPackageName()+" ',PackageType : '"+obj2.getPackageType()+"',Quantity : '"+obj2.getQuantity()+" ' ,Price : '"+(obj2.getPackageID().getBasePrice())+" ' ,EOLDate : '' ,Calendar_created : '"+obj2.getCalendar_created()+" ' ,Calendar_modified :' ' ,Calendar_logged : ' ' }";
+					}catch (Exception e) {
+						logger.info("Error : " + e.getMessage());
+						jsonOb2+="'}";
+						bool=false;
+					}
+					if((i<a.size()-1) && bool ){
+						jsonOb2+=",";
+					}
+				}
+				jsonOb2+="]";
+				System.out.println(jsonOb2);
+				jsonOb2=linebracker(jsonOb2);
+				out.println(jsonOb2);
+			}
 		}
 		//**********Nothing***********
 		else {
-			
 			System.out.println("This section is for Nothing but Grid");
 			out.println("");
 		}
+	
 	}
-	
-	
 	private String linebracker(String jsonOb2){
 		/*jsonOb2=jsonOb2.replaceAll("\\n", "|");
 		jsonOb2=jsonOb2.replaceAll("\r", "");

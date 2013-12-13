@@ -43,6 +43,7 @@ Ext.define('New.view.MenuBarView', {
 					store.proxy.extraParams.purpose = 'null';
 					store.load();
 					Ext.getCmp('savepjt').setVisible(true);
+					Ext.getCmp('ProjectDetails').setVisible(false);	
 					Ext.getCmp('imageView').setVisible(false);
 					Ext.getCmp('GridView').setVisible(false);
 					Ext.getCmp('CanversView').setVisible(true);
@@ -54,7 +55,8 @@ Ext.define('New.view.MenuBarView', {
 				text: 'Create Project (Comno box)',
 				handler : function() {
 					Ext.getCmp('EquipmentBulkDD').setVisible(false);
-					Ext.getCmp('imageView').setVisible(true);
+					Ext.getCmp('ProjectDetails').setVisible(true);	
+					Ext.getCmp('imageView').setVisible(false);
 					Ext.getCmp('GridView').setVisible(false);
 					Ext.getCmp('CanversView').setVisible(false);
 					Ext.getCmp('ReportView').setVisible(false);
@@ -67,6 +69,7 @@ Ext.define('New.view.MenuBarView', {
 					var store = grid.getStore('VersionMapStoreGrid');
 					store.proxy.extraParams.purpose='Grid';
 					store.load();
+					Ext.getCmp('ProjectDetails').setVisible(false);	
 					Ext.getCmp('VersionMapGrids').setVisible(true);
 					Ext.getCmp('ProjectGrid').setVisible(false);
 					Ext.getCmp('PackageGrid').setVisible(false);
@@ -83,7 +86,7 @@ Ext.define('New.view.MenuBarView', {
 			},{
 				text: 'Projects',
 				handler : function() {
-					
+					Ext.getCmp('ProjectDetails').setVisible(false);	
 					var grid = Ext.getCmp('gridProjectView');
 					var store = grid.getStore('ProjectsStoreGrid');
 					store.proxy.extraParams.purpose='Grid';
@@ -110,6 +113,7 @@ Ext.define('New.view.MenuBarView', {
 					var store = grid.getStore('CompanyStoreGrid');
 					store.proxy.extraParams.purpose='Grid';
 					store.load();
+					Ext.getCmp('ProjectDetails').setVisible(false);	
 					Ext.getCmp('VersionMapGrids').setVisible(false);
 					Ext.getCmp('ProjectGrid').setVisible(false);
 					Ext.getCmp('PackageGrid').setVisible(false);
@@ -137,7 +141,7 @@ Ext.define('New.view.MenuBarView', {
 				
 				Ext.getCmp('EquipmentBulkDD').setVisible(true);
 				Ext.getCmp('ProjectGrid').setVisible(false);
-				
+				Ext.getCmp('ProjectDetails').setVisible(false);	
 				Ext.getCmp('imageView').setVisible(false);
 				Ext.getCmp('GridView').setVisible(false);
 				Ext.getCmp('CanversView').setVisible(false);
@@ -152,7 +156,7 @@ Ext.define('New.view.MenuBarView', {
 				var store = grid.getStore('PackageStoreGrid');
 				store.proxy.extraParams.purpose='Grid';
 				store.load();
-				
+				Ext.getCmp('ProjectDetails').setVisible(false);	
 				Ext.getCmp('PackageGrid').setVisible(true);
 				Ext.getCmp('ItemTypeGrid').setVisible(false);
 				Ext.getCmp('ProjectGrid').setVisible(false);
@@ -167,7 +171,7 @@ Ext.define('New.view.MenuBarView', {
 			},{
 			text: 'Configure Equipment',
 			handler : function() {
-				
+				Ext.getCmp('ProjectDetails').setVisible(false);	
 				Ext.getCmp('EquipmentGrid').setVisible(true);
 				Ext.getCmp('ItemTypeGrid').setVisible(false);
 				Ext.getCmp('PackageGrid').setVisible(false);
@@ -188,7 +192,7 @@ Ext.define('New.view.MenuBarView', {
 			},{
 			text: 'Equipment Types',
 			handler : function() {
-				
+				Ext.getCmp('ProjectDetails').setVisible(false);	
 				Ext.getCmp('ItemTypeGrid').setVisible(true);
 				Ext.getCmp('EquipmentGrid').setVisible(false);
 				Ext.getCmp('PackageGrid').setVisible(false);
@@ -209,6 +213,7 @@ Ext.define('New.view.MenuBarView', {
 		},{
 			text: 'Add New Rools',
 			handler : function() {
+				Ext.getCmp('ProjectDetails').setVisible(false);	
 				Ext.getCmp('imageView').setVisible(false);
 				Ext.getCmp('GridView').setVisible(true);
 				Ext.getCmp('CanversView').setVisible(false);
@@ -225,6 +230,7 @@ Ext.define('New.view.MenuBarView', {
 		menu : [{
 			text: 'Generate Hardware Sizing report',
 			handler : function() {
+				Ext.getCmp('ProjectDetails').setVisible(false);	
 				Ext.getCmp('imageView').setVisible(false);
 				Ext.getCmp('GridView').setVisible(false);
 				Ext.getCmp('CanversView').setVisible(false);
@@ -234,6 +240,7 @@ Ext.define('New.view.MenuBarView', {
 		},{
 			text: 'Log report',
 			handler : function() {
+				Ext.getCmp('ProjectDetails').setVisible(false);	
 				Ext.getCmp('imageView').setVisible(false);
 				Ext.getCmp('GridView').setVisible(false);
 				Ext.getCmp('CanversView').setVisible(false);
@@ -243,6 +250,7 @@ Ext.define('New.view.MenuBarView', {
 		},{
 			text: 'Equipment Summery',
 			handler : function() {
+				Ext.getCmp('ProjectDetails').setVisible(false);	
 				Ext.getCmp('imageView').setVisible(false);
 				Ext.getCmp('GridView').setVisible(false);
 				Ext.getCmp('CanversView').setVisible(false);
@@ -253,6 +261,7 @@ Ext.define('New.view.MenuBarView', {
 		},{
 			text: 'Package Summery',
 			handler : function() {
+				Ext.getCmp('ProjectDetails').setVisible(false);	
 				Ext.getCmp('imageView').setVisible(false);
 				Ext.getCmp('GridView').setVisible(false);
 				Ext.getCmp('CanversView').setVisible(false);
@@ -262,6 +271,7 @@ Ext.define('New.view.MenuBarView', {
 		},{
 			text: 'Project Summery',
 			handler : function() {
+				Ext.getCmp('ProjectDetails').setVisible(false);	
 				Ext.getCmp('imageView').setVisible(false);
 				Ext.getCmp('GridView').setVisible(false);
 				Ext.getCmp('CanversView').setVisible(false);

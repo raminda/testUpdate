@@ -79,6 +79,12 @@ public class UpdateData {
 		
 		this.versionMapService=versionMapService;
 	}
+	public UpdateData(VersionMapService versionMapService,ProjectItemsService projectItemsService,ProjectsService projectService,CompanyService companyService){	
+		this.companyService=companyService;
+		this.projectItemsService = projectItemsService;
+		this.projectService =projectService;
+		this.versionMapService = versionMapService;	
+	}
 	public UpdateData(CompanyService companyService){
 		
 		this.companyService=companyService;

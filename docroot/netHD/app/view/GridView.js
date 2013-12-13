@@ -44,7 +44,7 @@ Ext.define('New.view.GridView', {
 				id : 'VersionMapGrids',
 				name : 'VersionMapGrids',
 				title : 'Project Deteils view',
-				xtype : 'VersionMapGrids'
+				//xtype : 'VersionMapGrids'
 			},{
 				flex : 1,
 				id : 'ProjectGrid',

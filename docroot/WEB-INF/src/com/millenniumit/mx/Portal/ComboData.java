@@ -17,6 +17,7 @@ import com.millenniumit.mx.data.nethdsizing.domain.Equipments;
 import com.millenniumit.mx.data.nethdsizing.domain.ItemTypes;
 import com.millenniumit.mx.data.nethdsizing.domain.Project;
 import com.millenniumit.mx.data.nethdsizing.domain.ProjectItems;
+import com.millenniumit.mx.data.nethdsizing.domain.VersionMap;
 import com.millenniumit.mx.data.nethdsizing.service.CompanyService;
 import com.millenniumit.mx.data.nethdsizing.service.EquipmentMapingService;
 import com.millenniumit.mx.data.nethdsizing.service.EquipmentsBulkService;
@@ -72,8 +73,8 @@ public class ComboData {
 		this.equipmentsBulkService=equipmentsBulkService;
 		this.packageService =packageService ;
 	}
-	public ComboData(VersionMapService versionMapService){
-		
+	public ComboData(ProjectsService projectService,VersionMapService versionMapService){
+		this.projectService=projectService;
 		this.versionMapService = versionMapService;	
 	}
 	public ComboData(ItemTypesService ItemTypesService){
@@ -89,21 +90,22 @@ public class ComboData {
 		this.projectService =projectService;
 	}
 	public ComboData(ProjectItemsService projectItemsService,ProjectsService projectService){
-	
 		this.projectItemsService = projectItemsService;
 		this.projectService =projectService;
 	}
-	public ComboData(EquipmentMapingService equipmentMapingService){
-		
+	public ComboData(EquipmentMapingService equipmentMapingService){	
 		this.equipmentMapingService=equipmentMapingService;
 	}
-	public ComboData(CompanyService companyService){
-		
-	this.companyService=companyService;
-	}
-
-
 	
+	public ComboData(CompanyService companyServicee){	
+		this.companyService=companyServicee;
+	}
+	public ComboData(VersionMapService versionMapService,ProjectItemsService projectItemsService,ProjectsService projectService,CompanyService companyService){	
+		this.companyService=companyService;
+		this.projectItemsService = projectItemsService;
+		this.projectService =projectService;
+		this.versionMapService = versionMapService;	
+	}
 	
 	@SuppressWarnings("null")
 	public void Combo(ResourceRequest request, ResourceResponse response,String ServiceType) throws IOException{
@@ -289,6 +291,59 @@ public class ComboData {
 			
 		}
 		//************************Package**************
+		else if (ServiceType.equals("VersionMap")) {
+			
+			System.out.println("This section is for Parameter VersionMap Combo");
+			if(Long.parseLong(request.getParameter("value"))==1){
+				List<String> a= versionMapService.getProjects(projectService.getProjects((request.getParameter("ID1"))));
+				System.out.println(a.size());
+				String jsonOb2="[";
+				boolean bool=true;
+				for(int i=0;i<a.size();i++){
+					String obj=a.get(i);
+					try{
+						jsonOb2+="{ OptionID: '" +obj+"'}";
+					}catch (Exception e) {
+						logger.info("Error : " + e.getMessage());
+						jsonOb2+="'}";
+						bool=false;
+					}
+					if(i<a.size()-1 && bool){
+						jsonOb2+=",";
+					}
+				}
+				jsonOb2+="]";
+				System.out.println(jsonOb2);
+				jsonOb2=linebracker(jsonOb2);
+				out.println(jsonOb2);
+			}
+			//*****
+			//do
+			else if(Long.parseLong(request.getParameter("value"))==2){
+				List<String> a= versionMapService.getVersion_Maps(projectService.getProjects((request.getParameter("ID1"))),request.getParameter("ID2"));
+				System.out.println(a.size());
+				String jsonOb2="[";
+				boolean bool=true;
+				for(int i=0;i<a.size();i++){
+					String obj=a.get(i);
+					try{
+						jsonOb2+="{Version: '" +obj+"'}";
+					}catch (Exception e) {
+						logger.info("Error : " + e.getMessage());
+						jsonOb2+="'}";
+						bool=false;
+					}
+					if(i<a.size()-1 && bool){
+						jsonOb2+=",";
+					}
+				}
+				jsonOb2+="]";
+				System.out.println(jsonOb2);
+				jsonOb2=linebracker(jsonOb2);
+				out.println(jsonOb2);
+			}
+			
+		}
 		else if (ServiceType.equals("Package")) {
 			
 			System.out.println("This section is for Parameter PackageService Combo");
@@ -456,36 +511,57 @@ public class ComboData {
 			//System.out.println(request.getParameter("value"));
 			
 			if(Long.parseLong(request.getParameter("value"))==1){
-				//lst = projectService.getProjects(request.getParameter("ID"));
+				List<Project> a= projectService.getCompany(companyService.get((request.getParameter("ID"))));
+				System.out.println(a.size());
+				String jsonOb2="[";
+				boolean bool=true;
+				for(int i=0;i<a.size();i++){
+					Project obj=a.get(i);
+					try{
+						jsonOb2+="{ ProjectName: '" +obj.getProjectName()+"'}";
+					}catch (Exception e) {
+						logger.info("Error : " + e.getMessage());
+						jsonOb2+="'}";
+						bool=false;
+					}
+					if(i<a.size()-1 && bool){
+						jsonOb2+=",";
+					}
+				}
+				jsonOb2+="]";
+				System.out.println(jsonOb2);
+				jsonOb2=linebracker(jsonOb2);
+				out.println(jsonOb2);
 			}
 			else if(Long.parseLong(request.getParameter("value"))==2){
-			List<Company> a= companyService.getAll();
-			System.out.println(a.size());
-			String jsonOb2="[";
-			boolean bool=true;
-			for(int i=0;i<a.size();i++){
-				Company obj=a.get(i);
-				try{
-					jsonOb2+="{ Company: '" +obj.getCompanyName()+"'}";
-				}catch (Exception e) {
-					logger.info("Error : " + e.getMessage());
-					jsonOb2+="'}";
-					bool=false;
+				List<Company> a= companyService.getAll();
+				System.out.println(a.size());
+				String jsonOb2="[";
+				boolean bool=true;
+				for(int i=0;i<a.size();i++){
+					Company obj=a.get(i);
+					try{
+						jsonOb2+="{ Company: '" +obj.getCompanyName()+"'}";
+					}catch (Exception e) {
+						logger.info("Error : " + e.getMessage());
+						jsonOb2+="'}";
+						bool=false;
+					}
+					if(i<a.size()-1 && bool){
+						jsonOb2+=",";
+					}
 				}
-				if(i<a.size()-1 && bool){
-					jsonOb2+=",";
-				}
-			}
-			jsonOb2+="]";
-			System.out.println(jsonOb2);
-			jsonOb2=linebracker(jsonOb2);
-			out.println(jsonOb2);
+				jsonOb2+="]";
+				System.out.println(jsonOb2);
+				jsonOb2=linebracker(jsonOb2);
+				out.println(jsonOb2);
 			}
 			else{
 				System.out.println(request.getParameter("value"));
 				lst = projectService.getProjects();
+				out.println(gson.toJson(lst));
 			}
-			out.println(gson.toJson(lst));
+			
 			
 		}
 		//**********ItemType***********

@@ -68,6 +68,12 @@ public class SaveData {
 		
 		this.versionMapService=versionMapService;
 	}
+	public SaveData(VersionMapService versionMapService,ProjectItemsService projectItemsService,ProjectsService projectService,CompanyService companyService){	
+		this.companyService=companyService;
+		this.projectItemsService = projectItemsService;
+		this.projectService =projectService;
+		this.versionMapService = versionMapService;	
+	}
 	public SaveData(CompanyService companyService){	
 		
 		this.companyService=companyService;

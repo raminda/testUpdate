@@ -68,6 +68,12 @@ public class DeleteData {
 		
 		this.versionMapService=versionMapService;
 	}
+	public DeleteData(VersionMapService versionMapService,ProjectItemsService projectItemsService,ProjectsService projectService,CompanyService companyService){	
+		this.companyService=companyService;
+		this.projectItemsService = projectItemsService;
+		this.projectService =projectService;
+		this.versionMapService = versionMapService;	
+	}
 	public DeleteData(CompanyService companyService){		
 		
 		this.companyService=companyService;

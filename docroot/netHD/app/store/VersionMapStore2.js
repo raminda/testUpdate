@@ -1,11 +1,11 @@
-Ext.define( 'New.store.ProjectItemsStore2', {
+Ext.define( 'New.store.VersionMapStore2', {
 	extend :'Ext.data.Store',
-	model : 'New.model.ProjectItemsModel',
+	model : 'New.model.VersionMapModel',
 	autoLoad : true,
 	autoSync : true,
 	proxy : {
 		type : 'ajax',
-		url : ProjectItemsStoreUrl,
+		url : VersionMapStoreUrl,
 		reader : {
 			type : 'json'
 		},
