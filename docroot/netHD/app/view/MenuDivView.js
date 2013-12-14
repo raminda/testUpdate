@@ -58,14 +58,14 @@ Ext.onReady(function(){
 	addLibraryIcon('firewall');
 	addLibraryIcon('Array');
 	addLibraryIcon('Catalyst');
-	//addLibraryIcon('InfiniBand');
+	addLibraryIcon('Router');
 	addLibraryIcon('PC');
 	addLibraryIcon('Server');
-	addLibraryIcon('firewall');
-	addLibraryIcon('Array');
 	addLibraryIcon('Switch');
 	addLibraryIcon('Tape Library');
 	addLibraryIcon('cloud');
+	addLibraryIcon('Site');
+	addLibraryIcon('SAN');
 
 	var droptarget=new Ext.dd.DropTarget("center1",{ddGroup:'TreeDD'});
 	droptarget.notifyDrop=function(dd, e, data){

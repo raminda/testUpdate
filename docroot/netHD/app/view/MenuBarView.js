@@ -65,29 +65,6 @@ Ext.define('New.view.MenuBarView', {
 					Ext.getCmp('savepjt').setVisible(false);
 		    	}
 			},{
-				text: 'Projects Items',
-				handler : function() {
-					
-					var grid = Ext.getCmp('VersionMapResultGrid');
-					var store = grid.getStore('VersionMapStoreGrid');
-					store.proxy.extraParams.purpose='Grid';
-					store.load();
-					Ext.getCmp('ProjectDetails').setVisible(false);	
-					Ext.getCmp('VersionMapGrids').setVisible(true);
-					Ext.getCmp('ProjectGrid').setVisible(false);
-					Ext.getCmp('PackageGrid').setVisible(false);
-					Ext.getCmp('ItemTypeGrid').setVisible(false);
-					Ext.getCmp('EquipmentGrid').setVisible(false);
-					Ext.getCmp('CompanyGrid').setVisible(false);
-					Ext.getCmp('imageView').setVisible(false);
-					Ext.getCmp('GridView').setVisible(true);
-					Ext.getCmp('CanversView').setVisible(false);
-					Ext.getCmp('EquipmentBulkDD').setVisible(false);
-					Ext.getCmp('ReportView').setVisible(false);
-					Ext.getCmp('savepjt').setVisible(false);
-		    	}
-					
-			},{
 				text: 'Projects',
 				handler : function() {
 					Ext.getCmp('ProjectDetails').setVisible(false);	
@@ -218,17 +195,6 @@ Ext.define('New.view.MenuBarView', {
 				Ext.getCmp('GridView').setVisible(true);
 				Ext.getCmp('CanversView').setVisible(false);
 				Ext.getCmp('EquipmentBulkDD').setVisible(false);
-				Ext.getCmp('ReportView').setVisible(false);	
-		    }
-		},{
-			text: 'Add New Rools',
-			handler : function() {
-				Ext.getCmp('ProjectDetails').setVisible(false);	
-				Ext.getCmp('imageView').setVisible(false);
-				Ext.getCmp('GridView').setVisible(true);
-				Ext.getCmp('CanversView').setVisible(false);
-				Ext.getCmp('EquipmentBulkDD').setVisible(false);
-				Ext.getCmp('savepjt').setVisible(false);
 				Ext.getCmp('ReportView').setVisible(false);	
 		    }
 		}]

@@ -5,8 +5,8 @@ var workflow;
 var Parth='/test-portlet/netHD/';
 function crt(){ 
 	workflow = new Workflow("paintarea");  
-	//workflow.clear();
-    JSN(workflow);
+	gJSN().figures.removeAllElements();
+	JSN(workflow);
 }
 
 function crt2(){ 

@@ -278,11 +278,12 @@ Ext.define('New.view.GridProjectsItemsView', {
         flex: 1,
         handler : function() {
         	var store = Ext.getStore('ProjectItemsStoreResult');
-    		store.proxy.extraParams.ID1=Ext.getCmp('cmbPrjProject').getValue();
-			store.proxy.extraParams.ID2=Ext.getCmp('cmbPrjOption').getValue();
-			store.proxy.extraParams.ID3=Ext.getCmp('cmbPrjVersion').getValue();
-			store.proxy.extraParams.value = '5';
-			store.proxy.extraParams.purpose = 'Combo';
+			store.proxy.extraParams.purpose = 'Grid';
+			store.proxy.extraParams.ID2=Ext.getCmp('cmbPrjVersion').getValue();;
+			store.proxy.extraParams.value="5";	
+			store.proxy.extraParams.ID1=Ext.getCmp('cmbPrjProject').getValue();
+			store.proxy.extraParams.ID=Ext.getCmp('cmbPrjOption').getValue();
+			store.proxy.extraParams.ID3=Ext.getCmp('cmbPrjSite').getValue();
 			store.load();
         }
     },/*{
