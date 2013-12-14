@@ -103,7 +103,7 @@ function Validator(txt) {
 	}
 	if(bool){
 		myjson_details+="{}]";
-		alert(myjson_details); 
+		//alert(myjson_details); 
 	}
 	else{
 		//do nothing

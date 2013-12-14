@@ -582,8 +582,7 @@ Ext.define('New.view.FormProjectDetailsView', {
 				            	store.proxy.extraParams.purpose="ExcelCreate";
 				        		store.proxy.extraParams.ID1=Ext.getCmp('cmbPrjProject').getValue();
 								store.proxy.extraParams.ID2=Ext.getCmp('cmbPrjOption').getValue();
-								store.proxy.extraParams.ID3=Ext.getCmp('cmbPrjVersion').getValue();
-							Ext.Msg.alert('Message', '!');	
+								store.proxy.extraParams.ID3=Ext.getCmp('cmbPrjVersion').getValue();	
 							var win = Ext.create('Ext.window.Window', {
 								title : 'Excel Genarating Window',
 								width : 450,
@@ -600,7 +599,6 @@ Ext.define('New.view.FormProjectDetailsView', {
 							win.show();
 								
 							store.load();
-							//store.reset();
 						}
 						else{
 							Ext.Msg.alert('Message', 'Plese Enter values!');

@@ -20,14 +20,11 @@ Ext.define( 'New.store.my', {
 	 listeners: {
          load: function (me, records, successful, eOpts) {
         	 var jsn=null;
-        	 
-        	 
 	        	 Ext.each(records, function(rec) {
-	        	 	jsn=Ext.encode(rec.raw);//"+jsn.FileName + "
-	        	 	jsn=JSON.parse(jsn);
+	        	 	jsn=Ext.encode(rec.raw);
 	                console.log(jsn + "   -       +   ");
 	        	 });
-	
+	        	 var jsn = eval ("(" + jsn + ")");
 	        	 if(jsn.FileName!=null){
 	        		 Ext.getCmp('buttonExcel').href=jsn.FileName;
 	        		 Ext.getCmp('imageExcel1').setVisible(false);
@@ -35,7 +32,7 @@ Ext.define( 'New.store.my', {
 	        		 Ext.getCmp('buttonExcel').setText("Click To Download");
 	        	 }
 	        	 else{
-	        		 console.log(jsn );
+	        		 console.log(jsn);
 	        	 }
         	 
          }

@@ -11,6 +11,8 @@ import java.util.Locale;
 
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 import jxl.JXLException;
 import jxl.Workbook;
@@ -48,26 +50,28 @@ import com.millenniumit.mx.data.nethdsizing.service.VersionMapService;
 public class  ExcelCreator {
 	
 	
+	
 	private String dateFormat  = "yyyy-MM-dd";
 	private Logger logger = Logger.getLogger(ExcelCreator.class);
 	
 	//Services Objects in Service class 
 	
 	private EquipmentsService equipmentService;
-	private EquipmentsBulkService equipmentsBulkService;
+	private CompanyService companyService;
 	private ItemTypesService itemTypeService;
 	private PackagesService packageService;
 	private ProjectsService projectService;
-
+	private EquipmentsBulkService equipmentsBulkService;
 	private ProjectItemsService projectItemsService;
+	private VersionMapService versionMapService;
+	
 	private String FilepathString,Coverpathstring;
 	private String obj[]=new String[3];
 	private WritableWorkbook workbook = null;
 	private Workbook Cover=null;
 	private int number;
 	
-	public ExcelCreator(EquipmentsService equipmentService,EquipmentsBulkService equipmentsBulkService,ItemTypesService itemTypeService,PackagesService packageService,ProjectsService projectService,ProjectItemsService projectItemsService,CompanyService companyService,VersionMapService versionMapService){
-		
+	public ExcelCreator(EquipmentsService equipmentService,EquipmentsBulkService equipmentsBulkService,ItemTypesService itemTypeService,PackagesService packageService,ProjectsService projectService,ProjectItemsService projectItemsService,CompanyService companyService,VersionMapService versionMapService){	
 		
 		this.equipmentService =equipmentService; 
 		this.equipmentsBulkService=equipmentsBulkService;
@@ -75,33 +79,39 @@ public class  ExcelCreator {
 		this.packageService =packageService ;
 		this.projectService =projectService;
 		this.projectItemsService = projectItemsService;
-		FilepathString="C:/project/liferay-portal/tomcat-7.0.27/webapps/Excel/";
+		this.companyService=companyService;
+		this.versionMapService=versionMapService;
+		
+		FilepathString="C:/project/liferay-portal/tomcat-7.0.27/webapps/Excel";
+		FilepathString=FilepathString.replaceAll("\\s", "");
 		Coverpathstring="C:/project/liferay-portal/tomcat-7.0.27/webapps/test-portlet/netHD/Excel/";
+		Coverpathstring=Coverpathstring.replaceAll("\\s", "");
 	}
 	
 	
 	public  void myxcel(ResourceRequest request, ResourceResponse response,String projectID,String Option,String Version) throws IOException, WriteException, BiffException {
 		PrintWriter out = response.getWriter();
-		obj[0]=Option;
-		obj[1]=Version;
-				
+		//obj[0]=projectID;
+		obj[1]=Option;
+		obj[0]=Version;
 		Project projects= projectService.getProjects(projectID);
 		//List<String> Projectitems=projectItemsService.getAllString(projects, obj, 1);
-		String[] Projectitems={"",""};
+		//String[] Projectitems={"",""};
 		
 		//Report Store Directory
-		String FilePath=projects.getCompany()+"/"+projectID+"/"+Option+"/"+Version;
+		String FilePath=projects.getCompany().getCompanyName()+"/"+projectID+"/"+Option+"/"+Version;
 		FilePath=FilePath.replaceAll("\\s","");
 		//Report file name like  BMB_option_1_(250us)_Hardware_specification_v2.1
-		String fileName = projects.getCompany()+ "_"+ projectID +"_"+Option+"_"+Version+".xls";
-		
+		String fileName = projects.getCompany().getCompanyName()+ "_"+ projectID +"_"+Option+"_"+Version+".xls";
 		fileName=fileName.replaceAll("\\s","");
-		FilepathString=FilepathString.replaceAll("\\s", "");
 		
-		String Drctry=FilepathString+"/"+FilePath;
+		
+		
+		String Drctry=Coverpathstring+"/"+FilePath;
 		//create Project Excel Directory
-		new File(Drctry).mkdirs();
-
+		logger.info(new File(Drctry).mkdirs());
+		System.out.println("Drctry : "+Drctry);
+		System.out.println("Coverpathstring : "+Coverpathstring);
 		WorkbookSettings ws = new WorkbookSettings();
 		ws.setLocale(new Locale("en", "EN"));
 		
@@ -113,7 +123,7 @@ public class  ExcelCreator {
 		 
 		//Hw-Sw spec
 		try {
-			HW_specCreator(projects);
+			HW_specCreator(obj,projects);
 		} catch (JXLException e) {
 			System.out.println(e.getMessage());
 		} catch (Exception e) {
@@ -133,36 +143,33 @@ public class  ExcelCreator {
 		workbook.write();
 		workbook.close();
 		String address=request.getContextPath()+" - "+request.getServerName()+ " - "+request.getServerPort()+" - /*/**"+request.toString();
-		
-		System.out.println("[{FileName: 'https://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/itic/Excel/"+FilePath+"/"+fileName+"'}]");
+		logger.info(address);
+		System.out.println("[{FileName: 'https://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/netHD/Excel/"+FilePath+"/"+fileName+"'}]");
 		
 		//https://localhost:8443/SystemAnalyze-portlet/itic/Excel/
-		out.println("[{FileName: 'https://"+request.getServerName()+":"+request.getServerPort()+"/Excel/"+FilePath+"/"+fileName+"'}]");
+		//out.println("[{FileName: 'https://"+request.getServerName()+":"+request.getServerPort()+"/Excel/"+FilePath+"/"+fileName+"'}]");
+		out.println("[{'FileName': 'https://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/netHD/Excel/"+FilePath+"/"+fileName+"'}]");
 		//System.out.println(address);
 	}
 	
 	
-	private void HW_specCreator(Project projects)throws JXLException, Exception {
+	private void HW_specCreator(String Obj[],Project projects)throws JXLException, Exception {
 		
-		
-		/*List<String> Sites=projectItemsService.getAllString(projects, obj, 3);*/
-		String[]Sites={"",""};
-		//number= Sites.size();
-		number= Sites.length;
+		List<String> Sites=versionMapService.getSite(projects, obj[1],obj[0]);
+		number= Sites.size();
 		System.out.println("Site No : "+number);
 		
 		WritableSheet s[]= new WritableSheet[number]  ;
 		//Common column labels
 		String Collumn[]={"Brand / Model","Details","Count","Usage","Unit cost ($)","Total cost ($)","Grand Total ($)"};
 		
-		//TableModel model = new DefaultTableModel(Column, PakNumber+1);
 		for(int i=0;i<number;i++){
 			//create Sheets
-			s[i] = workbook.createSheet("Hw-Sw spec ("+Sites.length+" )",( i+4));
-			//s[i].setPageSetup(arg0, arg1, arg2)
+			s[i] = workbook.createSheet("Hw-Sw spec ("+Sites.get(i)+" )",( i+4));
 			//get site Name
-			/*String site=Sites.get(i);*/
-			String site="";
+			String site=Sites.get(i);
+			System.out.println("Site Name : "+site);
+			
 			//set Column Width 
 			s[i].setColumnView(0, 50);
 			s[i].setColumnView(1, 44);
@@ -174,15 +181,15 @@ public class  ExcelCreator {
 			
 			obj[2]=site; //set site name to String
 			
-			//List<String> PacakgeTypes=projectItemsService.getAllString(projects, obj, 5);
-			String[] PacakgeTypes={"",""};
+			List<String> PacakgeTypes=projectItemsService.getPackageType(versionMapService.getAll(projects, obj[1], obj[0], site));
+			
 			//get chart numbers
-			int CNumner=PacakgeTypes.length;
+			int CNumner=PacakgeTypes.size();
+			System.out.println("PacakgeTypes Sz : "+CNumner);
 			int itemNumber=4;
-			Number nm,nm2;
+			Number nm;//,nm2;
 			Formula f;
 			
-			//WritableFont wf3 = new WritableFont(WritableFont.ARIAL,10,WritableFont.BOLD,true,UnderlineStyle.SINGLE_ACCOUNTING);
 			FontName ft=WritableFont.ARIAL;
 			NumberFormat nf=new NumberFormat("#0");
 			
@@ -233,10 +240,9 @@ public class  ExcelCreator {
 			
 			for(int j=0;j<CNumner;j++){
 				
-				/*String Package=PacakgeTypes.get(j);*/
-				String Package="";
-			System.out.println("String for alll : "+Package +" "+projects+" "+ obj[0]+" "+obj[1]+" "+ site+" "+ Package);
-				List<ProjectItems> projectItems=projectItemsService.getAll();
+				String Package=PacakgeTypes.get(j);
+				System.out.println("String for alll : "+Package +" "+projects+" "+ obj[0]+" "+obj[1]+" "+ site+" "+ Package);
+				List<ProjectItems> projectItems=projectItemsService.getAll(versionMapService.getAll(projects, obj[1], obj[0], site),Package);
 				
 				//get package Number
 				int PakNumber=projectItems.size();
@@ -292,7 +298,7 @@ public class  ExcelCreator {
 					s[i].addCell(nm);
 					
 					
-					//l = new Label(3, itemNumber,projectItems.get(m).getPcakageUsege(),cf3);
+					l = new Label(3, itemNumber,projectItems.get(m).getPcakageUsege(),cf3);
 					s[i].addCell(l);
 					
 			
@@ -309,11 +315,7 @@ public class  ExcelCreator {
 					l = new Label(6, itemNumber,null,cf3);
 					s[i].addCell(l);
 					
-					//itemNumber++;
 				}
-	
-		
-				
 				itemNumber++;
 
 				
@@ -331,10 +333,7 @@ public class  ExcelCreator {
 				s[i].addCell(f);
 				
 				itemNumber++;
-				
 			}
-			
-			//CNumner  itemNumber
 			int last = itemNumber+1;
 			
 			f = new Formula(2, 2, "SUM(G7:G"+last+")",cf1);
@@ -345,13 +344,9 @@ public class  ExcelCreator {
 			l = new Label(4, last, "Total hardware cost (US $)",cf6);
 			s[i].addCell(l);
 			f = new Formula(6, last, "SUM(G7:G"+(last-1)+")",cf6);
-			s[i].addCell(f);
-			
-			
+			s[i].addCell(f);	
 			 
 		}
-		
-		
 		
 	}
 
