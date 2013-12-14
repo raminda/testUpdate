@@ -273,6 +273,20 @@ Ext.define('New.view.GridProjectsItemsView', {
         }
     },{
         xtype: 'button',
+        text : 'Refresh',
+        width : 100,
+        flex: 1,
+        handler : function() {
+        	var store = Ext.getStore('ProjectItemsStoreResult');
+    		store.proxy.extraParams.ID1=Ext.getCmp('cmbPrjProject').getValue();
+			store.proxy.extraParams.ID2=Ext.getCmp('cmbPrjOption').getValue();
+			store.proxy.extraParams.ID3=Ext.getCmp('cmbPrjVersion').getValue();
+			store.proxy.extraParams.value = '5';
+			store.proxy.extraParams.purpose = 'Combo';
+			store.load();
+        }
+    },/*{
+        xtype: 'button',
         text : 'Copy Version',
         width : 100,
         flex: 1,
@@ -352,7 +366,7 @@ Ext.define('New.view.GridProjectsItemsView', {
 			});
 		win.show();
         }
-    },{
+    },*/{
 		text : 'Remove Project Items',
 		iconCls : 'remove',
 		handler : function(){

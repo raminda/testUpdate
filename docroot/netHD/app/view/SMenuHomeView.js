@@ -49,6 +49,7 @@ Ext.define('New.view.SMenuHomeView', {
 			handler : function() {
 				document.getElementById(Ext.getCmp('txtEqipmentType').getValue()+"_edit").value=Ext.getCmp('txtType').getValue();
 				document.getElementById(Ext.getCmp('txtEqipmentType').getValue()+"_save").click();
+				Ext.getCmp('savepjt').setVisible(true);
 			}
 		},{
 			xtype : 'textfield',

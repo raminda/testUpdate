@@ -23,6 +23,7 @@ Ext.define('New.view.MenuBarView', {
 			Ext.getCmp('CanversView').setVisible(false);
 			Ext.getCmp('EquipmentBulkDD').setVisible(false);
 			Ext.getCmp('ReportView').setVisible(false);
+			Ext.getCmp('savepjt').setVisible(false);
     	}
 		},{
 		text : 'Projects',
@@ -49,6 +50,7 @@ Ext.define('New.view.MenuBarView', {
 					Ext.getCmp('CanversView').setVisible(true);
 					Ext.getCmp('ReportView').setVisible(false);
 					Ext.getCmp('EquipmentBulkDD').setVisible(false);
+					
 					crt();
 	    		}
 			},{
@@ -60,6 +62,7 @@ Ext.define('New.view.MenuBarView', {
 					Ext.getCmp('GridView').setVisible(false);
 					Ext.getCmp('CanversView').setVisible(false);
 					Ext.getCmp('ReportView').setVisible(false);
+					Ext.getCmp('savepjt').setVisible(false);
 		    	}
 			},{
 				text: 'Projects Items',
@@ -81,6 +84,7 @@ Ext.define('New.view.MenuBarView', {
 					Ext.getCmp('CanversView').setVisible(false);
 					Ext.getCmp('EquipmentBulkDD').setVisible(false);
 					Ext.getCmp('ReportView').setVisible(false);
+					Ext.getCmp('savepjt').setVisible(false);
 		    	}
 					
 			},{
@@ -103,6 +107,7 @@ Ext.define('New.view.MenuBarView', {
 					Ext.getCmp('CanversView').setVisible(false);
 					Ext.getCmp('EquipmentBulkDD').setVisible(false);
 					Ext.getCmp('ReportView').setVisible(false);
+					Ext.getCmp('savepjt').setVisible(false);
 		    	}
 					
 			},{
@@ -125,6 +130,7 @@ Ext.define('New.view.MenuBarView', {
 					Ext.getCmp('CanversView').setVisible(false);
 					Ext.getCmp('EquipmentBulkDD').setVisible(false);
 					Ext.getCmp('ReportView').setVisible(false);	
+					Ext.getCmp('savepjt').setVisible(false);
 			    }
 			}]
 		},{
@@ -146,6 +152,7 @@ Ext.define('New.view.MenuBarView', {
 				Ext.getCmp('GridView').setVisible(false);
 				Ext.getCmp('CanversView').setVisible(false);
 				Ext.getCmp('ProjectGrid').setVisible(false);
+				Ext.getCmp('savepjt').setVisible(false);
 				Ext.getCmp('ReportView').setVisible(false);	
     			}
 			},{
@@ -167,6 +174,7 @@ Ext.define('New.view.MenuBarView', {
 				Ext.getCmp('GridView').setVisible(true);
 				Ext.getCmp('CanversView').setVisible(false);
 				Ext.getCmp('ReportView').setVisible(false);	
+				Ext.getCmp('savepjt').setVisible(false);
 	    		}
 			},{
 			text: 'Configure Equipment',
@@ -177,6 +185,7 @@ Ext.define('New.view.MenuBarView', {
 				Ext.getCmp('PackageGrid').setVisible(false);
 				Ext.getCmp('ProjectGrid').setVisible(false);
 				Ext.getCmp('VersionMapGrids').setVisible(false);
+				Ext.getCmp('savepjt').setVisible(false);
 				var grid = Ext.getCmp('gridEquipmentView');
 				var store = grid.getStore('EquipmentStoreGrid');
 				store.proxy.extraParams.purpose='Grid';
@@ -198,6 +207,7 @@ Ext.define('New.view.MenuBarView', {
 				Ext.getCmp('PackageGrid').setVisible(false);
 				Ext.getCmp('ProjectGrid').setVisible(false);
 				Ext.getCmp('VersionMapGrids').setVisible(false);
+				Ext.getCmp('savepjt').setVisible(false);
 				var grid = Ext.getCmp('GridItemTypeView');
 				var store = grid.getStore('ItemTypeStoreGrid');
 				store.proxy.extraParams.purpose='Grid';
@@ -218,6 +228,7 @@ Ext.define('New.view.MenuBarView', {
 				Ext.getCmp('GridView').setVisible(true);
 				Ext.getCmp('CanversView').setVisible(false);
 				Ext.getCmp('EquipmentBulkDD').setVisible(false);
+				Ext.getCmp('savepjt').setVisible(false);
 				Ext.getCmp('ReportView').setVisible(false);	
 		    }
 		}]
@@ -236,6 +247,7 @@ Ext.define('New.view.MenuBarView', {
 				Ext.getCmp('CanversView').setVisible(false);
 				Ext.getCmp('EquipmentBulkDD').setVisible(false);
 				Ext.getCmp('ReportView').setVisible(true);	
+				Ext.getCmp('savepjt').setVisible(false);
     		}
 		},{
 			text: 'Log report',
@@ -245,7 +257,8 @@ Ext.define('New.view.MenuBarView', {
 				Ext.getCmp('GridView').setVisible(false);
 				Ext.getCmp('CanversView').setVisible(false);
 				Ext.getCmp('EquipmentBulkDD').setVisible(false);
-				Ext.getCmp('ReportView').setVisible(true);	
+				Ext.getCmp('ReportView').setVisible(true);
+				Ext.getCmp('savepjt').setVisible(false);
 	    	}
 		},{
 			text: 'Equipment Summery',
@@ -256,6 +269,7 @@ Ext.define('New.view.MenuBarView', {
 				Ext.getCmp('CanversView').setVisible(false);
 				Ext.getCmp('EquipmentBulkDD').setVisible(false);
 				Ext.getCmp('ReportView').setVisible(true);	
+				Ext.getCmp('savepjt').setVisible(false);
 	    	}
 				
 		},{
@@ -266,7 +280,8 @@ Ext.define('New.view.MenuBarView', {
 				Ext.getCmp('GridView').setVisible(false);
 				Ext.getCmp('CanversView').setVisible(false);
 				Ext.getCmp('EquipmentBulkDD').setVisible(false);
-				Ext.getCmp('ReportView').setVisible(true);	
+				Ext.getCmp('ReportView').setVisible(true);
+				Ext.getCmp('savepjt').setVisible(false);
 		    }
 		},{
 			text: 'Project Summery',
@@ -277,6 +292,7 @@ Ext.define('New.view.MenuBarView', {
 				Ext.getCmp('CanversView').setVisible(false);
 				Ext.getCmp('EquipmentBulkDD').setVisible(false);
 				Ext.getCmp('ReportView').setVisible(true);	
+				Ext.getCmp('savepjt').setVisible(false);
 		    }
 		}]
 	}],

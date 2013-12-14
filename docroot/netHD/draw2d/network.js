@@ -2,15 +2,18 @@
  * @author DECAN
  */
 var workflow;
+var Parth='/test-portlet/netHD/';
 function crt(){ 
 	workflow = new Workflow("paintarea");  
+	workflow.clear();
     JSN(workflow);
 }
 
 function crt2(){ 
 	var txt = JSON.encode(new JSONSerializer().toJSON(workflow.getDocument()));
+	var JSONS = JSON.encode(new JSONSerializer().toJSON(workflow.getDocument()));
 	 txt = txt.replace(/,"/g, ', "');
-	 alert(txt);
+	 Validator(txt);
 }
 
 function JSN(Workflow){
@@ -97,14 +100,14 @@ function loadJSON(aFile)
 
 function addDragIcon(aName, aWhere) 
 {
-  loadJavaScript("/test-portlet/netHD/draw2d/icons/" + aName + ".js", function() { 
+  loadJavaScript(Parth+"draw2d/icons/" + aName + ".js", function() { 
      if (document.getElementById("cont_" + aName)) {
        return;
      }
      var div = document.getElementById(aWhere);
      var cdiv = createNewDiv("cont_" + aName);
      var html = '';
-     html = html + aName + "<img src='/test-portlet/netHD/draw2d/icons/" + aName + ".png' id='drag_" + aName + "' style='cursor:move'/><br><br>\n";
+     html = html + aName + "<img src='"+Parth+"draw2d/icons/" + aName + ".png' id='drag_" + aName + "' style='cursor:move'/><br><br>\n";
      cdiv.innerHTML = html;
      div.appendChild(cdiv);
      var dragsource=new Ext.dd.DragSource('drag_' + aName, {ddGroup:'TreeDD',dragData:{name: aName}});
@@ -121,7 +124,7 @@ function addDragIconPic(aName, aWhere, aPic)
      var html = '';
      html = html + "<center>";
      html = html + "<h1>" + aName + "</h1>\n";
-     html = html + "<img src='/test-portlet/netHD/draw2d/icons/"+ aPic + "' id='drag_" + aName + "' style='cursor:move'/>\n";
+     html = html + "<img src='"+Parth+"draw2d/icons/"+ aPic + "' id='drag_" + aName + "' style='cursor:move'/>\n";
      html = html + "<hr size=1 noshade>\n";
      html = html + "</center>";
 

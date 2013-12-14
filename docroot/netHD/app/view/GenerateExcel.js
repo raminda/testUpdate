@@ -45,14 +45,14 @@ Ext.define('New.view.GenerateExcel', {
 	    			xtype: 'image',
 	    			width : 200,
 	                height : 150,
-	    			src: '/SystemAnalyze-portlet/Img/6.gif',
+	    			src: '/test-portlet/Img/6.gif',
                 },{
                 	id : 'imageExcel2',
 	    			name : 'imageExcel2',
 	    			xtype: 'image',
 	    			width : 200,
 	                height : 150,
-	    			src: '/SystemAnalyze-portlet/Img/8.gif',
+	    			src: '/test-portlet/Img/8.gif',
                 }]
         }],
         initComponent : function() {

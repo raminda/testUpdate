@@ -541,7 +541,7 @@ Ext.define('New.view.FormProjectDetailsView', {
     	        		store.proxy.extraParams.ID1=Ext.getCmp('cmbPrjProject').getValue();
     					store.proxy.extraParams.ID2=Ext.getCmp('cmbPrjOption').getValue();
     					store.proxy.extraParams.ID3=Ext.getCmp('cmbPrjVersion').getValue();
-	        			store.proxy.extraParams.value = '6';
+	        			store.proxy.extraParams.value = '5';
 	        			store.proxy.extraParams.purpose = 'Combo';
     					store.load();
 	                }
@@ -575,12 +575,13 @@ Ext.define('New.view.FormProjectDetailsView', {
 	                },
 	                handler : function() {
 						if(Ext.getCmp('cmbPrjProject').getValue()!=null && Ext.getCmp('cmbPrjVersion').getValue()!=null  && Ext.getCmp('cmbPrjOption').getValue()!=null ){
+							
 							var store = Ext.getStore('my');
 				            	store.proxy.extraParams.purpose="ExcelCreate";
 				        		store.proxy.extraParams.ID1=Ext.getCmp('cmbPrjProject').getValue();
 								store.proxy.extraParams.ID2=Ext.getCmp('cmbPrjOption').getValue();
 								store.proxy.extraParams.ID3=Ext.getCmp('cmbPrjVersion').getValue();
-								
+							Ext.Msg.alert('Message', '!');	
 							var win = Ext.create('Ext.window.Window', {
 								title : 'Excel Genarating Window',
 								width : 450,
@@ -600,7 +601,7 @@ Ext.define('New.view.FormProjectDetailsView', {
 							//store.reset();
 						}
 						else{
-							
+							Ext.Msg.alert('Message', 'Plese Enter values!');
 						}
 					}
             	},{

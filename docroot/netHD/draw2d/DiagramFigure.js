@@ -13,7 +13,6 @@ Figure.prototype.toggleBackground=function()
   }
 }
 
-
 Figure.prototype.bgFlash = function() {
   if (this.toggleCountdown) {
     return;
@@ -148,6 +147,7 @@ Node.prototype.addAnnotation = function(aForWhat, aText, aAnnX, aAnnY) {
   ann.onDoubleClick=function(){
 	Ext.getCmp('txtType').setVisible(true);
 	Ext.getCmp('btnType').setVisible(true);
+	Ext.getCmp('savepjt').setVisible(false);
     this.doEdit();
   }
 
@@ -166,7 +166,7 @@ DiagramFigure.prototype=new ImageFigure;
 DiagramFigure.prototype.type="DiagramFigure";
 DiagramFigure.prototype.setPic = function(aPic) {
 	
-	aPic="/test-portlet/netHD/draw2d/icons/"+aPic;	
+	aPic=Parth+"draw2d/icons/"+aPic;	
 	this.pic = aPic;
   this.setImage(aPic);
 }

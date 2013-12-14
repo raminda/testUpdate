@@ -75,8 +75,8 @@ public class  ExcelCreator {
 		this.packageService =packageService ;
 		this.projectService =projectService;
 		this.projectItemsService = projectItemsService;
-		FilepathString="C:/Liferay/portal/tomcat-7.0.27/webapps/Excel/";
-		Coverpathstring="C:/Liferay/portal/tomcat-7.0.27/webapps/SystemAnalyze-portlet/itic/Excel/";
+		FilepathString="C:/project/liferay-portal/tomcat-7.0.27/webapps/Excel/";
+		Coverpathstring="C:/project/liferay-portal/tomcat-7.0.27/webapps/test-portlet/netHD/Excel/";
 	}
 	
 	

@@ -7,7 +7,7 @@ Ext.define('New.view.CanversView', {
 	border : false,
 	frame : false,
 	anchor: '100% 100%',
-	height:900,
+	height:830,
 	overflowX : 'auto',
 	layout:'border',
 	items :[{
