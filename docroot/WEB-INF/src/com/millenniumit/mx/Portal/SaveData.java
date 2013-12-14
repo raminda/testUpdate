@@ -22,6 +22,8 @@ import com.millenniumit.mx.data.nethdsizing.domain.Equipments;
 import com.millenniumit.mx.data.nethdsizing.domain.ItemTypes;
 import com.millenniumit.mx.data.nethdsizing.domain.Packages;
 import com.millenniumit.mx.data.nethdsizing.domain.Project;
+import com.millenniumit.mx.data.nethdsizing.domain.ProjectItems;
+import com.millenniumit.mx.data.nethdsizing.domain.VersionMap;
 import com.millenniumit.mx.data.nethdsizing.service.CompanyService;
 import com.millenniumit.mx.data.nethdsizing.service.EquipmentMapingService;
 import com.millenniumit.mx.data.nethdsizing.service.EquipmentsBulkService;
@@ -32,7 +34,6 @@ import com.millenniumit.mx.data.nethdsizing.service.ProjectItemsService;
 import com.millenniumit.mx.data.nethdsizing.service.ProjectsService;
 import com.millenniumit.mx.data.nethdsizing.service.VersionMapService;
 
-@SuppressWarnings("unused")
 public class SaveData {
 	
 	private String dateFormat  = "yyyy-MM-dd";
@@ -68,11 +69,12 @@ public class SaveData {
 		
 		this.versionMapService=versionMapService;
 	}
-	public SaveData(VersionMapService versionMapService,ProjectItemsService projectItemsService,ProjectsService projectService,CompanyService companyService){	
+	public SaveData(VersionMapService versionMapService,ProjectItemsService projectItemsService,ProjectsService projectService,CompanyService companyService,PackagesService packageService){	
 		this.companyService=companyService;
 		this.projectItemsService = projectItemsService;
 		this.projectService =projectService;
 		this.versionMapService = versionMapService;	
+		this.packageService=packageService;
 	}
 	public SaveData(CompanyService companyService){	
 		
@@ -115,8 +117,6 @@ public class SaveData {
 		this.equipmentMapingService=equipmentMapingService;
 	}
 
-	
-	
 	public void NewData(ResourceRequest request, ResourceResponse response,String ServiceType) throws NumberFormatException, JSONException, ParseException{
 		JSONObject jsonobj=jsonCreator.JsonCreat(request, response,ServiceType);
 		int ID = 0 ;
@@ -133,7 +133,6 @@ public class SaveData {
 					NewEquipment.setItemType(itemTypeService.get(jsonobj.getString("itemtypes")));
 					NewEquipment.setSummary(jsonobj.getString("Summary"));
 					NewEquipment.setTec_Descrip(jsonobj.getString("Comments"));
-					//NewEquipment.setTec_Descrip(jsonobj.getString("Tec_Descrip"));
 					NewEquipment.setITIC_Descrip(jsonobj.getString("ITIC_Descrip"));
 					NewEquipment.setPrice(Integer.parseInt(jsonobj.getString("Price"),10));
 					Date date = new SimpleDateFormat(dateFormat).parse(jsonobj.getString("EOLDate"));
@@ -399,57 +398,51 @@ public class SaveData {
 			}
 		}
 		//********ProjectItems**********
-		else if (ServiceType.equals("ProjectItems")) {
-			
-			//ProjectItems projectItems=new ProjectItems();
-			//ProjectItems obj=projectItemsService.get(projectService.getProjects(jsonobj.getString("ProjectID")), jsonobj.getString("OptionID"), jsonobj.getString("VersionID"), (jsonobj.getString("SiteID")),packageService.getPackagess(Integer.parseInt(jsonobj.getString("PackageID")))) ;
-			/*if(obj== null){
+		else if (ServiceType.equals("ProjectItemsStore")) {
+			logger.info("ProjectItemsStore ");
+			Project projects=projectService.getProjects(request.getParameter("ID1"));
+			Packages packages=packageService.getPackagess(Integer.parseInt(jsonobj.getString("PackageName")));
+			VersionMap obj =versionMapService.getAll(projects,request.getParameter("ID"),request.getParameter("ID2"),request.getParameter("ID3"));
+			if(obj==null){
 				logger.info("saving not Duplicate ");
+				obj=new VersionMap();
+				obj.setVersion(request.getParameter("ID2"));
+				obj.setSiteID(request.getParameter("ID3"));
+				obj.setProjectID(projects);
+				obj.setOptionID(request.getParameter("ID"));
 				try{
-
-					Project projects=projectService.getProjects(jsonobj.getString("ProjectID"));
-					VersionMap Version=versionMapService.get(Integer.parseInt(jsonobj.getString("PackageID")));
-					//logger.info("Error : " + projects.getProjectName()+"  "+ packages.getPackageName());
-					
-					projectItems.setVersion(Version);
-					//projectItems.setOpId(jsonobj.getString("OptionID"));
-					projectItems.setVersion(versionMapService.get(Integer.parseInt(jsonobj.getString("VersionID"))));
-					projectItems.setSiteID((jsonobj.getString("SiteID")));
-					//projectItems.setPackageID(packages);
-					projectItems.setQuantity(Integer.parseInt(jsonobj.getString("Quantity")));
-					projectItems.setPackageType(jsonobj.getString("PackageType"));
-				//	projectItems.setPcakageUsege(jsonobj.getString("PcakageUsege"));
-					Long price;
-					try {
-						price=(packageService.getPackagess(Integer.parseInt(jsonobj.getString("PackageID"))).getPrice())*projectItems.getQuantity();
-						
-					} catch (Exception e) {
-						price=(long)  0;
-					}
-					//projectItems.setPrice(price);
-				}catch (JSONException e) {
-					logger.info("Error222 : " + e.getMessage());
-					}
-				
-				logger.info("data  : " + projectItems.getPackageId().getPackageName() + "  "+projectItems.getProjectId().getProjectName());
-				//save data
-				try {
-					
-					ID = projectItemsService.save(projectItems);		
+					ID=versionMapService.save(obj);
 				}
 				catch (Exception e) {
-					logger.info("saving error : " + e.getMessage());
-					ID=  0;
+					logger.info("Error : " + e.getMessage());
+				}	
+				logger.info("ID : " +ID);
+			}
+			ProjectItems projectItems=projectItemsService.get(obj, packages);
+			if( projectItems==null){
+				projectItems=new ProjectItems();
+				projectItems.setVersion(obj);
+				projectItems.setPackageType(jsonobj.getString("PackageType"));
+				projectItems.setQuantity(Integer.parseInt(jsonobj.getString("Quantity")));
+				projectItems.setPackageID(packages);
+				
+				try{
+					ID=projectItemsService.save(projectItems);
+				}
+				catch (Exception e) {
+					logger.info("error "+ e.getMessage());
 				}
 			}
 			else{
-				logger.info("saving Duplicate Update : ");
-				obj.setQuantity((obj.getQuantity())+Integer.parseInt(jsonobj.getString("Quantity")));
-				obj.setPrice(obj.getQuantity()*packageService.getPackagess(Integer.parseInt(jsonobj.getString("PackageID"))).getPrice());
-				obj.setPackageType(jsonobj.getString("PackageType"));
-				//obj.setPcakageUsege(jsonobj.getString("PcakageUsege"));
-				projectItemsService.update(obj);
-			}*/
+				projectItems.setQuantity(projectItems.getQuantity()+Integer.parseInt(jsonobj.getString("Quantity")));
+				logger.info(projectItems.getPackageID().getPackageName());
+				try{
+					projectItemsService.update(projectItems);
+				}
+				catch (Exception e) {
+					logger.info("error "+ e.getMessage());
+				}
+			}
 			
 		}
 		//*********Project*********

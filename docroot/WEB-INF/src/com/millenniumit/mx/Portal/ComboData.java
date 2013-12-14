@@ -100,7 +100,7 @@ public class ComboData {
 	public ComboData(CompanyService companyServicee){	
 		this.companyService=companyServicee;
 	}
-	public ComboData(VersionMapService versionMapService,ProjectItemsService projectItemsService,ProjectsService projectService,CompanyService companyService){	
+	public ComboData(VersionMapService versionMapService,ProjectItemsService projectItemsService,ProjectsService projectService,CompanyService companyService,PackagesService packageService){	
 		this.companyService=companyService;
 		this.projectItemsService = projectItemsService;
 		this.projectService =projectService;

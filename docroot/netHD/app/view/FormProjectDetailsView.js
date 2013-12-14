@@ -574,8 +574,6 @@ Ext.define('New.view.FormProjectDetailsView', {
 	                    type: 'absolute'
 	                },
 	                handler : function() {
-		               
-		
 						if(Ext.getCmp('cmbPrjProject').getValue()!=null && Ext.getCmp('cmbPrjVersion').getValue()!=null  && Ext.getCmp('cmbPrjOption').getValue()!=null ){
 							var store = Ext.getStore('my');
 				            	store.proxy.extraParams.purpose="ExcelCreate";

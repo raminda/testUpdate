@@ -10,6 +10,9 @@ import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
+import jxl.read.biff.BiffException;
+import jxl.write.WriteException;
+
 import org.apache.log4j.Logger;
 import org.json.JSONException;
 import org.springframework.context.ApplicationContext;
@@ -165,10 +168,18 @@ public class NetHDSizing extends MVCPortlet {
 			ItemName="ProjectItemsStore";
 			System.out.println("This section is for Navigate "+ ItemName+" init");
 			gridData=new GridData(versionMapService,projectItemsService,projectService,companyService);
-			comboData=new ComboData(versionMapService,projectItemsService,projectService,companyService);
-			saveData=new SaveData(versionMapService,projectItemsService,projectService,companyService);
+			comboData=new ComboData(versionMapService,projectItemsService,projectService,companyService,packageService);
+			saveData=new SaveData(versionMapService,projectItemsService,projectService,companyService,packageService);
 			updateData=new UpdateData(versionMapService,projectItemsService,projectService,companyService);
 			deleteData=new DeleteData(versionMapService,projectItemsService,projectService,companyService);
+		}
+		else if (resourceID.equals("ExcelUrl")) {
+			ItemName="excel";
+			try {
+				excelCreator=new ExcelCreator(equipmentService, equipmentsBulkService, itemTypeService, packageService, projectService, projectItemsService,companyService,versionMapService);	
+			} catch (Exception e) {
+				logger.info("Error  : " + e.getMessage());
+			} 		
 		}
 		else{
 			
@@ -212,6 +223,21 @@ public class NetHDSizing extends MVCPortlet {
 			} catch (ParseException e) {
 				System.out.println(e.getMessage());
 			}
+		}
+		else if(request.getParameter("purpose").equals("ExcelCreate")){
+			try {
+				
+				String Company=request.getParameter("ID1");
+				String Option=request.getParameter("ID2");
+				String Vertion=request.getParameter("ID3");
+				
+				excelCreator.myxcel(request,  response,Company, Option, Vertion);
+			} catch (WriteException e) {
+				logger.info("Error : " + e.getMessage());
+			} catch (BiffException e) {
+				logger.info("Error : " + e.getMessage());
+			}
+			
 		}
 		else{
 			try {

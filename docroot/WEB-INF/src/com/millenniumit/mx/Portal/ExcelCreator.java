@@ -32,12 +32,14 @@ import com.millenniumit.mx.data.nethdsizing.domain.EquipmentBulk;
 import com.millenniumit.mx.data.nethdsizing.domain.Packages;
 import com.millenniumit.mx.data.nethdsizing.domain.Project;
 import com.millenniumit.mx.data.nethdsizing.domain.ProjectItems;
+import com.millenniumit.mx.data.nethdsizing.service.CompanyService;
 import com.millenniumit.mx.data.nethdsizing.service.EquipmentsBulkService;
 import com.millenniumit.mx.data.nethdsizing.service.EquipmentsService;
 import com.millenniumit.mx.data.nethdsizing.service.ItemTypesService;
 import com.millenniumit.mx.data.nethdsizing.service.PackagesService;
 import com.millenniumit.mx.data.nethdsizing.service.ProjectItemsService;
 import com.millenniumit.mx.data.nethdsizing.service.ProjectsService;
+import com.millenniumit.mx.data.nethdsizing.service.VersionMapService;
 /**
  * @author Raminda
  *
@@ -64,7 +66,7 @@ public class  ExcelCreator {
 	private Workbook Cover=null;
 	private int number;
 	
-	public ExcelCreator(EquipmentsService equipmentService,EquipmentsBulkService equipmentsBulkService,ItemTypesService itemTypeService,PackagesService packageService,ProjectsService projectService,ProjectItemsService projectItemsService){
+	public ExcelCreator(EquipmentsService equipmentService,EquipmentsBulkService equipmentsBulkService,ItemTypesService itemTypeService,PackagesService packageService,ProjectsService projectService,ProjectItemsService projectItemsService,CompanyService companyService,VersionMapService versionMapService){
 		
 		
 		this.equipmentService =equipmentService; 
