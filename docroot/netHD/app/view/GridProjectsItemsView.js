@@ -283,7 +283,7 @@ Ext.define('New.view.GridProjectsItemsView', {
 			store.proxy.extraParams.value="5";	
 			store.proxy.extraParams.ID1=Ext.getCmp('cmbPrjProject').getValue();
 			store.proxy.extraParams.ID=Ext.getCmp('cmbPrjOption').getValue();
-			store.proxy.extraParams.ID3=Ext.getCmp('cmbPrjSite').getValue();
+			//store.proxy.extraParams.ID3=Ext.getCmp('cmbPrjSite').getValue();
 			store.load();
         }
     },/*{

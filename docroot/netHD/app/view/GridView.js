@@ -4,13 +4,15 @@ Ext.define('New.view.GridView', {
 		border : false,
 		frame : false,
 	    defaults: {
-		    collapsible: true,
+		    collapsible: false,
 		    height: 800,
 			minSize: 100,
 		    maxSize: 900,
 		    viewConfig:{
 		 		forceFit:true,
 		 	},
+		    split: true,
+		    animate: true,
 		},
 	 	layout: 'fit',
 		bodyPadding : 15,

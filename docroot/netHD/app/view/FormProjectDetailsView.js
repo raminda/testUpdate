@@ -662,9 +662,9 @@ Ext.define('New.view.FormProjectDetailsView', {
 	    	        	form.reset(true);
 	    	        	Ext.getCmp('gridProjectoutView').setVisible(false);
 	    	        	Ext.getCmp('ProjectDetailspanel').setVisible(false);
-	    	        	Ext.getCmp('RestProjrct').setVisible(false);
-	                	Ext.getCmp('EditeProjrct').setVisible(false);
-	                	Ext.getCmp('GenerateAll').setVisible(false);
+	    	        	Ext.getCmp('RestProjrct').disabledisable(false);
+	                	Ext.getCmp('EditeProjrct').disable(false);
+	                	Ext.getCmp('GenerateAll').disable(false);
 	                }
             	}]
     		}]
