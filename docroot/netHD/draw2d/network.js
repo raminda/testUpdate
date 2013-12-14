@@ -1,11 +1,11 @@
 /**
- * @author DECAN
+ * @author Raminda
  */
 var workflow;
 var Parth='/test-portlet/netHD/';
 function crt(){ 
 	workflow = new Workflow("paintarea");  
-	workflow.clear();
+	//workflow.clear();
     JSN(workflow);
 }
 
@@ -19,6 +19,10 @@ function crt2(){
 function JSN(Workflow){
 	this.workflow=Workflow;
 }
+function gJSN(){
+	return workflow;
+}
+
 function addOnloadHandler(elementObject, functionObject)
 {
   if(typeof(appLog) != 'undefined') {
