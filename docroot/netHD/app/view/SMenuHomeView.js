@@ -20,7 +20,7 @@ Ext.define('New.view.SMenuHomeView', {
 			}
 		},{
 			xtype : 'combobox',
-			fieldLabel : 'Eqipment Name',
+			fieldLabel : 'Eqipment',
 			id : 'txtType',
 			name : 'txtType',
 			valueField : 'ItemName',
