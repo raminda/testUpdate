@@ -108,6 +108,13 @@ Node.prototype.addAnnotation = function(aForWhat, aText, aAnnX, aAnnY) {
 	}
       }
       this.workflow.commandStack.execute(new CommandDelete(this));
+      	Ext.getCmp('cmbDCompany').reset();
+  		Ext.getCmp('cmbDCompany').setVisible(false);
+  		Ext.getCmp('cmbDProject').setVisible(false);
+  		Ext.getCmp('cmbDOption').setVisible(false);
+  		Ext.getCmp('cmbDVersion').setVisible(false);
+  		Ext.getCmp('btnSaveDD').setVisible(false);
+  		Ext.getCmp('btnVaildtete').setVisible(true);
     }
     if(ctrl){
       this.workflow.onKeyDown(_3831,ctrl);
@@ -116,11 +123,9 @@ Node.prototype.addAnnotation = function(aForWhat, aText, aAnnX, aAnnY) {
   ann.doEdit=function(){
         var obj = this.html;
         var aThat = this;
-	//Element.hide(obj);
-        workflow.setCurrentSelection(null);
+	    workflow.setCurrentSelection(null);
 
 	
-	//var textarea = '<div id="'+obj.id+'_editor" style="position: absolute; left:'+this.getX()+'; top:' + this.getY() +'"><textarea id="'+obj.id+'_edit" name="'+obj.id+'" rows="4" cols="60">'+obj.innerHTML+'</textarea>';
 	var textarea = '<div id="'+obj.id+'_editor" style="position: absolute; z-index:99999; left:'+this.getX()+'; top:' + this.getY() +'"><input style="visibility:hidden" type="text" id="'+obj.id+'_edit" name="'+obj.id+'" value="'+obj.innerHTML+'"></input>';
 	var button	 = '<div><input style="visibility:hidden" id="'+obj.id+'_save" type="button" value="SAVE" /><input style="visibility:hidden" id="'+obj.id+'_cancel" type="button" value="CANCEL" /></div></div>';
 	
@@ -128,15 +133,14 @@ Node.prototype.addAnnotation = function(aForWhat, aText, aAnnX, aAnnY) {
 	$(obj.id+'_edit').focus();
 	$(obj.id+'_edit').select();
 
-	Ext.getCmp('txtEqipmentType').setValue(obj.id);
-	//Ext.getCmp('txtEqipmentName').setValue(true);
+	Ext.getCmp('txtEqipmentID').setValue(obj.id);
 	
 	Event.observe(obj.id+'_save', 'click', function(){
 		
 		//Ext.getCmp('txtEqipmentType').setVisible(false);
 		//Ext.getCmp('txtEqipmentName').setVisible(false);
-		Ext.getCmp('txtType').setVisible(false);
-		Ext.getCmp('btnType').setVisible(false);
+		//Ext.getCmp('txtType').setVisible(false);
+		//Ext.getCmp('btnType').setVisible(false);
 		
 		aThat.setText($F(obj.id+'_edit'));Element.remove(obj.id+'_editor'); Element.show(obj);}, false);
 	Event.observe(obj.id+'_cancel', 'click', function(){
@@ -145,9 +149,11 @@ Node.prototype.addAnnotation = function(aForWhat, aText, aAnnX, aAnnY) {
     	var key = event.which || event.keyCode;if(key==13) { aThat.setText($F(obj.id+'_edit'));Element.remove(obj.id+'_editor'); Element.show(obj);}}, false);
   }
   ann.onDoubleClick=function(){
-	Ext.getCmp('txtType').setVisible(true);
-	Ext.getCmp('btnType').setVisible(true);
-	Ext.getCmp('savepjt').setVisible(false);
+	  	Ext.getCmp('txtPortType').setVisible(false);
+		Ext.getCmp('txtItemName').setVisible(false);
+		Ext.getCmp('btnDAddEquipment').setVisible(false);
+		Ext.getCmp('btnAddConnecion').setVisible(false);
+		Ext.getCmp('btnVaildtete').setVisible(true);
     this.doEdit();
   }
 
@@ -236,21 +242,29 @@ DiagramFigure.prototype.onSelectionChanged=function(newSel){
 }
 
 DiagramFigure.prototype.onDoubleClick=function(){
-	
-	//Ext.getCmp('txtEqipmentType').setVisible(true);
-	//Ext.getCmp('txtEqipmentName').setVisible(true);
-
-	
 	Ext.getCmp('txtEqipmentName').setValue(this.toJSON()['subtype']);
+	Ext.getCmp('txtPortType').setVisible(false);
+	Ext.getCmp('txtItemName').setVisible(true);
+
+	Ext.getCmp('btnDAddEquipment').setVisible(true);
+	Ext.getCmp('btnAddConnecion').setVisible(false);
+	Ext.getCmp('btnVaildtete').setVisible(false);
+	
+	Ext.getCmp('cmbDCompany').reset();
+	Ext.getCmp('cmbDCompany').setVisible(false);
+	Ext.getCmp('cmbDProject').setVisible(false);
+	Ext.getCmp('cmbDOption').setVisible(false);
+	Ext.getCmp('cmbDVersion').setVisible(false);
+	Ext.getCmp('btnSaveDD').setVisible(false);
+	Ext.getCmp('txtEqipmentID').setValue(this.toJSON()['id']);
 	if(!this.annotation) {
 		this.addAnnotation(this, "", 1, this.height + 5);
-		Ext.getCmp('txtType').setVisible(true);
-		Ext.getCmp('btnType').setVisible(true);
 		this.annotation.doEdit();
 		this.bgFlash();
 	}
 	else {
 		this.annotation.bgFlash();
+		this.annotation.doEdit();
   }
   
 }

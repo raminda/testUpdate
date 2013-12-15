@@ -23,7 +23,14 @@ Ext.define('New.view.MenuBarView', {
 			Ext.getCmp('CanversView').setVisible(false);
 			Ext.getCmp('EquipmentBulkDD').setVisible(false);
 			Ext.getCmp('ReportView').setVisible(false);
-			Ext.getCmp('savepjt').setVisible(false);
+
+			Ext.getCmp('txtItemName').setVisible(false);
+			Ext.getCmp('txtPortType').setVisible(false);
+			Ext.getCmp('txtEqipmentID').setVisible(false);
+			Ext.getCmp('txtEqipmentName').setVisible(false);
+			Ext.getCmp('btnVaildtete').setVisible(true);
+			Ext.getCmp('btnDAddEquipment').setVisible(false);
+			Ext.getCmp('btnAddConnecion').setVisible(false);
     	}
 		},{
 		text : 'Projects',
@@ -43,13 +50,21 @@ Ext.define('New.view.MenuBarView', {
 					var store=grid.getStore('EquipmentsBulkStoreGrid');
 					store.proxy.extraParams.purpose = 'null';
 					store.load();
-					Ext.getCmp('savepjt').setVisible(true);
+
 					Ext.getCmp('ProjectDetails').setVisible(false);	
 					Ext.getCmp('imageView').setVisible(false);
 					Ext.getCmp('GridView').setVisible(false);
 					Ext.getCmp('CanversView').setVisible(true);
 					Ext.getCmp('ReportView').setVisible(false);
 					Ext.getCmp('EquipmentBulkDD').setVisible(false);
+					
+					Ext.getCmp('txtItemName').setVisible(false);
+					Ext.getCmp('txtPortType').setVisible(false);
+					Ext.getCmp('txtEqipmentID').setVisible(false);
+					Ext.getCmp('txtEqipmentName').setVisible(false);
+					Ext.getCmp('btnVaildtete').setVisible(true);
+					Ext.getCmp('btnDAddEquipment').setVisible(false);
+					Ext.getCmp('btnAddConnecion').setVisible(false);
 					
 					crt();
 	    		}
@@ -62,7 +77,14 @@ Ext.define('New.view.MenuBarView', {
 					Ext.getCmp('GridView').setVisible(false);
 					Ext.getCmp('CanversView').setVisible(false);
 					Ext.getCmp('ReportView').setVisible(false);
-					Ext.getCmp('savepjt').setVisible(false);
+					
+					Ext.getCmp('txtItemName').setVisible(false);
+					Ext.getCmp('txtPortType').setVisible(false);
+					Ext.getCmp('txtEqipmentID').setVisible(false);
+					Ext.getCmp('txtEqipmentName').setVisible(false);
+					Ext.getCmp('btnVaildtete').setVisible(true);
+					Ext.getCmp('btnDAddEquipment').setVisible(false);
+					Ext.getCmp('btnAddConnecion').setVisible(false);
 		    	}
 			},{
 				text: 'Projects',
@@ -84,7 +106,14 @@ Ext.define('New.view.MenuBarView', {
 					Ext.getCmp('CanversView').setVisible(false);
 					Ext.getCmp('EquipmentBulkDD').setVisible(false);
 					Ext.getCmp('ReportView').setVisible(false);
-					Ext.getCmp('savepjt').setVisible(false);
+
+					Ext.getCmp('txtItemName').setVisible(false);
+					Ext.getCmp('txtPortType').setVisible(false);
+					Ext.getCmp('txtEqipmentID').setVisible(false);
+					Ext.getCmp('txtEqipmentName').setVisible(false);
+					Ext.getCmp('btnVaildtete').setVisible(true);
+					Ext.getCmp('btnDAddEquipment').setVisible(false);
+					Ext.getCmp('btnAddConnecion').setVisible(false);
 		    	}
 					
 			},{
@@ -107,7 +136,14 @@ Ext.define('New.view.MenuBarView', {
 					Ext.getCmp('CanversView').setVisible(false);
 					Ext.getCmp('EquipmentBulkDD').setVisible(false);
 					Ext.getCmp('ReportView').setVisible(false);	
-					Ext.getCmp('savepjt').setVisible(false);
+
+					Ext.getCmp('txtItemName').setVisible(false);
+					Ext.getCmp('txtPortType').setVisible(false);
+					Ext.getCmp('txtEqipmentID').setVisible(false);
+					Ext.getCmp('txtEqipmentName').setVisible(false);
+					Ext.getCmp('btnVaildtete').setVisible(true);
+					Ext.getCmp('btnDAddEquipment').setVisible(false);
+					Ext.getCmp('btnAddConnecion').setVisible(false);
 			    }
 			}]
 		},{
@@ -129,8 +165,14 @@ Ext.define('New.view.MenuBarView', {
 				Ext.getCmp('GridView').setVisible(false);
 				Ext.getCmp('CanversView').setVisible(false);
 				Ext.getCmp('ProjectGrid').setVisible(false);
-				Ext.getCmp('savepjt').setVisible(false);
-				Ext.getCmp('ReportView').setVisible(false);	
+				
+				Ext.getCmp('txtItemName').setVisible(false);
+				Ext.getCmp('txtPortType').setVisible(false);
+				Ext.getCmp('txtEqipmentID').setVisible(false);
+				Ext.getCmp('txtEqipmentName').setVisible(false);
+				Ext.getCmp('btnVaildtete').setVisible(true);
+				Ext.getCmp('btnDAddEquipment').setVisible(false);
+				Ext.getCmp('btnAddConnecion').setVisible(false);
     			}
 			},{
 			text: 'Configure Base Equipments',
@@ -150,8 +192,14 @@ Ext.define('New.view.MenuBarView', {
 				Ext.getCmp('imageView').setVisible(false);
 				Ext.getCmp('GridView').setVisible(true);
 				Ext.getCmp('CanversView').setVisible(false);
-				Ext.getCmp('ReportView').setVisible(false);	
-				Ext.getCmp('savepjt').setVisible(false);
+
+				Ext.getCmp('txtItemName').setVisible(false);
+				Ext.getCmp('txtPortType').setVisible(false);
+				Ext.getCmp('txtEqipmentID').setVisible(false);
+				Ext.getCmp('txtEqipmentName').setVisible(false);
+				Ext.getCmp('btnVaildtete').setVisible(true);
+				Ext.getCmp('btnDAddEquipment').setVisible(false);
+				Ext.getCmp('btnAddConnecion').setVisible(false);
 	    		}
 			},{
 			text: 'Configure Equipment',
@@ -162,7 +210,6 @@ Ext.define('New.view.MenuBarView', {
 				Ext.getCmp('PackageGrid').setVisible(false);
 				Ext.getCmp('ProjectGrid').setVisible(false);
 				Ext.getCmp('VersionMapGrids').setVisible(false);
-				Ext.getCmp('savepjt').setVisible(false);
 				var grid = Ext.getCmp('gridEquipmentView');
 				var store = grid.getStore('EquipmentStoreGrid');
 				store.proxy.extraParams.purpose='Grid';
@@ -172,8 +219,15 @@ Ext.define('New.view.MenuBarView', {
 				Ext.getCmp('GridView').setVisible(true);
 				Ext.getCmp('CanversView').setVisible(false);
 				Ext.getCmp('EquipmentBulkDD').setVisible(false);
-				Ext.getCmp('ReportView').setVisible(false);	
-	    		}
+				
+				Ext.getCmp('txtItemName').setVisible(false);
+				Ext.getCmp('txtPortType').setVisible(false);
+				Ext.getCmp('txtEqipmentID').setVisible(false);
+				Ext.getCmp('txtEqipmentName').setVisible(false);
+				Ext.getCmp('btnVaildtete').setVisible(true);
+				Ext.getCmp('btnDAddEquipment').setVisible(false);
+				Ext.getCmp('btnAddConnecion').setVisible(false);
+	    	}
 				
 			},{
 			text: 'Equipment Types',
@@ -184,7 +238,6 @@ Ext.define('New.view.MenuBarView', {
 				Ext.getCmp('PackageGrid').setVisible(false);
 				Ext.getCmp('ProjectGrid').setVisible(false);
 				Ext.getCmp('VersionMapGrids').setVisible(false);
-				Ext.getCmp('savepjt').setVisible(false);
 				var grid = Ext.getCmp('GridItemTypeView');
 				var store = grid.getStore('ItemTypeStoreGrid');
 				store.proxy.extraParams.purpose='Grid';
@@ -195,7 +248,14 @@ Ext.define('New.view.MenuBarView', {
 				Ext.getCmp('GridView').setVisible(true);
 				Ext.getCmp('CanversView').setVisible(false);
 				Ext.getCmp('EquipmentBulkDD').setVisible(false);
-				Ext.getCmp('ReportView').setVisible(false);	
+				
+				Ext.getCmp('txtItemName').setVisible(false);
+				Ext.getCmp('txtPortType').setVisible(false);
+				Ext.getCmp('txtEqipmentID').setVisible(false);
+				Ext.getCmp('txtEqipmentName').setVisible(false);
+				Ext.getCmp('btnVaildtete').setVisible(true);
+				Ext.getCmp('btnDAddEquipment').setVisible(false);
+				Ext.getCmp('btnAddConnecion').setVisible(false);
 		    }
 		}]
 	},{
@@ -212,8 +272,14 @@ Ext.define('New.view.MenuBarView', {
 				Ext.getCmp('GridView').setVisible(false);
 				Ext.getCmp('CanversView').setVisible(false);
 				Ext.getCmp('EquipmentBulkDD').setVisible(false);
-				Ext.getCmp('ReportView').setVisible(true);	
-				Ext.getCmp('savepjt').setVisible(false);
+				
+				Ext.getCmp('txtItemName').setVisible(false);
+				Ext.getCmp('txtPortType').setVisible(false);
+				Ext.getCmp('txtEqipmentID').setVisible(false);
+				Ext.getCmp('txtEqipmentName').setVisible(false);
+				Ext.getCmp('btnVaildtete').setVisible(true);
+				Ext.getCmp('btnDAddEquipment').setVisible(false);
+				Ext.getCmp('btnAddConnecion').setVisible(false);
     		}
 		},{
 			text: 'Log report',
@@ -223,8 +289,14 @@ Ext.define('New.view.MenuBarView', {
 				Ext.getCmp('GridView').setVisible(false);
 				Ext.getCmp('CanversView').setVisible(false);
 				Ext.getCmp('EquipmentBulkDD').setVisible(false);
-				Ext.getCmp('ReportView').setVisible(true);
-				Ext.getCmp('savepjt').setVisible(false);
+
+				Ext.getCmp('txtItemName').setVisible(false);
+				Ext.getCmp('txtPortType').setVisible(false);
+				Ext.getCmp('txtEqipmentID').setVisible(false);
+				Ext.getCmp('txtEqipmentName').setVisible(false);
+				Ext.getCmp('btnVaildtete').setVisible(true);
+				Ext.getCmp('btnDAddEquipment').setVisible(false);
+				Ext.getCmp('btnAddConnecion').setVisible(false);
 	    	}
 		},{
 			text: 'Equipment Summery',
@@ -234,8 +306,14 @@ Ext.define('New.view.MenuBarView', {
 				Ext.getCmp('GridView').setVisible(false);
 				Ext.getCmp('CanversView').setVisible(false);
 				Ext.getCmp('EquipmentBulkDD').setVisible(false);
-				Ext.getCmp('ReportView').setVisible(true);	
-				Ext.getCmp('savepjt').setVisible(false);
+
+				Ext.getCmp('txtItemName').setVisible(false);
+				Ext.getCmp('txtPortType').setVisible(false);
+				Ext.getCmp('txtEqipmentID').setVisible(false);
+				Ext.getCmp('txtEqipmentName').setVisible(false);
+				Ext.getCmp('btnVaildtete').setVisible(true);
+				Ext.getCmp('btnDAddEquipment').setVisible(false);
+				Ext.getCmp('btnAddConnecion').setVisible(false);
 	    	}
 				
 		},{
@@ -246,8 +324,14 @@ Ext.define('New.view.MenuBarView', {
 				Ext.getCmp('GridView').setVisible(false);
 				Ext.getCmp('CanversView').setVisible(false);
 				Ext.getCmp('EquipmentBulkDD').setVisible(false);
-				Ext.getCmp('ReportView').setVisible(true);
-				Ext.getCmp('savepjt').setVisible(false);
+
+				Ext.getCmp('txtItemName').setVisible(false);
+				Ext.getCmp('txtPortType').setVisible(false);
+				Ext.getCmp('txtEqipmentID').setVisible(false);
+				Ext.getCmp('txtEqipmentName').setVisible(false);
+				Ext.getCmp('btnVaildtete').setVisible(true);
+				Ext.getCmp('btnDAddEquipment').setVisible(false);
+				Ext.getCmp('btnAddConnecion').setVisible(false);
 		    }
 		},{
 			text: 'Project Summery',
@@ -257,8 +341,14 @@ Ext.define('New.view.MenuBarView', {
 				Ext.getCmp('GridView').setVisible(false);
 				Ext.getCmp('CanversView').setVisible(false);
 				Ext.getCmp('EquipmentBulkDD').setVisible(false);
-				Ext.getCmp('ReportView').setVisible(true);	
-				Ext.getCmp('savepjt').setVisible(false);
+
+				Ext.getCmp('txtItemName').setVisible(false);
+				Ext.getCmp('txtPortType').setVisible(false);
+				Ext.getCmp('txtEqipmentID').setVisible(false);
+				Ext.getCmp('txtEqipmentName').setVisible(false);
+				Ext.getCmp('btnVaildtete').setVisible(true);
+				Ext.getCmp('btnDAddEquipment').setVisible(false);
+				Ext.getCmp('btnAddConnecion').setVisible(false);
 		    }
 		}]
 	}],

@@ -45,12 +45,27 @@ MyInputPort.prototype.toJSON = function() {
 }
 
 MyInputPort.prototype.onDoubleClick=function(){
+	Ext.getCmp('txtPortType').setVisible(true);
+	Ext.getCmp('txtItemName').setVisible(false);
+	Ext.getCmp('txtEqipmentName').setValue(this.getParent().toJSON['subtype']);
+	Ext.getCmp('btnDAddEquipment').setVisible(false);
+	Ext.getCmp('btnAddConnecion').setVisible(true);
+	Ext.getCmp('btnVaildtete').setVisible(false);
+	
+	Ext.getCmp('cmbDCompany').reset();
+	Ext.getCmp('cmbDCompany').setVisible(false);
+	Ext.getCmp('cmbDProject').setVisible(false);
+	Ext.getCmp('cmbDOption').setVisible(false);
+	Ext.getCmp('cmbDVersion').setVisible(false);
+	Ext.getCmp('btnSaveDD').setVisible(false);
+	Ext.getCmp('txtEqipmentID').setValue(this.getParent().toJSON['id']);
   if(!this.annotation) {
     this.getParent().addAnnotation(this, "Port description", this.getX(), this.getY());
     this.annotation.doEdit();
     this.bgFlash();
   } else {
     this.annotation.bgFlash();
+    this.annotation.doEdit();
   }
 }
 
