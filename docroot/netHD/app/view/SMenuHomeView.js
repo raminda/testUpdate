@@ -21,6 +21,7 @@ Ext.define('New.view.SMenuHomeView', {
 			width : 200,
 			handler : function() {
 				crt2();
+				
 			}
 		},{
 			xtype : 'combobox',
@@ -256,7 +257,6 @@ Ext.define('New.view.SMenuHomeView', {
         	}
         },{
         	xtype: 'button',
-	        labelWidth: 100,
 	        text : 'Save',
 	        id : 'btnSaveDD',
 			name : 'btnSaveDD',
@@ -268,16 +268,68 @@ Ext.define('New.view.SMenuHomeView', {
 	        handler : function() {
 	        	var Project=Ext.getCmp('cmbDProject').getValue();
 				var Option=Ext.getCmp('cmbDOption').getValue();
-				var Version=myjson_details;
-				var json=Ext.getCmp('cmbPrjSite').getValue();
+				var Version=Ext.getCmp('cmbDVersion').getValue();
+				//var json=Ext.getCmp('cmbPrjSite').getValue();
 				
-				var store = Ext.getStore('ProjectItemsStoreResult');
+				/*var store = Ext.getStore('ProjectItemsStoreResult');
 				store.proxy.extraParams.purpose = 'New';
 				store.proxy.extraParams.ID=Ext.getCmp('txtDDJSON1').getValue();
-				store.proxy.extraParams.ID2=Ext.getCmp('txtDDJSON2').getValue();
+				store.proxy.extraParams.ID1=Ext.getCmp('txtDDJSON2').getValue();
+				store.proxy.extraParams.ID2="DD";
+				store.proxy.extraParams.ID3=jsonsite;
 				var JsonObject= {Project:Project,OptionID:Option,Version: Version};
 				var row= Ext.create('New.model.VersionMapModel', JsonObject);
-				store.insert(0, row);
+				store.insert(0, row);*/
+				//var JsonObject= "{'Project':'"+Project+"','OptionID':'"+Option+"','Version':'"+Version+"'}";
+				Ext.Ajax.request({
+					url : ProjectItemsStoreUrl,
+					method : 'POST',
+					headers : {
+						'Content-Type' : 'application/json'
+					},
+					params : {
+						'type' : 'unique',
+						'context' : 'task&group',
+						'purpose' : 'New',
+						'Project':Project,
+						'Option':Option,
+						'Version':Version,
+						'ID2':"DD",
+						'ID3':jsonsite,
+						'ID1':myjson_details,
+					},
+					jsonData :Ext.getCmp('txtDDJSON1').getValue(),
+					success : function(response) {
+						//if success
+						if(!response.responseText.match(/*.0.*/)){
+							//Ext.getCmp('addEquipment_inBulkDD').disable(true);	
+							//Ext.getCmp('addPackage_inBulkDD').disable(true);	
+							//Ext.Msg.alert('Message', response.responseText);
+						}
+					},
+					failure : function(response) {											
+					}
+				});
+	        }
+	   },{
+	       	xtype: 'button',
+	        text : 'Cancel',
+	        id : 'btnCancelDD',
+			name : 'btnCancelDD',
+	        width : 150,
+	        flex: 1,
+	        layout: {
+	            type: 'absolute'
+	        },
+	        handler : function() {
+	        	Ext.getCmp('cmbDProject').setVisible(false);
+				xt.getCmp('cmbDOption').setVisible(false);
+				Ext.getCmp('cmbDVersion').setVisible(false);
+				Ext.getCmp('cmbDCompany').setVisible(false);
+				Ext.getCmp('cmbDProject').reset();
+				Ext.getCmp('btnSaveDD').setVisible(false);
+				Ext.getCmp('btnCancelDD').setVisible(false);
+				Ext.getCmp('txtEqipmentName').enableDD = true;
 	        }
 	   }]
 	}],		         
@@ -300,5 +352,6 @@ Ext.define('New.view.SMenuHomeView', {
 		
 		Ext.getCmp('txtDDJSON1').setVisible(false);
 		Ext.getCmp('txtDDJSON2').setVisible(false);
+		Ext.getCmp('btnCancelDD').setVisible(false);
 	}
 });

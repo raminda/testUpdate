@@ -201,11 +201,18 @@ public class ComboData {
 						jsonOb2+="]";
 				}
 				else if(Long.parseLong(request.getParameter("value"))==4){
-					 System.out.println(request.getParameter("ID"));
-					 List <Equipments> list =equipmentService.getAll(ItemTypesService.get(request.getParameter("ID")));
-					 boolean bool=true;
-					 for(int i=0;i<list.size();i++){
-							//Equipments obj=lst.get(i);
+					 
+					logger.info(request.getParameter("ID"));
+					if(request.getParameter("ID").equals("Site")){
+						jsonOb2+="{ItemName:'Primary'},{ItemName:'DR'},{ItemName:'Test'}";
+					}
+					else if(request.getParameter("ID").equals("cloud")){
+						jsonOb2+="{ItemName:'Cloud'}";
+					}
+					else{
+						 List <Equipments> list =equipmentService.getAll(ItemTypesService.get(request.getParameter("ID")));
+						 boolean bool=true;
+						 for(int i=0;i<list.size();i++){
 							Equipments obj=list.get(i);
 							try{
 								jsonOb2+="{ ItemName: '" + obj.getItemName()+"'}";
@@ -218,12 +225,11 @@ public class ComboData {
 								jsonOb2+=",";
 							}
 						}
-						
+					}
 						jsonOb2+="]";
 				}
 			jsonOb2=linebracker(jsonOb2);
-						out.println(jsonOb2);
-			//gdfgdfgfd
+			out.println(jsonOb2);
 		}
 		//*****equipment Map*******
 		else if (ServiceType.equals("EquipmentMap")) {	
@@ -359,122 +365,15 @@ public class ComboData {
 			System.out.println("This section is for Parameter ProjectItemsService Combo");
 			List<String> lst=null;
 			
-			//id value is for project options for Project ID
-			 if(Long.parseLong(request.getParameter("value"))==1){
-//				 System.out.println("This section is for Parameter ProjectItemsService cmbo value is "+ request.getParameter("ID1"));
-//				
-//				//projectItems.setPackageType(jsonobj.getString("PackageType PcakageUsege"));projectItems.setPcakageUsege(jsonobj.getString("PcakageUsege")); 
-//				 lst = projectItemsService.getAllString(projectService.getProjects(request.getParameter("ID1")),a,1); 
-//				 boolean bool=true;
-//					String jsonOb2="[";
-//					for(int i=0;i<lst.size();i++){
-//						String obj=lst.get(i);
-//						try{
-//							jsonOb2+="{ ProjectID: '"+"',OptionID:'"+obj+"',VersionID: '"+"',SiteID:'"+"',PackageID:'"+"',Quantity:'"+"',PackageType :'"+"', PcakageUsege :'"+"',Price:'"+"',date_logged:'"+"',date_modified:'"+"',date_created:'"+"', ID:'"+"'}";
-//						}catch (Exception e) {
-//							logger.info("Error : " + e.getMessage());
-//							jsonOb2+="'}";
-//							bool=false;
-//						}
-//						if(i<lst.size()-1 && bool){
-//							jsonOb2+=",";
-//						}
-//					}
-//				
-//					jsonOb2+="]";
-//					jsonOb2=linebracker(jsonOb2);
-//					out.println(jsonOb2);
-			 }
-			 else if(Long.parseLong(request.getParameter("value"))==2){
-				/* a[0]=request.getParameter("ID2");
-				 lst = projectItemsService.getAllString(projectService.getProjects(request.getParameter("ID1")),a,2); 
-				 boolean bool=true;
-					String jsonOb2="[";
-					for(int i=0;i<lst.size();i++){
-						String obj=lst.get(i);
-						try{
-							jsonOb2+="{ ProjectID: '"+"',OptionID:'"+"',VersionID: '"+obj+"',SiteID:'"+"',PackageID:'"+"',Quantity:'"+"',PackageType :'"+"', PcakageUsege :'"+"',Price:'"+"',date_logged:'"+"',date_modified:'"+"',date_created:'"+"', ID:'"+"'}";
-						}catch (Exception e) {
-							logger.info("Error : " + e.getMessage());
-							jsonOb2+="'}";
-							bool=false;
-						}
-						if(i<lst.size()-1 && bool){
-							jsonOb2+=",";
-						}
-					}
-				
-					jsonOb2+="]";
-					jsonOb2=linebracker(jsonOb2);
-					out.println(jsonOb2);*/
-			 }
-			 else if(Long.parseLong(request.getParameter("value"))==3){
-				/* a[0]=request.getParameter("ID2");
-				 a[1]=request.getParameter("ID3");
-				 lst = projectItemsService.getAllString(projectService.getProjects(request.getParameter("ID1")),a,3); 
-				boolean bool=true;
-					String jsonOb2="[";
-					for(int i=0;i<lst.size();i++){
-						String obj=lst.get(i);
-						try{
-							jsonOb2+="{ ProjectID: '"+"',OptionID:'"+"',VersionID: '"+"',SiteID:'"+obj+"',PackageID:'"+"',Quantity:'"+"',PackageType :'"+"', PcakageUsege :'"+"',Price:'"+"',date_logged:'"+"',date_modified:'"+"',date_created:'"+"', ID:'"+"'}";
-						}catch (Exception e) {
-							logger.info("Error : " + e.getMessage());
-							jsonOb2+="'}";
-							bool=false;
-						}
-						if(i<lst.size()-1 && bool){
-							jsonOb2+=",";
-						}
-					}
-				
-					jsonOb2+="]";
-					jsonOb2=linebracker(jsonOb2);
-					out.println(jsonOb2);*/
-			 }
-			 else if(Long.parseLong(request.getParameter("value"))==4){
-				/* a[0]=request.getParameter("ID2");
-				 a[1]=request.getParameter("ID3");
-				 a[2]=request.getParameter("ID4");
-				 lst = projectItemsService.getAllString(projectService.getProjects(request.getParameter("ID1")),a,4); 
-				boolean bool=true;
-					String jsonOb2="[";
-					for(int i=0;i<lst.size();i++){
-						String obj=lst.get(i);
-						try{
-							jsonOb2+="{ ProjectID: '"+"',OptionID:'"+"',VersionID: '"+"',SiteID:'"+"',PackageID:'"+"',Quantity:'"+"',PackageType :'"+obj+"', PcakageUsege :'"+"',Price:'"+"',date_logged:'"+"',date_modified:'"+"',date_created:'"+"', ID:'"+"'}";
-						}catch (Exception e) {
-							logger.info("Error : " + e.getMessage());
-							jsonOb2+="'}";
-							bool=false;
-						}
-						if(i<lst.size()-1 && bool){
-							jsonOb2+=",";
-						}
-					}
-				
-					jsonOb2+="]";
-					jsonOb2=linebracker(jsonOb2);
-					out.println(jsonOb2);*/
-			 }
-			 else if(Long.parseLong(request.getParameter("value"))==8 ||Long.parseLong(request.getParameter("value"))==5||Long.parseLong(request.getParameter("value"))==6||Long.parseLong(request.getParameter("value"))==7){
+			if(Long.parseLong(request.getParameter("value"))==8 ||Long.parseLong(request.getParameter("value"))==5||Long.parseLong(request.getParameter("value"))==6||Long.parseLong(request.getParameter("value"))==7){
 				 a[0]=request.getParameter("ID2");
 				 a[1]=request.getParameter("ID3");
 				 a[2]=request.getParameter("ID4");
 				 List<ProjectItems> jsonOb1=null;
 				 logger.info(request.getParameter("value")+" vcbcg "+ a[1] );
-				 if(Long.parseLong(request.getParameter("value"))==5){}
-					// jsonOb1 = projectItemsService.getAll(projectService.getProjects(request.getParameter("ID1")),a[0],a[1],a[2]); 
-				 /*else if(Long.parseLong(request.getParameter("value"))==6)
-					 jsonOb1= projectItemsService.getAll(projectService.getProjects(request.getParameter("ID1")),a[0],a[1]);
-				 else if(Long.parseLong(request.getParameter("value"))==7)
-					 jsonOb1= projectItemsService.getAll(projectService.getProjects(request.getParameter("ID1")),a[0]); 
-				 else if(Long.parseLong(request.getParameter("value"))==8)
-					 jsonOb1= projectItemsService.getAll(projectService.getProjects(request.getParameter("ID1"))); 
-				 */
-			
-			 
-				 
+				 if(Long.parseLong(request.getParameter("value"))==5){
+					 
+				 } 
 				 boolean bool=true;
 					String jsonOb2="[";
 					for(int i=0;i<jsonOb1.size();i++){
@@ -507,9 +406,6 @@ public class ComboData {
 			
 			System.out.println("This section is for Parameter ProjectsService Combo2");
 			List<Project> lst=null;
-			//value =1 means select projects for regular company 
-			//System.out.println(request.getParameter("value"));
-			
 			if(Long.parseLong(request.getParameter("value"))==1){
 				List<Project> a= projectService.getCompany(companyService.get((request.getParameter("ID"))));
 				System.out.println(a.size());
@@ -557,7 +453,7 @@ public class ComboData {
 				out.println(jsonOb2);
 			}
 			else{
-				System.out.println(request.getParameter("value"));
+				logger.info(request.getParameter("value"));
 				lst = projectService.getProjects();
 				out.println(gson.toJson(lst));
 			}

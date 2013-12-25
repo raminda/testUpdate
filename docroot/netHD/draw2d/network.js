@@ -19,15 +19,36 @@ function crt(){
 		console.log(e.toString());
 	}
 	
-	Ext.getCmp('btnVaildtete').setVisible(true);
-	//Ext.getCmp('btnDAddEquipment').setVisible(true);
-	//Ext.getCmp('btnAddConnecion').setVisible(true);
-	//Ext.getCmp('txtItemName').setVisible(true);
-	//Ext.getCmp('txtPortType').setVisible(true);
-	//Ext.getCmp('txtEqipmentID').setVisible(true);
-	//Ext.getCmp('txtEqipmentName').setVisible(true);
+		//Ext.getCmp('btnVaildtete').setVisible(true);
+		Ext.getCmp('cmbDCompany').reset();
+		Ext.getCmp('cmbDCompany').setVisible(false);
+		Ext.getCmp('cmbDProject').setVisible(false);
+		Ext.getCmp('cmbDOption').setVisible(false);
+		Ext.getCmp('cmbDVersion').setVisible(false);
+		Ext.getCmp('btnSaveDD').setVisible(false);
+		Ext.getCmp('btnAddConnecion').setVisible(false);
+		Ext.getCmp('btnVaildtete').setVisible(true);
+		Ext.getCmp('txtPortType').setVisible(false);
+		Ext.getCmp('txtItemName').setVisible(false);
 }
-
+function crtEdit(){ 
+	document.getElementById('paintarea').innerHTML="";
+	workflow = new Workflow("paintarea");
+	JSN(workflow);
+	try{
+		var Doc=gJSN().figures;
+		for(var j=0;j<Doc.getSize();j++){
+			var _3b4b=Doc.get(j);
+				_3b4b.dispose;
+				console.log(j);
+		}
+	}
+	catch (e) {
+		console.log(e.toString());
+	}
+	
+	Ext.getCmp('btnVaildtete').setVisible(true);
+}
 function crt2(){ 
 	try{
 		var txt = JSON.encode(new JSONSerializer().toJSON(workflow.getDocument()));

@@ -51,12 +51,12 @@ import com.millenniumit.mx.data.nethdsizing.service.ProjectsService;
 import com.millenniumit.mx.data.nethdsizing.service.VersionMapService;
 
 @SuppressWarnings("unused")
-public class  ExcelCreator {
+public class  ExcelCreatorEq {
 	
 	
 	
 	private String dateFormat  = "yyyy-MM-dd";
-	private Logger logger = Logger.getLogger(ExcelCreator.class);
+	private Logger logger = Logger.getLogger(ExcelCreatorEq.class);
 	
 	//Services Objects in Service class 
 	
@@ -75,7 +75,7 @@ public class  ExcelCreator {
 	private Workbook Cover=null;
 	private int number;
 	
-	public ExcelCreator(EquipmentsService equipmentService,EquipmentsBulkService equipmentsBulkService,ItemTypesService itemTypeService,PackagesService packageService,ProjectsService projectService,ProjectItemsService projectItemsService,CompanyService companyService,VersionMapService versionMapService){	
+	public ExcelCreatorEq(EquipmentsService equipmentService,EquipmentsBulkService equipmentsBulkService,ItemTypesService itemTypeService,PackagesService packageService,ProjectsService projectService,ProjectItemsService projectItemsService,CompanyService companyService,VersionMapService versionMapService){	
 		
 		this.equipmentService =equipmentService; 
 		this.equipmentsBulkService=equipmentsBulkService;
@@ -257,7 +257,7 @@ public class  ExcelCreator {
 				int PakNumber=projectItems.size();
 					
 				//Table name
-			System.out.println("Package no for each table :"+PakNumber);
+			System.out.println("Package no foe each table :"+PakNumber);
 				
 				
 				

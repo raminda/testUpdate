@@ -11,7 +11,7 @@ Figure.prototype.toggleBackground=function()
     window.clearInterval(this.toggleTimer);
     this.setBackgroundColor(this.xsaveOldBackgroundColor);
   }
-}
+};
 
 Figure.prototype.bgFlash = function() {
   if (this.toggleCountdown) {
@@ -48,7 +48,7 @@ Figure.prototype.bgFlash = function() {
   }
   fff(aOldBorder, 10);
 */
-}
+};
 
 
 Node.prototype.addAnnotation = function(aForWhat, aText, aAnnX, aAnnY) {
@@ -61,7 +61,7 @@ Node.prototype.addAnnotation = function(aForWhat, aText, aAnnX, aAnnY) {
         var ann = this.annotations[i];
         ann.setPosition(aX+ann.DX, aY+ann.DY);
       }
-    }
+    };
 
     this.oldOnDrag = this.onDrag;
     this.onDrag = function() {
@@ -72,7 +72,7 @@ Node.prototype.addAnnotation = function(aForWhat, aText, aAnnX, aAnnY) {
         var child = this.annotations[i];
         child.setPosition(child.getX()+this.getX()-oldX,child.getY()+this.getY()-oldY);
       }
-    }
+    };
   }
   var ann = new Annotation(aText);
   ann.setBackgroundColor(null);
@@ -115,6 +115,9 @@ Node.prototype.addAnnotation = function(aForWhat, aText, aAnnX, aAnnY) {
   		Ext.getCmp('cmbDVersion').setVisible(false);
   		Ext.getCmp('btnSaveDD').setVisible(false);
   		Ext.getCmp('btnVaildtete').setVisible(true);
+  		Ext.getCmp('txtPortType').setVisible(false);
+  		Ext.getCmp('txtItemName').setVisible(false);
+  		Ext.getCmp('btnAddConnecion').setVisible(false);
     }
     if(ctrl){
       this.workflow.onKeyDown(_3831,ctrl);
@@ -147,7 +150,7 @@ Node.prototype.addAnnotation = function(aForWhat, aText, aAnnX, aAnnY) {
 		Element.remove(obj.id+'_editor'); Element.show(obj);}, false);
     Event.observe(obj.id+'_edit', 'keydown', function(event) { 
     	var key = event.which || event.keyCode;if(key==13) { aThat.setText($F(obj.id+'_edit'));Element.remove(obj.id+'_editor'); Element.show(obj);}}, false);
-  }
+  };
   ann.onDoubleClick=function(){
 	  	Ext.getCmp('txtPortType').setVisible(false);
 		Ext.getCmp('txtItemName').setVisible(false);
@@ -155,17 +158,19 @@ Node.prototype.addAnnotation = function(aForWhat, aText, aAnnX, aAnnY) {
 		Ext.getCmp('btnAddConnecion').setVisible(false);
 		Ext.getCmp('btnVaildtete').setVisible(true);
     this.doEdit();
-  }
+  };
 
   this.annotations.push(ann);
   workflow.addFigure(ann,this.getX() + ann.DX,this.getY() + ann.DY);
   return ann;
-}
+};
 
 DiagramFigure=function(){
   this.type = "DiagramFigure";
   ImageFigure.call(this);
   this.inputPort=null;
+  
+  
 };
 
 DiagramFigure.prototype=new ImageFigure;
@@ -175,7 +180,27 @@ DiagramFigure.prototype.setPic = function(aPic) {
 	aPic=Parth+"draw2d/icons/"+aPic;	
 	this.pic = aPic;
   this.setImage(aPic);
-}
+  
+  this.onKeyDown=function(_3831,ctrl){
+	    if(_3831==46&&this.isDeleteable()==true){
+	      var i=0;
+	      this.workflow.commandStack.execute(new CommandDelete(this));
+	      	Ext.getCmp('cmbDCompany').reset();
+	  		Ext.getCmp('cmbDCompany').setVisible(false);
+	  		Ext.getCmp('cmbDProject').setVisible(false);
+	  		Ext.getCmp('cmbDOption').setVisible(false);
+	  		Ext.getCmp('cmbDVersion').setVisible(false);
+	  		Ext.getCmp('btnSaveDD').setVisible(false);
+	  		Ext.getCmp('btnVaildtete').setVisible(true);
+	  		Ext.getCmp('txtPortType').setVisible(false);
+	  		Ext.getCmp('txtItemName').setVisible(false);
+	  		Ext.getCmp('btnAddConnecion').setVisible(false);
+	    }
+	    if(ctrl){
+	      this.workflow.onKeyDown(_3831,ctrl);
+	    }
+	  };
+};
 /*
 DiagramFigure.prototype.setPosition=function(aX, aY){
   ImageFigure.prototype.setPosition.call(this, aX, aY);
@@ -191,7 +216,6 @@ ImageFigure.prototype.onDrag.call(this);
 child.setPosition(child.getX()+this.getX()-oldX,child.getY()+this.getY()-oldY);
 }
 */
-
 DiagramFigure.prototype.toJSON=function() {
   var js = new Object;
   var ports = this.getPorts();
@@ -227,7 +251,7 @@ DiagramFigure.prototype.toJSON=function() {
   js['annotations'] = js_annotations;
   //debug("Figure end"); 
   return js;
-}
+};
 
 DiagramFigure.prototype.onSelectionChanged=function(newSel){
   try { 
@@ -239,7 +263,7 @@ DiagramFigure.prototype.onSelectionChanged=function(newSel){
   } catch (err){
     // if properties do not exist, do nothing
   }
-}
+};
 
 DiagramFigure.prototype.onDoubleClick=function(){
 	Ext.getCmp('txtEqipmentName').setValue(this.toJSON()['subtype']);
@@ -267,8 +291,7 @@ DiagramFigure.prototype.onDoubleClick=function(){
 		this.annotation.doEdit();
   }
   
-}
-
+};
 DiagramFigure.prototype.setWorkflow=function(_3a5c){
 	ImageFigure.prototype.setWorkflow.call(this,_3a5c);
 	if(_3a5c!=null&&this.inputPort==null){
@@ -291,21 +314,23 @@ DiagramFigure.prototype.setWorkflow=function(_3a5c){
 
 DiagramFigure.prototype.getContextMenu=function(){
 var menu=new Menu();
-/*
 var oThis=this;
-menu.appendMenuItem(new MenuItem("NULL Router",null,function(){
-oThis.setRouter(null);
+menu.appendMenuItem(new MenuItem("Delete Figure",null,function(){
+	workflow.commandStack.execute(new CommandDelete(oThis));
+	Ext.getCmp('cmbDCompany').reset();
+	Ext.getCmp('cmbDCompany').setVisible(false);
+	Ext.getCmp('cmbDProject').setVisible(false);
+	Ext.getCmp('cmbDOption').setVisible(false);
+	Ext.getCmp('cmbDVersion').setVisible(false);
+	Ext.getCmp('btnSaveDD').setVisible(false);
+	Ext.getCmp('btnVaildtete').setVisible(true);
+	Ext.getCmp('txtPortType').setVisible(false);
+	Ext.getCmp('txtItemName').setVisible(false);
+	Ext.getCmp('btnDAddEquipment').setVisible(false);
+	Ext.getCmp('btnAddConnecion').setVisible(false);	
+	Ext.getCmp('btnAddConnecion').setVisible(false);
 }));
-menu.appendMenuItem(new MenuItem("Manhatten Router",null,function(){
-oThis.setRouter(new ManhattanConnectionRouter());
-}));
-menu.appendMenuItem(new MenuItem("Bezier Router",null,function(){
-oThis.setRouter(new BezierConnectionRouter());
-}));
-menu.appendMenuItem(new MenuItem("Fan Router",null,function(){
-oThis.setRouter(new FanConnectionRouter());
-}));
-*/
 return menu;
 };
+
 

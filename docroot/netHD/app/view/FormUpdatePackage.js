@@ -23,7 +23,7 @@ Ext.define('New.view.FormUpdatePackage', {
 				allowBlank : false,
 				msgTarget: 'side',
 				width : 400
-			}, {
+			}, /*{
 				xtype : 'textfield',
 				fieldLabel : 'Package Name',
 				id : 'txtUpPackageName',
@@ -31,7 +31,7 @@ Ext.define('New.view.FormUpdatePackage', {
 				allowBlank : false,
 				msgTarget: 'side',
 				width : 400
-			}, {
+			}, */{
 				xtype : 'textarea',
 				id : 'txtUpPkgSummery',
 				name : 'txtUpPkgSummery',
@@ -82,7 +82,7 @@ Ext.define('New.view.FormUpdatePackage', {
 		var val = sm.getSelection();
 
 		
-		var ItemName = val[0].get('PackageName');
+		//var ItemName = val[0].get('PackageName');
 		var Summary = val[0].get('Summery');
 		var Comment = val[0].get('Comment');
 		var BasePrice = val[0].get('BasePrice');
@@ -94,7 +94,7 @@ Ext.define('New.view.FormUpdatePackage', {
         day  = ("0" + date.getDate()).slice(-2);
 		var EOLDate =[ day, mnth,  date.getFullYear()].join("-");
 		
-		Ext.getCmp('txtUpPackageName').setValue(ItemName);
+		//Ext.getCmp('txtUpPackageName').setValue(ItemName);
 		Ext.getCmp('txtUpPkgSummery').setValue(Summary);
 		Ext.getCmp('txtUpPkgComment').setValue(Comment);
 		Ext.getCmp('txtUppkgBasePrice').setValue(BasePrice);

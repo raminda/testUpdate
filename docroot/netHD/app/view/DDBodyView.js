@@ -80,6 +80,7 @@ Ext.define('New.view.DDBodyView' , {
 							    var EOL=[ date.getFullYear(), mnth, day ].join("-"); //format date string to without GTM
 							    
 								var store = Ext.getStore('EquipmentStore');
+								store=null;
 								store.proxy.extraParams.purpose = 'New'; 
 								//new key word is for navigating to saving in server side
 								store.proxy.extraParams.ID=Support; 

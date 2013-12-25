@@ -81,7 +81,7 @@ Ext.define('New.view.GridPackageView', {
 						width : 150,
 						handler : function() {
 							
-							var Name = Ext.getCmp('txtPackageName').getValue();
+							//var Name = Ext.getCmp('txtPackageName').getValue();
 							var Summary=Ext.getCmp('txtPkgSummery').getValue();
 							var Comment = Ext.getCmp('txtPkgComment').getValue();
 							var BasePrice = Ext.getCmp('txtpkgBasePrice').getValue();
@@ -106,13 +106,13 @@ Ext.define('New.view.GridPackageView', {
 						         if(form.isValid()){
 									store = Ext.getStore('PackageStore');
 									store.proxy.extraParams.purpose = 'New';
-									store.proxy.extraParams.ID="[{PackageID:'"+Name+"',ItemID:'"+Itemname+"',Quantity:'1'}]";
-									JsonObject= {PackageName:Name,Summery:Summary,Comment:Comment,BasePrice:BasePrice,EOLDate:EOLdate};
+									store.proxy.extraParams.ID="[{PackageID:'"+Itemname+"',ItemID:'"+Itemname+"',Quantity:'1'}]";
+									JsonObject= {PackageName:Itemname,Summery:Summary,Comment:Comment,BasePrice:BasePrice,EOLDate:EOLdate};
 									row= Ext.create('New.model.PackagesModel', JsonObject);
 									store.insert(0, row);
 																
 									
-									Ext.getCmp('txtPackageName').reset();
+									//Ext.getCmp('txtPackageName').reset();
 									Ext.getCmp('txtPkgSummery').reset();
 									Ext.getCmp('txtPkgComment').reset();
 									Ext.getCmp('txtpkgBasePrice').reset();
@@ -199,7 +199,7 @@ Ext.define('New.view.GridPackageView', {
 						handler : function() {
 							
 							var ID = Ext.getCmp('txtUpPackageID').getValue();
-							var Name = Ext.getCmp('txtUpPackageName').getValue();
+							//var Name = Ext.getCmp('txtUpPackageName').getValue();
 							//var Price = Ext.getCmp('txtUpPkgPrice').getValue();
 							var Summery=Ext.getCmp('txtUpPkgSummery').getValue();
 							var Comment = Ext.getCmp('txtUpPkgComment').getValue();
@@ -226,7 +226,7 @@ Ext.define('New.view.GridPackageView', {
 							         if(form.isValid()){
 										store = Ext.getStore('PackageStore');
 										store.proxy.extraParams.purpose = 'Update';
-										JsonObject= {ID:ID,PackageName:Name,Summery: Summery,Comment:Comment,BasePrice:BasePrice,EOLDate:EOLdate};
+										JsonObject= {ID:ID,Summery: Summery,Comment:Comment,BasePrice:BasePrice,EOLDate:EOLdate};
 										row= Ext.create('New.model.PackagesModel', JsonObject);
 										store.insert(0, row);
 										

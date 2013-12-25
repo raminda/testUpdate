@@ -23,7 +23,7 @@ Ext.define('New.view.MenuDivView', {
 		listeners: {
 	        collapse: function() {
 	        	var panel = Ext.getCmp('Body_View');
-	        	Ext.getCmp('CanversView').setWidth(panel.getWidth()-5);
+	        	Ext.getCmp('CanversView').setWidth(panel.getWidth());
 	        	Ext.getCmp('ItemTypeGrid').setWidth(panel.getWidth() -35);
 				Ext.getCmp('EquipmentGrid').setWidth(panel.getWidth() -35);
 				Ext.getCmp('ProjectGrid').setWidth(panel.getWidth() -35);
@@ -79,7 +79,22 @@ Ext.onReady(function(){
 
 	var droptarget=new Ext.dd.DropTarget("center1",{ddGroup:'TreeDD'});
 	droptarget.notifyDrop=function(dd, e, data){
+		
 		if(data.name){
+			
+		Ext.getCmp('cmbDCompany').reset();
+		Ext.getCmp('cmbDCompany').setVisible(false);
+		Ext.getCmp('cmbDProject').setVisible(false);
+		Ext.getCmp('cmbDOption').setVisible(false);
+		Ext.getCmp('cmbDVersion').setVisible(false);
+		Ext.getCmp('btnSaveDD').setVisible(false);
+		Ext.getCmp('btnVaildtete').setVisible(true);
+		Ext.getCmp('txtPortType').setVisible(false);
+		Ext.getCmp('txtItemName').setVisible(false);
+
+		Ext.getCmp('btnDAddEquipment').setVisible(false);
+		Ext.getCmp('btnAddConnecion').setVisible(false);
+			
        var xOffset    = workflow.getAbsoluteX();
        var yOffset    = workflow.getAbsoluteY();
        var scrollLeft = workflow.getScrollLeft();

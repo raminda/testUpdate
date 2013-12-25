@@ -4,7 +4,7 @@
 Ext.define('New.controller.SystemController', {
 	extend : 'Ext.app.Controller',
 
-	views 	: ['BodyView','CanversView','DDBodyView','GenerateExcel','imageView','FormAddBulkDdView','FormAddCompanyView','FormAddEquipmentView','FormAddItemTypeView','FormAddPackageView','FormAddProjectsView','FormProjectDetailsView','FormUpdateCompany','FormUpdateEquipment','FormUpdateItemType','FormUpdatePackage','GridView','GridCompanyView','GridEquipmentsBulkView','GridEquipmentView','GridItemTypeView','GridPackageView','GridProjectsItemsView','GridProjectView','GridVersionMapView','MenuDivView','MenuBarView','SlideMenuView','SMenuHomeView'],
+	views 	: ['BodyView','CanversView','DDBodyView','GenerateExcel','imageView','FormAddBulkDdView','FormAddCompanyView','FormAddEquipmentView','FormAddItemTypeView','FormAddPackageView','FormAddProjectsView','FormProjectDetailsView','FormUpdateCompany','FormUpdateEquipment','FormUpdateItemType','FormUpdatePackage','GridView','GridCompanyView','GridEquipmentsBulkView','GridEquipmentView','GridItemTypeView','GridPackageView','GridProjectsItemsView','GridProjectView','GridVersionMapView','MenuDivView','MenuBarView','SlideMenuView','SMenuEHomeView','SMenuHomeView'],
 	stores 	: ['CompanyStore','CompanyStoreGrid','EquipmentsBulkStore','EquipmentsBulkStoreGrid','EquipmentStore','EquipmentStoreComp', 'EquipmentStoreGrid','GridStringStore','ItemTypeStore','ItemTypeStoreGrid','my','PackageStore','PackageStoreGrid','ProjectsStore','ProjectItemsStore1','ProjectItemsStoreResult','ProjectsStoreGrid','VersionMapStore','VersionMapStore2','VersionMapStoreGrid'],
 	models 	: ['CompanyModel','EquipmentsBulkModel','EquipmentModel','GridStringModel','ItemTypeModel','PackagesModel','ProjectsModel','SupportModel','VersionMapModel'],
 

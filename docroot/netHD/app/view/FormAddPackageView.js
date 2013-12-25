@@ -15,7 +15,7 @@ Ext.define('New.view.FormAddPackageView', {
 		width : '100%',
 		bodyPadding : 15,
 		border : false,
-		items : [{
+		items : [/*{
 				xtype : 'textfield',
 				fieldLabel : 'Package Name',
 				id : 'txtPackageName',
@@ -23,7 +23,7 @@ Ext.define('New.view.FormAddPackageView', {
 				allowBlank : false,
 				msgTarget: 'side',
 				width : 400
-			},{
+			},*/{
 				xtype : 'combobox',
 				fieldLabel : 'Base Item Name',
 				id : 'cmbItemss',

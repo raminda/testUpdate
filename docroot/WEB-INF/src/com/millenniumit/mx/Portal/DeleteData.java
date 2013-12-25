@@ -27,7 +27,6 @@ import common.Logger;
 
 public class DeleteData {
 	
-	@SuppressWarnings("unused")
 	private Logger logger = Logger.getLogger(DeleteData.class);
 	//Services Objects in Service class 
 	
@@ -87,8 +86,9 @@ public class DeleteData {
 		this.packageService =packageService ;
 		this.equipmentsBulkService=equipmentsBulkService;
 	}
-	public DeleteData(ProjectsService projectService){
-		
+	public DeleteData(ProjectsService projectService,VersionMapService versionMapService,ProjectItemsService projectItemsService){
+		this.versionMapService=versionMapService;
+		this.projectItemsService=projectItemsService;
 		this.projectService =projectService;
 	}
 	public DeleteData(ProjectItemsService projectItemsService){
@@ -194,11 +194,28 @@ public class DeleteData {
 			
 			Project newprojects=new Project();
 			newprojects=projectService.getProjects(request.getParameter("value"));
+			/*try{
+
+				List <VersionMap>list  =versionMapService.getAll(newprojects);
+				for(int i=0;i<list.size();i++){
+					List <ProjectItems>lis= projectItemsService.getAll(list.get(i));
+					for(int j=0;j<lis.size();j++){
+						projectItemsService.delete(lis.get(j));
+					}
+					wait(100);
+					versionMapService.delete(list.get(i));
+				}
+			}
+			catch (Exception e) {
+				logger.info(e.getMessage());
+			}*/
+			
 			try{
+				wait(100);
 			projectService.delete(newprojects);	
 			}
 			catch (Exception e) {
-				System.out.println("Error in delete in "+ServiceType+" "+e.getMessage());
+				logger.info("Error in delete in "+ServiceType+" "+e.getMessage());
 			}
 		}
 		//**********ItemType***********

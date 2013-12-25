@@ -8,9 +8,28 @@ this.setColor(new Color(128,128,255));
 this.setLineWidth(2);
 //this.setZOrder(101);
 this.setZOrderBaseIndex = 101;
+
 };
 ContextmenuConnection.prototype=new Connection;
-
+ContextmenuConnection.prototype.onKeyDown=function(_3831,ctrl){
+    if(_3831==46&&this.isDeleteable()==true){
+      var i=0;
+      this.workflow.commandStack.execute(new CommandDelete(this));
+      	Ext.getCmp('cmbDCompany').reset();
+  		Ext.getCmp('cmbDCompany').setVisible(false);
+  		Ext.getCmp('cmbDProject').setVisible(false);
+  		Ext.getCmp('cmbDOption').setVisible(false);
+  		Ext.getCmp('cmbDVersion').setVisible(false);
+  		Ext.getCmp('btnSaveDD').setVisible(false);
+  		Ext.getCmp('btnVaildtete').setVisible(true);
+  		Ext.getCmp('txtPortType').setVisible(false);
+  		Ext.getCmp('txtItemName').setVisible(false);
+  		Ext.getCmp('btnAddConnecion').setVisible(false);
+    }
+    if(ctrl){
+      this.workflow.onKeyDown(_3831,ctrl);
+    }
+  };
 ContextmenuConnection.prototype.toJSON=function() {
   var js = new Object;
   var c = this.getColor();
@@ -19,7 +38,7 @@ ContextmenuConnection.prototype.toJSON=function() {
   js['color'] = c.getRed() + "," + c.getGreen() + "," + c.getBlue();
   //js['router'] = this.router;
   return js;
-}
+};
 
 ContextmenuConnection.prototype.getContextMenu=function(){
 var menu=new Menu();
@@ -39,6 +58,20 @@ menu.appendMenuItem(new MenuItem("Green", null,function(){oThis.setColor(new  Co
 menu.appendMenuItem(new MenuItem("Red", null,function(){oThis.setColor(new  Color(200,0,0));}));
 menu.appendMenuItem(new MenuItem("Gray", null,function(){oThis.setColor(new  Color(128,128,128));}));
 menu.appendMenuItem(new MenuItem("Black", null,function(){oThis.setColor(new  Color(0,0,0));}));
-
+menu.appendMenuItem(new MenuItem("Delete Figure",null,function(){
+	workflow.commandStack.execute(new CommandDelete(oThis));
+	Ext.getCmp('cmbDCompany').reset();
+	Ext.getCmp('cmbDCompany').setVisible(false);
+	Ext.getCmp('cmbDProject').setVisible(false);
+	Ext.getCmp('cmbDOption').setVisible(false);
+	Ext.getCmp('cmbDVersion').setVisible(false);
+	Ext.getCmp('btnSaveDD').setVisible(false);
+	Ext.getCmp('btnVaildtete').setVisible(true);
+	Ext.getCmp('txtPortType').setVisible(false);
+	Ext.getCmp('txtItemName').setVisible(false);
+	Ext.getCmp('btnDAddEquipment').setVisible(false);
+	Ext.getCmp('btnAddConnecion').setVisible(false);
+	Ext.getCmp('btnAddConnecion').setVisible(false);
+}));
 return menu;
 };

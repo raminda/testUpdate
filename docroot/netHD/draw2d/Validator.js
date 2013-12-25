@@ -2,8 +2,10 @@
  * @author Raminda
  */
 var myjson_details="";
+var jsonsite="";
 function Validator(txt) {
 	try{
+		jsonsite="[";
 		myjson_details="[";
 		var obj = eval ("(" + txt + ")"); 
 		var WokflowLenth=obj.figures.length;
@@ -38,6 +40,12 @@ function Validator(txt) {
 									 if(target==obj.figures[ii].ports[jj].id){
 										 myjson_details+='{"Pid" : "'+obj.figures[i].id+'","Cid" : "'+obj.figures[ii].id+'","Ptype" : "'+obj.figures[i].subtype+'","Ctype" : "'+obj.figures[ii].subtype+'","Pannot" : "'+obj.figures[i].annotations[0].text+'","Cannot" : "'+obj.figures[ii].annotations[0].text+'"},';
 										 bool=true;
+										 if(obj.figures[i].subtype=='Site'){
+											 jsonsite+="{Site:'"+obj.figures[i].annotations[0].text+"',SiteID :'"+obj.figures[i].id+"' ,ConectotID:'"+obj.figures[ii].id+"',ConectotAnn:'"+obj.figures[ii].annotations[0].text+"'},";
+										 }
+										 if(obj.figures[ii].subtype=='Site'){
+											 jsonsite+="{Site:'"+obj.figures[ii].annotations[0].text+"',SiteID :'"+obj.figures[ii].id+"' , ConectotID:'"+obj.figures[i].id+"',ConectotAnn:'"+obj.figures[i].annotations[0].text+"'},";
+										 }
 									 }
 									 else{
 										 //do nothind
@@ -52,16 +60,15 @@ function Validator(txt) {
 				 }
 			 }
 			myjson_details+="{}]";
+			jsonsite+="{}]";
 		}
 		else{
 			 bool=false;
 			 Ext.Msg.alert('Error', 'No diagrum for validate Or No any Connections!');
 				
 		}
-		//alert(myjson_details);
 		var objo = eval ("(" + myjson_details + ")"); 
 		var jLenth=objo.length;
-		//alert(jLenth);
 		boolin=false;
 		if(jLenth>0){
 			for(var i=0;i<jLenth-1;i++){
@@ -105,16 +112,12 @@ function Validator(txt) {
 					Ext.Msg.alert('Warning', obj2.Ptype +" & "+obj2.Ctype +" not compatible connection for "+obj2.Cannot+" and "+obj2.Pannot);
 				}
 			}
-			if(boolin){
-				Ext.Msg.alert('Validated', "Validation complete ready to Submit !");
-			}
 		}
 		else{
 			Ext.Msg.alert('Warning', "No conections for validations");
 		}
 		if(boolin){
 			
-			//alert(myjson_details);
 			Ext.getCmp('txtDDJSON1').setValue(txt);
 			Ext.getCmp('txtDDJSON2').setValue(myjson_details);
 			Ext.getCmp('cmbDCompany').setVisible(true);
@@ -122,6 +125,8 @@ function Validator(txt) {
 			Ext.getCmp('cmbDOption').setVisible(true);
 			Ext.getCmp('cmbDVersion').setVisible(true);
 			Ext.getCmp('btnVaildtete').setVisible(false);
+			Ext.getCmp('txtEqipmentName').enableDD = false;
+			Ext.Msg.alert('Validated', "Validation complete ready to Submit !");
 		}
 		else{
 			//do nothing

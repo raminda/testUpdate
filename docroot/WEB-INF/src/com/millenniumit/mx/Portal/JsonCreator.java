@@ -12,8 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class JsonCreator {
-	
-	private Logger logger;
+	private Logger logger = Logger.getLogger(JsonCreator.class);
 	
 	public JsonCreator(){
 		logger = Logger.getLogger(JsonCreator.class);

@@ -30,7 +30,7 @@ Ext.define('New.view.CanversView', {
 	    
 	},{
 		region: 'center',
-		html: "<div id='center1' class='x-layout-active-content' style='width:1500px;height:1500px;' ><div  id='paintarea' style='width:1500px;height:1500px;'></div></div>",
+		html: "<div id='center1' class='x-layout-active-content' style='width:1200px;height:825px;' ><div  id='paintarea' style='width:1200px;height:810px;'></div></div>",
 		xtype: 'panel',
 		border : true,
 		titlebar: true,

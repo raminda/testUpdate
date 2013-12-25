@@ -11,34 +11,35 @@ Ext.define('New.view.MenuBarView', {
 	width   : 1000,
 	height :70,
 	items : [{
-		text : 'Home',
-		iconCls : 'homeIcon',
-		xtype :'button',
-		height : 30,
-		flex : 1,
-		textAlign : 'left',
-		handler : function() {
-			Ext.getCmp('imageView').setVisible(true);
-			Ext.getCmp('GridView').setVisible(false);
-			Ext.getCmp('CanversView').setVisible(false);
-			Ext.getCmp('EquipmentBulkDD').setVisible(false);
-			Ext.getCmp('ReportView').setVisible(false);
-
-			Ext.getCmp('txtItemName').setVisible(false);
-			Ext.getCmp('txtPortType').setVisible(false);
-			Ext.getCmp('txtEqipmentID').setVisible(false);
-			Ext.getCmp('txtEqipmentName').setVisible(false);
-			Ext.getCmp('btnVaildtete').setVisible(true);
-			Ext.getCmp('btnDAddEquipment').setVisible(false);
-			Ext.getCmp('btnAddConnecion').setVisible(false);
-    	}
+			text : 'Home',
+			iconCls : 'homeIcon',
+			xtype :'button',
+			height : 30,
+			flex : 1,
+			textAlign : 'left',
+			handler : function() {
+				Ext.getCmp('imageView').setVisible(true);
+				Ext.getCmp('GridView').setVisible(false);
+				Ext.getCmp('CanversView').setVisible(false);
+				Ext.getCmp('EquipmentBulkDD').setVisible(false);
+				Ext.getCmp('ReportView').setVisible(false);
+				Ext.getCmp('SMenuHome_View').setVisible(false);
+				Ext.getCmp('SMenuEHome_View').setVisible(false);
+				/*Ext.getCmp('txtItemName').setVisible(false);
+				Ext.getCmp('txtPortType').setVisible(false);
+				Ext.getCmp('txtEqipmentID').setVisible(false);
+				Ext.getCmp('txtEqipmentName').setVisible(false);
+				Ext.getCmp('btnDAddEquipment').setVisible(false);
+				Ext.getCmp('btnAddConnecion').setVisible(false);
+				Ext.getCmp('btnVaildtete').setVisible(false);*/
+	    	}
 		},{
-		text : 'Projects',
-		iconCls : 'jobsIcon',
-		height : 30,
-		flex : 1,
-		textAlign : 'left',
-		menu : [{
+			text : 'Projects',
+			iconCls : 'jobsIcon',
+			height : 30,
+			flex : 1,
+			textAlign : 'left',
+			menu : [{
 				text: 'Create Project (Drawer)',
 				handler : function() {
 					var grid = Ext.getCmp('formgridPanel');
@@ -66,8 +67,45 @@ Ext.define('New.view.MenuBarView', {
 					Ext.getCmp('btnDAddEquipment').setVisible(false);
 					Ext.getCmp('btnAddConnecion').setVisible(false);
 					
+					Ext.getCmp('cmbDCompany').setVisible(false);
+					Ext.getCmp('cmbDProject').setVisible(false);
+					Ext.getCmp('cmbDOption').setVisible(false);
+					Ext.getCmp('cmbDVersion').setVisible(false);
+					Ext.getCmp('btnSaveDD').setVisible(false);
+					
+					Ext.getCmp('SMenuHome_View').setVisible(true);
+					Ext.getCmp('SMenuEHome_View').setVisible(false);
 					crt();
 	    		}
+			},{
+				text : 'Edit Project (Drawer)',
+				handler : function() {
+					Ext.getCmp('imageView').setVisible(false);
+					Ext.getCmp('GridView').setVisible(false);
+					Ext.getCmp('CanversView').setVisible(true);
+					Ext.getCmp('EquipmentBulkDD').setVisible(false);
+					Ext.getCmp('ReportView').setVisible(false);
+					Ext.getCmp('SMenuHome_View').setVisible(false);
+					/*Ext.getCmp('txtItemName').setVisible(false);
+					Ext.getCmp('txtPortType').setVisible(false);
+					Ext.getCmp('txtEqipmentID').setVisible(false);
+					Ext.getCmp('txtEqipmentName').setVisible(false);
+					Ext.getCmp('btnDAddEquipment').setVisible(false);
+					Ext.getCmp('btnAddConnecion').setVisible(false);
+					Ext.getCmp('btnVaildtete').setVisible(false);*/
+					Ext.getCmp('SMenuHome_View').setVisible(false);
+					Ext.getCmp('SMenuEHome_View').setVisible(true);
+					
+					Ext.getCmp('txtItemName').setVisible(false);
+					Ext.getCmp('txtPortType').setVisible(false);
+					Ext.getCmp('txtEqipmentID').setVisible(false);
+					Ext.getCmp('txtEqipmentName').setVisible(false);
+					Ext.getCmp('btnVaildtete').setVisible(true);
+					Ext.getCmp('btnDAddEquipment').setVisible(false);
+					Ext.getCmp('btnAddConnecion').setVisible(false);
+					
+					crtEdit();
+		    	}
 			},{
 				text: 'Create Project (Comno box)',
 				handler : function() {
@@ -78,13 +116,14 @@ Ext.define('New.view.MenuBarView', {
 					Ext.getCmp('CanversView').setVisible(false);
 					Ext.getCmp('ReportView').setVisible(false);
 					
-					Ext.getCmp('txtItemName').setVisible(false);
+					/*Ext.getCmp('txtItemName').setVisible(false);
 					Ext.getCmp('txtPortType').setVisible(false);
 					Ext.getCmp('txtEqipmentID').setVisible(false);
 					Ext.getCmp('txtEqipmentName').setVisible(false);
-					Ext.getCmp('btnVaildtete').setVisible(true);
 					Ext.getCmp('btnDAddEquipment').setVisible(false);
 					Ext.getCmp('btnAddConnecion').setVisible(false);
+					Ext.getCmp('btnVaildtete').setVisible(false);*/
+					Ext.getCmp('SMenuHome_View').setVisible(false);Ext.getCmp('SMenuEHome_View').setVisible(false);
 		    	}
 			},{
 				text: 'Projects',
@@ -102,18 +141,21 @@ Ext.define('New.view.MenuBarView', {
 					Ext.getCmp('EquipmentGrid').setVisible(false);
 					Ext.getCmp('CompanyGrid').setVisible(false);
 					Ext.getCmp('imageView').setVisible(false);
+					Ext.getCmp('btnVaildtete').setVisible(false);
 					Ext.getCmp('GridView').setVisible(true);
 					Ext.getCmp('CanversView').setVisible(false);
 					Ext.getCmp('EquipmentBulkDD').setVisible(false);
 					Ext.getCmp('ReportView').setVisible(false);
 
-					Ext.getCmp('txtItemName').setVisible(false);
+					/*Ext.getCmp('txtItemName').setVisible(false);
 					Ext.getCmp('txtPortType').setVisible(false);
 					Ext.getCmp('txtEqipmentID').setVisible(false);
 					Ext.getCmp('txtEqipmentName').setVisible(false);
 					Ext.getCmp('btnVaildtete').setVisible(true);
 					Ext.getCmp('btnDAddEquipment').setVisible(false);
 					Ext.getCmp('btnAddConnecion').setVisible(false);
+					Ext.getCmp('btnVaildtete').setVisible(false);*/
+					Ext.getCmp('SMenuHome_View').setVisible(false);Ext.getCmp('SMenuEHome_View').setVisible(false);
 		    	}
 					
 			},{
@@ -137,13 +179,15 @@ Ext.define('New.view.MenuBarView', {
 					Ext.getCmp('EquipmentBulkDD').setVisible(false);
 					Ext.getCmp('ReportView').setVisible(false);	
 
-					Ext.getCmp('txtItemName').setVisible(false);
+					/*Ext.getCmp('txtItemName').setVisible(false);
 					Ext.getCmp('txtPortType').setVisible(false);
 					Ext.getCmp('txtEqipmentID').setVisible(false);
 					Ext.getCmp('txtEqipmentName').setVisible(false);
-					Ext.getCmp('btnVaildtete').setVisible(true);
+					Ext.getCmp('btnVaildtete').setVisible(false);
 					Ext.getCmp('btnDAddEquipment').setVisible(false);
 					Ext.getCmp('btnAddConnecion').setVisible(false);
+					Ext.getCmp('btnVaildtete').setVisible(false);*/
+					Ext.getCmp('SMenuHome_View').setVisible(false);
 			    }
 			}]
 		},{
@@ -166,13 +210,14 @@ Ext.define('New.view.MenuBarView', {
 				Ext.getCmp('CanversView').setVisible(false);
 				Ext.getCmp('ProjectGrid').setVisible(false);
 				
-				Ext.getCmp('txtItemName').setVisible(false);
+				/*Ext.getCmp('txtItemName').setVisible(false);
 				Ext.getCmp('txtPortType').setVisible(false);
 				Ext.getCmp('txtEqipmentID').setVisible(false);
 				Ext.getCmp('txtEqipmentName').setVisible(false);
-				Ext.getCmp('btnVaildtete').setVisible(true);
+				Ext.getCmp('btnVaildtete').setVisible(false);
 				Ext.getCmp('btnDAddEquipment').setVisible(false);
-				Ext.getCmp('btnAddConnecion').setVisible(false);
+				Ext.getCmp('btnAddConnecion').setVisible(false);*/
+				Ext.getCmp('SMenuHome_View').setVisible(false);Ext.getCmp('SMenuEHome_View').setVisible(false);
     			}
 			},{
 			text: 'Configure Base Equipments',
@@ -193,13 +238,14 @@ Ext.define('New.view.MenuBarView', {
 				Ext.getCmp('GridView').setVisible(true);
 				Ext.getCmp('CanversView').setVisible(false);
 
-				Ext.getCmp('txtItemName').setVisible(false);
+				/*Ext.getCmp('txtItemName').setVisible(false);
 				Ext.getCmp('txtPortType').setVisible(false);
 				Ext.getCmp('txtEqipmentID').setVisible(false);
 				Ext.getCmp('txtEqipmentName').setVisible(false);
-				Ext.getCmp('btnVaildtete').setVisible(true);
+				Ext.getCmp('btnVaildtete').setVisible(false);
 				Ext.getCmp('btnDAddEquipment').setVisible(false);
-				Ext.getCmp('btnAddConnecion').setVisible(false);
+				Ext.getCmp('btnAddConnecion').setVisible(false);*/
+				Ext.getCmp('SMenuHome_View').setVisible(false);
 	    		}
 			},{
 			text: 'Configure Equipment',
@@ -220,13 +266,14 @@ Ext.define('New.view.MenuBarView', {
 				Ext.getCmp('CanversView').setVisible(false);
 				Ext.getCmp('EquipmentBulkDD').setVisible(false);
 				
-				Ext.getCmp('txtItemName').setVisible(false);
+				/*Ext.getCmp('txtItemName').setVisible(false);
 				Ext.getCmp('txtPortType').setVisible(false);
 				Ext.getCmp('txtEqipmentID').setVisible(false);
 				Ext.getCmp('txtEqipmentName').setVisible(false);
-				Ext.getCmp('btnVaildtete').setVisible(true);
+				Ext.getCmp('btnVaildtete').setVisible(false);
 				Ext.getCmp('btnDAddEquipment').setVisible(false);
-				Ext.getCmp('btnAddConnecion').setVisible(false);
+				Ext.getCmp('btnAddConnecion').setVisible(false);*/
+				Ext.getCmp('SMenuHome_View').setVisible(false);Ext.getCmp('SMenuEHome_View').setVisible(false);
 	    	}
 				
 			},{
@@ -249,13 +296,14 @@ Ext.define('New.view.MenuBarView', {
 				Ext.getCmp('CanversView').setVisible(false);
 				Ext.getCmp('EquipmentBulkDD').setVisible(false);
 				
-				Ext.getCmp('txtItemName').setVisible(false);
+				/*Ext.getCmp('txtItemName').setVisible(false);
 				Ext.getCmp('txtPortType').setVisible(false);
 				Ext.getCmp('txtEqipmentID').setVisible(false);
 				Ext.getCmp('txtEqipmentName').setVisible(false);
-				Ext.getCmp('btnVaildtete').setVisible(true);
+				Ext.getCmp('btnVaildtete').setVisible(false);
 				Ext.getCmp('btnDAddEquipment').setVisible(false);
-				Ext.getCmp('btnAddConnecion').setVisible(false);
+				Ext.getCmp('btnAddConnecion').setVisible(false);*/
+				Ext.getCmp('SMenuHome_View').setVisible(false);Ext.getCmp('SMenuEHome_View').setVisible(false);
 		    }
 		}]
 	},{
@@ -273,13 +321,14 @@ Ext.define('New.view.MenuBarView', {
 				Ext.getCmp('CanversView').setVisible(false);
 				Ext.getCmp('EquipmentBulkDD').setVisible(false);
 				
-				Ext.getCmp('txtItemName').setVisible(false);
+				/*Ext.getCmp('txtItemName').setVisible(false);
 				Ext.getCmp('txtPortType').setVisible(false);
 				Ext.getCmp('txtEqipmentID').setVisible(false);
 				Ext.getCmp('txtEqipmentName').setVisible(false);
-				Ext.getCmp('btnVaildtete').setVisible(true);
+				Ext.getCmp('btnVaildtete').setVisible(false);
 				Ext.getCmp('btnDAddEquipment').setVisible(false);
-				Ext.getCmp('btnAddConnecion').setVisible(false);
+				Ext.getCmp('btnAddConnecion').setVisible(false);*/
+				Ext.getCmp('SMenuHome_View').setVisible(false);Ext.getCmp('SMenuEHome_View').setVisible(false);
     		}
 		},{
 			text: 'Log report',
@@ -290,13 +339,14 @@ Ext.define('New.view.MenuBarView', {
 				Ext.getCmp('CanversView').setVisible(false);
 				Ext.getCmp('EquipmentBulkDD').setVisible(false);
 
-				Ext.getCmp('txtItemName').setVisible(false);
+				/*Ext.getCmp('txtItemName').setVisible(false);
 				Ext.getCmp('txtPortType').setVisible(false);
 				Ext.getCmp('txtEqipmentID').setVisible(false);
 				Ext.getCmp('txtEqipmentName').setVisible(false);
-				Ext.getCmp('btnVaildtete').setVisible(true);
+				Ext.getCmp('btnVaildtete').setVisible(false);
 				Ext.getCmp('btnDAddEquipment').setVisible(false);
-				Ext.getCmp('btnAddConnecion').setVisible(false);
+				Ext.getCmp('btnAddConnecion').setVisible(false);*/
+				Ext.getCmp('SMenuHome_View').setVisible(false);Ext.getCmp('SMenuEHome_View').setVisible(false);
 	    	}
 		},{
 			text: 'Equipment Summery',
@@ -307,13 +357,14 @@ Ext.define('New.view.MenuBarView', {
 				Ext.getCmp('CanversView').setVisible(false);
 				Ext.getCmp('EquipmentBulkDD').setVisible(false);
 
-				Ext.getCmp('txtItemName').setVisible(false);
+				/*Ext.getCmp('txtItemName').setVisible(false);
 				Ext.getCmp('txtPortType').setVisible(false);
 				Ext.getCmp('txtEqipmentID').setVisible(false);
 				Ext.getCmp('txtEqipmentName').setVisible(false);
-				Ext.getCmp('btnVaildtete').setVisible(true);
+				Ext.getCmp('btnVaildtete').setVisible(false);
 				Ext.getCmp('btnDAddEquipment').setVisible(false);
-				Ext.getCmp('btnAddConnecion').setVisible(false);
+				Ext.getCmp('btnAddConnecion').setVisible(false);*/
+				Ext.getCmp('SMenuHome_View').setVisible(false);Ext.getCmp('SMenuEHome_View').setVisible(false);
 	    	}
 				
 		},{
@@ -325,14 +376,15 @@ Ext.define('New.view.MenuBarView', {
 				Ext.getCmp('CanversView').setVisible(false);
 				Ext.getCmp('EquipmentBulkDD').setVisible(false);
 
-				Ext.getCmp('txtItemName').setVisible(false);
+/*				Ext.getCmp('txtItemName').setVisible(false);
 				Ext.getCmp('txtPortType').setVisible(false);
 				Ext.getCmp('txtEqipmentID').setVisible(false);
 				Ext.getCmp('txtEqipmentName').setVisible(false);
-				Ext.getCmp('btnVaildtete').setVisible(true);
+				Ext.getCmp('btnVaildtete').setVisible(false);
 				Ext.getCmp('btnDAddEquipment').setVisible(false);
 				Ext.getCmp('btnAddConnecion').setVisible(false);
-		    }
+*/		    	Ext.getCmp('SMenuHome_View').setVisible(false);Ext.getCmp('SMenuEHome_View').setVisible(false);
+			}
 		},{
 			text: 'Project Summery',
 			handler : function() {
@@ -342,13 +394,14 @@ Ext.define('New.view.MenuBarView', {
 				Ext.getCmp('CanversView').setVisible(false);
 				Ext.getCmp('EquipmentBulkDD').setVisible(false);
 
-				Ext.getCmp('txtItemName').setVisible(false);
+				/*Ext.getCmp('txtItemName').setVisible(false);
 				Ext.getCmp('txtPortType').setVisible(false);
 				Ext.getCmp('txtEqipmentID').setVisible(false);
 				Ext.getCmp('txtEqipmentName').setVisible(false);
-				Ext.getCmp('btnVaildtete').setVisible(true);
+				Ext.getCmp('btnVaildtete').setVisible(false);
 				Ext.getCmp('btnDAddEquipment').setVisible(false);
-				Ext.getCmp('btnAddConnecion').setVisible(false);
+				Ext.getCmp('btnAddConnecion').setVisible(false);*/
+				Ext.getCmp('SMenuHome_View').setVisible(false);Ext.getCmp('SMenuEHome_View').setVisible(false);
 		    }
 		}]
 	}],

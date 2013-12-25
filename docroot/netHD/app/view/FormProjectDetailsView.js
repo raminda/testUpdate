@@ -1,10 +1,10 @@
 var PackageType = Ext.create('Ext.data.Store', {
     fields: ['PackageType'],
     data : [
-        {"PackageType":"servers"},
-        {"PackageType":"Network Accessories"},
-        {"PackageType":"accessories"},
-        {"PackageType":"Application "}
+        {"PackageType":"Backend machines"},
+        {"PackageType":"Accessories"},
+        {"PackageType":"Network equipment"}//,
+        //{"PackageType":"Third party software"}
     ]
 });
 var Sitetype = Ext.create('Ext.data.Store', {
@@ -576,8 +576,9 @@ Ext.define('New.view.FormProjectDetailsView', {
 	                    type: 'absolute'
 	                },
 	                handler : function() {
+	                	
 						if(Ext.getCmp('cmbPrjProject').getValue()!=null && Ext.getCmp('cmbPrjVersion').getValue()!=null  && Ext.getCmp('cmbPrjOption').getValue()!=null ){
-							
+						
 							var store = Ext.getStore('my');
 				            	store.proxy.extraParams.purpose="ExcelCreate";
 				        		store.proxy.extraParams.ID1=Ext.getCmp('cmbPrjProject').getValue();
@@ -598,12 +599,11 @@ Ext.define('New.view.FormProjectDetailsView', {
 							});
 							win.show();
 								
-							store.load();
-						}
-						else{
-							Ext.Msg.alert('Message', 'Plese Enter values!');
-						}
-					}
+							store.load();}
+							else{
+							Ext.Msg.alert('Message', 'Plese Enter values!');}
+							}
+					
             	},{
             		id : 'EditeProjrct',
 					name : 'EditeProjrct',

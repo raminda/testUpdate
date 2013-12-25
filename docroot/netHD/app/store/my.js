@@ -7,7 +7,7 @@ Ext.define( 'New.store.my', {
 		type : 'ajax',
 		url : ExcelUrl,
 		reader : {
-			type : 'json'
+			//type : 'json'
 		},
 		
 		extraParams: {
@@ -34,6 +34,9 @@ Ext.define( 'New.store.my', {
 	        	 else{
 	        		 console.log(jsn);
 	        	 }
+        	// grid_panel.getEl().unmask();
+            // window.open('xls/' + report_name + '.xls');
+             
         	 
          }
       }

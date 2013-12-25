@@ -145,7 +145,7 @@ public class NetHDSizing extends MVCPortlet {
 			comboData=new ComboData(projectService,companyService);
 			saveData=new SaveData(projectService,companyService);
 			updateData=new UpdateData(projectService,companyService);
-			deleteData=new DeleteData(projectService);
+			deleteData=new DeleteData(projectService,versionMapService,projectItemsService);
 		}
 		else if (resourceID.equals("CompanyStoreUrl")) {
 			ItemName="Company";

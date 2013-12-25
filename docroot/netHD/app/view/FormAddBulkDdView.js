@@ -46,7 +46,9 @@ var formPanel = Ext.define('formPanel', {
 				}
         	},
             focus:function( me, The, eOpts ){
+            	
             	var store = Ext.getStore('PackageStoreGrid');
+            	//Store.loadData([],false);
 				store.proxy.extraParams.purpose = 'Grid';
 				store.load();
             }
@@ -78,6 +80,7 @@ var formPanel = Ext.define('formPanel', {
 		        	
 		        	var grid = Ext.getCmp('gridEquipmentsBulkView');
 					var store=grid.getStore('EquipmentsBulkStoreGrid');
+					//Store.loadData([],false);
 					store.proxy.extraParams.purpose = 'Combo';
 					store.proxy.extraParams.ID="2";
 					store.proxy.extraParams.value=Ext.getCmp('cmbDDPackage').getValue();
@@ -88,6 +91,7 @@ var formPanel = Ext.define('formPanel', {
         		var store = Ext.getStore('GridStringStore');
 				if(Ext.getCmp('cmbDDPackage').getValue()!=null){
 					store.proxy.extraParams.purpose = 'Combo';
+					//Store.loadData([],false);
 					store.proxy.extraParams.ID="1";
 					store.proxy.extraParams.value=Ext.getCmp('cmbDDPackage').getValue();
     			}
@@ -118,6 +122,7 @@ var formPanel = Ext.define('formPanel', {
 				if(Ext.getCmp('cmbBsItemType').getValue()!=null){
 					var grid = Ext.getCmp('formgridPanel');
 					var store=grid.getStore('EquipmentStoreGrid');
+					//Store.loadData([],false);
 					store.proxy.extraParams.purpose = 'Combo';
 					store.proxy.extraParams.value="3";
 					store.proxy.extraParams.ID=Ext.getCmp('cmbBsItemType').getValue();
@@ -134,12 +139,14 @@ var formPanel = Ext.define('formPanel', {
 				else{
 					var grid = Ext.getCmp('formgridPanel');
 					var store=grid.getStore('EquipmentStoreGrid');
+					//store.loadData([],false);
 					store.proxy.extraParams.purpose = 'null';
 					store.load();
 				}
         	},
     			focus:function( me, The, eOpts ){
-    				var store = Ext.getStore('ItemTypeStore');     				
+    				var store = Ext.getStore('ItemTypeStore'); 
+    				//Store.loadData([],false);
     				store.proxy.extraParams.purpose = 'Combo';
 					store.proxy.extraParams.ID="1";
         			store.load();
@@ -281,6 +288,7 @@ Ext.define('New.view.FormAddBulkDdView', {
 			  			}
 			  			else{
 			     				var store = Ext.getStore('EquipmentsBulkStore');
+			     				//Store.loadData([],false);
 			     				store.proxy.extraParams.purpose = 'New';
 			     				store.proxy.extraParams.value=cmbBsItem;
 			     				var JsonObject= {PackageID:PackageID,ItemID:Itemname,Quantity: Quntity,Price:Price};
@@ -295,6 +303,7 @@ Ext.define('New.view.FormAddBulkDdView', {
 			     	        	
 			     	        	var grid = Ext.getCmp('gridEquipmentsBulkView');
 								var store=grid.getStore('EquipmentsBulkStoreGrid');
+								//Store.loadData([],false);
 								store.proxy.extraParams.purpose = 'Combo';
 								store.proxy.extraParams.ID="2";
 								store.proxy.extraParams.value=Ext.getCmp('cmbDDPackage').getValue();
@@ -319,6 +328,7 @@ Ext.define('New.view.FormAddBulkDdView', {
 			  		handler : function() {
 			  			var grid = Ext.getCmp('formgridPanel');
 						var store=grid.getStore('EquipmentStoreGrid');
+						//Store.loadData([],false);
 						store.proxy.extraParams.purpose = 'Combo';
 						store.proxy.extraParams.value="3";
 						store.proxy.extraParams.ID=Ext.getCmp('cmbBsItemType').getValue();
@@ -342,11 +352,13 @@ Ext.define('New.view.FormAddBulkDdView', {
 			              //refresh source grid
 			          	var grid = Ext.getCmp('formgridPanel');
 			  			var store=grid.getStore('EquipmentStoreGrid');
+			  			//Store.loadData([],false);
 			  			store.proxy.extraParams.purpose = 'null';
 			  			store.load();
 			  			
 			  			var grid = Ext.getCmp('gridEquipmentsBulkView');
 						var store=grid.getStore('EquipmentsBulkStoreGrid');
+						//Store.loadData([],false);
 						store.proxy.extraParams.purpose = 'null';
 						store.load();
 						

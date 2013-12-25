@@ -66,7 +66,7 @@ Ext.define('New.view.GridItemTypeView', {
 						width : 150,
 						handler : function() {
 								
-							var Name = Ext.getCmp('txtItemName').getValue();
+							var Name = Ext.getCmp('txtIteName').getValue();
 							var Type = Ext.getCmp('cmbAsLvlLevel').getValue();
 																
 							var row=null;
@@ -77,6 +77,7 @@ Ext.define('New.view.GridItemTypeView', {
 								store.proxy.extraParams.purpose = 'New';
 								JsonObject= {TypeName:Name,AccsessLevel: Type};
 								row= Ext.create('New.model.ItemTypeModel', JsonObject);
+								store.loadData([],false);
 								store.insert(0, row);
 	
 								Ext.getCmp('txtItemName').reset();

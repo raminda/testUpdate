@@ -27,8 +27,8 @@ Ext.define('New.view.FormAddItemTypeView', {
 		items : [ {
 			xtype : 'textfield',
 			fieldLabel : 'Item Type Name',
-			id : 'txtItemName',
-			name : 'txtItemName',
+			id : 'txtIteName',
+			name : 'txtIteName',
 			allowBlank : false,
 			msgTarget: 'side',
 			width : 400

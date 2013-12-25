@@ -1,6 +1,10 @@
 package com.millenniumit.mx.Portal;
 
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -117,8 +121,11 @@ public class SaveData {
 		this.equipmentMapingService=equipmentMapingService;
 	}
 
-	public void NewData(ResourceRequest request, ResourceResponse response,String ServiceType) throws NumberFormatException, JSONException, ParseException{
+	public void NewData(ResourceRequest request, ResourceResponse response,String ServiceType) throws NumberFormatException, JSONException, ParseException, IOException{
 		JSONObject jsonobj=jsonCreator.JsonCreat(request, response,ServiceType);
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("application/json");
+		PrintWriter out = response.getWriter();
 		int ID = 0 ;
 		System.out.println(jsonobj);
 		
@@ -150,9 +157,11 @@ public class SaveData {
 				try {
 					ID = equipmentService.save(NewEquipment);
 					
+					out.println("[{'data':'Succses'}]");
 				}catch (Exception e) {
 					logger.info("Error : " + e.getMessage());
-					ID= 0;
+					ID=  0;
+					out.println("[{'data':'" + e.getMessage()+"'}]");
 				}
 			}
 			else{
@@ -197,9 +206,11 @@ public class SaveData {
 				//save data
 				try {
 					ID=equipmentMapingService.save(equipmentMaping);	
+					out.println("[{'data':'Succses'}]");
 				}catch (Exception e) {
 					logger.info("Error : " + e.getMessage());
-					ID= 0;
+					ID=  0;
+					out.println("[{'data':'" + e.getMessage()+"'}]");
 				}
 				
 				//
@@ -246,9 +257,11 @@ public class SaveData {
 				//save data
 				try {
 					ID=equipmentMapingService.save(equipmentMaping);	
+					out.println("[{'data':'Succses'}]");
 				}catch (Exception e) {
 					logger.info("Error : " + e.getMessage());
 					ID=  0;
+					out.println("[{'data':'" + e.getMessage()+"'}]");
 				}
 			}
 		}
@@ -280,14 +293,16 @@ public class SaveData {
 					}
 					//packages.setPrice(prices);
 					packageService.update(packages);
+					out.println("[{'data':'Succses'}]");
 				}catch (Exception e) {
 					logger.info("Error : " + e.getMessage());
 					ID=  0;
+					out.println("[{'data':'" + e.getMessage()+"'}]");
 				}
 			}
 			else{
 				
-				EquipmentBulk equipmentsBulk=equipmentsBulkService.EquipmentsBulkget(packageService.getPackagess(Integer.parseInt(jsonobj.getString("PackageID"))), equipmentService.getEquipments(jsonobj.getString("ItemID")));
+				EquipmentBulk equipmentsBulk=equipmentsBulkService.EquipmentsBulkget(packageService.getPackages(jsonobj.getString("PackageID")), equipmentService.getEquipments(jsonobj.getString("ItemID")));
 				equipmentsBulk.setQuantity(equipmentsBulk.getQuantity()+(Integer.parseInt(jsonobj.getString("Quantity"),10)));
 				//equipmentsBulk.setPrice((Integer.parseInt(jsonobj.getString("Price"),10)*equipmentsBulk.getQuantity()));
 				
@@ -321,9 +336,11 @@ public class SaveData {
 				//save data
 				try {
 					ID = packageService.save( NewPackage);		
+					out.println("[{'data':'Succses'}]");
 				}catch (Exception e) {
 					logger.info("Error : " + e.getMessage());
 					ID=  0;
+					out.println("[{'data':'" + e.getMessage()+"'}]");
 				}
 			
 		
@@ -378,9 +395,11 @@ public class SaveData {
 						}
 						//packages.setPrice(prices);
 						packageService.update(packages);
+						out.println("[{'data':'Succses'}]");
 					}catch (Exception e) {
 						logger.info("Error : " + e.getMessage());
 						ID=  0;
+						out.println("[{'data':'" + e.getMessage()+"'}]");
 					}
 				}
 				else{
@@ -388,8 +407,14 @@ public class SaveData {
 					EquipmentBulk equipmentsBulk=equipmentsBulkService.EquipmentsBulkget(packageService.getPackagess(Integer.parseInt(jsonobj.getString("PackageID"))), equipmentService.getEquipments(jsonobj.getString("ItemID")));
 					equipmentsBulk.setQuantity(equipmentsBulk.getQuantity()+(Integer.parseInt(jsonobj.getString("Quantity"),10)));
 					//equipmentsBulk.setPrice(equipments.getPrice()*equipmentsBulk.getQuantity());
-					
-					equipmentsBulkService.update(equipmentsBulk);
+					try{
+						equipmentsBulkService.update(equipmentsBulk);
+						out.println("[{'data':'Succses'}]");
+					}catch (Exception e) {
+						logger.info("Error : " + e.getMessage());
+						ID=  0;
+						out.println("[{'data':'" + e.getMessage()+"'}]");
+					}
 				}
 			
 			}
@@ -399,51 +424,97 @@ public class SaveData {
 		}
 		//********ProjectItems**********
 		else if (ServiceType.equals("ProjectItemsStore")) {
+			DigramAnalize digramAnalize=new DigramAnalize(projectItemsService, versionMapService, packageService);
 			logger.info("ProjectItemsStore ");
-			Project projects=projectService.getProjects(request.getParameter("ID1"));
-			Packages packages=packageService.getPackagess(Integer.parseInt(jsonobj.getString("PackageName")));
-			VersionMap obj =versionMapService.getAll(projects,request.getParameter("ID"),request.getParameter("ID2"),request.getParameter("ID3"));
-			if(obj==null){
-				logger.info("saving not Duplicate ");
-				obj=new VersionMap();
-				obj.setVersion(request.getParameter("ID2"));
-				obj.setSiteID(request.getParameter("ID3"));
-				obj.setProjectID(projects);
-				obj.setOptionID(request.getParameter("ID"));
-				try{
-					ID=versionMapService.save(obj);
-				}
-				catch (Exception e) {
-					logger.info("Error : " + e.getMessage());
-				}	
-				logger.info("ID : " +ID);
-			}
-			ProjectItems projectItems=projectItemsService.get(obj, packages);
-			if( projectItems==null){
-				projectItems=new ProjectItems();
-				projectItems.setVersion(obj);
-				projectItems.setPackageType(jsonobj.getString("PackageType"));
-				projectItems.setQuantity(Integer.parseInt(jsonobj.getString("Quantity")));
-				projectItems.setPackageID(packages);
+			if(request.getParameter("ID2").equals("DD")){
+				logger.info("DD place ");
+				String projectID=request.getParameter("Project");
+				String Option=request.getParameter("Option");//   
+				String Version=request.getParameter("Version");
 				
-				try{
-					ID=projectItemsService.save(projectItems);
+				String summary= request.getParameter("ID1");
+				String Sites=request.getParameter("ID3");
+				
+				Project projects= projectService.getProjects(projectID);
+				String FilePath=projects.getCompany().getCompanyName()+"/"+projectID+"/"+Option+"/"+Version;
+				FilePath=FilePath.replaceAll("\\s","");
+				String Coverpathstring="C:/project/liferay-portal/tomcat-7.0.27/webapps/test-portlet/netHD/Excel/";
+				Coverpathstring=Coverpathstring.replaceAll("\\s", "");
+				String Drctry=Coverpathstring+"/"+FilePath;
+				String fileName = projects.getCompany().getCompanyName()+ "_"+ projectID +"_"+Option+"_"+Version+".json";
+				fileName=fileName.replaceAll("\\s","");
+				new File(Drctry).mkdirs();
+				try {
+					FileWriter file = new FileWriter(Drctry+"/"+fileName);
+					file.write(jsonobj.toString());
+					file.flush();
+					file.close();
+			 
+				} catch (IOException e) {
+					logger.info(e.getMessage());
 				}
-				catch (Exception e) {
-					logger.info("error "+ e.getMessage());
+				
+				logger.info(request.getParameter("ID1"));//all summary
+				logger.info(request.getParameter("ID3"));//site
+				
+				logger.info(jsonobj.toString());
+				try {
+					digramAnalize.Analize(projects,Option,Version,jsonobj,Sites,summary);
+				} catch (Exception e) {
+					logger.info(e.getMessage());
+				}
+				
+			}
+			else{	
+				Project projects=projectService.getProjects(request.getParameter("ID1"));
+				Packages packages=packageService.getPackagess(Integer.parseInt(jsonobj.getString("PackageName")));
+				VersionMap obj =versionMapService.getAll(projects,request.getParameter("ID"),request.getParameter("ID2"),request.getParameter("ID3"));
+				if(obj==null){
+					logger.info("saving not Duplicate ");
+					obj=new VersionMap();
+					obj.setVersion(request.getParameter("ID2"));
+					obj.setSiteID(request.getParameter("ID3"));
+					obj.setProjectID(projects);
+					obj.setOptionID(request.getParameter("ID"));
+					try{
+						ID=versionMapService.save(obj);
+					}
+					catch (Exception e) {
+						logger.info("Error : " + e.getMessage());
+					}	
+					logger.info("ID : " +ID);
+				}
+				ProjectItems projectItems=projectItemsService.get(obj, packages);
+				if( projectItems==null){
+					projectItems=new ProjectItems();
+					projectItems.setVersion(obj);
+					projectItems.setPackageType(jsonobj.getString("PackageType"));
+					projectItems.setQuantity(Integer.parseInt(jsonobj.getString("Quantity")));
+					projectItems.setPackageID(packages);
+					projectItems.setPcakageUsege(jsonobj.getString("Quantity"));
+					
+					try{
+						ID=projectItemsService.save(projectItems);
+						out.println("[{'data':'Succses'}]");
+					}catch (Exception e) {
+						logger.info("Error : " + e.getMessage());
+						ID=  0;
+						out.println("[{'data':'" + e.getMessage()+"'}]");
+					}
+				}
+				else{
+					projectItems.setQuantity(projectItems.getQuantity()+Integer.parseInt(jsonobj.getString("Quantity")));
+					logger.info(projectItems.getPackageID().getPackageName());
+					try{
+						projectItemsService.update(projectItems);
+						out.println("[{'data':'Project Items Updated'}]");
+					}catch (Exception e) {
+						logger.info("Error : " + e.getMessage());
+						ID=  0;
+						out.println("[{'data':'" + e.getMessage()+"'}]");
+					}
 				}
 			}
-			else{
-				projectItems.setQuantity(projectItems.getQuantity()+Integer.parseInt(jsonobj.getString("Quantity")));
-				logger.info(projectItems.getPackageID().getPackageName());
-				try{
-					projectItemsService.update(projectItems);
-				}
-				catch (Exception e) {
-					logger.info("error "+ e.getMessage());
-				}
-			}
-			
 		}
 		//*********Project*********
 		
@@ -456,9 +527,11 @@ public class SaveData {
 				
 				try {
 					ID =projectService.save(projects);		
+					out.println("[{'data':'Succses'}]");
 				}catch (Exception e) {
 					logger.info("Error : " + e.getMessage());
 					ID=  0;
+					out.println("[{'data':'" + e.getMessage()+"'}]");
 				}
 			}
 			else{
@@ -473,9 +546,11 @@ public class SaveData {
 				
 				try {
 					ID =companyService.save(company);		
+					out.println("[{'data':'Succses'}]");
 				}catch (Exception e) {
 					logger.info("Error : " + e.getMessage());
 					ID=  0;
+					out.println("[{'data':'" + e.getMessage()+"'}]");
 				}
 			}
 			else{
@@ -494,10 +569,12 @@ public class SaveData {
 			catch (JSONException e) {logger.info("Error : " + e.getMessage());}
 			//save data
 			try {
-				ID =itemTypeService.save(NewitemType);		
+				ID =itemTypeService.save(NewitemType);	
+				out.println("[{'data':'Succses'}]");
 			}catch (Exception e) {
 				logger.info("Error : " + e.getMessage());
 				ID=  0;
+				out.println("[{'data':'" + e.getMessage()+"'}]");
 			}
 		}
 		//**********Nothing***********

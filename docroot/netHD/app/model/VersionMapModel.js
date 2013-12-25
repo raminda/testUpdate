@@ -31,6 +31,9 @@ Ext.define('New.model.VersionMapModel', {
 		name : 'Price',
 		type : 'string'
 	},{
+		name :'PcakageUsege',
+		type:'string'
+	},{
 		name : 'EOLDate',
 		type : 'string'
 	},{
