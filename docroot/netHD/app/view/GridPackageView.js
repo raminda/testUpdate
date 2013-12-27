@@ -15,6 +15,10 @@ Ext.define('New.view.GridPackageView', {
 		name : 'gridPackageView',
 		store : 'PackageStoreGrid',
 		overflowX : 'auto',
+
+		viewConfig: {
+            forceFit: true
+		},
 		columns :[/* {
 			header : 'Package ID',
 			dataIndex : 'ID',
@@ -149,19 +153,24 @@ Ext.define('New.view.GridPackageView', {
 					var val = sm.getSelection();
 					var store = grid.getStore('PackageStoreGrid');
 					if(val[0]!=null){
-						store.remove(val);
-						if (store.getCount() > 0) {
-							sm.select(0);
-						}
-						
-						store.proxy.extraParams.purpose = 'delete';
-						store.proxy.extraParams.value = val[0].get('ID');
-						store.load();
-						
-						var grid = Ext.getCmp('gridPackageView');
-						var store = grid.getStore('PackageStoreGrid');
-						store.proxy.extraParams.purpose='Grid';
-						store.load();
+						Ext.MessageBox.confirm('Confirm', 'Are you sure you want to do that?',  function(btn) {
+						       if(btn === 'yes'){
+						    	   	store.remove(val);
+									if (store.getCount() > 0) {
+										sm.select(0);
+									}
+									var grid = Ext.getCmp('gridPackageView');
+									var store = grid.getStore('PackageStoreGrid');
+									store.proxy.extraParams.purpose = 'delete';
+									store.proxy.extraParams.value = val[0].get('ID');
+									store.load();
+									Ext.Msg.alert('Sucsess', 'Successfully Deleted');
+									var grid = Ext.getCmp('gridPackageView');
+									var store = grid.getStore('PackageStoreGrid');
+									//store.proxy.extraParams.purpose='Grid';
+									store.load();
+						       }
+					    });
 					}
 					else{
 						Ext.Msg.alert('Error ', "Plese Select one Row befor Press Delete");

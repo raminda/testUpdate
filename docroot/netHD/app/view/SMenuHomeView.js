@@ -8,7 +8,11 @@ Ext.define('New.view.SMenuHomeView', {
 	border : false,
 	bodyPadding : 0,
 	defaults: {
-		labelWidth: 75,
+		labelWidth: 60,
+	},
+	fieldStyle: {
+	     'fontFamily'   : 'courier new',
+	     'fontSize'     : '12px',
 	},
 	items : [{
 		

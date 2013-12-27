@@ -83,16 +83,15 @@ Ext.define('New.view.GridItemTypeView', {
 								Ext.getCmp('txtItemName').reset();
 								Ext.getCmp('cmbAsLvlLevel').reset();
 								
+								setInterval( Ext.Msg.alert('Sucsess', 'Successfully added'),3000);
 								var grid = Ext.getCmp('GridItemTypeView');
 								var store=grid.getStore('ItemTypeStoreGrid');
 								store.proxy.extraParams.purpose = 'Grid';
 								store.load();
-								
-								//Ext.Msg.alert('Error', 'Plese Fill all the feied brfor saving !');
-								win.close();//Ext.Msg.alert('Sucsess', 'Sucsess !');
+								win.close();
 					         }
 					 		else{
-					 			Ext.Msg.alert('Error', 'Plese Fill all the feied brfor saving !');
+					 			Ext.Msg.alert('Error', 'Plese Fill all the felids brfor saving !');
 					 		}
 						}
 							
@@ -120,19 +119,27 @@ Ext.define('New.view.GridItemTypeView', {
 					store.remove(val);
 					if (store.getCount() > 0) {
 					sm.select(0);
-				}
-				
-					store.proxy.extraParams.purpose = 'delete';
-					store.proxy.extraParams.value = val[0].get('ID');
-					store.load();
-					
-					Ext.Msg.alert('Error', 'ok');
-					
-					var grid = Ext.getCmp('GridItemTypeView');
-					var store=grid.getStore('ItemTypeStoreGrid');
-					store.proxy.extraParams.purpose = 'Grid';
-					store.load();
-					
+					}
+					Ext.MessageBox.confirm('Confirm', 'Are you sure you want to do that?',  function(btn) {
+					       if(btn === 'yes'){
+					    	   var grid = Ext.getCmp('GridItemTypeView');
+					    	   var store = grid.getStore('ItemTypeStoreGrid');
+					    	   store.proxy.extraParams.purpose = 'delete';
+					    	   store.proxy.extraParams.value = val[0].get('ID');
+					    	   store.load();    	  
+					    	   setInterval( Ext.Msg.alert('Sucsess', 'Successfully Deleted'),3000);
+					    	   var grid = Ext.getCmp('GridItemTypeView');
+					    	   var store=grid.getStore('ItemTypeStoreGrid');
+					    	   store.proxy.extraParams.purpose = 'Grid';
+					    	   store.load();
+					       }
+					       else{
+					    	   var grid = Ext.getCmp('GridItemTypeView');
+								var store=grid.getStore('ItemTypeStoreGrid');
+								store.proxy.extraParams.purpose = 'Grid';
+								store.load();
+					       }
+				    });
 				}
 				else{
 					Ext.Msg.alert('Error ', "Plese Select one Row befor Pressing Delete");
@@ -184,7 +191,7 @@ Ext.define('New.view.GridItemTypeView', {
 									JsonObject= {ID:ID,TypeName:Name,AccsessLevel: Type};
 									row= Ext.create('New.model.ItemTypeModel', JsonObject);
 									store.insert(0, row);
-
+									 setInterval( Ext.Msg.alert('Sucsess', 'Successfully Updated'),3000);
 									var grid = Ext.getCmp('GridItemTypeView');
 									var store=grid.getStore('ItemTypeStoreGrid');
 									store.proxy.extraParams.purpose = 'Grid';
@@ -192,9 +199,8 @@ Ext.define('New.view.GridItemTypeView', {
 									win.close();
 							         }
 							         else{
-							        	 Ext.Msg.alert('Error', 'Plese Fill all the feied brfor saving !'); 
+							        	 Ext.Msg.alert('Error', 'Plese Fill all the felids brfor saving !'); 
 							         }
-									//Ext.Msg.alert('Sucsess', 'Sucsess !');
 								}
 								
 							

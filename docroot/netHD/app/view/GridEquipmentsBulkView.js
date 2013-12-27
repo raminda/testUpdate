@@ -14,6 +14,10 @@ Ext.define('New.view.GridEquipmentsBulkView', {
 		name : 'gridEquipmentsBulkView',		
 		store : 'EquipmentsBulkStoreGrid',
 		overflowX : 'auto',
+
+		viewConfig: {
+            forceFit: true
+		},
 		columns :[/* {
 			flex : 1,
 			header : 'Equipments Bulk ID',

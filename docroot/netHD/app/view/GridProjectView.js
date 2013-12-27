@@ -107,7 +107,14 @@ Ext.define('New.view.GridProjectView', {
 			text : 'Remove Project',
 			iconCls : 'Remove',
 			handler : function(){
-				
+				var sts=null;
+				Ext.MessageBox.confirm('Confirm', 'Are you sure you want to do that?',  function(btn) {
+				       if(btn === 'yes')
+				    	   sts="yes";
+			    	   else
+			    		   sts="no";
+			    });
+				alert(sts);
 				var grid = Ext.getCmp('gridProjectView');
 				var sm = grid.getSelectionModel();
 				var val = sm.getSelection();
@@ -121,6 +128,7 @@ Ext.define('New.view.GridProjectView', {
 					store.proxy.extraParams.value = val[0].get('ProjectName');
 					store.load();
 					
+					Ext.Msg.alert('Sucsess ', "data row deleted");
 					var grid = Ext.getCmp('gridProjectView');
 					var store = grid.getStore('ProjectsStoreGrid');
 					store.proxy.extraParams.purpose='Grid';

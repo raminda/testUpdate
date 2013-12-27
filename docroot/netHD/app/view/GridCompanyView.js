@@ -15,6 +15,7 @@ Ext.define('New.view.GridCompanyView', {
 			name : 'gridCompanyView',
 			store : 'CompanyStoreGrid',
 			overflowX : 'auto',
+
 			viewConfig: {
 	            forceFit: true
 			},

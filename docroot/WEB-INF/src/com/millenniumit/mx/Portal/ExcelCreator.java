@@ -311,9 +311,12 @@ public class  ExcelCreator {
 					s[i].addCell(l);
 					
 			
-					
-					
-					nm = new Number(4, itemNumber,projectItems.get(m).getPackageID().getBasePrice(),nF);
+					long price=0;
+					List <EquipmentBulk> lst =equipmentsBulkService.getPackageBulk(projectItems.get(m).getPackageID());
+					for(int k=0;k<lst.size();k++){
+						price+=lst.get(k).getEquipmentsId().getPrice();
+					}
+					nm = new Number(4, itemNumber,price,nF);
 					s[i].addCell(nm);
 					
 					

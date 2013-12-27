@@ -127,7 +127,6 @@ Ext.define('New.view.GridVersionMapView', {
 				handler : function() {
 					
 					var Name = Ext.getCmp('txtPackageName').getValue();
-					//var Price = Ext.getCmp('txtPkgPrice').getValue();
 					var Summary=Ext.getCmp('txtPkgSummery').getValue();
 					var FullDescription = Ext.getCmp('txtPkgFullDescription').getValue();
 					var ITICDescription = Ext.getCmp('txtpkgITICDescription').getValue();
@@ -153,7 +152,6 @@ Ext.define('New.view.GridVersionMapView', {
 						store.insert(0, row);
 						
 						Ext.getCmp('txtPackageName').reset();
-						//Ext.getCmp('txtPkgPrice').reset();
 						Ext.getCmp('txtPkgSummery').reset();
 						Ext.getCmp('txtPkgFullDescription').reset();
 						Ext.getCmp('txtpkgITICDescription').reset();

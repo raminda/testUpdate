@@ -14,11 +14,14 @@ Ext.define('New.view.GridView', {
 		    split: true,
 		    animate: true,
 		},
+		fieldStyle: {
+		     'fontFamily'   : 'courier new',
+		     'fontSize'     : '12px',
+		},
 	 	layout: 'fit',
 		bodyPadding : 15,
 		items : [{
 				flex : 1,
-				text : 'Add Type',
 				id : 'ItemTypeGrid',
 				name : 'ItemTypeGrid',
 				title : 'Configure Equipment Types',

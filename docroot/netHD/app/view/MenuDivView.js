@@ -11,6 +11,10 @@ Ext.define('New.view.MenuDivView', {
 	    split: true,
 	    animate: true,
 	},
+	fieldStyle: {
+	     'fontFamily'   : 'courier new',
+	     'fontSize'     : '12px',
+	},
 	items:[{
 		region: 'west',
 		xtype : 'Slide_View', 

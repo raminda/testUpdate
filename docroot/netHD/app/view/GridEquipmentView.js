@@ -15,6 +15,10 @@ Ext.define('New.view.GridEquipmentView', {
 		name : 'gridEquipmentView',
 		store : 'EquipmentStoreGrid',
 		overflowX : 'auto',
+
+		viewConfig: {
+            forceFit: true
+		},
 		columns :[ /*{
 			header : 'Equipment ID',
 			dataIndex : 'ID',	

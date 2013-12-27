@@ -7,6 +7,10 @@ Ext.define('New.view.SlideMenuView', {
 		type : 'fit',
 		padding : 5
 	},
+	fieldStyle: {
+	     'fontFamily'   : 'courier new',
+	     'fontSize'     : '12px',
+	},
 	height:'100%',
 	items :[{
 		id:'SMenuHome_View',

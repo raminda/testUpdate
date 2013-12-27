@@ -18,6 +18,10 @@ Ext.define('New.view.GridProjectItems', {
 		height : 700,
 		store : 'ProjectItemsStoreResult',
 		overflowX : 'auto',
+
+		viewConfig: {
+            forceFit: true
+		},
 		
 		columns :[/* {
 			header : 'Project Items ID',

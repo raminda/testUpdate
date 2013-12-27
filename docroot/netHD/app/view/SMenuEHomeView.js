@@ -8,7 +8,7 @@ Ext.define('New.view.SMenuEHomeView', {
 	border : false,
 	bodyPadding : 0,
 	defaults: {
-		labelWidth: 75,
+		labelWidth: 60,
 	},
 	items : [{
 		

@@ -4,6 +4,10 @@ Ext.define('New.view.imageView', {
 	border : false,
 	frame : true,
 	height:900,
+	fieldStyle: {
+	     'fontFamily'   : 'courier new',
+	     'fontSize'     : '12px',
+	},
 	layout : {
 		align: 'stretch', 
 		type : 'fit',
