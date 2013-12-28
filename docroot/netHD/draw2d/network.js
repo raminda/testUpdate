@@ -32,6 +32,7 @@ function crt(){
 		Ext.getCmp('txtItemName').setVisible(false);
 }
 function crtEdit(){ 
+	
 	document.getElementById('paintarea').innerHTML="";
 	workflow = new Workflow("paintarea");
 	JSN(workflow);
@@ -47,7 +48,7 @@ function crtEdit(){
 		console.log(e.toString());
 	}
 	
-	Ext.getCmp('btnVaildtete').setVisible(true);
+	Ext.getCmp('btnEVaildtete').setVisible(true);
 }
 function crt2(){ 
 	try{
