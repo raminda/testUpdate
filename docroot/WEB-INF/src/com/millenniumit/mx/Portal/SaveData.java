@@ -458,11 +458,11 @@ public class SaveData {
 				logger.info(request.getParameter("ID3"));//site
 				
 				logger.info(jsonobj.toString());
-				try {
+				//try {
 					digramAnalize.Analize(projects,Option,Version,jsonobj,Sites,summary);
-				} catch (Exception e) {
+				/*} catch (Exception e) {
 					logger.info(e.getMessage());
-				}
+				}*/
 				
 			}
 			else{	

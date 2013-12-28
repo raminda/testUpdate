@@ -126,18 +126,18 @@ public class NetHDSizing extends MVCPortlet {
 		else if (resourceID.equals("EquipmentsBulkStoreUrl")) {
 			ItemName="EquipmentsBulk";
 			updateData=new UpdateData(equipmentsBulkService,packageService);
-			comboData=new ComboData(equipmentsBulkService,packageService);
+			comboData=new ComboData(equipmentsBulkService,packageService,itemTypeService);
 			gridData=new GridData(equipmentsBulkService);
 			saveData=new SaveData(equipmentsBulkService,packageService,equipmentService);
 			deleteData=new DeleteData(equipmentsBulkService);
-		}else if (resourceID.equals("EquipmentsBulkStoreUrl")) {
+		}/*else if (resourceID.equals("EquipmentsBulkStoreUrl")) {
 			ItemName="EquipmentsBulk";
 			updateData=new UpdateData(equipmentsBulkService,packageService);
-			comboData=new ComboData(equipmentsBulkService,packageService);
+			comboData=new ComboData(equipmentsBulkService,packageService,itemTypeService);
 			gridData=new GridData(equipmentsBulkService);
 			saveData=new SaveData(equipmentsBulkService,packageService,equipmentService);
 			deleteData=new DeleteData(equipmentsBulkService);
-		}
+		}*/
 		else if (resourceID.equals("ProjectsStoreUrl")) {
 			ItemName="Projects";
 			System.out.println("This section is for Navigate "+ ItemName+" init");
@@ -239,7 +239,7 @@ public class NetHDSizing extends MVCPortlet {
 			}
 			
 		}
-		else{
+		/*else{
 			try {
 				userfinder(request, response);
 			} catch (PortalException e) {
@@ -247,7 +247,7 @@ public class NetHDSizing extends MVCPortlet {
 			} catch (SystemException e) {
 				System.out.println(e.getMessage());
 			}
-		}
+		}*/
 		
 		/*if (resourceID.equals("EquipmentStoreUrl")) {
 			ItemName="Equipment";

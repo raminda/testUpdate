@@ -236,23 +236,5 @@ Ext.define('New.view.SMenuEHomeView', {
 	}],		         
 	initComponent : function() {
 		this.callParent(arguments);
-		
-	/*	Ext.getCmp('txtItemName').setVisible(false);
-		Ext.getCmp('txtPortType').setVisible(false);
-		Ext.getCmp('txtEqipmentID').setVisible(false);
-		Ext.getCmp('txtEqipmentName').setVisible(false);
-		Ext.getCmp('btnVaildtete').setVisible(false);
-		Ext.getCmp('btnDAddEquipment').setVisible(false);
-		Ext.getCmp('btnAddConnecion').setVisible(false);
-		
-		Ext.getCmp('cmbEDCompany').setVisible(false);
-		Ext.getCmp('cmbEDProject').setVisible(false);
-		Ext.getCmp('cmbEDOption').setVisible(false);
-		Ext.getCmp('cmbEDVersion').setVisible(false);
-		Ext.getCmp('btnESaveDD').setVisible(false);
-		
-		Ext.getCmp('txtDDJSON1').setVisible(false);
-		Ext.getCmp('txtDDJSON2').setVisible(false);
-		Ext.getCmp('btnECancelDD').setVisible(false);*/
 	}
 });

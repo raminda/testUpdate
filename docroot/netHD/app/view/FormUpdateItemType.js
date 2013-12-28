@@ -2,8 +2,8 @@ var Aslevel = Ext.create('Ext.data.Store', {
     fields: ['Level','name'],
     data : [
         {"Level":"0", "name":"Base Items"},
-        {"Level":"1", "name":"Equipment"}
-
+        {"Level":"1", "name":"Equipment"},
+    //  {"Level":"2", "name":"Applications"}
     ]
 });
 

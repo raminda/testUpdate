@@ -49,8 +49,6 @@ public class ComboData {
 	
 	public ComboData(VersionMapService versionMapService,CompanyService companyService,EquipmentsService equipmentService,EquipmentMapingService equipmentMapingService,EquipmentsBulkService equipmentsBulkService,ItemTypesService ItemTypesService,PackagesService packageService,ProjectsService projectService,ProjectItemsService projectItemsService){
 		
-		
-		
 		this.equipmentService =equipmentService; 
 		this.equipmentsBulkService=equipmentsBulkService;
 		this.ItemTypesService = ItemTypesService;
@@ -68,8 +66,8 @@ public class ComboData {
 		this.ItemTypesService = ItemTypesService;	
 		this.equipmentMapingService=equipmentMapingService;
 	}
-	public ComboData(EquipmentsBulkService equipmentsBulkService,PackagesService packageService){		
-		
+	public ComboData(EquipmentsBulkService equipmentsBulkService,PackagesService packageService,ItemTypesService itemTypesService){		
+		this.ItemTypesService=itemTypesService;
 		this.equipmentsBulkService=equipmentsBulkService;
 		this.packageService =packageService ;
 	}
@@ -178,8 +176,6 @@ public class ComboData {
 				 boolean bool=true;
 				int value =Integer.parseInt(request.getParameter("ID"));
 				
-					/*List<Equipments> lst = equipmentService.getAll(ItemTypesService.getItemTypes(value));*/
-				//List <Equipments>lst=null;
 				List <EquipmentMaping>list=equipmentMapingService.getEquipmentMapings(equipmentService.getEquipments(request.getParameter("ID2")),ItemTypesService.getItemTypess(value));
 				
 						for(int i=0;i<list.size();i++){
@@ -294,7 +290,40 @@ public class ComboData {
 				jsonOb2=linebracker(jsonOb2);
 				out.println(jsonOb2);
 			}
-			
+			else if(Long.parseLong(request.getParameter("ID"))==3){
+				String Item=request.getParameter("value");
+				ItemTypes itemTypes= ItemTypesService.get(Item);
+				logger.info(request.getParameter("value"));
+				jsonOb2="[";
+				if(request.getParameter("value").equals("Site")){
+					jsonOb2+="{Package:'Primary'},{Package:'DR'},{Package:'Test'},{Package:'Backup Primary'},{Package:'Backup DR'},{Package:'Backup  Test'}";
+				}
+				else if(request.getParameter("value").equals("cloud")){
+					jsonOb2+="{Package:'Cloud'}";
+				}
+				else{
+					List<EquipmentBulk>lst=equipmentsBulkService.getEquipmentsBulks(itemTypes);
+					Boolean bool=true;
+					jsonOb2="[";
+					for(int i=0;i<lst.size();i++){
+						EquipmentBulk obj=lst.get(i);
+						try{
+							jsonOb2+="{Package : '"+lst.get(i).getPackageID().getPackageName()+"'}";
+							}catch (Exception e) {
+								logger.info("Error : " + e.getMessage());
+							jsonOb2+="'}";
+							bool=false;
+						}
+						if(i<lst.size()-1 && bool){
+							jsonOb2+=",";
+						}
+					}
+				}
+					jsonOb2+="]";
+					jsonOb2=linebracker(jsonOb2);
+				
+				out.println(jsonOb2);
+			}
 		}
 		//************************Package**************
 		else if (ServiceType.equals("VersionMap")) {

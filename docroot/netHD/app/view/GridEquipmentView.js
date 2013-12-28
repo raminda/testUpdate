@@ -19,6 +19,10 @@ Ext.define('New.view.GridEquipmentView', {
 		viewConfig: {
             forceFit: true
 		},
+		fieldStyle: {
+		     'fontFamily'   : 'courier new',
+		     'fontSize'     : '20px',
+		},
 		columns :[ /*{
 			header : 'Equipment ID',
 			dataIndex : 'ID',	
@@ -43,33 +47,24 @@ Ext.define('New.view.GridEquipmentView', {
 			  header : 'ITIC Description',
 			  dataIndex : 'ITIC_Descrip',
 	
-			}, {
-				flex : 1,
-			header : 'Comments ',
-			dataIndex : 'Comments',
+		  },{
+			  flex : 1,
+			  header : 'Comments ',
+			  dataIndex : 'Comments',
 	
-			}, {
-				flex : 1,
-				header : 'End of life date',
-				dataIndex : 'EOLDate',
+		  },{
+			  flex : 1,
+			  header : 'End of life date',
+			  dataIndex : 'EOLDate',
 	
-			}, {
-				flex : 1,
-				header : 'Equipment Price',
-				dataIndex : 'Price',
+		  },{
+			 flex : 1,
+			 header : 'Equipment Price',
+			 dataIndex : 'Price',
 	
-			}/*, {
-			header : 'Date created',
-			dataIndex : 'date_created',
-	
-			}, {
-				flex : 1,
-				header : 'Date modified',
-				dataIndex : 'date_modified',
-	
-			}*/],
+		  }],
          tbar : [ {
-				text : 'Add New Equipment',
+				text : 'Add Equipment',
 				iconCls : 'add',
 				handler : function() {
 					var win =null;
@@ -131,6 +126,7 @@ Ext.define('New.view.GridEquipmentView', {
 									Ext.getCmp('txtEqTecDescription').reset();
 									Ext.getCmp('txtEqEOD').reset();
 									
+									Ext.Msg.alert('Sucsess', 'Successfully added');
 									var grid = Ext.getCmp('gridEquipmentView');
 									var store = grid.getStore('EquipmentStoreGrid');
 									store.proxy.extraParams.purpose='Grid';
@@ -139,7 +135,7 @@ Ext.define('New.view.GridEquipmentView', {
 									//	Ext.Msg.alert('Message', edate);
 								}
 						         else{
-						        	 Ext.Msg.alert('Error', 'Plese Fill all the feied brfor saving !');
+						        	 Ext.Msg.alert('Error', 'Plese Fill all the felids brfor saving !');
 								}
 									
 							}
@@ -178,14 +174,23 @@ Ext.define('New.view.GridEquipmentView', {
 						if(val[0]!=null){
 							store.remove(val);
 							if (store.getCount() > 0) {
-							sm.select(0);
+								sm.select(0);
 							}
-						
-							store.proxy.extraParams.purpose = 'delete';
-							store.proxy.extraParams.value = val[0].get('ItemName');
-							store.load();
+							Ext.MessageBox.confirm('Confirm', 'Are you sure, you want to do this?',  function(btn) {
+								if(btn === 'yes'){
+									var store =  Ext.getStore('EquipmentStore');
+									store.proxy.extraParams.purpose = 'delete';
+									store.proxy.extraParams.value = val[0].get('ItemName');
+									store.load();
 							
-							
+									Ext.Msg.alert('Sucsess', 'Successfully Deleted');
+									
+									var grid = Ext.getCmp('gridEquipmentView');
+									var store = grid.getStore('EquipmentStoreGrid');
+									store.proxy.extraParams.purpose='Grid';
+									store.load();
+								}
+							});
 							var grid = Ext.getCmp('gridEquipmentView');
 							var store = grid.getStore('EquipmentStoreGrid');
 							store.proxy.extraParams.purpose='Grid';
@@ -194,7 +199,6 @@ Ext.define('New.view.GridEquipmentView', {
 						else{
 							Ext.Msg.alert('Error ', "Plese Select one Row befor Pressing Delete");
 						}
-					//	Ext.Msg.alert('Sucsess', val[0].get('ID')+"===fd==="+val);
 						}
 					},{
 					text : 'Refresh',
@@ -208,9 +212,12 @@ Ext.define('New.view.GridEquipmentView', {
 			} ],
 			listeners : {
 				itemdblclick: function(me, record, item, index, e, eOpts ){
-					var win =null;
+					var grid = Ext.getCmp('gridEquipmentView');
+					var sm = grid.getSelectionModel();
+					var val = sm.getSelection();
+					var Titel = val[0].get('ItemName');
 					win= Ext.create('Ext.window.Window', {
-						title : 'Update Equipment details',
+						title : Titel,
 						width : 450,
 						height : 550,
 						minWidth : 300,
@@ -233,10 +240,8 @@ Ext.define('New.view.GridEquipmentView', {
 								var support=Ext.getCmp('cmbEqUpSupport').getValue();
 								var Comments = Ext.getCmp('txtEqUpComments').getValue();
 								var ITICDescription = Ext.getCmp('txtEqUpITICDescription').getValue();
-								//var TecDescription = Ext.getCmp('txtEqUpTecDescription').getValue();
 								var edate= Ext.getCmp('txtEqUpEOD').getValue();	
 								var ID =Ext.getCmp('cmbEqUpID').getValue();
-							//	var ndate=new Date();
 								
 								var Support=support.toString();
 								
@@ -259,6 +264,8 @@ Ext.define('New.view.GridEquipmentView', {
 									 var JsonObject= {ID:ID,ItemName:Name,itemtypes:ItemType,Summary: Summary,Comments:Comments,ITIC_Descrip:ITICDescription,Price:Price,EOLDate:EOL};
 									 var row= Ext.create('New.model.EquipmentModel', JsonObject);
 									 store.insert(0, row);
+									 
+									 Ext.Msg.alert('Sucsess', 'Successfully Updated');
 									 
 									 var grid = Ext.getCmp('gridEquipmentView');
 									 var store = grid.getStore('EquipmentStoreGrid');

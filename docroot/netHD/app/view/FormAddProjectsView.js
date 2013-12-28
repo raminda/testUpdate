@@ -9,7 +9,10 @@ Ext.define('New.view.FormAddProjectsView', {
 	bodyPadding : 0,
 	id : 'AddProjects',
 	name : 'AddProjects',
-	
+	fieldStyle: {
+	     'fontFamily'   : 'courier new',
+	     'fontSize'     : '12px',
+	},
 	items : [ {
 		xtype : 'panel',
 		width : '100%',

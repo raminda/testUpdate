@@ -10,9 +10,6 @@ Ext.define('New.model.ProjectsModel', {
 		name : 'ProjectName',
 		type : 'string'
 	},{
-		name : 'TotalAmount',
-		type : 'number'
-	},{
 		name : 'SysReq',
 		type : 'string'
 	},{

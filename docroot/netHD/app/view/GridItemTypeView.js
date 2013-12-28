@@ -19,11 +19,11 @@ Ext.define('New.view.GridItemTypeView', {
 		viewConfig: {
             forceFit: true
 		},
-		columns :[ /*{
-			header : 'Item Type ID',
-			dataIndex : 'ID',
-	
-		},*/{
+		fieldStyle: {
+		     'fontFamily'   : 'courier new',
+		     'fontSize'     : '20px',
+		},
+		columns :[{
 			flex : 1,
 			header : 'Type Name',
 			dataIndex : 'TypeName',
@@ -35,12 +35,12 @@ Ext.define('New.view.GridItemTypeView', {
 	
 		},{
 			flex : 1,
-			header : 'date created',
+			header : 'Date created',
 			dataIndex : 'date_created',
 	
 		},{
 			flex : 1,
-			header : 'date modified',
+			header : 'Date modified',
 			dataIndex : 'date_modified',
 	
 		}],
@@ -83,12 +83,13 @@ Ext.define('New.view.GridItemTypeView', {
 								Ext.getCmp('txtItemName').reset();
 								Ext.getCmp('cmbAsLvlLevel').reset();
 								
-								setInterval( Ext.Msg.alert('Sucsess', 'Successfully added'),3000);
+								Ext.Msg.alert('Sucsess', 'Successfully added');
+								win.close();
 								var grid = Ext.getCmp('GridItemTypeView');
 								var store=grid.getStore('ItemTypeStoreGrid');
 								store.proxy.extraParams.purpose = 'Grid';
 								store.load();
-								win.close();
+								
 					         }
 					 		else{
 					 			Ext.Msg.alert('Error', 'Plese Fill all the felids brfor saving !');
@@ -118,28 +119,29 @@ Ext.define('New.view.GridItemTypeView', {
 				if(val[0]!=null){
 					store.remove(val);
 					if (store.getCount() > 0) {
-					sm.select(0);
+						sm.select(0);
 					}
-					Ext.MessageBox.confirm('Confirm', 'Are you sure you want to do that?',  function(btn) {
-					       if(btn === 'yes'){
-					    	   var grid = Ext.getCmp('GridItemTypeView');
-					    	   var store = grid.getStore('ItemTypeStoreGrid');
-					    	   store.proxy.extraParams.purpose = 'delete';
-					    	   store.proxy.extraParams.value = val[0].get('ID');
-					    	   store.load();    	  
-					    	   setInterval( Ext.Msg.alert('Sucsess', 'Successfully Deleted'),3000);
-					    	   var grid = Ext.getCmp('GridItemTypeView');
-					    	   var store=grid.getStore('ItemTypeStoreGrid');
-					    	   store.proxy.extraParams.purpose = 'Grid';
-					    	   store.load();
-					       }
-					       else{
-					    	   var grid = Ext.getCmp('GridItemTypeView');
-								var store=grid.getStore('ItemTypeStoreGrid');
-								store.proxy.extraParams.purpose = 'Grid';
-								store.load();
-					       }
-				    });
+					Ext.MessageBox.confirm('Confirm', 'Are you sure, you want to do this?',  function(btn) {
+					if(btn === 'yes'){
+			    	   var store =  Ext.getStore('ItemTypeStore');
+			    	   store.proxy.extraParams.purpose = 'delete';
+			    	   store.proxy.extraParams.value = val[0].get('ID');
+			    	   store.load();    
+			    	   
+			    	   
+			    	   Ext.Msg.alert('Sucsess', 'Successfully Deleted');
+			    	   
+			    	   var grid = Ext.getCmp('GridItemTypeView');
+			    	   var store=grid.getStore('ItemTypeStoreGrid');
+			    	   store.proxy.extraParams.purpose = 'Grid';
+			    	   store.load();
+					}
+			       	
+					});
+					var grid = Ext.getCmp('GridItemTypeView');
+			    	   var store=grid.getStore('ItemTypeStoreGrid');
+			    	   store.proxy.extraParams.purpose = 'Grid';
+			    	   store.load();
 				}
 				else{
 					Ext.Msg.alert('Error ', "Plese Select one Row befor Pressing Delete");
@@ -160,8 +162,13 @@ Ext.define('New.view.GridItemTypeView', {
 		listeners : {
 			itemdblclick: function(me, record, item, index, e, eOpts ){
 				var win=null;
+				var grid = Ext.getCmp('GridItemTypeView');
+				var sm = grid.getSelectionModel();
+				var val = sm.getSelection();
+				var Titel = val[0].get('TypeName');
 				win= Ext.create('Ext.window.Window', {
-					title : 'Update Item Type details',
+					
+					title : Titel,
 					width : 450,
 					height : 250,
 					minWidth : 300,
@@ -184,19 +191,23 @@ Ext.define('New.view.GridItemTypeView', {
 									var row=null;
 									var store=null;
 									var form = Ext.getCmp('UpdateItemType').getForm();
-							         if(form.isValid()){
-									store = Ext.getStore('ItemTypeStore');
-									store.proxy.extraParams.purpose = 'Update';
-									store.proxy.extraParams.ID=Ext.getCmp('txtUItemID').getValue();
-									JsonObject= {ID:ID,TypeName:Name,AccsessLevel: Type};
-									row= Ext.create('New.model.ItemTypeModel', JsonObject);
-									store.insert(0, row);
-									 setInterval( Ext.Msg.alert('Sucsess', 'Successfully Updated'),3000);
-									var grid = Ext.getCmp('GridItemTypeView');
-									var store=grid.getStore('ItemTypeStoreGrid');
-									store.proxy.extraParams.purpose = 'Grid';
-									store.load();
-									win.close();
+							        if(form.isValid()){
+										store = Ext.getStore('ItemTypeStore');
+										store.proxy.extraParams.purpose = 'Update';
+										store.proxy.extraParams.ID=Ext.getCmp('txtUItemID').getValue();
+										JsonObject= {ID:ID,TypeName:Name,AccsessLevel: Type};
+										row= Ext.create('New.model.ItemTypeModel', JsonObject);
+										store.insert(0, row);
+										
+
+										Ext.Msg.alert('Sucsess', 'Successfully Updated');
+										
+										 
+										var grid = Ext.getCmp('GridItemTypeView');
+										var store=grid.getStore('ItemTypeStoreGrid');
+										store.proxy.extraParams.purpose = 'Grid';
+										store.load();
+										win.close();
 							         }
 							         else{
 							        	 Ext.Msg.alert('Error', 'Plese Fill all the felids brfor saving !'); 
@@ -218,8 +229,7 @@ Ext.define('New.view.GridItemTypeView', {
 		}
 	}
 ],
-
-	initComponent : function() {
-		this.callParent(arguments);
-	}
+initComponent : function() {
+	this.callParent(arguments);
+}
 });

@@ -14,10 +14,14 @@ Ext.define('New.view.BodyView', {
 		 autoScroll:true,
 		 fitToFrame:true
 	},
+	fieldStyle: {
+	     'fontFamily'   : 'courier new',
+	     'fontSize'     : '12px',
+	},
 	height:900,
 	items :[{
 		region: 'center',
-		text : 'Add Equipment to EquipmentBulk',
+		text : 'Add Equipment to Equipment Bulk',
 		id : 'EquipmentBulkDD',
 		name : 'EquipmentBulkDD',
 		iconCls : 'Icon',
@@ -39,7 +43,7 @@ Ext.define('New.view.BodyView', {
 		xtype:'GridView'
 	},{
 		region: 'center',
-		text : 'Home',
+		text : 'Design Enviroment',
 		id : 'CanversView',
 		name : 'CanversView',
 		textAlign : 'left',
@@ -64,7 +68,8 @@ Ext.define('New.view.BodyView', {
 		Ext.getCmp('imageView').setVisible(true);
 		Ext.getCmp('GridView').setVisible(false);
 		Ext.getCmp('CanversView').setVisible(false);
-		Ext.getCmp('ProjectDetails').setVisible(false);		
+		Ext.getCmp('ProjectDetails').setVisible(false);
+		Ext.getCmp('ReportView').setVisible(false);		
 	}
 });
 

@@ -100,7 +100,11 @@ public class CopyData {
 		}
 //		else{
 //			System.out.println(request.getParameter("value")+ " &&&&&&*&*&*& "+jsonobj+ " ****** ");
-//		}
+//		BufferedReader reader = new BufferedReader(new FileReader("/path/to/file.txt"));
+	//String line = null;
+	//while ((line = reader.readLine()) != null) {
+	    // ...
+	//}}
 		
 		
 	}

@@ -21,29 +21,38 @@ Ext.define('New.view.MenuDivView', {
 		width: 275,
 	    minSize: 100,
 	    maxSize: 250,
+	    text : 'Contrall bar ',
 		margins: '5 0 0 0',
 		id : 'Slide_View',
 		name : 'Slide_View',
 		listeners: {
 	        collapse: function() {
 	        	var panel = Ext.getCmp('Body_View');
-	        	Ext.getCmp('CanversView').setWidth(panel.getWidth());
-	        	Ext.getCmp('ItemTypeGrid').setWidth(panel.getWidth() -35);
-				Ext.getCmp('EquipmentGrid').setWidth(panel.getWidth() -35);
-				Ext.getCmp('ProjectGrid').setWidth(panel.getWidth() -35);
-				Ext.getCmp('PackageGrid').setWidth(panel.getWidth() -35);
-				Ext.getCmp('CompanyGrid').setWidth(panel.getWidth() -35);
-				Ext.getCmp('VersionMapGrids').setWidth(panel.getWidth() -35);
+	        	Ext.getCmp('CanversView').setWidth(panel.getWidth()-30);
+	        	Ext.getCmp('ItemTypeGrid').setWidth(panel.getWidth()-30);//35
+				Ext.getCmp('EquipmentGrid').setWidth(panel.getWidth()-30);
+				Ext.getCmp('ProjectGrid').setWidth(panel.getWidth()-30);
+				Ext.getCmp('PackageGrid').setWidth(panel.getWidth()-30);
+				Ext.getCmp('CompanyGrid').setWidth(panel.getWidth()-30);
+				//Ext.getCmp('VersionMapGrids').setWidth(panel.getWidth()-10);
 	        },
 	        expand: function() {
-	        	var panel = Ext.getCmp('Slide_View');
+	        	var panel = Ext.getCmp('Body_View');
+	        	Ext.getCmp('CanversView').setWidth(panel.getWidth()-30);
+	        	Ext.getCmp('ItemTypeGrid').setWidth(panel.getWidth()-30);//35
+				Ext.getCmp('EquipmentGrid').setWidth(panel.getWidth()-30);
+				Ext.getCmp('ProjectGrid').setWidth(panel.getWidth()-30);
+				Ext.getCmp('PackageGrid').setWidth(panel.getWidth()-30);
+				Ext.getCmp('CompanyGrid').setWidth(panel.getWidth()-30);
+				//Ext.getCmp('VersionMapGrids').setWidth(panel.getWidth()-10);
+	        	/*var panel = Ext.getCmp('Slide_View');
 	            Ext.getCmp('CanversView').setWidth(Ext.getCmp('CanversView').getWidth()-panel.getWidth());
 	        	Ext.getCmp('ItemTypeGrid').setWidth(Ext.getCmp('ItemTypeGrid').getWidth()-panel.getWidth()-15);
 				Ext.getCmp('EquipmentGrid').setWidth(Ext.getCmp('EquipmentGrid').getWidth()-panel.getWidth()-15);
 				Ext.getCmp('ProjectGrid').setWidth(Ext.getCmp('ProjectGrid').getWidth()-panel.getWidth()-15);
 				Ext.getCmp('PackageGrid').setWidth(Ext.getCmp('PackageGrid').getWidth()-panel.getWidth()-15);
 				Ext.getCmp('CompanyGrid').setWidth(Ext.getCmp('CompanyGrid').getWidth()-panel.getWidth()-15);
-				Ext.getCmp('VersionMapGrids').setWidth(Ext.getCmp('VersionMapGrids').getWidth()-panel.getWidth()-15);
+				Ext.getCmp('VersionMapGrids').setWidth(Ext.getCmp('VersionMapGrids').getWidth()-panel.getWidth()-15);*/
 	        }
 	    }
 	},{		

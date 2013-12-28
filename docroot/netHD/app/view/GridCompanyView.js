@@ -1,7 +1,7 @@
 Ext.define('New.view.GridCompanyView', {
 	extend : 'Ext.form.Panel',
 	alias : 'widget.CompanyGrid',
-	title : 'Project Grid View',
+	title : 'Clients',
 	height :750,
 	frame : true,
 	border : false,
@@ -18,6 +18,10 @@ Ext.define('New.view.GridCompanyView', {
 
 			viewConfig: {
 	            forceFit: true
+			},
+			fieldStyle: {
+			     'fontFamily'   : 'courier new',
+			     'fontSize'     : '20px',
 			},
 			
 			columns :[/*{
@@ -76,11 +80,16 @@ Ext.define('New.view.GridCompanyView', {
 								JsonObject= {Company:CompanyName};
 								row= Ext.create('New.model.CompanyModel', JsonObject);
 								store.insert(0, row);
-									
+								
+								Ext.Msg.alert('Sucsess', 'Successfully added');
 								win.close();
+								var grid = Ext.getCmp('gridCompanyView');
+								var store=grid.getStore('CompanyStoreGrid');
+								store.proxy.extraParams.purpose = 'Grid';
+								store.load();
 							}
 							else{
-								Ext.Msg.alert('Message', 'Plese Enter ProjectName And CompanyName Borth Befor Save!');
+								Ext.Msg.alert('Message', 'Plese Enter Company Name Befor Save!');
 							}
 						}
 					},{
@@ -107,16 +116,26 @@ Ext.define('New.view.GridCompanyView', {
 					if (store.getCount() > 0) {
 						sm.select(0);
 					}
-					store.proxy.extraParams.purpose = 'delete';
-					store.proxy.extraParams.value = val[0].get('Company');
-					store.load();
-					
+					Ext.MessageBox.confirm('Confirm', 'Are you sure, you want to do this?',  function(btn) {
+						if(btn === 'yes'){
+							
+							var store = Ext.getStore('CompanyStore');
+							store.proxy.extraParams.purpose = 'delete';
+							store.proxy.extraParams.value = val[0].get('Company');
+							store.load();
+							
+							Ext.Msg.alert('Sucsess', 'Successfully Deleted');
+							
+							var grid = Ext.getCmp('gridCompanyView');
+							var store = grid.getStore('CompanyStoreGrid');
+							store.proxy.extraParams.purpose='Grid';
+							store.load();
+						}
+					});
 					var grid = Ext.getCmp('gridCompanyView');
-					var store = grid.getStore('CompanyStoreGrid');
-					store.proxy.extraParams.purpose='Grid';
-					store.load();
-					
-					
+			    	var store=grid.getStore('CompanyStoreGrid');
+			    	store.proxy.extraParams.purpose = 'Grid';
+			    	store.load();
 					
 				}
 				else{
@@ -139,8 +158,13 @@ Ext.define('New.view.GridCompanyView', {
 			itemdblclick: function(me, record, item, index, e, eOpts ){
 				
 				var win=null;
+				var grid = Ext.getCmp('gridCompanyView');
+				var sm = grid.getSelectionModel();
+				var val = sm.getSelection();
+				var Titel = val[0].get('Company');
 				win= Ext.create('Ext.window.Window', {
-					title : 'Update Company details',
+					
+					title : Titel,
 					width : 450,
 					height : 250,
 					minWidth : 300,
@@ -171,7 +195,9 @@ Ext.define('New.view.GridCompanyView', {
 								JsonObject= {Company:Company};
 								row= Ext.create('New.model.CompanyModel', JsonObject);
 								store.insert(0, row);
-
+								
+								Ext.Msg.alert('Sucsess', 'Successfully Updated');
+								
 								var grid = Ext.getCmp('gridCompanyView');
 								var store = grid.getStore('CompanyStoreGrid');
 								store.proxy.extraParams.purpose='Grid';
@@ -180,7 +206,7 @@ Ext.define('New.view.GridCompanyView', {
 								win.close();
 							}
 							else{
-								Ext.Msg.alert('Message', 'Plese Enter ProjectName And CompanyName Borth Befor Save!');
+								Ext.Msg.alert('Message', 'Plese Company Name Befor Save!');
 							}
 						}
 					},{

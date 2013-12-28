@@ -1,7 +1,6 @@
 Ext.define('New.view.DDBodyView' , {
 	extend :'Ext.panel.Panel',
 	alias  : 'widget.DDBody',
-    title: 'Main Display',
     anchor: '100% 100%',
     border : false,
 	frame : false,
@@ -9,6 +8,10 @@ Ext.define('New.view.DDBodyView' , {
 	layout:'border',
     defaults: {
 	    collapsible: true,
+	},
+	fieldStyle: {
+	     'fontFamily'   : 'courier new',
+	     'fontSize'     : '12px',
 	},
     items: [{
     	region: 'north',
@@ -50,46 +53,42 @@ Ext.define('New.view.DDBodyView' , {
 						xtype : 'AddEquiment',
 					}],
 					buttons : [{
-						//save button
 						text : 'Save',
 						width : 150,
 						handler : function() {
+							
 							var Name = Ext.getCmp('txtEquipmentName').getValue();
 							var ItemType = Ext.getCmp('cmbEqItemType').getValue();
 							var Price = Ext.getCmp('txtEqPrice').getValue();
 							var Summary=Ext.getCmp('txtEqSummery').getValue();
 							var support=Ext.getCmp('cmbEqSupport').getValue();
-							var FullDescription = Ext.getCmp('txtEqFullDescription').getValue();
+							var Comments = Ext.getCmp('txtEqFullDescription').getValue();
 							var ITICDescription = Ext.getCmp('txtEqITICDescription').getValue();
 							var TecDescription = Ext.getCmp('txtEqTecDescription').getValue();
 							var edate= Ext.getCmp('txtEqEOD').getValue();						
 
-							
+							//var ndate=new Date();
 							var Support=support.toString();
-							if(Support=="This is a base Item" ||Support==""){
-								Support='base';
-								
+							if(Support=="This is a base Item"){
+								Support='Base';
 							}
-							//check form validity 
 							 var form = Ext.getCmp('AddEquiment').getForm();
 					         if(form.isValid()){
-								//if form valid		
+										
 							    var date = new Date(edate),
 						        mnth = ("0" + (date.getMonth()+1)).slice(-2),
 						        day  = ("0" + date.getDate()).slice(-2);
-							    var EOL=[ date.getFullYear(), mnth, day ].join("-"); //format date string to without GTM
-							    
+							    var EOL=[ date.getFullYear(), mnth, day ].join("-");
+
+									
 								var store = Ext.getStore('EquipmentStore');
-								store=null;
-								store.proxy.extraParams.purpose = 'New'; 
-								//new key word is for navigating to saving in server side
-								store.proxy.extraParams.ID=Support; 
-								//supported items (Equipments for Equipment mapping table)
-								var JsonObject= {ItemName:Name,ItemType:ItemType,Summary: Summary,Full_Descrip:FullDescription,ITIC_Descrip:ITICDescription,Tec_Descrip:TecDescription,Price:Price,EOLDate:EOL};
+								store.proxy.extraParams.purpose = 'New';
+								store.proxy.extraParams.ID=Support;
+								var JsonObject= {ID:0,ItemName:Name,itemtypes:ItemType,Summary: Summary,ITIC_Descrip:ITICDescription,Tec_Descrip:TecDescription,Comments:Comments,Price:Price,EOLDate:EOL};
 								var row= Ext.create('New.model.EquipmentModel', JsonObject);
 								store.insert(0, row);
 								
-								//reset all fields
+								
 								Ext.getCmp('txtEquipmentName').reset();
 								Ext.getCmp('cmbEqItemType').reset();
 								Ext.getCmp('txtEqPrice').reset();
@@ -100,22 +99,13 @@ Ext.define('New.view.DDBodyView' , {
 								Ext.getCmp('txtEqTecDescription').reset();
 								Ext.getCmp('txtEqEOD').reset();
 								
-								//refresh Grid
-								var grid = Ext.getCmp('gridEquipmentView');
-								var store = grid.getStore('EquipmentStoreGrid');
-								store.proxy.extraParams.purpose='Grid';
-								store.load();
-								
-								var grid = Ext.getCmp('gridEquipmentsBulkView');
-								var store=grid.getStore('EquipmentsBulkStoreGrid');
-								store.proxy.extraParams.purpose = 'Combo';
-								store.proxy.extraParams.ID="2";
-								store.proxy.extraParams.value=Ext.getCmp('cmbDDPackage').getValue();
-								store.load();	
-								
+								Ext.Msg.alert('Sucsess', 'Successfully added');
+							
+								win.close();
+								//	Ext.Msg.alert('Message', edate);
 							}
 					         else{
-					        	 Ext.Msg.alert('Error', 'Plese Fill all the feied brfor saving !');
+					        	 Ext.Msg.alert('Error', 'Plese Fill all the felids brfor saving !');
 							}
 								
 						}
@@ -167,11 +157,9 @@ Ext.define('New.view.DDBodyView' , {
 							width : 150,
 							handler : function() {
 								
-								var Name = Ext.getCmp('txtPackageName').getValue();
 								var Summary=Ext.getCmp('txtPkgSummery').getValue();
-								var FullDescription = Ext.getCmp('txtPkgFullDescription').getValue();
-								var ITICDescription = Ext.getCmp('txtpkgITICDescription').getValue();
-								var TecDescription = Ext.getCmp('txtpkgTecDescription').getValue();
+								var Comment = Ext.getCmp('txtPkgComment').getValue();
+								var BasePrice = Ext.getCmp('txtpkgBasePrice').getValue();
 								var edate= Ext.getCmp('txtPkgEOD').getValue();
 								
 								var Itemname = Ext.getCmp('cmbItemss').getValue();
@@ -190,20 +178,21 @@ Ext.define('New.view.DDBodyView' , {
 									
 									 var form = Ext.getCmp('AddPackage').getForm();
 							         if(form.isValid()){
+							        	 
 										store = Ext.getStore('PackageStore');
 										store.proxy.extraParams.purpose = 'New';
-										store.proxy.extraParams.ID="[{PackageID:'"+Name+"',ItemID:'"+Itemname+"',Quantity:'1'}]";
-										JsonObject= {PackageName:Name,Summery: Summary,Full_Descrip:FullDescription,ITIC_Descrip:ITICDescription,Tec_Descrip:TecDescription,Price:0,EOLDate:EOLdate};
-										row= Ext.create('New.model.PackageModel', JsonObject);
+										store.proxy.extraParams.ID="[{PackageID:'"+Itemname+"',ItemID:'"+Itemname+"',Quantity:'1'}]";
+										JsonObject= {PackageName:Itemname,Summery:Summary,Comment:Comment,BasePrice:BasePrice,EOLDate:EOLdate};
+										row= Ext.create('New.model.PackagesModel', JsonObject);
 										store.insert(0, row);
 																	
 										
-										Ext.getCmp('txtPackageName').reset();
 										Ext.getCmp('txtPkgSummery').reset();
-										Ext.getCmp('txtPkgFullDescription').reset();
-										Ext.getCmp('txtpkgITICDescription').reset();
-										Ext.getCmp('txtpkgTecDescription').reset();
+										Ext.getCmp('txtPkgComment').reset();
+										Ext.getCmp('txtpkgBasePrice').reset();
 										Ext.getCmp('txtPkgEOD').reset();
+										
+										Ext.Msg.alert('Sucsess', 'Successfully added');
 										
 										var grid = Ext.getCmp('gridPackageView');
 										var store = grid.getStore('PackageStoreGrid');
@@ -215,18 +204,6 @@ Ext.define('New.view.DDBodyView' , {
 							        	 Ext.Msg.alert('Error', 'Plese Fill all the feied brfor saving !');
 							         }
 								}
-							}
-						},{
-							text : 'Reset',
-							width : 150,
-							handler : function() {
-								Ext.getCmp('txtPackageName').reset();
-								Ext.getCmp('txtUpPackageName').reset();
-								Ext.getCmp('txtUpPkgSummery').reset();
-								Ext.getCmp('txtUpPkgFullDescription').reset();
-								Ext.getCmp('txtUppkgITICDescription').reset();
-								Ext.getCmp('txtUppkgTecDescription').reset();
-								Ext.getCmp('txtUpPkgEOD').reset();
 							}
 						},{
 							text : 'Close',
@@ -254,17 +231,32 @@ Ext.define('New.view.DDBodyView' , {
 						if (store.getCount() > 0) {
 						sm.select(0);
 						}
-					
-						store.proxy.extraParams.purpose = 'delete';
-						store.proxy.extraParams.value = val[0].get('ID');
-						store.load();
-						
-						var grid = Ext.getCmp('gridEquipmentsBulkView');
-						var store=grid.getStore('gridEquipmentsBulkView');
-						store.proxy.extraParams.purpose = 'Combo';
-						store.proxy.extraParams.ID="2";
-						store.proxy.extraParams.value=Ext.getCmp('cmbDDPackage').getValue();
-						store.load();
+						Ext.MessageBox.confirm('Confirm', 'Are you sure, you want to do this?',  function(btn) {
+						if(btn === 'yes'){
+							var grid = Ext.getCmp('gridEquipmentsBulkView');
+							var store = Ext.getStore('EquipmentsBulkStoreGrid');
+							store.proxy.extraParams.purpose = 'delete';
+							store.proxy.extraParams.value = val[0].get('ID');
+							store.load();
+							
+							setInterval( Ext.Msg.alert('Sucsess', 'Successfully Deleted'),3000);
+							
+							var grid = Ext.getCmp('gridEquipmentsBulkView');
+							var store=grid.getStore('gridEquipmentsBulkView');
+							store.proxy.extraParams.purpose = 'Combo';
+							store.proxy.extraParams.ID="2";
+							store.proxy.extraParams.value=Ext.getCmp('cmbDDPackage').getValue();
+							store.load();
+						}
+						else{
+							var grid = Ext.getCmp('gridEquipmentsBulkView');
+							var store=grid.getStore('gridEquipmentsBulkView');
+							store.proxy.extraParams.purpose = 'Combo';
+							store.proxy.extraParams.ID="2";
+							store.proxy.extraParams.value=Ext.getCmp('cmbDDPackage').getValue();
+							store.load();
+				       	}
+						});
 					
 					}
 					else{

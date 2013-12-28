@@ -101,9 +101,23 @@ Ext.define('New.view.GridProjectsItemsView', {
 			
 			listeners : {
 				itemdblclick: function(me, record, item, index, e, eOpts ){
-										
+					var grid = Ext.getCmp('ProjectItemsResultGrid');
+					var sm = grid.getSelectionModel();
+					var val = sm.getSelection();
+					
+					var ProjectID = val[0].get('Project');
+					var OptionID = val[0].get('OptionID');
+					var VersionID=val[0].get('Version');
+
+					if(ProjectID=="")
+						ProjectID=Ext.getCmp('cmbPrjProject').getValue();
+					if(OptionID=="")
+						OptionID=Ext.getCmp('cmbPrjOption').getValue();
+					if(VersionID=="")
+						VersionID=Ext.getCmp('cmbPrjVersion').getValue();
+					
 					var win = Ext.create('Ext.window.Window', {
-						title : 'Update Project Items details',
+						title : ProjectID+' '+OptionID+' '+VersionID ,
 						width : 450,
 						height : 250,
 						minWidth : 300,
@@ -123,9 +137,16 @@ Ext.define('New.view.GridProjectsItemsView', {
 					var sm = grid.getSelectionModel();
 					var val = sm.getSelection();
 					
-					var ProjectID = val[0].get('ProjectID');
+					var ProjectID = val[0].get('Project');
 					var OptionID = val[0].get('OptionID');
-					var VersionID=val[0].get('VersionID');
+					var VersionID=val[0].get('Version');
+
+					if(ProjectID=="")
+						VersionID=Ext.getCmp('cmbPrjProject').getValue();
+					if(OptionID=="")
+						OptionID=Ext.getCmp('cmbPrjOption').getValue();
+					if(VersionID=="")
+						VersionID=Ext.getCmp('cmbPrjVersion').getValue();
 					
 					var store = Ext.getStore('my');
 	            	store.proxy.extraParams.purpose="ExcelCreate";

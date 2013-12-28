@@ -133,13 +133,14 @@ public class UpdateData {
 				NewEquipment.setPrice(Integer.parseInt(jsonobj.getString("Price"),10));
 				NewEquipment.setCalendar_modified(calendar.getTime());
 				
-				/*Calendar cal = Calendar.getInstance();
-			    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			    cal.setTime((Date)sdf.parse(jsonobj.getString("EOLDate")));*/
 				Date date = new SimpleDateFormat(dateFormat).parse(jsonobj.getString("EOLDate"));
 				NewEquipment.setEOLDate(date);
-				
-				equipmentService.update(NewEquipment);
+				//NewEquipment.setCalendar_modified(calendar.getTime());
+				try{
+					equipmentService.update(NewEquipment);
+				}catch (Exception e) {
+					logger.info("Error : " + e.getMessage());	
+				}
 			}
 			else{
 				System.out.println("This section is for Parameter equipmentService Update and Delete ");
@@ -178,8 +179,11 @@ public class UpdateData {
 				catch (Exception e) {
 					 logger.info("Error : " + e.getMessage());
 				}
-				equipmentService.save(NewEquipment);
-				
+				try{
+					equipmentService.save(NewEquipment);
+				}catch (Exception e) {
+					logger.info("Error : " + e.getMessage());	
+				}
 				/*************************************EOLDate************************************
 				 *
 				 * */
@@ -239,6 +243,7 @@ public class UpdateData {
 			logger.info("updating Duplicate Update :"+jsonobj.getString("Company"));
 			Company company= companyService.get(request.getParameter("ID"));
 			company.setCompanyName(jsonobj.getString("Company"));
+			company.setCalendar_modified(calendar.getTime());
 			try {
 				companyService.update(company);		
 			}catch (Exception e) {
@@ -256,19 +261,16 @@ public class UpdateData {
 		else if (ServiceType.equals("EquipmentsBulk")) {
 			EquipmentBulk equipmentsBulk=equipmentsBulkService.EquipmentsBulkget(packageService.getPackagess(Integer.parseInt(jsonobj.getString("PackageID"))), equipmentService.getEquipments(jsonobj.getString("ItemID")));
 			equipmentsBulk.setQuantity(equipmentsBulk.getQuantity()+(Integer.parseInt(jsonobj.getString("Quantity"),10)));
-			//equipmentsBulk.setPrice((Integer.parseInt(jsonobj.getString("Price"),10)*equipmentsBulk.getQuantity()));
 			
 			equipmentsBulkService.update(equipmentsBulk);
 			Packages packages =packageService.getPackagess(Integer.parseInt(jsonobj.getString("PackageID")));
 			System.out.println("This section is for Parameter equipmentBulkService Update");
-			//List<EquipmentBulk> equipmentmaping=equipmentsBulkService.getPackageBulk(packages);
-			//Long prices=(long) 0;
-			/*for(int i=0;i<equipmentmaping.size();i++){
-				prices+=equipmentmaping.get(i).getPrice();
-				
+			try{
+				packageService.update(packages);
 			}
-			packages.setPrice(prices);*/
-			packageService.update(packages);
+			catch (Exception e) {
+				logger.info("Error : " + e.getMessage());
+			}
 			
 		}
 		//************************Package**************
@@ -280,10 +282,8 @@ public class UpdateData {
 			packages.setCalendar_modified(calendar.getTime());
 			packages.setPackageName(jsonobj.getString("PackageName"));
 			packages.setSummary(jsonobj.getString("Summery"));
-			//packages.setFullDescription(jsonobj.getString("Full_Descrip"));
-			//packages.setTecDescription(jsonobj.getString("Tec_Descrip"));
-			//packages.setITICDescription(jsonobj.getString("ITIC_Descrip"));
-			//packages.setPrice(Integer.parseInt(jsonobj.getString("Price"),10));
+			packages.setComment(jsonobj.getString("Comment"));
+			packages.setBasePrice(Integer.parseInt(jsonobj.getString("Price"),10));
 			
 			Date date = new SimpleDateFormat(dateFormat).parse(jsonobj.getString("EOLDate"));
 			/**********************************/
@@ -293,7 +293,12 @@ public class UpdateData {
 			catch (Exception e) {
 				 logger.info("Error : " + e.getMessage());
 			}
-			packageService.update(packages);
+			try{
+				packageService.update(packages);
+			}
+			catch (Exception e) {
+				logger.info("Error : " + e.getMessage());
+			}
 		}
 		//********ProjectItems**********
 		else if (ServiceType.equals("ProjectItems")) {
@@ -303,11 +308,13 @@ public class UpdateData {
 			projectItems.setPackageType(jsonobj.getString("PackageType"));
 			//projectItems.setPcakageUsege(jsonobj.getString("PcakageUsege"));
 			projectItems.setQuantity(Integer.parseInt(jsonobj.getString("Quantity")));
-			//projectItems.setPrice(projectItems.getQuantity()*packageService.getPackagess(Integer.parseInt(jsonobj.getString("PackageID"))).getPrice());
 			projectItems.setCalendar_modified(calendar.getTime());
-			
-			projectItemsService.update(projectItems);
-			
+			try{
+				projectItemsService.update(projectItems);
+			}
+			catch (Exception e) {
+				logger.info("Error : " + e.getMessage());
+			}
 			
 		}
 		//*********Project*********
@@ -318,7 +325,12 @@ public class UpdateData {
 			projects.setCompany(companyService.get((jsonobj.getString("Company"))));
 			projects.setProjectName(jsonobj.getString("ProjectName"));
 			projects.setCalendar_modified(calendar.getTime());
-			projectService.update(projects);
+			try{
+				projectService.update(projects);
+			}
+			catch (Exception e) {
+				logger.info("Error : " + e.getMessage());
+			}
 		}
 		//********* versionMapService******
 		else if (ServiceType.equals("VersionMap")) {
@@ -329,7 +341,12 @@ public class UpdateData {
 			versionMap.setOptionID(jsonobj.getString("optionID"));
 			versionMap.setCalendar_modified(calendar.getTime());
 			versionMap.setProjectID(projectService.getProjects(Integer.parseInt(jsonobj.getString("Projects"))));
-			versionMapService.update(versionMap);
+			try{
+				versionMapService.update(versionMap);
+			}
+			catch (Exception e) {
+				logger.info("Error : " + e.getMessage());
+			}
 		}
 		//**********ItemType***********
 		else if (ServiceType.equals("ItemType")) {
@@ -340,7 +357,12 @@ public class UpdateData {
 				itemType.setAccsessLevel(Integer.parseInt(jsonobj.getString("AccsessLevel")));
 				itemType.setCalendar_modified(calendar.getTime());
 				itemType.setTypeName(jsonobj.getString("TypeName"));
-				itemTypeService.update(itemType);
+				try{
+					itemTypeService.update(itemType);
+				}
+				catch (Exception e) {
+					logger.info("Error : " + e.getMessage());
+				}
 			}
 			else{
 				System.out.println("Error ; In valide data"+itemType.getTypeName()+" d "+jsonobj.getString("AccsessLevel"));

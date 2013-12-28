@@ -32,20 +32,20 @@ Ext.define('New.view.SMenuHomeView', {
 			fieldLabel : 'Eqipment',
 			id : 'txtItemName',
 			name : 'txtItemName',
-			valueField : 'ItemName',
-			displayField:'ItemName',
+			valueField : 'Package',
+			displayField:'Package',
 			selectOnTab : true,
 			allowBlank : false,
 			msgTarget: 'side',
 			width : 200,
 			editable:false,
-			store : 'EquipmentStoreComp',   
+			store : 'EquipmentsBulkCompStore',   
 	        listeners: {
 				focus:function( me, The, eOpts ){
-					var store = Ext.getStore('EquipmentStoreComp');
+					var store = Ext.getStore('EquipmentsBulkCompStore');
 					store.proxy.extraParams.purpose = 'Combo';
-					store.proxy.extraParams.value="4";
-					store.proxy.extraParams.ID=Ext.getCmp('txtEqipmentName').getValue();;
+					store.proxy.extraParams.ID="3";
+					store.proxy.extraParams.value=Ext.getCmp('txtEqipmentName').getValue();;
 	    			store.load();
 	            }
 	    	}

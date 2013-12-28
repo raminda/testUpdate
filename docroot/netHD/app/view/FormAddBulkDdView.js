@@ -10,10 +10,16 @@ var myrow=Ext.define('myrow', {
 var formPanel = Ext.define('formPanel', {
 	extend:'Ext.form.Panel',
     alias : 'widget.fdd',
+    id : 'formPanelDD',
+	name : 'formPanelDD',
     title      : 'Package Bulk',
     height :350,
     bodyStyle  : 'padding: 10px; background-color: #DFE8F6',
     margins    : '0 0 0 3',
+    fieldStyle: {
+	     'fontFamily'   : 'courier new',
+	     'fontSize'     : '12px',
+	},
     items      : [{
     	fieldLabel: 'Pacakge Name',
     	xtype : 'combobox',
@@ -33,27 +39,38 @@ var formPanel = Ext.define('formPanel', {
         listeners: {
         	change: function(){
 				if(Ext.getCmp('cmbDDPackage').getValue()!=null){
-					Ext.getCmp('cmbBsItem').enable(true);
+					//Ext.getCmp('cmbBsItem').enable(true);
 									
 					Ext.getCmp('txtBsItemName').enable(true);
 		        	Ext.getCmp('txtBsItemType').enable(true);
 		        	Ext.getCmp('txtBsItemPrice').enable(true);
 		        	Ext.getCmp('txtBsItemQuntity').enable(true);
 		        	Ext.getCmp('cmbBsItemType').enable(true);
-		        	Ext.getCmp('cmbBsItem').reset();
+		        	//Ext.getCmp('cmbBsItem').reset();
 		        	Ext.getCmp('btnbulkReset').enable(true);
 		        	
+					
+					var grid = Ext.getCmp('gridEquipmentsBulkView');
+					var store=grid.getStore('EquipmentsBulkStoreGrid');
+					store.proxy.extraParams.purpose = 'Combo';
+					store.proxy.extraParams.ID="2";
+					store.proxy.extraParams.value=Ext.getCmp('cmbDDPackage').getValue();
+					store.load();
+					
+					Ext.getCmp('txtBsItemName').reset();
+		        	Ext.getCmp('txtBsItemType').reset();
+		        	Ext.getCmp('txtBsItemPrice').reset();
+		        	Ext.getCmp('txtBsItemQuntity').reset();
 				}
         	},
             focus:function( me, The, eOpts ){
             	
             	var store = Ext.getStore('PackageStoreGrid');
-            	//Store.loadData([],false);
 				store.proxy.extraParams.purpose = 'Grid';
 				store.load();
             }
     	}
-    },{
+    },/*{
 		
 		xtype : 'combobox',
 		fieldLabel : 'Base Item Name',
@@ -102,7 +119,7 @@ var formPanel = Ext.define('formPanel', {
         	}
     	}
 		
-	},{
+	},*/{
 		
 		xtype : 'combobox',
 		fieldLabel : 'Item Type',
@@ -122,11 +139,10 @@ var formPanel = Ext.define('formPanel', {
 				if(Ext.getCmp('cmbBsItemType').getValue()!=null){
 					var grid = Ext.getCmp('formgridPanel');
 					var store=grid.getStore('EquipmentStoreGrid');
-					//Store.loadData([],false);
 					store.proxy.extraParams.purpose = 'Combo';
 					store.proxy.extraParams.value="3";
 					store.proxy.extraParams.ID=Ext.getCmp('cmbBsItemType').getValue();
-					store.proxy.extraParams.ID2=Ext.getCmp('cmbBsItem').getValue();
+					store.proxy.extraParams.ID2=Ext.getCmp('cmbDDPackage').getValue();
 					store.load();
 					
 					Ext.getCmp('formgridPanel').enable(true);
@@ -208,6 +224,10 @@ var formPanel = Ext.define('formPanel', {
 	            enableDrop: false,
 	        }
 	    },
+	    fieldStyle: {
+		     'fontFamily'   : 'courier new',
+		     'fontSize'     : '12px',
+		},
 	    columns:[{
 			header : 'Equipment Name',
 			dataIndex : 'ItemName',
@@ -244,6 +264,10 @@ Ext.define('New.view.FormAddBulkDdView', {
 		border : false,
         bodyPadding: 5,
         layout: 'hbox',
+        fieldStyle: {
+   	     'fontFamily'   : 'courier new',
+   	     'fontSize'     : '12px',
+        },
         items    : [{
 				anchor: '60% 100%',
 				text : 'Body',
@@ -266,7 +290,7 @@ Ext.define('New.view.FormAddBulkDdView', {
 				xtype : 'DD',
 			}],
 			
-			bbar : [ {
+			bbar : [{
 		        	flex: 1,
 			  		text : 'Save',
 			  		width: 200,
@@ -278,7 +302,7 @@ Ext.define('New.view.FormAddBulkDdView', {
 			  			var Itemname = Ext.getCmp('txtBsItemName').getValue();
 			  			var Price = Ext.getCmp('txtBsItemPrice').getValue();
 			  			var Quntity=Ext.getCmp('txtBsItemQuntity').getValue();
-			  			var cmbBsItem=Ext.getCmp('cmbBsItem').getValue();
+			  			var cmbBsItem=Ext.getCmp('cmbDDPackage').getValue();
 			  			
 			  			if(PackageID==""||Itemname==""||Price==""){
 			  				Ext.Msg.alert('Message', 'Drag and drop Suitabale Equipment befor Saving');				
@@ -316,7 +340,7 @@ Ext.define('New.view.FormAddBulkDdView', {
 			          	Ext.getCmp('txtBsItemType').reset(true);
 			          	Ext.getCmp('txtBsItemPrice').reset(true);
 			          	Ext.getCmp('txtBsItemQuntity').reset(true);
-			          	Ext.getCmp('cmbBsItem').reset(true);
+			          	//Ext.getCmp('cmbBsItem').reset(true);
 			          	Ext.getCmp('cmbBsItemType').reset(true);
 			  		}
 			  	},{
@@ -332,7 +356,7 @@ Ext.define('New.view.FormAddBulkDdView', {
 						store.proxy.extraParams.purpose = 'Combo';
 						store.proxy.extraParams.value="3";
 						store.proxy.extraParams.ID=Ext.getCmp('cmbBsItemType').getValue();
-						store.proxy.extraParams.ID2=Ext.getCmp('cmbBsItem').getValue();
+						store.proxy.extraParams.ID2=Ext.getCmp('cmbDDPackage').getValue();
 						store.load();
 			  			
 			  			Ext.getCmp('txtBsItemName').reset(true);
@@ -368,7 +392,7 @@ Ext.define('New.view.FormAddBulkDdView', {
 			  			Ext.getCmp('formgridPanel').disable(true);
 			  			Ext.getCmp('btnbulkReset').disable(true);
 			  			Ext.getCmp('formgridPanel').disable(true);
-			  			Ext.getCmp('cmbBsItem').disable(true);
+			  			//Ext.getCmp('cmbBsItem').disable(true);
 			        	
 			        	Ext.getCmp('txtBsItemName').disable(true);
 			        	Ext.getCmp('txtBsItemType').disable(true);
@@ -382,7 +406,7 @@ Ext.define('New.view.FormAddBulkDdView', {
         	this.callParent(arguments);	 
         	Ext.getCmp('formgridPanel').disable(true);
         	Ext.getCmp('cmbDDPackage').enable(true);
-        	Ext.getCmp('cmbBsItem').disable(true);
+        	//Ext.getCmp('cmbDDPackage').disable(true);
         	
         	Ext.getCmp('txtBsItemName').disable(true);
         	Ext.getCmp('txtBsItemType').disable(true);

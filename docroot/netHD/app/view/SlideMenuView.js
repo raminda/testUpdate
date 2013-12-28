@@ -14,16 +14,14 @@ Ext.define('New.view.SlideMenuView', {
 	height:'100%',
 	items :[{
 		id:'SMenuHome_View',
-		text : 'Home',
-		iconCls : 'homeIcon',
+		//text : 'Home',
 		xtype :'SMenuHome_View',
 		height : 30,
 		flex : 1,
 		textAlign : 'left',
 	},{
 		id:'SMenuEHome_View',
-		text : 'Home',
-		iconCls : 'homeIcon',
+		//text : 'Home',
 		xtype :'SMenuEHome_View',
 		height : 30,
 		flex : 1,

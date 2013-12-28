@@ -27,9 +27,6 @@ public class DigramAnalize {
 	private JSONArray sitesArray ;
 	private JSONArray summaryArray;
 	private VersionMap obj ;
-	private String SavedID[];
-	private String Savedname[];
-	private int i=0;
 	/**
 	 * 
 	 * @param projectItemsService
@@ -67,7 +64,7 @@ public class DigramAnalize {
 		
 		logger.info("Site no : "+sitesArray.length());
 		for(int i=0;i<sitesArray.length()-1;i++){
-			logger.info("ID"+i);
+			logger.info("Site id "+i);
 			String Site = null;
 			try {
 				Site = sitesArray.getJSONObject(i).get("Site").toString();
@@ -96,13 +93,8 @@ public class DigramAnalize {
 				}	
 				logger.info("ID : " +ID);
 			}
-			logger.info("hi");
 			Hanler(Site,SiteID);
-			for(int k=0;k<SavedID.length;k++){
-				logger.info("i value "+k);
-				Hanler(this.Savedname[k],this.SavedID[k]);
-			}
-			logger.info("hi00");
+			logger.info("end site");
 		}
 		return ID;
 	}
@@ -120,47 +112,53 @@ public class DigramAnalize {
 		String pacStringAn="";
 		int id=0;
 		
-		logger.info("Figuer lenth : "+summaryArray.length());
-		for(int j=0;j<summaryArray.length()-1;j++){
-			id=0;
-			logger.info("IID : "+j);
+		logger.info("Figuer lenth : "+summaryArray.length()+" call by "+Ptype);
+		for(int j=0;j<summaryArray.length();j++){
+			logger.info("Summary Array : "+j+" call by "+Ptype);
 			try {
-				if((summaryArray.getJSONObject(j).get("Ctype").toString().equals(Ptype )|| summaryArray.getJSONObject(j).get("Cid").toString().equals(ID))){
+				if((summaryArray.getJSONObject(j).get("Ctype").toString().equals(Ptype )&& summaryArray.getJSONObject(j).get("Cid").toString().equals(ID))){
 					pacString=	summaryArray.getJSONObject(j).get("Ptype").toString();
 					pacStringID=summaryArray.getJSONObject(j).get("Pid").toString();
 					pacStringAn=summaryArray.getJSONObject(j).get("Pannot").toString();
 					String Type=Typehanler(pacString);
 					logger.info("Ptype " +Type);
-					id=crateProjectItems(pacStringAn,obj,Type);
-					if(id!=0){
-						this.SavedID[this.i]=pacStringID;
-						this.Savedname[this.i++]=pacString;
-						logger.info("0OK");
-					}
+					id=crateProjectItems(pacStringAn,obj,Type,pacString);
 					logger.info("OK");
+					summaryArray.getJSONObject(j).remove("Ctype");
+					summaryArray.getJSONObject(j).remove("Cid");
+					summaryArray.getJSONObject(j).remove("Ptype");
+					summaryArray.getJSONObject(j).remove("Pid");
+					logger.info(id+" pass "+pacString);
+					if(pacString.equals("firewall") || pacString.equals("cloud") || pacString.equals("Site") ){}
+					else
+					Hanler(pacString ,pacStringID);
 				}
-				else if((summaryArray.getJSONObject(j).get("Ptype").toString().equals(Ptype )|| summaryArray.getJSONObject(j).get("Pid").toString().equals(ID) )){
+				else if((summaryArray.getJSONObject(j).get("Ptype").toString().equals(Ptype )&& summaryArray.getJSONObject(j).get("Pid").toString().equals(ID) )){
 					pacString=	summaryArray.getJSONObject(j).get("Ctype").toString();
 					pacStringID=summaryArray.getJSONObject(j).get("Cid").toString();
 					pacStringAn=summaryArray.getJSONObject(j).get("Cannot").toString();
 					String Type=Typehanler(pacString);
 					logger.info("Ctype " +Type);
-					id=crateProjectItems(pacStringAn,obj,Type);
-					if(id!=0){
-						this.SavedID[this.i]=pacStringID;
-						this.Savedname[this.i++]=pacString;
-						logger.info("0OK");
-					}
+					id=crateProjectItems(pacStringAn,obj,Type,pacString);
 					logger.info("OK");
+					summaryArray.getJSONObject(j).remove("Ctype");
+					summaryArray.getJSONObject(j).remove("Cid");
+					summaryArray.getJSONObject(j).remove("Ptype");
+					summaryArray.getJSONObject(j).remove("Pid");
+					logger.info(id +" pass "+ pacString);
+					if(pacString.equals("firewall") || pacString.equals("cloud") || pacString.equals("Site") ){}
+					else
+					Hanler(pacString ,pacStringID);
 				}
 				
 				else{
-					logger.info(summaryArray.getJSONObject(j).get("Ctype").toString()+" "+summaryArray.getJSONObject(j).get("Cid").toString());
+					logger.info("Not save yet "+summaryArray.getJSONObject(j).get("Ctype").toString()+" "+summaryArray.getJSONObject(j).get("Cid").toString());
+					logger.info("Not save yet "+summaryArray.getJSONObject(j).get("Ptype").toString()+" "+summaryArray.getJSONObject(j).get("Pid").toString());
 				}
 			} catch (JSONException e) {
 				logger.info("Error : " + e.getMessage());
-			}
-		}
+			}	
+		}	
 	}
 	/**
 	 * 
@@ -169,10 +167,16 @@ public class DigramAnalize {
 	 * @param Type
 	 * @return
 	 */
-	private int crateProjectItems(String pacString,VersionMap obj,String Type){
+	private int crateProjectItems(String pacString,VersionMap obj,String Type,String PacString){
 		logger.info(pacString);
 		int id=0;
-		if(!pacString.equals("cloud") || !pacString.equals("Site") || pacString!=null){
+		if(PacString.equals("Cloud")){
+			
+		} else if(PacString.equals("firewall")){
+			
+		} else if(PacString.equals("Site")){
+			
+		}else {
 			Packages packages=packageService.getPackages(pacString);
 			ProjectItems projectItems=projectItemsService.get(obj, packages);
 			if( projectItems==null){

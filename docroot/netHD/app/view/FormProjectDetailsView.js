@@ -3,16 +3,16 @@ var PackageType = Ext.create('Ext.data.Store', {
     data : [
         {"PackageType":"Backend machines"},
         {"PackageType":"Accessories"},
-        {"PackageType":"Network equipment"}//,
+        {"PackageType":"Network equipment"},
         //{"PackageType":"Third party software"}
     ]
 });
 var Sitetype = Ext.create('Ext.data.Store', {
     fields: ['SiteID'],
     data : [
-        {"SiteID":"Primary"},
-        {"SiteID":"DR"},
-        {"SiteID":"Test"}
+        {"SiteID":"Primary"},{"SiteID":"Backup Primary"},
+        {"SiteID":"DR"},{"SiteID":"Backup DR"},
+        {"SiteID":"Test"}, {"SiteID":"Backup Test"}
     ]
 });
 
@@ -566,7 +566,6 @@ Ext.define('New.view.FormProjectDetailsView', {
     		items : [{
     			xtype: 'panel',		        
 	            bbar: [{
-		    	//	xtype: 'button',
 		    		id : 'GenerateAll',
 					name : 'GenerateAll',
 	                text : 'Generate Project to Excel',
@@ -580,12 +579,17 @@ Ext.define('New.view.FormProjectDetailsView', {
 						if(Ext.getCmp('cmbPrjProject').getValue()!=null && Ext.getCmp('cmbPrjVersion').getValue()!=null  && Ext.getCmp('cmbPrjOption').getValue()!=null ){
 						
 							var store = Ext.getStore('my');
-				            	store.proxy.extraParams.purpose="ExcelCreate";
-				        		store.proxy.extraParams.ID1=Ext.getCmp('cmbPrjProject').getValue();
-								store.proxy.extraParams.ID2=Ext.getCmp('cmbPrjOption').getValue();
-								store.proxy.extraParams.ID3=Ext.getCmp('cmbPrjVersion').getValue();	
+							store.proxy.extraParams.purpose="ExcelCreate";
+							ProjectID=Ext.getCmp('cmbPrjProject').getValue();
+							OptionID=Ext.getCmp('cmbPrjOption').getValue();
+							VersionID=Ext.getCmp('cmbPrjVersion').getValue();
+							
+							store.proxy.extraParams.ID1=ProjectID;
+							store.proxy.extraParams.ID2=OptionID;
+							store.proxy.extraParams.ID3=VersionID;	
+					
 							var win = Ext.create('Ext.window.Window', {
-								title : 'Excel Genarating Window',
+								title : ProjectID+' '+OptionID+' '+VersionID ,
 								width : 450,
 								height : 250,
 								minWidth : 300,
@@ -601,7 +605,7 @@ Ext.define('New.view.FormProjectDetailsView', {
 								
 							store.load();}
 							else{
-							Ext.Msg.alert('Message', 'Plese Enter values!');}
+								Ext.Msg.alert('Message', 'Plese Enter values!');}
 							}
 					
             	},{

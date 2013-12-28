@@ -95,7 +95,6 @@ public class  ExcelCreator {
 	
 	public  void myxcel(ResourceRequest request, ResourceResponse response,String projectID,String Option,String Version) throws IOException, WriteException, BiffException {
 		response.addProperty(HttpHeaders.CACHE_CONTROL, "max-age=3600, must-revalidate");
-		
 		response.addProperty(HttpHeaders.CONTENT_TYPE, " application/vnd.ms-excel");
 		response.addProperty(HttpHeaders.PRAGMA," no-cache");
 		response.addProperty(HttpHeaders.CACHE_CONTROL, "post-check=0, pre-check=0,false");
@@ -311,7 +310,7 @@ public class  ExcelCreator {
 					s[i].addCell(l);
 					
 			
-					long price=0;
+					long price=projectItems.get(m).getPackageID().getBasePrice();
 					List <EquipmentBulk> lst =equipmentsBulkService.getPackageBulk(projectItems.get(m).getPackageID());
 					for(int k=0;k<lst.size();k++){
 						price+=lst.get(k).getEquipmentsId().getPrice();

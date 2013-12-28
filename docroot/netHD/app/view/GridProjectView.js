@@ -29,11 +29,6 @@ Ext.define('New.view.GridProjectView', {
 		
 			},{
 				flex : 1,
-				header : 'Total Amount',
-				dataIndex : 'TotalAmount',
-		
-			},{
-				flex : 1,
 				header : 'Project Name',
 				dataIndex : 'ProjectName',
 				
@@ -160,7 +155,7 @@ Ext.define('New.view.GridProjectView', {
 		}],
 		listeners : {
 			itemdblclick: function(me, record, item, index, e, eOpts ){
-				
+				//alert('fg');
 				var win=null;
 				win= Ext.create('Ext.window.Window', {
 					title : 'Update Equipment details',

@@ -9,21 +9,12 @@ Ext.define('New.view.FormAddPackageView', {
 	bodyPadding : 0,
 	id : 'AddPackage',
 	name : 'AddPackage',
-	
 	items : [ {
 		xtype : 'panel',
 		width : '100%',
 		bodyPadding : 15,
 		border : false,
-		items : [/*{
-				xtype : 'textfield',
-				fieldLabel : 'Package Name',
-				id : 'txtPackageName',
-				name : 'txtPackageName',
-				allowBlank : false,
-				msgTarget: 'side',
-				width : 400
-			},*/{
+		items : [{
 				xtype : 'combobox',
 				fieldLabel : 'Base Item Name',
 				id : 'cmbItemss',
@@ -48,7 +39,7 @@ Ext.define('New.view.FormAddPackageView', {
 				xtype : 'textarea',
 				id : 'txtPkgSummery',
 				name : 'txtPkgSummery',
-				fieldLabel : 'Summery',
+				fieldLabel : 'Summary',
 				allowBlank : false,
 				msgTarget: 'side',
 				width : 400,
@@ -68,27 +59,21 @@ Ext.define('New.view.FormAddPackageView', {
 				name : 'txtpkgBasePrice',
 				fieldLabel : 'Base Price',
 				width : 400,
+				allowBlank : false,
 				msgTarget: 'side',
 				height : 60,
 				allowNegative: false,
 				allowDecimals: false,
 				minValue: 0,
 				emptyText : '$'
-			},/*{
-				xtype : 'textarea',
-				id : 'txtpkgTecDescription',
-				name : 'txtpkgTecDescription',
-				fieldLabel : 'Technical Description',
-				width : 400,
-				height : 60,
-				emptyText : 'Technical Description Here'
-			},*/{
+			},{
 				xtype : 'datefield',
 				id : 'txtPkgEOD',
 				name : 'txtPkgEOD',
 				fieldLabel : 'End Of Life Date',
 				width : 400,
 				height : 60,
+				allowBlank : false,
 				selectOnTab : true,
 				msgTarget: 'side',
 				minValue:new Date(),

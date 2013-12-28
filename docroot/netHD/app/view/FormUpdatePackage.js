@@ -9,7 +9,6 @@ Ext.define('New.view.FormUpdatePackage', {
 	bodyPadding : 0,
 	id : 'UpPackage',
 	name : 'UpPackage',
-	
 	items : [{
 			xtype : 'panel',
 			width : '100%',
@@ -23,19 +22,11 @@ Ext.define('New.view.FormUpdatePackage', {
 				allowBlank : false,
 				msgTarget: 'side',
 				width : 400
-			}, /*{
-				xtype : 'textfield',
-				fieldLabel : 'Package Name',
-				id : 'txtUpPackageName',
-				name : 'txtUpPackageName',
-				allowBlank : false,
-				msgTarget: 'side',
-				width : 400
-			}, */{
+			},{
 				xtype : 'textarea',
 				id : 'txtUpPkgSummery',
 				name : 'txtUpPkgSummery',
-				fieldLabel : 'Summery',
+				fieldLabel : 'Summary',
 				width : 400,
 				height : 60,
 				allowBlank : false,
@@ -50,13 +41,18 @@ Ext.define('New.view.FormUpdatePackage', {
 				height : 60,
 				emptyText : 'Comment'
 			}, {
-				xtype : 'textarea',
-				id : 'txtUppkgBasePrice',
-				name : 'txtUppkgBasePrice',
+				xtype : 'numberfield',
 				fieldLabel : 'Base Price',
 				width : 400,
+				allowBlank : false,
+				msgTarget: 'side',
 				height : 60,
-				emptyText : '$'
+				allowNegative: false,
+				allowDecimals: false,
+				minValue: 0,
+				emptyText : '$',
+				id : 'txtUppkgBasePrice',
+				name : 'txtUppkgBasePrice',
 			},{
 				xtype : 'datefield',
 				id : 'txtUpPkgEOD',
@@ -81,8 +77,6 @@ Ext.define('New.view.FormUpdatePackage', {
 		var sm = grid.getSelectionModel();
 		var val = sm.getSelection();
 
-		
-		//var ItemName = val[0].get('PackageName');
 		var Summary = val[0].get('Summery');
 		var Comment = val[0].get('Comment');
 		var BasePrice = val[0].get('BasePrice');
@@ -94,7 +88,6 @@ Ext.define('New.view.FormUpdatePackage', {
         day  = ("0" + date.getDate()).slice(-2);
 		var EOLDate =[ day, mnth,  date.getFullYear()].join("-");
 		
-		//Ext.getCmp('txtUpPackageName').setValue(ItemName);
 		Ext.getCmp('txtUpPkgSummery').setValue(Summary);
 		Ext.getCmp('txtUpPkgComment').setValue(Comment);
 		Ext.getCmp('txtUppkgBasePrice').setValue(BasePrice);
