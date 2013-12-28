@@ -173,8 +173,6 @@ public class DigramAnalize {
 		int id=0;
 		if(PacString.equals("Cloud")){
 			
-		} else if(PacString.equals("firewall")){
-			
 		} else if(PacString.equals("Site")){
 			
 		}else {
