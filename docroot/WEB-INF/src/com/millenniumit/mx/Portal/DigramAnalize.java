@@ -116,7 +116,8 @@ public class DigramAnalize {
 		for(int j=0;j<summaryArray.length();j++){
 			logger.info("Summary Array : "+j+" call by "+Ptype);
 			try {
-				if((summaryArray.getJSONObject(j).get("Ctype").toString().equals(Ptype )&& summaryArray.getJSONObject(j).get("Cid").toString().equals(ID))){
+				logger.info(" ***** P "+summaryArray.getJSONObject(j).get("Pid").toString()+" ******C "+summaryArray.getJSONObject(j).get("Cid").toString()+" ****** "+ID);
+				if(summaryArray.getJSONObject(j).get("Cid").toString().equals(ID)){
 					pacString=	summaryArray.getJSONObject(j).get("Ptype").toString();
 					pacStringID=summaryArray.getJSONObject(j).get("Pid").toString();
 					pacStringAn=summaryArray.getJSONObject(j).get("Pannot").toString();
@@ -133,7 +134,7 @@ public class DigramAnalize {
 					else
 					Hanler(pacString ,pacStringID);
 				}
-				else if((summaryArray.getJSONObject(j).get("Ptype").toString().equals(Ptype )&& summaryArray.getJSONObject(j).get("Pid").toString().equals(ID) )){
+				else if( summaryArray.getJSONObject(j).get("Pid").toString().equals(ID) ){
 					pacString=	summaryArray.getJSONObject(j).get("Ctype").toString();
 					pacStringID=summaryArray.getJSONObject(j).get("Cid").toString();
 					pacStringAn=summaryArray.getJSONObject(j).get("Cannot").toString();
